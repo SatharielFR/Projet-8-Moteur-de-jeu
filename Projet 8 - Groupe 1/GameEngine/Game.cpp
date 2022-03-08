@@ -1,11 +1,8 @@
 // GameEngine.cpp : Définit le point d'entrée de l'application.
 //
-
+#include <iostream>
 #include "framework.h"
 #include "Game.h"
-
-
-#include <iostream>
 
 #define MAX_LOADSTRING 100
 
@@ -54,12 +51,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+        //Render DirectX 3D
+        render_frame();
     }
 
+    cleanD3D();
     return (int) msg.wParam;
 }
-
-
 
 //
 //  FONCTION : MyRegisterClass()
@@ -113,6 +111,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   //Setup and initialize DirectX 3D Windows
+   initD3D(hWnd);
+
    return TRUE;
 }
 
@@ -128,12 +129,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+
+
     switch (message)
     {
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
-            
+
             //// Analyse les sélections de menu :
             //switch (wmId)
             //{
@@ -184,3 +187,52 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 //    }
 //    return (INT_PTR)FALSE;
 //}
+
+
+/// 
+///     Fonctions DirectX 3D
+/// 
+/// 
+
+// this function initializes and prepares Direct3D for use
+void initD3D(HWND hWnd)
+{
+    d3d = Direct3DCreate9(D3D_SDK_VERSION);    // create the Direct3D interface
+
+    D3DPRESENT_PARAMETERS d3dpp;    // create a struct to hold various device information
+
+    ZeroMemory(&d3dpp, sizeof(d3dpp));    // clear out the struct for use
+    d3dpp.Windowed = TRUE;    // program windowed, not fullscreen
+    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;    // discard old frames
+    d3dpp.hDeviceWindow = hWnd;    // set the window to be used by Direct3D
+
+    // create a device class using this information and information from the d3dpp stuct
+    d3d->CreateDevice(D3DADAPTER_DEFAULT,
+        D3DDEVTYPE_HAL,
+        hWnd,
+        D3DCREATE_SOFTWARE_VERTEXPROCESSING,
+        &d3dpp,
+        &d3ddev);
+}
+
+// this is the function used to render a single frame
+void render_frame(void)
+{
+    // clear the window to a deep blue
+    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 40, 100), 1.0f, 0);
+
+    d3ddev->BeginScene();    // begins the 3D scene
+
+    // do 3D rendering on the back buffer here
+
+    d3ddev->EndScene();    // ends the 3D scene
+
+    d3ddev->Present(NULL, NULL, NULL, NULL);    // displays the created frame
+}
+
+// this is the function that cleans up Direct3D and COM
+void cleanD3D(void)
+{
+    d3ddev->Release();    // close and release the 3D device
+    d3d->Release();    // close and release Direct3D
+}
