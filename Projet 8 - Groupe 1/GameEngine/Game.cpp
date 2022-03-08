@@ -2,7 +2,10 @@
 //
 
 #include "framework.h"
-#include "GameEngine.h"
+#include "Game.h"
+
+
+#include <iostream>
 
 #define MAX_LOADSTRING 100
 
@@ -26,6 +29,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Placez le code ici.
+
+    std::cout<<("test")<<std::endl;
 
     // Initialise les chaînes globales
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
