@@ -5,6 +5,9 @@
 #include "Game.h"
 
 #define MAX_LOADSTRING 100
+// define the screen resolution
+#define SCREEN_WIDTH  1920
+#define SCREEN_HEIGHT 1080
 
 // Variables globales :
 HINSTANCE hInst;                                // instance actuelle
@@ -100,8 +103,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Stocke le handle d'instance dans la variable globale
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_EX_TOPMOST | WS_POPUP,
+      CW_USEDEFAULT, 0, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
