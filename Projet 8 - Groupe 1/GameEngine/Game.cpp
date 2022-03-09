@@ -236,7 +236,6 @@ void init_graphics(void)
     v_buffer->Lock(0, 0, (void**)&pVoid, 0);
     memcpy(pVoid, vertices, sizeof(vertices));
     v_buffer->Unlock();
-<<<<<<< HEAD
 }
 
 /// 
@@ -292,7 +291,6 @@ void UpdateCameraPosition()
 {
     vecCamPosition.x += g_fHorizontalValue  * g_fSpeed;
     vecCamPosition.z += g_fForwardValue     * g_fSpeed;
-=======
 
     // create the indices using an int array
     short indices[] =
@@ -322,12 +320,7 @@ void UpdateCameraPosition()
     );
 
     // lock i_buffer and load the indices into it
-    i_buffer->Lock(0, 0, (void**)&pVoid, 0);
-    memcpy(pVoid, indices, sizeof(indices));
+    //i_buffer->Lock(0, 0, (void**)&pVoid, 0);
+    //memcpy(pVoid, indices, sizeof(indices));
     i_buffer->Unlock();
-
-    
-
-  
->>>>>>> cb4ea9575801ed307b8e6abfca4abb0df398ebf1
 }
