@@ -1,30 +1,13 @@
 
 #include "Game.h"
 
+
 // define the screen resolution
 #define SCREEN_WIDTH  1920
 #define SCREEN_HEIGHT 1080
+//#define SCREEN_WIDTH  500
+//#define SCREEN_HEIGHT 500
 #define MAX_LOADSTRING 100
-
-////Vertices
-//typedef struct _D3DMATRIX {
-//    union {
-//        struct {
-//            float        _11, _12, _13, _14;
-//            float        _21, _22, _23, _24;
-//            float        _31, _32, _33, _34;
-//            float        _41, _42, _43, _44;
-//        };
-//        float m[4][4];
-//    }
-//} D3DMATRIX;
-////
-//D3DXMATRIX* D3DXMatrixIdentity(D3DXMATRIX* pOut);
-
-
-//Struct for 2D :
-//struct CUSTOMVERTEX { FLOAT X, Y, Z, RHW; DWORD COLOR; };
-//#define CUSTOMFVF (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
 
 //Struct for 3D
 struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; };
@@ -41,146 +24,76 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 //INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+// the WindowProc function prototype
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+// the entry point for any Windows program
+int WINAPI WinMain( HINSTANCE hInstance,
+                    HINSTANCE hPrevInstance,
+                    LPSTR lpCmdLine,
+                    int nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+    HWND hWnd;
+    WNDCLASSEX wc;
 
-    // TODO: Placez le code ici.
+    ZeroMemory(&wc, sizeof(WNDCLASSEX));
 
+    wc.cbSize = sizeof(WNDCLASSEX);
+    wc.style = CS_HREDRAW | CS_VREDRAW;
+    wc.lpfnWndProc = WindowProc;
+    wc.hInstance = hInstance;
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wc.lpszClassName = L"WindowClass";
 
-    // Initialise les chaînes globales
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_GAMEENGINE, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+    RegisterClassEx(&wc);
 
-    // Effectue l'initialisation de l'application :
-    if (!InitInstance (hInstance, nCmdShow))
-    {
-        return FALSE;
-    }
+  hWnd = CreateWindowEx(NULL, L"WindowClass", L"Our Direct3D Program",
+                          WS_OVERLAPPEDWINDOW, 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT,
+                          NULL, NULL, hInstance, NULL);
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_GAMEENGINE));
+    ShowWindow(hWnd, nCmdShow);
+
+    // set up and initialize Direct3D
+    initD3D(hWnd);
+
+    // enter the main loop:
 
     MSG msg;
 
-    // Boucle de messages principale :
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (TRUE)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
-        //Render DirectX 3D
+
+        if (msg.message == WM_QUIT)
+            break;
+
         render_frame();
     }
 
+    // clean up DirectX and COM
     cleanD3D();
-    return (int) msg.wParam;
+
+    return msg.wParam;
 }
 
-//
-//  FONCTION : MyRegisterClass()
-//
-//  OBJECTIF : Inscrit la classe de fenêtre.
-//
-ATOM MyRegisterClass(HINSTANCE hInstance)
-{
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_GAMEENGINE));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-//    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_GAMEENGINE);
-    wcex.lpszMenuName = NULL;
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-
-
-    return RegisterClassExW(&wcex);
-}
-
-//
-//   FONCTION : InitInstance(HINSTANCE, int)
-//
-//   OBJECTIF : enregistre le handle d'instance et crée une fenêtre principale
-//
-//   COMMENTAIRES :
-//
-//        Dans cette fonction, nous enregistrons le handle de l'instance dans une variable globale, puis
-//        nous créons et affichons la fenêtre principale du programme.
-//
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
-{
-   hInst = hInstance; // Stocke le handle d'instance dans la variable globale
-
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_EX_TOPMOST | WS_POPUP,
-      CW_USEDEFAULT, 0, SCREEN_WIDTH, SCREEN_HEIGHT, nullptr, nullptr, hInstance, nullptr);
-
-   if (!hWnd)
-   {
-      return FALSE;
-   }
-
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
-
-   //Setup and initialize DirectX 3D Windows
-   initD3D(hWnd);
-
-   return TRUE;
-}
-
-//
-//  FONCTION : WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  OBJECTIF : Traite les messages pour la fenêtre principale.
-//
-//  WM_COMMAND  - traite le menu de l'application
-//  WM_PAINT    - Dessine la fenêtre principale
-//  WM_DESTROY  - génère un message d'arrêt et retourne
-//
-//
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+// this is the main message handler for the program
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-        }
-        break;
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Ajoutez ici le code de dessin qui utilise hdc...
-            EndPaint(hWnd, &ps);
-        }
-        break;
     case WM_DESTROY:
+    {
         PostQuitMessage(0);
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        return 0;
+    } break;
     }
-    return 0;
+
+    return DefWindowProc(hWnd, message, wParam, lParam);
 }
-
-
-
-
 
 /// 
 ///     Fonctions DirectX 3D
@@ -200,6 +113,8 @@ void initD3D(HWND hWnd)
     d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;    // set the back buffer format to 32-bit
     d3dpp.BackBufferWidth = SCREEN_WIDTH;    // set the width of the buffer
     d3dpp.BackBufferHeight = SCREEN_HEIGHT;    // set the height of the buffer
+    d3dpp.EnableAutoDepthStencil = TRUE;    // automatically run the z-buffer for us
+    d3dpp.AutoDepthStencilFormat = D3DFMT_D16;    // 16-bit pixel format for the z-buffer
 
     // create a device class using this information and information from the d3dpp stuct
     d3d->CreateDevice(D3DADAPTER_DEFAULT,
@@ -209,31 +124,71 @@ void initD3D(HWND hWnd)
         &d3dpp,
         &d3ddev);
     init_graphics();    // call the function to initialize the triangle
+
+    d3ddev->SetRenderState(D3DRS_LIGHTING, FALSE);    // turn off the 3D lighting
+    d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);    // both sides of the triangles
+    d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
 }
 
 // this is the function used to render a single frame
 void render_frame(void)
 {
-    // clear the window to a deep blue
-    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 40, 100), 1.0f, 0);
+    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+    d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
-    d3ddev->BeginScene();    // begins the 3D scene
+    d3ddev->BeginScene();
 
-
-        // select which vertex format we are using
+    // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
+
+    // set the view transform
+    D3DXMATRIX matView;    // the view transform matrix
+    D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position
+    D3DXVECTOR3 vecLookAtPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);    // the look-at position
+    D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
+
+    D3DXMatrixLookAtLH(&matView,
+        &vecCamPosition,   // the camera position
+        &vecLookAtPosition,    // the look-at position
+        &vecUpDirection);    // the up direction
+    d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
+
+    // set the projection transform
+    D3DXMATRIX matProjection;    // the projection transform matrix
+    D3DXMatrixPerspectiveFovLH(&matProjection,
+        D3DXToRadian(45),    // the horizontal field of view
+        (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
+        1.0f,    // the near view-plane
+        100.0f);    // the far view-plane
+    d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
+
 
     // select the vertex buffer to display
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
 
-    // copy the vertex buffer to the back buffer
+    D3DXMATRIX matTranslateA;    // a matrix to store the translation for triangle A
+    D3DXMATRIX matTranslateB;    // a matrix to store the translation for triangle B
+    D3DXMATRIX matRotateY;    // a matrix to store the rotation for each triangle
+    static float index = 0.0f; index += 0.05f; // an ever-increasing float value
+
+    // build MULTIPLE matrices to translate the model and one to rotate
+    D3DXMatrixTranslation(&matTranslateA, 0.0f, 0.0f, 2.0f);
+    D3DXMatrixTranslation(&matTranslateB, 0.0f, 0.0f, -2.0f);
+    D3DXMatrixRotationY(&matRotateY, index);    // the front side
+
+    D3DXMATRIX matResultA = matTranslateA * matRotateY;
+    D3DXMATRIX matResultB = matTranslateB * matRotateY;
+
+    // tell Direct3D about each world transform, and then draw another triangle
+    d3ddev->SetTransform(D3DTS_WORLD, &matResultA);
     d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
 
-    // do 3D rendering on the back buffer here
+    d3ddev->SetTransform(D3DTS_WORLD, &matResultB);
+    d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
 
-    d3ddev->EndScene();    // ends the 3D scene
+    d3ddev->EndScene();
 
-    d3ddev->Present(NULL, NULL, NULL, NULL);    // displays the created frame
+    d3ddev->Present(NULL, NULL, NULL, NULL);
 }
 
 // this is the function that cleans up Direct3D and COM
@@ -250,9 +205,9 @@ void init_graphics(void)
     // create the vertices using the CUSTOMVERTEX struct
     CUSTOMVERTEX vertices[] =
     {
-        { 400.0f, 062.5f, 0.5f, D3DCOLOR_XRGB(0, 0, 255), },
-        { 650.0f, 500.0f, 0.5f, D3DCOLOR_XRGB(0, 255, 0), },
-        { 150.0f, 500.0f, 0.5f, D3DCOLOR_XRGB(255, 0, 0), },
+        { 3.0f, -3.0f, 0.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        { 0.0f, 3.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        { -3.0f, -3.0f, 0.0f, D3DCOLOR_XRGB(255, 0, 0), },
     };
 
     // create a vertex buffer interface called v_buffer
