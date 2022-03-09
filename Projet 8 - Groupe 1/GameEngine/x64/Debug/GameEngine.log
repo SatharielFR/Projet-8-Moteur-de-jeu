@@ -1,3 +1,3 @@
 ﻿  Game.cpp
-C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(80,15): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
-  GameEngine.vcxproj -> C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe
+C:\Users\jbellerophon\Documents\GitHub\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(80,15): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
+  GameEngine.vcxproj -> C:\Users\jbellerophon\Documents\GitHub\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe
