@@ -1,16 +1,34 @@
-// GameEngine.cpp : Définit le point d'entrée de l'application.
-//
-#include <iostream>
-#include "framework.h"
+
 #include "Game.h"
 
-#define MAX_LOADSTRING 100
 // define the screen resolution
 #define SCREEN_WIDTH  1920
 #define SCREEN_HEIGHT 1080
+#define MAX_LOADSTRING 100
 
-struct CUSTOMVERTEX { FLOAT X, Y, Z, RHW; DWORD COLOR; };
-#define CUSTOMFVF (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
+////Vertices
+//typedef struct _D3DMATRIX {
+//    union {
+//        struct {
+//            float        _11, _12, _13, _14;
+//            float        _21, _22, _23, _24;
+//            float        _31, _32, _33, _34;
+//            float        _41, _42, _43, _44;
+//        };
+//        float m[4][4];
+//    }
+//} D3DMATRIX;
+////
+//D3DXMATRIX* D3DXMatrixIdentity(D3DXMATRIX* pOut);
+
+
+//Struct for 2D :
+//struct CUSTOMVERTEX { FLOAT X, Y, Z, RHW; DWORD COLOR; };
+//#define CUSTOMFVF (D3DFVF_XYZRHW | D3DFVF_DIFFUSE)
+
+//Struct for 3D
+struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; };
+#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)
 
 // Variables globales :
 HINSTANCE hInst;                                // instance actuelle
@@ -32,7 +50,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Placez le code ici.
-    std::cout<<("test")<<std::endl;
+
 
     // Initialise les chaînes globales
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -89,6 +107,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
+
     return RegisterClassExW(&wcex);
 }
 
@@ -135,26 +154,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-
-
     switch (message)
     {
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
-
-            //// Analyse les sélections de menu :
-            //switch (wmId)
-            //{
-            ////case IDM_ABOUT:
-            ////    DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-            ////    break;
-            //case IDM_EXIT:
-            //    DestroyWindow(hWnd);
-            //    break;
-            //default:
-            //    return DefWindowProc(hWnd, message, wParam, lParam);
-            //}
         }
         break;
     case WM_PAINT:
@@ -174,30 +178,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-//// Gestionnaire de messages pour la boîte de dialogue À propos de.
-//INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-//{
-//    UNREFERENCED_PARAMETER(lParam);
-//    switch (message)
-//    {
-//    case WM_INITDIALOG:
-//        return (INT_PTR)TRUE;
-//
-//    case WM_COMMAND:
-//        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-//        {
-//            EndDialog(hDlg, LOWORD(wParam));
-//            return (INT_PTR)TRUE;
-//        }
-//        break;
-//    }
-//    return (INT_PTR)FALSE;
-//}
+
+
 
 
 /// 
 ///     Fonctions DirectX 3D
-/// 
 /// 
 
 // this function initializes and prepares Direct3D for use
@@ -258,16 +244,15 @@ void cleanD3D(void)
     d3d->Release();    // close and release Direct3D
 }
 
-
 // this is the function that puts the 3D models into video RAM
 void init_graphics(void)
 {
     // create the vertices using the CUSTOMVERTEX struct
     CUSTOMVERTEX vertices[] =
     {
-        { 400.0f, 62.5f, 0.5f, 1.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        { 650.0f, 500.0f, 0.5f, 1.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        { 150.0f, 500.0f, 0.5f, 1.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        { 400.0f, 062.5f, 0.5f, D3DCOLOR_XRGB(0, 0, 255), },
+        { 650.0f, 500.0f, 0.5f, D3DCOLOR_XRGB(0, 255, 0), },
+        { 150.0f, 500.0f, 0.5f, D3DCOLOR_XRGB(255, 0, 0), },
     };
 
     // create a vertex buffer interface called v_buffer
