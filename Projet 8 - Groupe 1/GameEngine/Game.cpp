@@ -133,8 +133,10 @@ void initD3D(HWND hWnd)
 // this is the function used to render a single frame
 void render_frame(void)
 {
-    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
-    d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+    D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 255, 255);
+
+    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, ClearColor, 1.0f, 0);
+    d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER,ClearColor, 1.0f, 0);
 
     d3ddev->BeginScene();
 
