@@ -13,16 +13,16 @@
 struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; };
 #define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)
 
-// Variables globales :
-HINSTANCE hInst;                                // instance actuelle
-WCHAR szTitle[MAX_LOADSTRING];                  // Texte de la barre de titre
-WCHAR szWindowClass[MAX_LOADSTRING];            // nom de la classe de fenêtre principale
+#pragma region GlobalVariables
+    HINSTANCE hInst;                                // instance actuelle
+    WCHAR szTitle[MAX_LOADSTRING];                  // Texte de la barre de titre
+    WCHAR szWindowClass[MAX_LOADSTRING];            // nom de la classe de fenêtre principale
 
-// Déclarations anticipées des fonctions incluses dans ce module de code :
-ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-//INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+    D3DXMATRIX matView;    // the view transform matrix
+    D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position
+    D3DXVECTOR3 vecLookAtPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);    // the look-at position
+    D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
+#pragma endregion
 
 // the WindowProc function prototype
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -133,6 +133,8 @@ void initD3D(HWND hWnd)
 // this is the function used to render a single frame
 void render_frame(void)
 {
+    Update();
+
     D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 255, 255);
 
     d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, ClearColor, 1.0f, 0);
@@ -144,11 +146,6 @@ void render_frame(void)
     d3ddev->SetFVF(CUSTOMFVF);
 
     // set the view transform
-    D3DXMATRIX matView;    // the view transform matrix
-    D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position
-    D3DXVECTOR3 vecLookAtPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);    // the look-at position
-    D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
-
     D3DXMatrixLookAtLH(&matView,
         &vecCamPosition,   // the camera position
         &vecLookAtPosition,    // the look-at position
@@ -226,4 +223,59 @@ void init_graphics(void)
     v_buffer->Lock(0, 0, (void**)&pVoid, 0);
     memcpy(pVoid, vertices, sizeof(vertices));
     v_buffer->Unlock();
+}
+
+/// 
+///     Custom Functions
+/// 
+
+#pragma region GlobalVariable
+    float g_fForwardValue = 0;
+    float g_fHorizontalValue = 0;
+    float g_fSpeed = 0.5f;
+#pragma endregion
+
+
+void Update()
+{
+    UpdateInputs();
+    UpdateCameraPosition();
+}
+
+//Detect Inputs
+void UpdateInputs()
+{
+    //Forward inputs
+    if (GetKeyState('Z') & 0x8000)
+    {
+        g_fForwardValue = 1;
+    }
+    else if (GetKeyState('S') & 0x8000)
+    {
+        g_fForwardValue = -1;
+    }
+    else
+    {
+        g_fForwardValue = 0;
+    }
+
+    //Horizontal inputs
+    if (GetKeyState('Q') & 0x8000)
+    {
+        g_fHorizontalValue = 1;
+    }
+    else if (GetKeyState('D') & 0x8000)
+    {
+        g_fHorizontalValue = -1;
+    }
+    else
+    {
+        g_fHorizontalValue = 0;
+    }
+}
+
+void UpdateCameraPosition()
+{
+    vecCamPosition.x += g_fHorizontalValue  * g_fSpeed;
+    vecCamPosition.z += g_fForwardValue     * g_fSpeed;
 }
