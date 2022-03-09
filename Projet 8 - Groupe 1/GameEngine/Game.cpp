@@ -3,10 +3,10 @@
 
 
 // define the screen resolution
-#define SCREEN_WIDTH  1920
-#define SCREEN_HEIGHT 1080
-//#define SCREEN_WIDTH  500
-//#define SCREEN_HEIGHT 500
+//#define SCREEN_WIDTH  1920
+//#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH  800 
+#define SCREEN_HEIGHT 800
 #define MAX_LOADSTRING 100
 
 //Struct for 3D
@@ -107,7 +107,7 @@ void initD3D(HWND hWnd)
     D3DPRESENT_PARAMETERS d3dpp;    // create a struct to hold various device information
 
     ZeroMemory(&d3dpp, sizeof(d3dpp));    // clear out the struct for use
-    d3dpp.Windowed = FALSE;    // program windowed, not fullscreen
+    d3dpp.Windowed = TRUE;    // FALSE - program windowed, not fullscreen
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;    // discard old frames
     d3dpp.hDeviceWindow = hWnd;    // set the window to be used by Direct3D
     d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;    // set the back buffer format to 32-bit
