@@ -388,5 +388,4 @@ void UpdateCameraPosition()
 {
     vecCamPosition.x += g_fHorizontalValue  * g_fSpeed;
     vecCamPosition.z += g_fForwardValue     * g_fSpeed;
-
 }
