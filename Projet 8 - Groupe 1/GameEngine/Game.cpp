@@ -2,6 +2,7 @@
 #include "Game.h"
 
 
+
 // define the screen resolution
 //#define SCREEN_WIDTH  1920
 //#define SCREEN_HEIGHT 1080
@@ -346,6 +347,7 @@ void init_graphics(void)
 
 void Update()
 {
+    Transform* myTransform;
     UpdateInputs();
     UpdateCameraPosition();
 }
