@@ -164,7 +164,7 @@ void render_frame(void)
 
     // select the vertex buffer to display
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
-   // d3ddev->SetIndices(i_buffer);
+    d3ddev->SetIndices(i_buffer);
 
     D3DXMATRIX matTranslateA;    // a matrix to store the translation for triangle A
     D3DXMATRIX matTranslateB;    // a matrix to store the translation for triangle B
@@ -175,18 +175,23 @@ void render_frame(void)
     D3DXMatrixTranslation(&matTranslateA, 0.0f, 0.0f, 2.0f);
     D3DXMatrixTranslation(&matTranslateB, 0.0f, 0.0f, -2.0f);
     D3DXMatrixRotationY(&matRotateY, index);    // the front side
-
+    //D3DXMatrixRotationX(&matRotateY, index);
+    //D3DXMatrixRotationZ(&matRotateY, index);
     D3DXMATRIX matResultA = matTranslateA * matRotateY;
     D3DXMATRIX matResultB = matTranslateB * matRotateY;
 
     // tell Direct3D about each world transform, and then draw another triangle
     d3ddev->SetTransform(D3DTS_WORLD, &matResultA);
+
+    // draw the cube
+    d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
-    d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+   // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
     d3ddev->SetTransform(D3DTS_WORLD, &matResultB);
    // d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
-    d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+   // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
     d3ddev->EndScene();
 
@@ -236,6 +241,39 @@ void init_graphics(void)
     v_buffer->Lock(0, 0, (void**)&pVoid, 0);
     memcpy(pVoid, vertices, sizeof(vertices));
     v_buffer->Unlock();
+
+
+    // create the indices using an int array
+    short indices[] =
+    {
+        0, 1, 2,    // side 1
+        2, 1, 3,
+        4, 0, 6,    // side 2
+        6, 0, 2,
+        7, 5, 6,    // side 3
+        6, 5, 4,
+        3, 1, 7,    // side 4
+        7, 1, 5,
+        4, 5, 0,    // side 5
+        0, 5, 1,
+        3, 7, 2,    // side 6
+        2, 7, 6,
+    };
+
+
+
+    d3ddev->CreateIndexBuffer(36 * sizeof(short),    // 3 per triangle, 12 triangles
+        0,
+        D3DFMT_INDEX16,
+        D3DPOOL_MANAGED,
+        &i_buffer,
+        NULL
+    );
+
+    // lock i_buffer and load the indices into it
+    i_buffer->Lock(0, 0, (void**)&pVoid, 0);
+    memcpy(pVoid, indices, sizeof(indices));
+    i_buffer->Unlock();
 }
 
 /// 
@@ -292,35 +330,4 @@ void UpdateCameraPosition()
     vecCamPosition.x += g_fHorizontalValue  * g_fSpeed;
     vecCamPosition.z += g_fForwardValue     * g_fSpeed;
 
-    // create the indices using an int array
-    short indices[] =
-    {
-        0, 1, 2,    // side 1
-        2, 1, 3,
-        4, 0, 6,    // side 2
-        6, 0, 2,
-        7, 5, 6,    // side 3
-        6, 5, 4,
-        3, 1, 7,    // side 4
-        7, 1, 5,
-        4, 5, 0,    // side 5
-        0, 5, 1,
-        3, 7, 2,    // side 6
-        2, 7, 6,
-    };
-
-    LPDIRECT3DINDEXBUFFER9 i_buffer;
-
-    d3ddev->CreateIndexBuffer(36 * sizeof(short),    // 3 per triangle, 12 triangles
-        0,
-        D3DFMT_INDEX16,
-        D3DPOOL_MANAGED,
-        &i_buffer,
-        NULL
-    );
-
-    // lock i_buffer and load the indices into it
-    //i_buffer->Lock(0, 0, (void**)&pVoid, 0);
-    //memcpy(pVoid, indices, sizeof(indices));
-    i_buffer->Unlock();
 }
