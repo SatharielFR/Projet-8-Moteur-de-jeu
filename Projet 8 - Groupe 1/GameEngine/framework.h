@@ -18,7 +18,8 @@
 //TODO : Iclude l'engine ici ?
 //// include the Direct3D Library file
 //#pragma comment (lib, "Engine.lib")
-#include <Transform.h>
+#include <Engine.h>
+#pragma comment (lib, "Engine.lib")
 
 
 //TODO : Supprimer ca quand tout aurras été fait dans l engine 

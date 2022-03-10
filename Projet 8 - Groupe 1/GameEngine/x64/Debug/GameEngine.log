@@ -1,1 +1,4 @@
-﻿  GameEngine.vcxproj -> C:\Users\jbellerophon\Documents\GitHub\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe
+﻿  Game.cpp
+C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(81,15): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
+C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(350,16): warning C4101: 'myTransform' : variable locale non référencée
+  GameEngine.vcxproj -> C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe
