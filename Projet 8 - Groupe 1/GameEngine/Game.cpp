@@ -174,6 +174,7 @@ void render_frame(void)
     // build MULTIPLE matrices to translate the model and one to rotate
     D3DXMatrixTranslation(&matTranslateA, 0.0f, 0.0f, 2.0f);
     D3DXMatrixTranslation(&matTranslateB, 0.0f, 0.0f, -2.0f);
+
     D3DXMatrixRotationY(&matRotateY, index);    // the front side
     //D3DXMatrixRotationX(&matRotateY, index);
     //D3DXMatrixRotationZ(&matRotateY, index);
@@ -184,7 +185,13 @@ void render_frame(void)
     d3ddev->SetTransform(D3DTS_WORLD, &matResultA);
 
     // draw the cube
-    d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+   // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+
+    // draw the pyramid
+    d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 5, 0, 6);
+
+    // draw the Hypercraft
+    d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 10, 0, 6);
 
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
    // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -217,18 +224,47 @@ void init_graphics(void)
         { -3.0f, -3.0f, 0.0f, D3DCOLOR_XRGB(255, 0, 0), },
         { 3.0f, -3.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 255), },*/
 
-      { -3.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },    // vertex 0
-      { 3.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 0), },     // vertex 1
-      { -3.0f, -3.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },   // 2
-      { 3.0f, -3.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },  // 3
-      { -3.0f, 3.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },     // ...
-      { 3.0f, 3.0f, 3.0f, D3DCOLOR_XRGB(255, 0, 0), },
-      { -3.0f, -3.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
-      { 3.0f, -3.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 255), },
+        // Vertex for cube 
+      //{ -3.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },    // vertex 0
+      //{ 3.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 0), },     // vertex 1
+      //{ -3.0f, -3.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },   // 2
+      //{ 3.0f, -3.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },  // 3
+      //{ -3.0f, 3.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },     // ...
+      //{ 3.0f, 3.0f, 3.0f, D3DCOLOR_XRGB(255, 0, 0), },
+      //{ -3.0f, -3.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
+      //{ 3.0f, -3.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 255), },
+
+      // Vertex for pyramide
+        // // base
+        //{ -3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        //{ 3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        //{ -3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        //{ 3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },
+
+        //// top
+        //{ 0.0f, 5.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
+
+        // Vertex the Hypercraft
+        // fuselage
+        { 3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        { 0.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        { 0.0f, 0.0f, 10.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        { -3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 255), },
+
+        // left gun
+        { 3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        { 3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        { 2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
+
+        // right gun
+        { -3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        { -3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        { -2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
+
     };
 
     //create a vertex buffer interface called v_buffer
-    d3ddev->CreateVertexBuffer(8 * sizeof(CUSTOMVERTEX),
+    d3ddev->CreateVertexBuffer(10 * sizeof(CUSTOMVERTEX),
         0,
         CUSTOMFVF,
         D3DPOOL_MANAGED,
@@ -246,23 +282,40 @@ void init_graphics(void)
     // create the indices using an int array
     short indices[] =
     {
-        0, 1, 2,    // side 1
+        // indice for cube
+        //0, 1, 2,    // side 1
+        //2, 1, 3,
+        //4, 0, 6,    // side 2
+        //6, 0, 2,
+        //7, 5, 6,    // side 3
+        //6, 5, 4,
+        //3, 1, 7,    // side 4
+        //7, 1, 5,
+        //4, 5, 0,    // side 5
+        //0, 5, 1,
+        //3, 7, 2,    // side 6
+        //2, 7, 6,
+
+        // indice for pyramide
+        //0, 2, 1,    // base
+        //1, 2, 3,
+        //0, 1, 4,    // sides
+        //1, 3, 4,
+        //3, 2, 4,
+        //2, 0, 4,
+
+        // indice the hypercraft
+        0, 1, 2,    // fuselage
         2, 1, 3,
-        4, 0, 6,    // side 2
-        6, 0, 2,
-        7, 5, 6,    // side 3
-        6, 5, 4,
-        3, 1, 7,    // side 4
-        7, 1, 5,
-        4, 5, 0,    // side 5
-        0, 5, 1,
-        3, 7, 2,    // side 6
-        2, 7, 6,
+        3, 1, 0,
+        0, 2, 3,
+        4, 5, 6,    // wings
+        7, 8, 9,
+
     };
 
 
-
-    d3ddev->CreateIndexBuffer(36 * sizeof(short),    // 3 per triangle, 12 triangles
+    d3ddev->CreateIndexBuffer(18 * sizeof(short),    // 3 per triangle, 12 triangles
         0,
         D3DFMT_INDEX16,
         D3DPOOL_MANAGED,
