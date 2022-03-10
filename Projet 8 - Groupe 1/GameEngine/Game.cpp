@@ -166,23 +166,27 @@ void render_frame(void)
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
     d3ddev->SetIndices(i_buffer);
 
-    D3DXMATRIX matTranslateA;    // a matrix to store the translation for triangle A
-    D3DXMATRIX matTranslateB;    // a matrix to store the translation for triangle B
+    D3DXMATRIX matScaling;
+    D3DXMATRIX matTranslate;    // a matrix to store the translation for triangle A
     D3DXMATRIX matRotateY;    // a matrix to store the rotation for each triangle
     static float index = 0.0f; index += 0.05f; // an ever-increasing float value
 
-    // build MULTIPLE matrices to translate the model and one to rotate
-    D3DXMatrixTranslation(&matTranslateA, 0.0f, 0.0f, 2.0f);
-    D3DXMatrixTranslation(&matTranslateB, 0.0f, 0.0f, -2.0f);
 
-    D3DXMatrixRotationY(&matRotateY, index);    // the front side
-    //D3DXMatrixRotationX(&matRotateY, index);
-    //D3DXMatrixRotationZ(&matRotateY, index);
-    D3DXMATRIX matResultA = matTranslateA * matRotateY;
-    D3DXMATRIX matResultB = matTranslateB * matRotateY;
+    D3DXMatrixScaling(&matScaling, 0.5f, 0.5f, 0.5f);
+
+    //D3DXMatrixRotationY(&matRotateY, index);    // the front side
+    //(&matRotateY, index);
+    D3DXMatrixRotationZ(&matRotateY, index);
+    
+    // build MULTIPLE matrices to translate the model and one to rotate
+    D3DXMatrixTranslation(&matTranslate, 0.0f, 0.0f, 2.0f);
+
+ 
+    D3DXMATRIX matResult = matScaling * matRotateY * matTranslate;
+    
 
     // tell Direct3D about each world transform, and then draw another triangle
-    d3ddev->SetTransform(D3DTS_WORLD, &matResultA);
+    d3ddev->SetTransform(D3DTS_WORLD, &matResult);
 
     // draw the cube
    // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
@@ -196,7 +200,7 @@ void render_frame(void)
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
    // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-    d3ddev->SetTransform(D3DTS_WORLD, &matResultB);
+    //d3ddev->SetTransform(D3DTS_WORLD, &matResultB);
    // d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
    // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
