@@ -1,6 +1,14 @@
 #include "pch.h"
 #include "Timer.h"
 
+Timer::Timer(float initTime, bool isPerformanceTimer, float frequency, LONGLONG performTime)
+{
+    initTime = s_initTime;
+    isPerformanceTimer = s_isPerformanceTimer;
+    frequency = s_frequency;
+    performTime = s_performTime;
+}
+
 void Timer::InitSystemTime()
 {
 	s_initTime = timeGetTime() / 1000.0f;
