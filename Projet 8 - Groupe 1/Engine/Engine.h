@@ -21,7 +21,7 @@ LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;     // the pointer to the index buffer
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-
+#include "SceneManager.h"
 
 
 class Engine
@@ -37,6 +37,7 @@ class Engine
 
 	private:
 		#pragma region PrivateVariables
+			SceneManager _sceneManager;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
