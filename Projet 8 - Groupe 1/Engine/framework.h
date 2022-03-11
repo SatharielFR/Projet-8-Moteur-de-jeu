@@ -12,9 +12,7 @@
 
 //Windows
 #include <Windows.h>
-//#include <iostream>
-//#include <math.h>
 #include <d3dx9.h>
 
-using namespace std;
-
+//Include Engine
+#include "Engine.h"
