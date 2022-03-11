@@ -16,9 +16,9 @@ class Entity
 			void Begin();
 			void Update();
 
-			void SetParent(Entity newParentEntity);
-			void AddChild(Entity newChildToAdd);
-			void RemoveChild(Entity childToRem);
+			void SetParent(Entity* newParentEntity);
+			void AddChild(Entity* newChildToAdd);
+			void RemoveChild(Entity* childToRem);
 		#pragma endregion 
 
 	private:

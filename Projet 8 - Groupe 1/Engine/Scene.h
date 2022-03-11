@@ -5,8 +5,12 @@
 class Scene
 {
 	public:
+		void Begin();
+		void Update();
 
 	private:
-		list<Entity*> _listEntity;
+		#pragma region PrivateVariables
+			list<Entity*> _listEntity;
+		#pragma endregion
 };
 
