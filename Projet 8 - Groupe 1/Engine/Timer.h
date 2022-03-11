@@ -8,7 +8,7 @@ class Timer
 		float s_frequency;
 		LONGLONG s_performTime;
 
-		Timer();
+		Timer(float initTime, bool isPerformanceTimer, float frequency, LONGLONG performTime);
 		void InitSystemTime();
 		float GetSystemTimeEx();
 };

@@ -1,7 +1,7 @@
 
 #include "Game.h"
-
-
+#include <iostream>
+#include <string>
 
 // define the screen resolution
 //#define SCREEN_WIDTH  1920
@@ -23,6 +23,9 @@ struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; };
     D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position
     D3DXVECTOR3 vecLookAtPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);    // the look-at position
     D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
+
+    //Font variable
+    ID3DXFont* Font = 0;
 #pragma endregion
 
 // the WindowProc function prototype
@@ -48,7 +51,7 @@ int WINAPI WinMain( HINSTANCE hInstance,
 
     RegisterClassEx(&wc);
 
-  hWnd = CreateWindowEx(NULL, L"WindowClass", L"Our Direct3D Program",
+    hWnd = CreateWindowEx(NULL, L"WindowClass", L"Our Direct3D Program",
                           WS_OVERLAPPEDWINDOW, 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT,
                           NULL, NULL, hInstance, NULL);
 
@@ -129,6 +132,23 @@ void initD3D(HWND hWnd)
     d3ddev->SetRenderState(D3DRS_LIGHTING, FALSE);    // turn off the 3D lighting
     d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);    // both sides of the triangles
     d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
+
+
+    //Create font
+    D3DXFONT_DESC fontDesc;
+    ZeroMemory(&fontDesc, sizeof(D3DXFONT_DESC));
+    fontDesc.Height = 25;
+    fontDesc.Width = 12;
+    fontDesc.Weight = 500;
+    fontDesc.MipLevels = D3DX_DEFAULT;
+    fontDesc.Italic = false;
+    fontDesc.CharSet = 0;
+    fontDesc.OutputPrecision = 0;
+    fontDesc.Quality = 0;
+    fontDesc.PitchAndFamily = 0;
+    char* test = (char*)fontDesc.FaceName;
+    strcpy(test, "Times New Roman"); // font style
+    D3DXCreateFontIndirect(d3ddev, &fontDesc, &Font);
 }
 
 // this is the function used to render a single frame
@@ -142,6 +162,32 @@ void render_frame(void)
     d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER,ClearColor, 1.0f, 0);
 
     d3ddev->BeginScene();
+
+
+    //Test Print text
+    //Create Font
+    //Create Rectangle to draw the font
+    RECT  Rec;
+    Rec.left = 20;
+    Rec.top = 20;
+    Rec.right = SCREEN_WIDTH;
+    Rec.bottom = SCREEN_HEIGHT;
+    //Display the font text using the rect and font
+    std::wstring w = L"Groupe 1 : Janaky / Leo / Rodrigue / Tom";;
+    const WCHAR* wcharTextToDisplay = w.c_str();
+    LPCWSTR textToDisplay = LPCWSTR(wcharTextToDisplay);
+    if (Font)
+    {
+        Font->DrawText(
+            NULL,
+            textToDisplay, // String to draw.
+            -1, // Null terminating string.
+            &Rec, // Rectangle to draw the string in.
+            DT_TOP | DT_LEFT, // Draw in top-left corner of rect.
+            0xff000000); // Black.
+
+    }
+    //end test print text
 
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
