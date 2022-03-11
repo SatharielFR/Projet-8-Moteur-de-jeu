@@ -21,3 +21,24 @@ LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;     // the pointer to the index buffer
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+
+
+class Engine
+{
+	public:
+		#pragma region PublicVariables
+
+		#pragma endregion 
+
+		#pragma region PublicFunctions
+			Engine();
+		#pragma endregion 
+
+	private:
+		#pragma region PrivateVariables
+		#pragma endregion 
+
+		#pragma region PrivateFunctions
+		#pragma endregion 
+};

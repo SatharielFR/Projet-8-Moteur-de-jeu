@@ -1,11 +1,5 @@
 #pragma once
 
-#include "Engine.h"
-
-//#include <D3DX10math.h>
-//// include the Direct3D Library file
-//#pragma comment (lib, "D3DX10math.lib")
-
 class Transform
 {
 	public:

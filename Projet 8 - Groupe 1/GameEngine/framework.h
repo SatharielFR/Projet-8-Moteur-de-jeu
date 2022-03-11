@@ -16,10 +16,4 @@
 #include <tchar.h>
 
 //TODO : Iclude l'engine ici ?
-//// include the Direct3D Library file
-//#pragma comment (lib, "Engine.lib")
-#include <Engine.h>
-#pragma comment (lib, "Engine.lib")
-
-
-
+#include "../Engine/framework.h"
