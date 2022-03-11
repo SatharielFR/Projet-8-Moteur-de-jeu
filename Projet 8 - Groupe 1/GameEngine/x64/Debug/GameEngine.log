@@ -1,3 +1,5 @@
 ﻿  Game.cpp
-C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(81,15): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
-  GameEngine.vcxproj -> C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe
+C:\Users\jbellerophon\Documents\GitHub\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(81,15): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
+Game.obj : error LNK2019: symbole externe non résolu "public: __cdecl Transform::Transform(void)" (??0Transform@@QEAA@XZ) référencé dans la fonction "void __cdecl render_frame(void)" (?render_frame@@YAXXZ)
+Game.obj : error LNK2019: symbole externe non résolu "public: void __cdecl Transform::Rotate(float,float,float)" (?Rotate@Transform@@QEAAXMMM@Z) référencé dans la fonction "void __cdecl render_frame(void)" (?render_frame@@YAXXZ)
+C:\Users\jbellerophon\Documents\GitHub\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe : fatal error LNK1120: 2 externes non résolus
