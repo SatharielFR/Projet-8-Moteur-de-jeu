@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+using namespace std;
 
 class Entity
 {
@@ -13,12 +15,16 @@ class Entity
 		#pragma region PublicFunctions
 			void Begin();
 			void Update();
+
+			void SetParent(Entity newParentEntity);
+			void AddChild(Entity newChildToAdd);
+			void RemoveChild(Entity childToRem);
 		#pragma endregion 
 
 	private:
 		#pragma region PrivateVariable
 			Entity* _entityParent = nullptr;
-//			Entit
+			list<Entity*> _lstEntityChild;
 		#pragma endregion
 };
 
