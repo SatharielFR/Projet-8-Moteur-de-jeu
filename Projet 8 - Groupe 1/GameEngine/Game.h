@@ -2,6 +2,11 @@
 
 #include "resource.h"
 #include "framework.h"
+// Fichiers d'en-tête C RunTime
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
 
 // Déclarations anticipées des fonctions incluses dans ce module de code :
 ATOM                MyRegisterClass(HINSTANCE hInstance);

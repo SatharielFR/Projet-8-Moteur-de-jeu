@@ -347,7 +347,7 @@ void init_graphics(void)
 
 void Update()
 {
-    Transform* myTransform;
+//    Transform* myTransform;
     UpdateInputs();
     UpdateCameraPosition();
 }
