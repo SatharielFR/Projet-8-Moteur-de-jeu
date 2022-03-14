@@ -47,7 +47,6 @@ int WINAPI WinMain( HINSTANCE hInstance,
     while (running)
     {
         g_game->m_engine->Update();
-        //    render_frame();
         
         while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -64,7 +63,6 @@ int WINAPI WinMain( HINSTANCE hInstance,
 
     // clean up DirectX and COM
     g_game->m_engine->Close();
-//    cleanD3D();
 
     return msg.wParam;
 }
