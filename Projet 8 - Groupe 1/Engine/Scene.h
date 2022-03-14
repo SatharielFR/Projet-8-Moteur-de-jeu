@@ -1,6 +1,8 @@
 #pragma once
-#include <list>
-#include "Entity.h"
+
+//#include "framework.h"
+
+class Entity;
 
 class Scene
 {

@@ -1,8 +1,10 @@
 #pragma once
-#include <list>
-#include "scene.h"
 
-using namespace std;
+//#include "scene.h"
+#include <list>
+
+ class Scene;
+
 
 class SceneManager
 {
@@ -16,7 +18,7 @@ public :
 private: 
 	#pragma region PrivateVariables
 		Scene* _currentScene;
-		list<Scene*> _lstScenes;
+		std::list<Scene*> _lstScenes;
 	#pragma endregion
 
 	#pragma region PrivateFunctions

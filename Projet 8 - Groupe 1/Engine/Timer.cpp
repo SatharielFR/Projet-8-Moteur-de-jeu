@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "Timer.h"
+#include "framework.h"
+
 
 Timer::Timer(float initTime, bool isPerformanceTimer, float frequency, LONGLONG performTime)
 {
