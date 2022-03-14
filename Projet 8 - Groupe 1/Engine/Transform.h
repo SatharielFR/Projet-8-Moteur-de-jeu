@@ -4,32 +4,25 @@ class Transform
 {
 	public:
 		#pragma region  Variables
-			D3DMATRIX			m_vec3Sca;
-			D3DVECTOR			m_vec3Dir;
-			D3DVECTOR			m_vec3Right;
-			D3DVECTOR			m_veec3Up;
-			D3DXQUATERNION		m_quatRot;
-			D3DXMATRIX			m_matrixRot;
-			D3DVECTOR			m_vec3Pos;
+			D3DXVECTOR3			m_vSca;
+			D3DXMATRIX			m_matSca;
+			D3DXVECTOR3			m_vDir;
+			D3DXVECTOR3			m_vRight;
+			D3DXVECTOR3			m_vUp;
+			D3DXMATRIX			m_matRot;
+			D3DXQUATERNION		m_qRot;
+			D3DXVECTOR3			m_vPos;
+			D3DXMATRIX			m_matPos;
 			D3DXMATRIX			m_matrix;
 		#pragma endregion
 
 		#pragma region PublicFunction
 			Transform();
 			void Identity();
-			void FromMatrix(D3DMATRIX* pMat);
-			void UpdateRotationFromVectors();
-			void UpdateRotationFromQuaternion();
-			void UpdateRotationFromMatrix();
 			void UpdateMatrix();
 			void Rotate(float yaw, float pitch, float roll);
-			void RotateYaw(float angle);
-			void RotatePitch(float angle);
-			void RotateRoll(float angle);
-			void RotateWorld(D3DMATRIX* pMatrix);
-			void RotateWorldX(float angle);
-			void RotateWorldY(float angle);
-			void RotateWorldZ(float angle);
+			
+			void Scaling(D3DXMATRIX* pOut, float x, float y, float z);
 		#pragma endregion 
 };
 
