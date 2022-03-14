@@ -24,7 +24,7 @@ class Game
 		#pragma endregion
 
 		#pragma region PublicFunctions
-			Game();
+			Game(HWND hWnd);
 			void Update();
 			void Close();
 		#pragma endregion

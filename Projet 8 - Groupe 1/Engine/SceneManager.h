@@ -11,7 +11,8 @@ class SceneManager
 public :
 	#pragma region PublicFunctions
 		SceneManager();
-		void OpenScene();
+		void AddScene(Scene* sceneToAdd);
+		void OpenScene(string strSceneName);
 		void UpdateScene();
 	#pragma endregion
 

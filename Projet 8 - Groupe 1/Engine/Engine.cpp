@@ -6,10 +6,17 @@ Engine::Engine(HWND hWnd)
 {
     _hWnd = hWnd;
     InitD3D(_hWnd);
+    Init();
+}
+
+void Engine::Init()
+{
+    _sceneManager = new SceneManager();
 }
 
 void Engine::Update()
 {
+    _sceneManager->UpdateScene();
     RenderFrame();
 }
 

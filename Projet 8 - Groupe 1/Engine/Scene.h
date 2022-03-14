@@ -7,11 +7,20 @@ class Entity;
 class Scene
 {
 	public:
-		void Begin();
-		void Update();
+		#pragma region PublicFunctions
+			Scene(string strSceneName);
+			void Begin();
+			void Update();
+		#pragma endregion
+
+		#pragma region Accessors
+			void SetSceneName(string strNewSceneName);
+			string GetSceneName() { return _strSceneName;}
+		#pragma endregion
 
 	private:
 		#pragma region PrivateVariables
+			string _strSceneName = "Default";
 			list<Entity*> _listEntity;
 		#pragma endregion
 };

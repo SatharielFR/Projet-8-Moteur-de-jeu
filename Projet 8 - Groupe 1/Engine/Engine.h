@@ -33,6 +33,10 @@ class Engine
 			void Close();
 		#pragma endregion 
 
+		#pragma region Accessors
+			SceneManager* GetSceneMananger() { return _sceneManager; }
+		#pragma endregion
+
 	private:
 		#pragma region PrivateVariables
 			HWND _hWnd;
@@ -40,6 +44,7 @@ class Engine
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
+			void Init();
 		#pragma endregion 
 
 		#pragma region 3D Display

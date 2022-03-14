@@ -30,8 +30,7 @@
         ShowWindow(hWnd, nCmdShow);
 
         // Set up and initialize Direct3D
-        g_game = new Game();
-        g_game->m_engine = new Engine(hWnd);
+        g_game = new Game(hWnd);
 
         // Enter the main loop:
         MSG msg;
@@ -75,9 +74,12 @@
 
 #pragma region GameFunctions
 
-    Game::Game()
+    Game::Game(HWND hWnd)
     {
-
+        m_engine = new Engine(hWnd);
+        //Create a map for the game
+        Scene* sceneMain = new Scene("Main");
+        m_engine->GetSceneMananger()->OpenScene("Main");
     }
 
     void Game::Update()
