@@ -250,7 +250,9 @@ void Engine::RenderFrame(void)
     static float index = 0.0f; index += 0.05f; // an ever-increasing float value
 
     Transform test;
-    test.Rotate(index, 0.5f, 0.5f);
+    test.Rotate(index, 2.5f, 1.5f);
+    //test.Scaling(0.5f, 0.5f, 0.5f);
+    test.ScalingUniforme(0.5f);
     //D3DXMatrixScaling(&matScaling, 0.5f, 0.5f, 0.5f);
 
     ////D3DXMatrixRotationY(&matRotateY, index);    // the front side

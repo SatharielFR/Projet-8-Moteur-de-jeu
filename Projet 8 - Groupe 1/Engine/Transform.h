@@ -22,7 +22,8 @@ class Transform
 			void UpdateMatrix();
 			void Rotate(float yaw, float pitch, float roll);
 			
-			//void Scaling(D3DXMATRIX* pOut, float x, float y, float z);
+			void Scaling( float x, float y, float z);
+			void ScalingUniforme(float scale);
 		#pragma endregion 
 };
 
