@@ -2,7 +2,6 @@
 
 #include "resource.h"
 #include "framework.h"
-#include "../Engine/Engine.h"
 
 
 // Déclarations anticipées des fonctions incluses dans ce module de code :
@@ -13,25 +12,32 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 //INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 
-// function prototypes
-//void initD3D(HWND hWnd);    // sets up and initializes Direct3D
-//void render_frame(void);    // renders a single frame
-//void cleanD3D(void);    // closes Direct3D and releases memory
-//void init_graphics(void);    // 3D declarations
-
-
 class Game* g_game;
 
 //Our main game class
 class Game 
 {
 	public:
-		Game();
-		Engine* m_engine = nullptr;
+		#pragma region publicVariables
+			Engine* m_engine = nullptr;
+			bool m_bIsRunning = false;
+		#pragma endregion
+
+		#pragma region PublicFunctions
+			Game();
+			void Update();
+			void Close();
+		#pragma endregion
 
 	private:
-		//Fonctions Custom
-		void Update();
-		void UpdateInputs();
-		void UpdateCameraPosition();
+		#pragma region PrivateFunctions
+			float _fForwardValue = 0;
+			float _fHorizontalValue = 0;
+			float _fSpeed = 0.5f;
+		#pragma endregion
+
+		#pragma region PrivateFunctions	
+			void UpdateInputs();
+			void UpdateCameraPosition();
+		#pragma endregion
 };
