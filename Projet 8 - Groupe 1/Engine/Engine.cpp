@@ -89,35 +89,35 @@ void Engine::InitGraphics(void)
 
       // Vertex for pyramide
         // // base
-        //{ -3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        //{ 3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        //{ -3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },
-        //{ 3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },
+        { -3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        { 3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        { -3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        { 3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },
 
         //// top
-        //{ 0.0f, 5.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        { 0.0f, 5.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
 
         // Vertex the Hypercraft
         // fuselage
-        { 3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        { 0.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        { 0.0f, 0.0f, 10.0f, D3DCOLOR_XRGB(255, 0, 0), },
-        { -3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 255), },
+        //{ 3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        //{ 0.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        //{ 0.0f, 0.0f, 10.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        //{ -3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 255), },
 
-        // left gun
-        { 3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        { 3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        { 2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        //// left gun
+        //{ 3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        //{ 3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        //{ 2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
 
-        // right gun
-        { -3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        { -3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        { -2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
+        //// right gun
+        //{ -3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
+        //{ -3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
+        //{ -2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
 
     };
 
     //create a vertex buffer interface called v_buffer
-    d3ddev->CreateVertexBuffer(10 * sizeof(CUSTOMVERTEX),
+    d3ddev->CreateVertexBuffer(5 * sizeof(CUSTOMVERTEX),
         0,
         CUSTOMFVF,
         D3DPOOL_MANAGED,
@@ -150,20 +150,20 @@ void Engine::InitGraphics(void)
         //2, 7, 6,
 
         // indice for pyramide
-        //0, 2, 1,    // base
-        //1, 2, 3,
-        //0, 1, 4,    // sides
-        //1, 3, 4,
-        //3, 2, 4,
-        //2, 0, 4,
+        0, 2, 1,    // base
+        1, 2, 3,
+        0, 1, 4,    // sides
+        1, 3, 4,
+        3, 2, 4,
+        2, 0, 4,
 
         // indice the hypercraft
-        0, 1, 2,    // fuselage
-        2, 1, 3,
-        3, 1, 0,
-        0, 2, 3,
-        4, 5, 6,    // wings
-        7, 8, 9,
+        //0, 1, 2,    // fuselage
+        //2, 1, 3,
+        //3, 1, 0,
+        //0, 2, 3,
+        //4, 5, 6,    // wings
+        //7, 8, 9,
 
     };
 
@@ -244,27 +244,28 @@ void Engine::RenderFrame(void)
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
     d3ddev->SetIndices(i_buffer);
 
-    D3DXMATRIX matScaling;
-    D3DXMATRIX matTranslate;    // a matrix to store the translation for triangle A
-    D3DXMATRIX matRotateY;    // a matrix to store the rotation for each triangle
+    //D3DXMATRIX matScaling;
+    //D3DXMATRIX matTranslate;    // a matrix to store the translation for triangle A
+    //D3DXMATRIX matRotateY;    // a matrix to store the rotation for each triangle
     static float index = 0.0f; index += 0.05f; // an ever-increasing float value
 
+    Transform test;
+    test.Rotate(index, 0.5f, 0.5f);
+    //D3DXMatrixScaling(&matScaling, 0.5f, 0.5f, 0.5f);
 
-    D3DXMatrixScaling(&matScaling, 0.5f, 0.5f, 0.5f);
+    ////D3DXMatrixRotationY(&matRotateY, index);    // the front side
+    ////(&matRotateY, index);
+    //D3DXMatrixRotationZ(&matRotateY, index);
 
-    //D3DXMatrixRotationY(&matRotateY, index);    // the front side
-    //(&matRotateY, index);
-    D3DXMatrixRotationZ(&matRotateY, index);
-
-    // build MULTIPLE matrices to translate the model and one to rotate
-    D3DXMatrixTranslation(&matTranslate, 0.0f, 0.0f, 2.0f);
+    //// build MULTIPLE matrices to translate the model and one to rotate
+    //D3DXMatrixTranslation(&matTranslate, 0.0f, 0.0f, 2.0f);
 
 
-    D3DXMATRIX matResult = matScaling * matRotateY * matTranslate;
+    //D3DXMATRIX matResult = matScaling * matRotateY * matTranslate;
 
 
     // tell Direct3D about each world transform, and then draw another triangle
-    d3ddev->SetTransform(D3DTS_WORLD, &matResult);
+    d3ddev->SetTransform(D3DTS_WORLD, &test.m_matrix);
 
     // draw the cube
    // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
@@ -273,7 +274,7 @@ void Engine::RenderFrame(void)
     d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 5, 0, 6);
 
     // draw the Hypercraft
-    d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 10, 0, 6);
+    //d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 10, 0, 6);
 
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
    // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);

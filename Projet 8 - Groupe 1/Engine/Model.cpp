@@ -36,5 +36,5 @@ void Model::LoadModel(Model* model, LPCTSTR File)
     //        model->Texture[index] = NULL;    // if there is no texture, set the texture to NULL 
     //}
 
-    //return;
+    return;
 }
