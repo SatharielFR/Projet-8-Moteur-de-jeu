@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5bedd2ac-80e3-447c-b321-1213bb9f596a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.exe.recipe" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.exe.recipe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/Game.lastbuildstate" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/Game.lastbuildstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/rc.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/rc.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/rc.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/Game.tlog/rc.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/GameEngine.log" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/GameEngine.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/vc143.idb" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/GameEngine/x64/Debug/vc143.idb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projet 8 - Groupe 1/x64/Debug/Game.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Projet 8 - Groupe 1/x64/Debug/Game.exe" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="26NjtJh7PXELc5G57y9sBs8JSJd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5bedd2ac-80e3-447c-b321-1213bb9f596a" name="Changes" comment="" />
+      <created>1647271154650</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647271154650</updated>
+      <workItem from="1647271157887" duration="234000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
