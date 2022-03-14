@@ -65,3 +65,21 @@ void Transform::Rotate(float yaw, float pitch, float roll)
 
 	UpdateMatrix();
 }
+
+void Transform::Scaling(float x, float y, float z)
+{
+	m_vSca.x = x;
+	m_vSca.y = y;
+	m_vSca.z = z;
+	D3DXMatrixScaling(&m_matSca, x,y,z);
+	UpdateMatrix();
+}
+
+void Transform::ScalingUniforme(float scale) 
+{
+	m_vSca.x = scale;
+	m_vSca.y = scale;
+	m_vSca.z = scale;
+	D3DXMatrixScaling(&m_matSca, scale, scale, scale);
+	UpdateMatrix();
+}
