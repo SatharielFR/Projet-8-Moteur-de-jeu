@@ -83,3 +83,28 @@ void Transform::ScalingUniforme(float scale)
 	D3DXMatrixScaling(&m_matSca, scale, scale, scale);
 	UpdateMatrix();
 }
+
+void Transform::Move(float x, float y, float z) 
+{
+	m_vPos.x += x;
+	m_vPos.y += y;
+	m_vPos.z += z;
+	D3DXMatrixTranslation(&m_matPos, x, y, z);
+	UpdateMatrix();
+}
+
+void Transform::MoveUniforme(float dist)
+{
+	m_vPos += m_vDir * dist;
+	D3DXMatrixTranslation(&m_matPos, m_vPos.x, m_vPos.y, m_vPos.z);
+	UpdateMatrix();
+}
+
+void Transform::SetPosition(float x, float y, float z)
+{
+	m_vPos.x = x;
+	m_vPos.y = y;
+	m_vPos.z = z;
+	D3DXMatrixTranslation(&m_matPos, x, y, z);
+	UpdateMatrix();
+}
