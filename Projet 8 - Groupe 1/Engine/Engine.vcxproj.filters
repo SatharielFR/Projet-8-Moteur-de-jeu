@@ -48,7 +48,11 @@
     <ClInclude Include="Moteur.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Debug.h">
+=======
     <ClInclude Include="Texturing.h">
+>>>>>>> 7ddb6cd83caa1229599a1dcbd770275a3c8840c4
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,7 +84,11 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Debug.cpp">
+=======
     <ClCompile Include="Texturing.cpp">
+>>>>>>> 7ddb6cd83caa1229599a1dcbd770275a3c8840c4
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
