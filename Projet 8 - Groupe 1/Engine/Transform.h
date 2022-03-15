@@ -24,6 +24,9 @@ class Transform
 			
 			void Scaling( float x, float y, float z);
 			void ScalingUniforme(float scale);
+			void Move(float x, float y, float z);
+			void MoveUniforme(float dist);
+			void SetPosition(float x, float y, float z);
 		#pragma endregion 
 };
 

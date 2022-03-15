@@ -260,6 +260,9 @@ void Engine::RenderFrame(void)
     test.Rotate(index, 2.5f, 1.5f);
     //test.Scaling(0.5f, 0.5f, 0.5f);
     test.ScalingUniforme(0.5f);
+    //test.Move(1.0f,5.0f,1.0f);
+    test.MoveUniforme(2.0f);
+    //test.SetPosition(2.0f,1.0f,2.0f);
     //D3DXMatrixScaling(&matScaling, 0.5f, 0.5f, 0.5f);
 
     ////D3DXMatrixRotationY(&matRotateY, index);    // the front side
