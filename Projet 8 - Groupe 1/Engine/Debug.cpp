@@ -37,21 +37,21 @@ void Debug::Init()
     D3DXCreateFontIndirect(*_d3ddev, &fontDesc, &_Font);
 }
 
-void Debug::DebugLog(const char charToLog[])
+void Debug::ScreenLog(const char charToLog[])
 {
     string l_string;
     l_string = charToLog;
-    DebugLog(&l_string);
+    ScreenLog(&l_string);
 }
 
-void Debug::DebugLog(char charToLog[])
+void Debug::ScreenLog(char charToLog[])
 {
     string l_string;
     l_string = charToLog;
-    DebugLog(&l_string);
+    ScreenLog(&l_string);
 }
 
-void Debug::DebugLog(string* strToLog)
+void Debug::ScreenLog(string* strToLog)
 {
     //Create Rectangle to draw the font
     RECT  Rec;

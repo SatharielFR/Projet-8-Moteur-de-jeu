@@ -16,9 +16,9 @@ void Scene::Update()
 {
 	if (Debug::s_inst)
 	{
-		Debug::s_inst->DebugLog("Scene::Update");
+		Debug::s_inst->ScreenLog("Scene::Update");
 	}
-	Println("Scene::Update");
+	ConsoleLog("Scene::Update");
 }
 
 void Scene::SetSceneName(string strNewSceneName)

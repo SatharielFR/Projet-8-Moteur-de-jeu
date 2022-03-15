@@ -13,9 +13,9 @@ class Debug
 		#pragma region PublicFunctions
 			Debug(LPDIRECT3DDEVICE9* d3ddev);
 			void Init();
-			void DebugLog(const char charToLog[]);
-			void DebugLog(char charToLog[]);
-			void DebugLog(string* strToLog);
+			void ScreenLog(const char charToLog[]);
+			void ScreenLog(char charToLog[]);
+			void ScreenLog(string* strToLog);
 		#pragma endregion
 
 	private:
@@ -28,7 +28,7 @@ class Debug
 
 };
 
-static void Println(string s)
+static void ConsoleLog(string s)
 {
 	s += "\n";
 	wstring temp(s.begin(), s.end());
