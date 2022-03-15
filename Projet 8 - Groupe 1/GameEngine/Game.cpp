@@ -79,6 +79,7 @@
         m_engine = new Engine(hWnd);
         //Create a map for the game
         Scene* sceneMain = new Scene("Main");
+        m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
     }
 

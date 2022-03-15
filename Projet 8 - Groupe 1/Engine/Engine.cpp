@@ -9,14 +9,15 @@ Engine::Engine(HWND hWnd)
     Init();
 }
 
+//Init all engine values
 void Engine::Init()
 {
     _sceneManager = new SceneManager();
+    _debug = new Debug(&d3ddev);
 }
 
 void Engine::Update()
 {
-    _sceneManager->UpdateScene();
     RenderFrame();
 }
 
@@ -31,7 +32,6 @@ void Engine::InitD3D(HWND hWnd)
     d3d = Direct3DCreate9(D3D_SDK_VERSION);    // create the Direct3D interface
 
     D3DPRESENT_PARAMETERS d3dpp;    // create a struct to hold various device information
-
     ZeroMemory(&d3dpp, sizeof(d3dpp));    // clear out the struct for use
     d3dpp.Windowed = TRUE;    // FALSE - program windowed, not fullscreen
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;    // discard old frames
@@ -54,23 +54,6 @@ void Engine::InitD3D(HWND hWnd)
     d3ddev->SetRenderState(D3DRS_LIGHTING, FALSE);    // turn off the 3D lighting
     d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);    // both sides of the triangles
     d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
-
-
-    //Create font
-    D3DXFONT_DESC fontDesc;
-    ZeroMemory(&fontDesc, sizeof(D3DXFONT_DESC));
-    fontDesc.Height = 25;
-    fontDesc.Width = 12;
-    fontDesc.Weight = 500;
-    fontDesc.MipLevels = D3DX_DEFAULT;
-    fontDesc.Italic = false;
-    fontDesc.CharSet = 0;
-    fontDesc.OutputPrecision = 0;
-    fontDesc.Quality = 0;
-    fontDesc.PitchAndFamily = 0;
-    char* test = (char*)fontDesc.FaceName;
-    strcpy(test, "Times New Roman"); // font style
-    D3DXCreateFontIndirect(d3ddev, &fontDesc, &Font);
 }
 
 // this is the function that puts the 3D models into video RAM
@@ -192,8 +175,6 @@ void Engine::InitGraphics(void)
 // this is the function used to render a single frame
 void Engine::RenderFrame(void)
 {
-//    Update();
-
     D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 255, 255);
 
     d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, ClearColor, 1.0f, 0);
@@ -201,31 +182,8 @@ void Engine::RenderFrame(void)
 
     d3ddev->BeginScene();
 
-
-    //Test Print text
-    //Create Font
-    //Create Rectangle to draw the font
-    RECT  Rec;
-    Rec.left = 20;
-    Rec.top = 20;
-    Rec.right = SCREEN_WIDTH;
-    Rec.bottom = SCREEN_HEIGHT;
-    //Display the font text using the rect and font
-    std::wstring w = L"Groupe 1 : Janaky / Leo / Rodrigue / Tom";;
-    const WCHAR* wcharTextToDisplay = w.c_str();
-    LPCWSTR textToDisplay = LPCWSTR(wcharTextToDisplay);
-    if (Font)
-    {
-        Font->DrawText(
-            NULL,
-            textToDisplay, // String to draw.
-            -1, // Null terminating string.
-            &Rec, // Rectangle to draw the string in.
-            DT_TOP | DT_LEFT, // Draw in top-left corner of rect.
-            0xff000000); // Black.
-
-    }
-    //end test print text
+    // Render Game
+    _sceneManager->UpdateScene();
 
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);

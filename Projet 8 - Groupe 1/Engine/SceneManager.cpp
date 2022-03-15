@@ -8,17 +8,17 @@ SceneManager::SceneManager()
 void SceneManager::AddScene(Scene* sceneToAdd)
 {
 	_lstScenes.push_back(sceneToAdd);
-//	advance(_lstScenes, 0)->GetName();
 }
 
 void SceneManager::OpenScene(string strSceneName)
 {
-//	_currentScene = strSceneName;
-
-	//for each (Scene* currentScene in _lstScenes)
-	//{
-
-	//}
+	for(Scene* currentScene : _lstScenes)
+	{
+		if (currentScene->GetSceneName() == strSceneName)
+		{
+			_currentScene = currentScene;
+		}
+	}
 }
 
 void SceneManager::UpdateScene()
