@@ -52,6 +52,7 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Debug.h">
+    <ClInclude Include="Texturing.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -87,6 +88,7 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Debug.cpp">
+    <ClCompile Include="Texturing.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

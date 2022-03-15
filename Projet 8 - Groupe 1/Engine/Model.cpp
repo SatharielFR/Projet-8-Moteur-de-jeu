@@ -3,10 +3,11 @@
 
 Model::Model(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material)
 {
-    materials = numMaterials;
-    mesh = Mesh;
-    texture = Texture;
-    material = Material;
+
+    numMaterials = materials;
+    Mesh = mesh;
+    Texture = texture;
+    Material = material;
 }
 
 void Model::LoadModel(Model* model, LPCTSTR File)
