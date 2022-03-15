@@ -1,8 +1,8 @@
 #pragma once
 
-//#include "framework.h"
-
-class Entity;
+#pragma region ForwardDeclaration
+	class Entity;
+#pragma endregion
 
 class Scene
 {

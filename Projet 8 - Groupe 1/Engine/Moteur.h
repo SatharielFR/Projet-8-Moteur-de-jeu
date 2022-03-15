@@ -41,6 +41,7 @@
 	#include "Transform.h"
 	#include "Entity.h"
 	#include "Scene.h"
+	#include "Debug.h"
 #pragma endregion
 
 #pragma region GlobalVariables
