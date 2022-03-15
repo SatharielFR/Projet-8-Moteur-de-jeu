@@ -36,13 +36,14 @@
 #pragma region Engine
 	#include "Engine.h"
 	#include "SceneManager.h"
-	#include "Model.h"
 	#include "Timer.h"
 	#include "Transform.h"
 	#include "Entity.h"
 	#include "Scene.h"
+	#include "Debug.h"
 	#include "Component.h"
 	#include "Texturing.h"
+	#include "Mesh.h"
 #pragma endregion
 
 #pragma region GlobalVariables

@@ -3,6 +3,7 @@
 #pragma region ForwardDeclaration
 	class SceneManager;
 	class Component;
+	class Debug;
 #pragma endregion
 
 class Engine
@@ -43,6 +44,7 @@ class Engine
 		#pragma region PrivateVariables
 			HWND _hWnd;
 			SceneManager * _sceneManager;
+			Debug* _debug = nullptr;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
