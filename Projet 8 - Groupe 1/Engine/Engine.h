@@ -1,11 +1,10 @@
 #pragma once
 
-//#include "SceneManager.h"
-//#include "Moteur.h"
-//#include "framework.h"
-
-class SceneManager;
-class Debug;
+#pragma region ForwardDeclaration
+	class SceneManager;
+	class Component;
+	class Debug;
+#pragma endregion
 
 class Engine
 {
@@ -24,6 +23,11 @@ class Engine
 			D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position
 			D3DXVECTOR3 vecLookAtPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);    // the look-at position
 			D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
+			//Font variable
+			ID3DXFont* Font = 0;
+
+			static list<Component*> lstComponents;
+
 		#pragma endregion 
 
 		#pragma region PublicFunctions

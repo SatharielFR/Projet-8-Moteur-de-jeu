@@ -23,15 +23,15 @@ void Entity::SetParent(Entity* newParentEntity)
 	}
 }
 
-void Entity::AddChild(Entity* newChildToAdd)
+void Entity::AddEntity(Entity* newEntityToAdd)
 {
-	if (newChildToAdd == nullptr) { return; }
+	if (newEntityToAdd == nullptr) { return; }
 
 	for (auto i = _lstEntityChild.begin(); i != _lstEntityChild.end(); i++)
 	{
-		if (*i != newChildToAdd)
+		if (*i != newEntityToAdd)
 		{
-			_lstEntityChild.push_back(newChildToAdd);
+			_lstEntityChild.push_back(newEntityToAdd);
 		}
 		else
 		{
@@ -40,15 +40,45 @@ void Entity::AddChild(Entity* newChildToAdd)
 	}
 }
 
-void Entity::RemoveChild(Entity* childToRem)
+void Entity::RemoveEntity(Entity* EntityToRem)
 {
-	if (childToRem == nullptr) { return; }
+	if (EntityToRem == nullptr) { return; }
 
 	for (auto i = _lstEntityChild.begin(); i != _lstEntityChild.end(); i++)
 	{
-		if (*i == childToRem)
+		if (*i == EntityToRem)
 		{
 			_lstEntityChild.erase(i);
+		}
+	}
+}
+
+void Entity::AddComponent(Component* newComponentToAdd)
+{
+	if (newComponentToAdd == nullptr) { return; }
+
+	for (auto i = _lstComponenetChild.begin(); i != _lstComponenetChild.end(); i++)
+	{
+		if (*i != newComponentToAdd)
+		{
+			_lstComponenetChild.push_back(newComponentToAdd);
+		}
+		else
+		{
+			return;
+		}
+	}
+}
+
+void Entity::RemoveComponent(Component* ComponentToRem)
+{
+	if (ComponentToRem == nullptr) { return; }
+
+	for (auto i = _lstComponenetChild.begin(); i != _lstComponenetChild.end(); i++)
+	{
+		if (*i == ComponentToRem)
+		{
+			_lstComponenetChild.erase(i);
 		}
 	}
 }
