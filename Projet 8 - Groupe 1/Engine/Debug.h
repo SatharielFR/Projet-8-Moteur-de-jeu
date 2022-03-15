@@ -24,6 +24,7 @@ class Debug
 			//Font variable
 			ID3DXFont* _Font = 0;
 			std::wstring _strToLog;
+//			list<std::wstring*> _lstLogToPrint;
 		#pragma endregion
 
 };
