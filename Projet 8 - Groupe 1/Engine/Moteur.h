@@ -41,6 +41,7 @@
 	#include "Transform.h"
 	#include "Entity.h"
 	#include "Scene.h"
+	#include "Texturing.h"
 #pragma endregion
 
 #pragma region GlobalVariables
@@ -52,7 +53,8 @@
 	#define MAX_LOADSTRING 100
 
 	//Struct for 3D
-	struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; };
+	struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; static const DWORD FVF; };
 	#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)
+	
 #pragma endregion
 
