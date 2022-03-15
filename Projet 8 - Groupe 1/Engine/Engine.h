@@ -1,10 +1,9 @@
 #pragma once
 
-//#include "SceneManager.h"
-//#include "Moteur.h"
-//#include "framework.h"
-
-class SceneManager;
+#pragma region ForwardDeclaration
+	class SceneManager;
+	class Component;
+#pragma endregion
 
 class Engine
 {
@@ -25,6 +24,9 @@ class Engine
 			D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
 			//Font variable
 			ID3DXFont* Font = 0;
+
+			static list<Component*> lstComponents;
+
 		#pragma endregion 
 
 		#pragma region PublicFunctions

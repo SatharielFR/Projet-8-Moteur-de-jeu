@@ -1,5 +1,5 @@
 #pragma once
-//#include "framework.h"
+#include "framework.h"
 
 class Entity
 {
@@ -15,14 +15,17 @@ class Entity
 			void Update();
 
 			void SetParent(Entity* newParentEntity);
-			void AddChild(Entity* newChildToAdd);
-			void RemoveChild(Entity* childToRem);
+			void AddEntity(Entity* newEntityToAdd);
+			void RemoveEntity(Entity* EntityToRem);
+			void AddComponent(Component* newComponentToAdd);
+			void RemoveComponent(Component* ComponentToRem);
 		#pragma endregion 
 
 	private:
 		#pragma region PrivateVariable
 			Entity* _entityParent = nullptr;
 			list<Entity*> _lstEntityChild;
+			list<Component*> _lstComponenetChild;
 		#pragma endregion
 };
 

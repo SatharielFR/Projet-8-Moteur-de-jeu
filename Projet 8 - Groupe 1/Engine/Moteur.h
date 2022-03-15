@@ -41,6 +41,7 @@
 	#include "Transform.h"
 	#include "Entity.h"
 	#include "Scene.h"
+	#include "Component.h"
 	#include "Texturing.h"
 #pragma endregion
 
