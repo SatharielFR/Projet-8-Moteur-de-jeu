@@ -21,7 +21,6 @@ class Transform
 			void Identity();
 			void UpdateMatrix();
 			void Rotate(float yaw, float pitch, float roll);
-			
 			void Scaling( float x, float y, float z);
 			void ScalingUniforme(float scale);
 			void Move(float x, float y, float z);
