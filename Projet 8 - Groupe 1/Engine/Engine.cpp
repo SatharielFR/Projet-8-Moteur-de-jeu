@@ -14,11 +14,21 @@ void Engine::Init()
 {
     _sceneManager = new SceneManager();
     _debug = new Debug(&d3ddev);
+    _timer = new Timer();
 }
 
 void Engine::Update()
 {
-    RenderFrame();
+    if (_timer)
+    {
+        //UpdateTime and only update the game if the time elapsed is long enough
+        if (_timer->UpdateTime())
+        {
+            //UpdatePhysique
+            RenderFrame();
+        }
+    }
+
 }
 
 void Engine::Close()

@@ -20,6 +20,9 @@
 	// Fichiers d'en-tête Windows
 	#include <windows.h>
 	#include <windowsx.h>
+	//To use Time
+	#include <mmsystem.h> 
+	#pragma comment(lib, "winmm.lib")
 	// Fichiers d'en-tête C RunTime
 	#include <stdlib.h>
 	#include <malloc.h>
@@ -53,10 +56,8 @@
 	#define SCREEN_WIDTH  800
 	#define SCREEN_HEIGHT 800
 	#define MAX_LOADSTRING 100
-
 	//Struct for 3D
 	struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; static const DWORD FVF; };
 	#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)
-	
 #pragma endregion
 

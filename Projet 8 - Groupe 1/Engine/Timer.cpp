@@ -1,17 +1,15 @@
 #include "pch.h"
 #include "framework.h"
 
-
-Timer::Timer(float initTime, bool isPerformanceTimer, float frequency, LONGLONG performTime)
+Timer::Timer()
 {
-    initTime = s_initTime;
-    isPerformanceTimer = s_isPerformanceTimer;
-    frequency = s_frequency;
-    performTime = s_performTime;
+    InitSystemTime();
 }
 
 void Timer::InitSystemTime()
 {
+    s_initTime = 8.0f;
+    timeGetTime();
 	s_initTime = timeGetTime() / 1000.0f;
 	s_isPerformanceTimer = false;
     s_frequency = 0.0f;
@@ -34,9 +32,27 @@ float Timer::GetSystemTimeEx()
     {
         LARGE_INTEGER counter;
         QueryPerformanceCounter(&counter);
-        return (float)(counter.QuadPart - s_performTime) / s_frequency;
+        return (float)(counter.QuadPart - s_performTime) / s_frequency; //rounded to micro sec
     }
+    else
 
     // Classic
-    return timeGetTime() / 1000.0f - s_initTime;
+    return timeGetTime() / 1000.0f - s_initTime; //rounded to mili sec
+}
+
+bool Timer::UpdateTime()
+{
+    // System time
+    float newSysTime = GetSystemTimeEx();
+    float elapsedSysTime = newSysTime - m_fSysTime;
+    if (elapsedSysTime < 0.005f) // 200 fps max
+        return false;
+    m_fSysTime = newSysTime;
+    if (elapsedSysTime > 0.04f) // 25 fps min
+        elapsedSysTime = 0.04f;
+
+    // App time
+    m_fElapsedTime = elapsedSysTime;
+    m_fTime += m_fElapsedTime;
+    return true;
 }

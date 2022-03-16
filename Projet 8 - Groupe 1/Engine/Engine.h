@@ -4,6 +4,7 @@
 	class SceneManager;
 	class Component;
 	class Debug;
+	class Timer;
 #pragma endregion
 
 class Engine
@@ -43,8 +44,9 @@ class Engine
 	private:
 		#pragma region PrivateVariables
 			HWND _hWnd;
-			SceneManager * _sceneManager;
+			SceneManager * _sceneManager = nullptr;
 			Debug* _debug = nullptr;
+			Timer* _timer = nullptr;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
