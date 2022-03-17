@@ -28,7 +28,6 @@ void Engine::Update()
             RenderFrame();
         }
     }
-
 }
 
 void Engine::Close()

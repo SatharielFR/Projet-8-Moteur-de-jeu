@@ -4,6 +4,7 @@ class Timer
 {
 	public :
 		#pragma region PublicVariable
+			static Timer* s_inst;
 			float s_initTime;					//Start time of the app
 			bool s_isPerformanceTimer;
 			float s_frequency;

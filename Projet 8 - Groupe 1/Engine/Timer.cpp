@@ -1,8 +1,19 @@
 #include "pch.h"
 #include "framework.h"
 
+Timer* Timer::s_inst = nullptr;
+
 Timer::Timer()
-{
+{   
+    //Singleton
+    if (s_inst)
+    {
+        delete(this);
+    }
+    else
+    {
+        s_inst = this;
+    }
     InitSystemTime();
 }
 
