@@ -217,7 +217,7 @@ void Engine::RenderFrame(void)
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
     d3ddev->SetIndices(i_buffer);
 
-    static float index = 0.0f; index += 0.05f; // an ever-increasing float value
+    static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
 
     Transform test;
     test.Rotate(index, index, index);
