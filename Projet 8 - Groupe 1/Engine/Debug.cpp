@@ -53,25 +53,58 @@ void Debug::ScreenLog(char charToLog[])
 
 void Debug::ScreenLog(string* strToLog)
 {
-    //Create Rectangle to draw the font
-    RECT  Rec;
-    Rec.left = 20;
-    Rec.top = 20;
-    Rec.right = SCREEN_WIDTH;
-    Rec.bottom = SCREEN_HEIGHT;
+    //Create the log
+    Log* l_pLogCurrent = new Log(*strToLog, _fDefaultDuration);
+    _lstLogs.push_back(l_pLogCurrent);
+}
 
-    //Display the font text using the rect and font
-    _strToLog = std::wstring(strToLog->begin(), strToLog->end());
-    const WCHAR* wcharTextToDisplay = _strToLog.c_str();
-    LPCWSTR textToDisplay = LPCWSTR(wcharTextToDisplay);
-    if (_Font)
+void Debug::UpdateScreenLogs()
+{
+    //if there is at least one Log on the list, Print the last log added to the list
+    if (_lstLogs.size() > 0)
     {
-        _Font->DrawText(
-                        NULL,
-                        textToDisplay, // String to draw.
-                        -1, // Null terminating string.
-                        &Rec, // Rectangle to draw the string in.
-                        DT_TOP | DT_LEFT, // Draw in top-left corner of rect.
-                        0xff000000); // Black.
+        //Create Rectangle to draw the font
+        RECT  Rec;
+        Rec.left = 20;
+        Rec.top = 20;
+        Rec.right = SCREEN_WIDTH;
+        Rec.bottom = SCREEN_HEIGHT;
+
+        //Create the text to display
+        string strToLog = "";
+        for (Log* currentLog : _lstLogs)
+        {
+            strToLog =  currentLog->GetText() + "\n" + strToLog;
+        }
+
+        //Display the font text using the rect and font
+        _wstrToLog = std::wstring(strToLog.begin(), strToLog.end());
+        const WCHAR* wcharTextToDisplay = _wstrToLog.c_str();
+        LPCWSTR textToDisplay = LPCWSTR(wcharTextToDisplay);
+        if (_Font)
+        {
+            _Font->DrawText(
+                NULL,
+                textToDisplay, // String to draw.
+                -1, // Null terminating string.
+                &Rec, // Rectangle to draw the string in.
+                DT_TOP | DT_LEFT, // Draw in top-left corner of rect.
+                _DefaultColor); // Black.
+        }
+
+        //Update List
+        auto it = _lstLogs.begin()++;
+        while(it != _lstLogs.end())
+        {
+            if ((*it)->bShouldBeDestroy())
+            {
+                it = _lstLogs.erase(it);
+            }
+
+            else
+            {
+                ++it;
+            }
+        }
     }
 }
