@@ -184,15 +184,14 @@ void Engine::InitGraphics(void)
 // this is the function used to render a single frame
 void Engine::RenderFrame(void)
 {
-    D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 255, 255);
-
-    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, ClearColor, 1.0f, 0);
-    d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER, ClearColor, 1.0f, 0);
+    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, _ClearColor, 1.0f, 0);
+    d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER, _ClearColor, 1.0f, 0);
 
     d3ddev->BeginScene();
 
     // Render Game
     _sceneManager->UpdateScene();
+    _debug->UpdateScreenLogs();
 
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);

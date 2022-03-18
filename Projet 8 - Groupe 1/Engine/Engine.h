@@ -47,6 +47,7 @@ class Engine
 			SceneManager * _sceneManager = nullptr;
 			Debug* _debug = nullptr;
 			Timer* _timer = nullptr;
+			D3DCOLOR _ClearColor = D3DCOLOR_XRGB(49, 51, 54);
 		#pragma endregion 
 
 		#pragma region PrivateFunctions

@@ -81,6 +81,8 @@
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
+
+        Debug::s_inst->ScreenLog("Game Start");        //Debug
     }
 
     void Game::Update()
