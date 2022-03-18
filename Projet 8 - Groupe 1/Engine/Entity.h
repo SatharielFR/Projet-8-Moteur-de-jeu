@@ -1,10 +1,12 @@
 #pragma once
 
+class TransformComponent;
+
 class Entity
 {
 	public:
 		#pragma region PublicVariables
-			TransformComponent transform;
+			TransformComponent* transform;
 			//collider
 			//mesh
 		#pragma endregion 
