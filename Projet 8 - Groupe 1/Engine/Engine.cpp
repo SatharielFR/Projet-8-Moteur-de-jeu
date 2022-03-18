@@ -208,21 +208,23 @@ void Engine::RenderFrame(void)
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
 
-    // set the view transform
-    D3DXMatrixLookAtLH(&matView,
-        &vecCamPosition,   // the camera position
-        &vecLookAtPosition,    // the look-at position
-        &vecUpDirection);    // the up direction
-    d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
 
-    // set the projection transform
-    D3DXMATRIX matProjection;    // the projection transform matrix
-    D3DXMatrixPerspectiveFovLH(&matProjection,
-        D3DXToRadian(45),    // the horizontal field of view
-        (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
-        1.0f,    // the near view-plane
-        100.0f);    // the far view-plane
-    d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
+
+    //// set the view transform
+    //D3DXMatrixLookAtLH(&matView,
+    //    &vecCamPosition,   // the camera position
+    //    &vecLookAtPosition,    // the look-at position
+    //    &vecUpDirection);    // the up direction
+    //d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
+
+    //// set the projection transform
+    //D3DXMATRIX matProjection;    // the projection transform matrix
+    //D3DXMatrixPerspectiveFovLH(&matProjection,
+    //    D3DXToRadian(45),    // the horizontal field of view
+    //    (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
+    //    1.0f,    // the near view-plane
+    //    100.0f);    // the far view-plane
+    //d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
 
 
     // select the vertex buffer to display
@@ -262,7 +264,8 @@ void Engine::RenderFrame(void)
 
     //setting transform and DRAWING mesh
     Transform tr;
-    tr.m_vPos.z = 100.0f;
+    tr.m_vPos.x = 200.0f;
+    tr.m_vPos.z = 200.0f;
     tr.UpdateMatrix();
     tr.ScalingUniforme(1.0f);
     tr.Rotate(index, 0.0f, index);
@@ -277,6 +280,7 @@ void Engine::RenderFrame(void)
     }
     // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
 
+    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
 
     d3ddev->EndScene();
 

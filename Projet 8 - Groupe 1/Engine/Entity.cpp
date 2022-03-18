@@ -4,11 +4,25 @@
 void Entity::Begin()
 {
 	transform = new TransformComponent;
+	AddComponent(transform);
 }
 
 void Entity::Update()
 {
+	//Update All child Entities
+	for (Entity* currentEntity : _lstEntityChild)
+	{
+		currentEntity->Update();
+	}
+	//Update All Components
+	for (Component* currentChild : _lstComponentChild)
+	{
+		currentChild->Update();
+	}
+}
 
+void Entity::Render()
+{
 }
 
 void Entity::SetParent(Entity* newParentEntity)
@@ -61,6 +75,7 @@ void Entity::AddComponent(Component* newComponentToAdd)
 	{
 		if (*i != newComponentToAdd)
 		{
+			newComponentToAdd->SetParent(this);
 			_lstComponentChild.push_back(newComponentToAdd);
 		}
 		else

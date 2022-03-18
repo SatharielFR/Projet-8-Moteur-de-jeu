@@ -5,8 +5,8 @@ class TransformComponent : public Component
 
 		TransformComponent();
 
-	protected :
+	//protected :
 
-		Transform m_trans;
+		Transform m_transform;
 };
 

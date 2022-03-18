@@ -50,6 +50,7 @@
 	#include "Texturing.h"
 	#include "MeshComponent.h"
 	#include "TransformComponent.h"
+    #include "Camera.h"
 #pragma endregion
 
 #pragma region GlobalVariables
