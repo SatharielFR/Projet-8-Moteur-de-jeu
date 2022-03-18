@@ -37,9 +37,9 @@ class Debug
 		#pragma region PublicFunctions
 			Debug(LPDIRECT3DDEVICE9* d3ddev);
 			void Init();
-			void ScreenLog(const char charToLog[]);
-			void ScreenLog(char charToLog[]);
-			void ScreenLog(string* strToLog);
+			void ScreenLog(const char charToLog[], float fDuration = -1);
+			void ScreenLog(char charToLog[], float fDuration = -1);
+			void ScreenLog(string* strToLog, float fDuration = -1);
 			void UpdateScreenLogs();
 		#pragma endregion
 

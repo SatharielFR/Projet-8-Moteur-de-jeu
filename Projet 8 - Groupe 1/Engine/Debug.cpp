@@ -37,24 +37,30 @@ void Debug::Init()
     D3DXCreateFontIndirect(*_d3ddev, &fontDesc, &_Font);
 }
 
-void Debug::ScreenLog(const char charToLog[])
+void Debug::ScreenLog(const char charToLog[], float fDuration)
 {
     string l_string;
     l_string = charToLog;
-    ScreenLog(&l_string);
+    ScreenLog(&l_string, fDuration);
 }
 
-void Debug::ScreenLog(char charToLog[])
+void Debug::ScreenLog(char charToLog[], float fDuration)
 {
     string l_string;
     l_string = charToLog;
-    ScreenLog(&l_string);
+    ScreenLog(&l_string, fDuration);
 }
 
-void Debug::ScreenLog(string* strToLog)
+void Debug::ScreenLog(string* strToLog, float fDuration)
 {
+    //Set Time duration
+    if (fDuration <= 0.0f)
+    {
+        fDuration = _fDefaultDuration;
+    }
+
     //Create the log
-    Log* l_pLogCurrent = new Log(*strToLog, _fDefaultDuration);
+    Log* l_pLogCurrent = new Log(*strToLog, fDuration);
     _lstLogs.push_back(l_pLogCurrent);
 }
 
