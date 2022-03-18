@@ -28,21 +28,4 @@ void Component::SetParent(Entity* newParentEntity)
 	}
 }
 
-//void Component::AddComponent(Component* newComponent)
-//{
-//	if (newComponent == nullptr) { return; }
-//
-//	for (auto i = Engine::lstComponents.begin(); i != Engine::lstComponents.end(); i++)
-//	{
-//		if (*i != newComponent)
-//		{
-//			Engine::lstComponents.push_back(newComponent);
-//		}
-//		else
-//		{
-//			return;
-//		}
-//	}
-//}
-
 

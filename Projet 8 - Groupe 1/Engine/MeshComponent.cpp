@@ -1,87 +1,116 @@
 #include "pch.h"
 #include "framework.h"
 
-MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material)
+MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTURE9* textureIn, D3DMATERIAL9* materialIn, string meshAndTexturePathIn)
 {
 
-    _numMaterials = materials;
-    _mesh = mesh;
-    _texture = texture;
-    _material = material;
+    numMaterials = materials;
+    mesh = meshIn;
+    meshTextures = textureIn;
+    meshMaterials = materialIn;
+    meshAndTexturePath = meshAndTexturePathIn;
 }
 
 MeshComponent::MeshComponent() {
-    _numMaterials = 0;
-    _mesh = 0;
-    _texture = 0;
-    _material = 0;
+    numMaterials = 0;
+    mesh = NULL;
+    meshTextures = NULL;
+    meshMaterials = NULL;
+    materialBuffer = NULL;
+    meshAndTexturePath = "";
 }
 
+//easy debugs
+//MessageBoxA(NULL, strFileName.c_str(), "", MB_OK);
+
+
 /// <summary>
-/// this has to be tested, it probably does not work properly
-/// this method should only be called in scene as we do not have access to the device (d3ddev) in this class
+/// loads the mesh and creates the appropriate texture from a .x file
 /// </summary>
-/// <param name="mesh">mesh of the Mesh object</param>
-/// <param name="file">filepath to .x file</param>
-/// <param name="device">device to draw on PASSED BY SCENE</param>
-void MeshComponent::LoadMesh(MeshComponent* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device)
+/// <param name="file">|| filepath to the .x mesh file</param>
+/// <param name="device">|| device of the engine, necessary to draw. This means that this method can only be called in engine render and not in class as it needs the device</param>
+void MeshComponent::LoadMesh(LPCTSTR file, LPDIRECT3DDEVICE9 device)
 {
-     //on passe le device par la scène et c'est elle qui va draw
-    LPD3DXBUFFER bufMaterial;
-    D3DXLoadMeshFromXW(file, D3DXMESH_SYSTEMMEM, device, NULL, &bufMaterial, NULL, &mesh->_numMaterials, &mesh->_mesh);
-
-    D3DXMATERIAL* tempMaterials = (D3DXMATERIAL*)bufMaterial->GetBufferPointer();
-
-    mesh->_material = new D3DMATERIAL9[mesh->_numMaterials];
-    mesh->_texture = new LPDIRECT3DTEXTURE9[mesh->_numMaterials];
-
-    for (DWORD index = 0; index < mesh->_numMaterials; index++)
+    //loading mesh
+    if (mesh == NULL)
     {
-     //this should be updated after renaming, probably broke
-        mesh->_material[index] = tempMaterials[index].MatD3D;
-        mesh->_material[index].Ambient = mesh->_material[index].Diffuse;
 
-        // if there is a texture to load, load it 
-        if (FAILED(D3DXCreateTextureFromFileA(device,
-            tempMaterials[index].pTextureFilename,
-            &mesh->_texture[index])))
-            mesh->_texture[index] = NULL;    // if there is no texture, set the texture to NULL 
+        HRESULT hr = D3DXLoadMeshFromX(file, D3DXMESH_SYSTEMMEM, device, NULL, &materialBuffer, NULL, &numMaterials, &mesh);
+
+        // Loading the material buffer
+        D3DXMATERIAL* d3dxMaterials = (D3DXMATERIAL*)materialBuffer->GetBufferPointer();
+        // Holding material and texture pointers
+        meshMaterials = new D3DMATERIAL9[numMaterials];
+        meshTextures = new LPDIRECT3DTEXTURE9[numMaterials];
+        // Filling material and texture arrays
+        for (DWORD i = 0; i < numMaterials; i++)
+        {
+            // Copy the material
+            meshMaterials[i] = d3dxMaterials[i].MatD3D;
+
+            // Set the ambient color for the material (D3DX does not do this)
+            meshMaterials[i].Ambient = meshMaterials[i].Diffuse;
+
+            // Create the texture if it exists - it may not
+            meshTextures[i] = NULL;
+            if (d3dxMaterials[i].pTextureFilename) {
+
+                //create full path
+                string strFileName = "..\\Ressources\\";
+                strFileName.append((string)d3dxMaterials[i].pTextureFilename);
+
+                //store it in class variable
+                meshAndTexturePath = strFileName;
+
+                //making string to lpwstr for CreateTextureFromFile
+                wstring stemp = wstring(strFileName.begin(), strFileName.end());
+                LPCWSTR fullPath = stemp.c_str();
+
+                //StringCchCatW(strFileName, 26, (d3dxMaterials[i].pTextureFilename));
+                D3DXCreateTextureFromFile(device, fullPath, &meshTextures[i]);
+            }
+        }
+        materialBuffer->Release();
     }
-
-    return;
 }
 
 #pragma region Accessors
     DWORD MeshComponent::GetNumMaterials() {
-        return _numMaterials;
+        return numMaterials;
     }
 
     LPD3DXMESH MeshComponent::GetMesh() {
-        return _mesh;
+        return mesh;
     }
 
-    LPDIRECT3DTEXTURE9* MeshComponent::GetTexture() {
-        return _texture;
+    const LPDIRECT3DTEXTURE9* MeshComponent::GetMeshTextures() {
+        return meshTextures;
     }
-    D3DMATERIAL9* MeshComponent::GetMaterial() {
-        return _material;
+
+    const D3DMATERIAL9* MeshComponent::GetMeshMaterials() {
+        return meshMaterials;
+    }
+
+    string MeshComponent::GetMeshAndTexturePath() {
+        return meshAndTexturePath;
     }
 #pragma endregion
 
 #pragma region mutators
     void MeshComponent::SetNumMaterials(DWORD numMaterials) {
-        _numMaterials = numMaterials;
+        numMaterials = numMaterials;
     }
     void MeshComponent::SetMesh(LPD3DXMESH mesh) {
-        _mesh = mesh;
+        mesh = mesh;
     }
     void MeshComponent::SetTexture(LPDIRECT3DTEXTURE9* texture) {
-        _texture = texture;
+        meshTextures = texture;
     }
     void MeshComponent::SetMaterial(D3DMATERIAL9* material) {
-        _material = material;
+        meshMaterials = material;
+    }
+
+    void MeshComponent::SetMeshAndTexturePath(string pathIn) {
+        meshAndTexturePath = pathIn;
     }
 #pragma endregion
-
-    //https://www.unknowncheats.me/forum/d3d-tutorials-and-source/102186-d3d9-mesh-directx-format-loading-class.html
-    //we are using this => https://stackoverflow.com/questions/996879/loading-mesh-from-x-file-with-direct-x-9-in-c

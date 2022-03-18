@@ -1,31 +1,35 @@
 #pragma once
 //#include "framework.h"
 
-class MeshComponent
+class MeshComponent : public Component
 {
 public:
 
 #pragma region variables
-    DWORD _numMaterials;
-    LPD3DXMESH _mesh;
-    LPDIRECT3DTEXTURE9* _texture;
-    D3DMATERIAL9* _material;
+    DWORD numMaterials;
+    LPD3DXMESH mesh;
+    LPDIRECT3DTEXTURE9* meshTextures;
+    D3DMATERIAL9* meshMaterials;
+    LPD3DXBUFFER materialBuffer;
+    string meshAndTexturePath;
 #pragma endregion
+
 
 #pragma region Constructeur
     MeshComponent();
-    MeshComponent(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material);
+    MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTURE9* textureIn, D3DMATERIAL9* materialIn, string meshAndTexturePathIn);
 #pragma endregion
 
 #pragma region methods
-    void LoadMesh(MeshComponent* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device);
+    void LoadMesh(LPCTSTR file, LPDIRECT3DDEVICE9 device);
 #pragma endregion
 
 #pragma region accessors
     DWORD GetNumMaterials();
     LPD3DXMESH GetMesh();
-    LPDIRECT3DTEXTURE9* GetTexture();
-    D3DMATERIAL9* GetMaterial();
+    string GetMeshAndTexturePath();
+    const LPDIRECT3DTEXTURE9* GetMeshTextures();
+    const D3DMATERIAL9* GetMeshMaterials();
 #pragma endregion
 
 #pragma region mutators
@@ -33,6 +37,7 @@ public:
     void SetMesh(LPD3DXMESH mesh);
     void SetTexture(LPDIRECT3DTEXTURE9* texture);
     void SetMaterial(D3DMATERIAL9* material);
+    void SetMeshAndTexturePath(string pathIn);
 #pragma endregion
 
 
