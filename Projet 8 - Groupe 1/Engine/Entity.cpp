@@ -3,7 +3,7 @@
 
 void Entity::Begin()
 {
-
+	transform = new TransformComponent;
 }
 
 void Entity::Update()
