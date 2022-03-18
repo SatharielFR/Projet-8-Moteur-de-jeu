@@ -1,7 +1,7 @@
 #pragma once
 //#include "framework.h"
 
-class Mesh
+class MeshComponent
 {
 public:
 
@@ -13,11 +13,12 @@ public:
 #pragma endregion
 
 #pragma region Constructeur
-    Mesh(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material);
+    MeshComponent();
+    MeshComponent(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material);
 #pragma endregion
 
 #pragma region methods
-    void LoadMesh(Mesh* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device);
+    void LoadMesh(MeshComponent* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device);
 #pragma endregion
 
 #pragma region accessors

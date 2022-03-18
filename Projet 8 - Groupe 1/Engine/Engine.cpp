@@ -65,6 +65,18 @@ void Engine::InitD3D(HWND hWnd)
     d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
 }
 
+D3DMATERIAL9 Engine::CreateTestMaterial() {
+    D3DMATERIAL9 mtrl;
+    ZeroMemory(&mtrl, sizeof(mtrl));
+    mtrl.Emissive.r = 0.0f;
+    mtrl.Emissive.g = 0.75f;
+    mtrl.Emissive.b = 0.0f;
+    mtrl.Emissive.a = 0.0f;
+    d3ddev->SetMaterial(&mtrl);
+    d3ddev->SetRenderState(D3DRS_EMISSIVEMATERIALSOURCE, D3DMCS_MATERIAL);
+    return mtrl;
+}
+
 // this is the function that puts the 3D models into video RAM
 void Engine::InitGraphics(void)
 {
@@ -184,9 +196,9 @@ void Engine::InitGraphics(void)
 // this is the function used to render a single frame
 void Engine::RenderFrame(void)
 {
-    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, _ClearColor, 1.0f, 0);
-    d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER, _ClearColor, 1.0f, 0);
+    D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 0, 0);
 
+    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET| D3DCLEAR_ZBUFFER, _ClearColor, 1.0f, 0);
     d3ddev->BeginScene();
 
     // Render Game
@@ -219,8 +231,8 @@ void Engine::RenderFrame(void)
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
     d3ddev->SetIndices(i_buffer);
 
-    static float index = 0.0f; index += 0.05f; // an ever-increasing float value
-
+    static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
+    
     Transform test;
     test.Rotate(index, index, index);
     //test.Scaling(0.5f, 0.5f, 0.5f);
@@ -237,13 +249,69 @@ void Engine::RenderFrame(void)
    // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
     // draw the pyramid
-    d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 5, 0, 6);
+   // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 5, 0, 6);
 
     // draw the Hypercraft
     //d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 10, 0, 6);
 
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
-   // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+    // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+
+    //loading mesh
+    LPD3DXBUFFER materialBuffer = NULL;
+    static DWORD numMaterials = 0;
+    static LPD3DXMESH mesh = NULL;
+    static D3DMATERIAL9* meshMaterials = NULL;
+    static LPDIRECT3DTEXTURE9* meshTextures = NULL;
+    if (mesh == NULL)
+    {
+
+        //HRESULT hr = d3dObject->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &presParams, &d3dDevice);
+
+        HRESULT hr = D3DXLoadMeshFromX(L"..\\Ressources\\tiger.x", D3DXMESH_SYSTEMMEM, d3ddev, NULL, &materialBuffer, NULL, &numMaterials, &mesh);
+
+        // Loading the material buffer
+        D3DXMATERIAL* d3dxMaterials = (D3DXMATERIAL*)materialBuffer->GetBufferPointer();
+        // Holding material and texture pointers
+        meshMaterials = new D3DMATERIAL9[numMaterials];
+        meshTextures = new LPDIRECT3DTEXTURE9[numMaterials];
+        // Filling material and texture arrays
+        for (DWORD i = 0; i < numMaterials; i++)
+        {
+            // Copy the material
+            meshMaterials[i] = d3dxMaterials[i].MatD3D;
+
+            // Set the ambient color for the material (D3DX does not do this)
+            meshMaterials[i].Ambient = meshMaterials[i].Diffuse;
+
+            // Create the texture if it exists - it may not
+            meshTextures[i] = NULL;
+            if (d3dxMaterials[i].pTextureFilename) {
+                LPCWSTR strFileName = (LPCWSTR)d3dxMaterials[i].pTextureFilename;
+                D3DXCreateTextureFromFile(d3ddev, strFileName, &meshTextures[i]);
+            }
+        }
+
+        materialBuffer->Release();
+    }
+
+    //setting transform and DRAWING mesh
+    Transform tr;
+    tr.m_vPos.z = 100.0f;
+    tr.UpdateMatrix();
+    tr.ScalingUniforme(1.0f);
+    tr.Rotate(index, 0.0f, index);
+    d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
+    for (DWORD i = 0; i < numMaterials; i++)
+    {
+        // Set the material and texture for this subset
+        d3ddev->SetMaterial(&meshMaterials[i]);
+        d3ddev->SetTexture(0, meshTextures[i]);
+        // Draw the mesh subset
+        mesh->DrawSubset(i);
+    }
+    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
+
 
     d3ddev->EndScene();
 
