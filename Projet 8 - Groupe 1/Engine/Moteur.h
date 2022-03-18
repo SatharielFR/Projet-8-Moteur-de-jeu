@@ -31,6 +31,7 @@
 	#include <string>
 	#include <iostream>
 	#include <list>
+	#include<vector>
 	using namespace std;
 	// Engine classes
 	//#include "pch.h"
@@ -47,6 +48,7 @@
 	#include "Component.h"
 	#include "Texturing.h"
 	#include "Mesh.h"
+	#include "TransformComponent.h"
 #pragma endregion
 
 #pragma region GlobalVariables
