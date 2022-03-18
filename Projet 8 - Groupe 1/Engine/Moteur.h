@@ -47,8 +47,9 @@
 	#include "Debug.h"
 	#include "Component.h"
 	#include "Texturing.h"
-	#include "Mesh.h"
+	#include "MeshComponent.h"
 	#include "TransformComponent.h"
+    #include "Camera.h"
 #pragma endregion
 
 #pragma region GlobalVariables

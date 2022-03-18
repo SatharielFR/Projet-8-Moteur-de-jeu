@@ -208,21 +208,23 @@ void Engine::RenderFrame(void)
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
 
-    // set the view transform
-    D3DXMatrixLookAtLH(&matView,
-        &vecCamPosition,   // the camera position
-        &vecLookAtPosition,    // the look-at position
-        &vecUpDirection);    // the up direction
-    d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
 
-    // set the projection transform
-    D3DXMATRIX matProjection;    // the projection transform matrix
-    D3DXMatrixPerspectiveFovLH(&matProjection,
-        D3DXToRadian(45),    // the horizontal field of view
-        (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
-        1.0f,    // the near view-plane
-        100.0f);    // the far view-plane
-    d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
+
+    //// set the view transform
+    //D3DXMatrixLookAtLH(&matView,
+    //    &vecCamPosition,   // the camera position
+    //    &vecLookAtPosition,    // the look-at position
+    //    &vecUpDirection);    // the up direction
+    //d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
+
+    //// set the projection transform
+    //D3DXMATRIX matProjection;    // the projection transform matrix
+    //D3DXMatrixPerspectiveFovLH(&matProjection,
+    //    D3DXToRadian(45),    // the horizontal field of view
+    //    (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
+    //    1.0f,    // the near view-plane
+    //    100.0f);    // the far view-plane
+    //d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
 
 
     // select the vertex buffer to display
@@ -230,15 +232,6 @@ void Engine::RenderFrame(void)
     d3ddev->SetIndices(i_buffer);
 
     static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
-
-    // testing mesh 1
-    /*D3DMATERIAL9 testMaterial = CreateTestMaterial();
-    LPDIRECT3DTEXTURE9* testTexture;*/
-    //Mesh meshTest;
-    //meshTest.LoadMesh(&meshTest, L"/cat.x", d3ddev);
-
-
-
     
     Transform test;
     test.Rotate(index, index, index);
@@ -264,10 +257,6 @@ void Engine::RenderFrame(void)
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
     // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-
-
-
-        //testing mesh 2
     //loading mesh
     LPD3DXBUFFER materialBuffer = NULL;
     static DWORD numMaterials = 0;
@@ -322,7 +311,6 @@ void Engine::RenderFrame(void)
         mesh->DrawSubset(i);
 
         // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
-
     }
 
     d3ddev->EndScene();

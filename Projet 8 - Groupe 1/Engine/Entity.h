@@ -1,6 +1,7 @@
 #pragma once
 
 class TransformComponent;
+class Component;
 
 class Entity
 {
@@ -13,8 +14,8 @@ class Entity
 
 		#pragma region PublicFunctions
 			void Begin();
-			void Update();
-
+			virtual void Update();
+			virtual void Render();
 			void SetParent(Entity* newParentEntity);
 			void AddEntity(Entity* newEntityToAdd);
 			void RemoveEntity(Entity* EntityToRem);
@@ -23,7 +24,7 @@ class Entity
 			void RemoveComponent(Component* ComponentToRem);
 		#pragma endregion 
 
-	private:
+	protected:
 		#pragma region PrivateVariable
 			Entity* _entityParent = nullptr;
 			list<Entity*> _lstEntityChild;
