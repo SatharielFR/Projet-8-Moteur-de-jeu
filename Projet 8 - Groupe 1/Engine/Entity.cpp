@@ -3,7 +3,7 @@
 
 void Entity::Begin()
 {
-
+	
 }
 
 void Entity::Update()

@@ -4,7 +4,7 @@ class Entity
 {
 	public:
 		#pragma region PublicVariables
-			//transform
+			TransformComponent transform;
 			//collider
 			//mesh
 		#pragma endregion 
