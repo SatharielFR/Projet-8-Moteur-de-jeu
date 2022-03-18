@@ -27,8 +27,6 @@ class Engine
 			//Font variable
 			ID3DXFont* Font = 0;
 
-			static list<Component*> lstComponents;
-
 		#pragma endregion 
 
 		#pragma region PublicFunctions

@@ -14,7 +14,6 @@ class Component
 			virtual void Update();
 			virtual void Render();
 			void SetParent(Entity* newParentEntity);
-//			void AddComponent(Component* newComponent);
 		#pragma endregion 
 
 	protected:
