@@ -14,6 +14,7 @@ class Scene
 		#pragma endregion
 
 		#pragma region Accessors
+			void AddEntity(Entity* l_entityToAdd);
 			void SetSceneName(string strNewSceneName);
 			string GetSceneName() { return _strSceneName;}
 		#pragma endregion

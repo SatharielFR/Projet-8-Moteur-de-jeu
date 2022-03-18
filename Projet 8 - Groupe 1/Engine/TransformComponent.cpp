@@ -4,6 +4,6 @@
 TransformComponent::TransformComponent()
 {
 	TransformComponent::name = "Transform";
-	TransformComponent::AddComponent(this);
+//	TransformComponent::AddComponent(this);
 }
 

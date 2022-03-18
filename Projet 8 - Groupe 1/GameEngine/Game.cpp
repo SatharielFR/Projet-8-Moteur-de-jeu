@@ -81,6 +81,12 @@
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
+        Entity* entityCam = new Entity;
+        Camera* cam = new Camera();
+        entityCam->AddComponent(cam);
+        sceneMain->AddEntity(entityCam);
+      //  cam->
+        
 
         Debug::s_inst->ScreenLog("Game Start");        //Debug
     }
