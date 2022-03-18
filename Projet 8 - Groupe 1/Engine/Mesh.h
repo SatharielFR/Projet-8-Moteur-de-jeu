@@ -13,6 +13,7 @@ public:
 #pragma endregion
 
 #pragma region Constructeur
+    Mesh();
     Mesh(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material);
 #pragma endregion
 

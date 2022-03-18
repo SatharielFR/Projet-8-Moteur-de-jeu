@@ -10,6 +10,7 @@ Scene::Scene(string strSceneName)
 
 void Scene::Begin()
 {
+
 }
 
 void Scene::Update()
@@ -19,6 +20,9 @@ void Scene::Update()
 	//	Debug::s_inst->ScreenLog("Scene::Update");
 	//}
 	//ConsoleLog("Scene::Update");
+
+	//testing mesh class
+
 
 
 	//Print Time to screen

@@ -10,6 +10,13 @@ Mesh::Mesh(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMAT
     _material = material;
 }
 
+Mesh::Mesh() {
+    _numMaterials = 0;
+    _mesh = 0;
+    _texture = 0;
+    _material = 0;
+}
+
 /// <summary>
 /// this has to be tested, it probably does not work properly
 /// this method should only be called in scene as we do not have access to the device (d3ddev) in this class
