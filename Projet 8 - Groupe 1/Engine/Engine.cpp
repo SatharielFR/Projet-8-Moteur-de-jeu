@@ -322,9 +322,8 @@ void Engine::RenderFrame(void)
         mesh->DrawSubset(i);
 
         // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
+
     }
-
-
 
     d3ddev->EndScene();
 

@@ -108,7 +108,7 @@
     //Detect Inputs
     void Game::UpdateInputs()
     {
-        float l_fDebugDuration = 0.5f;
+        float l_fDebugDuration = 0.01f;
         //Forward inputs
         if (GetKeyState('Z') & 0x8000)
         {
