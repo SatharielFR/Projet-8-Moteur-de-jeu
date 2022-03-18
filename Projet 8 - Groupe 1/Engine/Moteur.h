@@ -47,7 +47,7 @@
 	#include "Debug.h"
 	#include "Component.h"
 	#include "Texturing.h"
-	#include "Mesh.h"
+	#include "MeshComponent.h"
 	#include "TransformComponent.h"
 #pragma endregion
 

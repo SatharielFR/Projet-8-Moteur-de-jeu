@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "framework.h"
 
-Mesh::Mesh(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material)
+MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMATERIAL9* material)
 {
 
     _numMaterials = materials;
@@ -10,7 +10,7 @@ Mesh::Mesh(DWORD materials, LPD3DXMESH mesh, LPDIRECT3DTEXTURE9* texture, D3DMAT
     _material = material;
 }
 
-Mesh::Mesh() {
+MeshComponent::MeshComponent() {
     _numMaterials = 0;
     _mesh = 0;
     _texture = 0;
@@ -24,7 +24,7 @@ Mesh::Mesh() {
 /// <param name="mesh">mesh of the Mesh object</param>
 /// <param name="file">filepath to .x file</param>
 /// <param name="device">device to draw on PASSED BY SCENE</param>
-void Mesh::LoadMesh(Mesh* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device)
+void MeshComponent::LoadMesh(MeshComponent* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device)
 {
      //on passe le device par la scène et c'est elle qui va draw
     LPD3DXBUFFER bufMaterial;
@@ -52,33 +52,33 @@ void Mesh::LoadMesh(Mesh* mesh, LPCTSTR file, LPDIRECT3DDEVICE9 device)
 }
 
 #pragma region Accessors
-    DWORD Mesh::GetNumMaterials() {
+    DWORD MeshComponent::GetNumMaterials() {
         return _numMaterials;
     }
 
-    LPD3DXMESH Mesh::GetMesh() {
+    LPD3DXMESH MeshComponent::GetMesh() {
         return _mesh;
     }
 
-    LPDIRECT3DTEXTURE9* Mesh::GetTexture() {
+    LPDIRECT3DTEXTURE9* MeshComponent::GetTexture() {
         return _texture;
     }
-    D3DMATERIAL9* Mesh::GetMaterial() {
+    D3DMATERIAL9* MeshComponent::GetMaterial() {
         return _material;
     }
 #pragma endregion
 
 #pragma region mutators
-    void Mesh::SetNumMaterials(DWORD numMaterials) {
+    void MeshComponent::SetNumMaterials(DWORD numMaterials) {
         _numMaterials = numMaterials;
     }
-    void Mesh::SetMesh(LPD3DXMESH mesh) {
+    void MeshComponent::SetMesh(LPD3DXMESH mesh) {
         _mesh = mesh;
     }
-    void Mesh::SetTexture(LPDIRECT3DTEXTURE9* texture) {
+    void MeshComponent::SetTexture(LPDIRECT3DTEXTURE9* texture) {
         _texture = texture;
     }
-    void Mesh::SetMaterial(D3DMATERIAL9* material) {
+    void MeshComponent::SetMaterial(D3DMATERIAL9* material) {
         _material = material;
     }
 #pragma endregion

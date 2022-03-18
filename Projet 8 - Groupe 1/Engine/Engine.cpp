@@ -230,15 +230,6 @@ void Engine::RenderFrame(void)
     d3ddev->SetIndices(i_buffer);
 
     static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
-
-    // testing mesh 1
-    /*D3DMATERIAL9 testMaterial = CreateTestMaterial();
-    LPDIRECT3DTEXTURE9* testTexture;*/
-    //Mesh meshTest;
-    //meshTest.LoadMesh(&meshTest, L"/cat.x", d3ddev);
-
-
-
     
     Transform test;
     test.Rotate(index, index, index);
@@ -264,10 +255,6 @@ void Engine::RenderFrame(void)
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
     // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-
-
-
-        //testing mesh 2
     //loading mesh
     LPD3DXBUFFER materialBuffer = NULL;
     static DWORD numMaterials = 0;
@@ -320,10 +307,8 @@ void Engine::RenderFrame(void)
         d3ddev->SetTexture(0, meshTextures[i]);
         // Draw the mesh subset
         mesh->DrawSubset(i);
-
-        // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
     }
-
+    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
 
 
     d3ddev->EndScene();
