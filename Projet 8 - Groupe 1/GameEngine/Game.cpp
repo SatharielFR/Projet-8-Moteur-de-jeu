@@ -104,10 +104,12 @@
         //Forward inputs
         if (GetKeyState('Z') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Forward");
             _fForwardValue = 1;
         }
         else if (GetKeyState('S') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Backward");
             _fForwardValue = -1;
         }
         else
@@ -116,12 +118,14 @@
         }
 
         //Horizontal inputs
-        if (GetKeyState('Q') & 0x8000)
+        if (GetKeyState('D') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Right");
             _fHorizontalValue = 1;
         }
-        else if (GetKeyState('D') & 0x8000)
+        else if (GetKeyState('Q') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Left");
             _fHorizontalValue = -1;
         }
         else
