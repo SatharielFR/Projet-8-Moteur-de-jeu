@@ -10,12 +10,8 @@ class Component
 		#pragma endregion 
 
 		#pragma region PublicFunctions
-			Component();
-			void Begin();
-			void Update();
 			void SetParent(Entity* newParentEntity);
 			void AddComponent(Component* newComponent);
-
 		#pragma endregion 
 
 	private:

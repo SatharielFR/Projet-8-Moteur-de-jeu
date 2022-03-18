@@ -1,22 +1,6 @@
 #include "pch.h"
 #include "framework.h"
 
-
-Component::Component()
-{
-	Begin();
-}
-
-void Component::Begin()
-{
-
-}
-
-void Component::Update()
-{
-
-}
-
 void Component::SetParent(Entity* newParentEntity)
 {
 	if (_entityParent != nullptr)
