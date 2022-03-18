@@ -10,7 +10,6 @@ Scene::Scene(string strSceneName)
 
 void Scene::Begin()
 {
-
 }
 
 void Scene::Update()
