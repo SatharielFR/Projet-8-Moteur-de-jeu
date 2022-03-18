@@ -1,11 +1,12 @@
 #pragma once
-#include "framework.h"
+
+class TransformComponent;
 
 class Entity
 {
 	public:
 		#pragma region PublicVariables
-			//transform
+			TransformComponent* transform;
 			//collider
 			//mesh
 		#pragma endregion 
@@ -18,6 +19,7 @@ class Entity
 			void AddEntity(Entity* newEntityToAdd);
 			void RemoveEntity(Entity* EntityToRem);
 			void AddComponent(Component* newComponentToAdd);
+			Component* GetComponentByName(string name);
 			void RemoveComponent(Component* ComponentToRem);
 		#pragma endregion 
 
@@ -25,7 +27,7 @@ class Entity
 		#pragma region PrivateVariable
 			Entity* _entityParent = nullptr;
 			list<Entity*> _lstEntityChild;
-			list<Component*> _lstComponenetChild;
+			vector<Component*> _lstComponentChild;
 		#pragma endregion
 };
 

@@ -198,13 +198,12 @@ void Engine::RenderFrame(void)
 {
     D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 0, 0);
 
-    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET| D3DCLEAR_ZBUFFER, ClearColor, 1.0f, 0);
-
-
+    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET| D3DCLEAR_ZBUFFER, _ClearColor, 1.0f, 0);
     d3ddev->BeginScene();
 
     // Render Game
     _sceneManager->UpdateScene();
+    _debug->UpdateScreenLogs();
 
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
@@ -230,7 +229,7 @@ void Engine::RenderFrame(void)
     d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
     d3ddev->SetIndices(i_buffer);
 
-    static float index = 0.0f; index += 0.05f; // an ever-increasing float value
+    static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
 
     // testing mesh 1
     /*D3DMATERIAL9 testMaterial = CreateTestMaterial();
@@ -312,7 +311,7 @@ void Engine::RenderFrame(void)
     tr.m_vPos.z = 100.0f;
     tr.UpdateMatrix();
     tr.ScalingUniforme(1.0f);
-    tr.Rotate(index * 0.1f, 0.0f, index * 0.1f);
+    tr.Rotate(index, 0.0f, index);
     d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
     for (DWORD i = 0; i < numMaterials; i++)
     {
@@ -321,6 +320,8 @@ void Engine::RenderFrame(void)
         d3ddev->SetTexture(0, meshTextures[i]);
         // Draw the mesh subset
         mesh->DrawSubset(i);
+
+        // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
     }
 
 

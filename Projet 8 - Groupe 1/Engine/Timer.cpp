@@ -19,36 +19,36 @@ Timer::Timer()
 
 void Timer::InitSystemTime()
 {
-    s_initTime = 8.0f;
+    m_initTime = 8.0f;
     timeGetTime();
-	s_initTime = timeGetTime() / 1000.0f;
-	s_isPerformanceTimer = false;
-    s_frequency = 0.0f;
+	m_initTime = timeGetTime() / 1000.0f;
+	m_isPerformanceTimer = false;
+    m_frequency = 0.0f;
     LARGE_INTEGER frequency;
     memset(&frequency, 0, sizeof(LARGE_INTEGER));
     if (QueryPerformanceFrequency(&frequency) && frequency.QuadPart)
     {
-        s_isPerformanceTimer = true;
-        s_frequency = (float)frequency.QuadPart;
+        m_isPerformanceTimer = true;
+        m_frequency = (float)frequency.QuadPart;
         LARGE_INTEGER counter;
         QueryPerformanceCounter(&counter);
-        s_performTime = counter.QuadPart;
+        m_performTime = counter.QuadPart;
     }
 }
 
 float Timer::GetSystemTimeEx()
 {
     // Performance
-    if (s_isPerformanceTimer)
+    if (m_isPerformanceTimer)
     {
         LARGE_INTEGER counter;
         QueryPerformanceCounter(&counter);
-        return (float)(counter.QuadPart - s_performTime) / s_frequency; //rounded to micro sec
+        return (float)(counter.QuadPart - m_performTime) / m_frequency; //rounded to micro sec
     }
     else
 
     // Classic
-    return timeGetTime() / 1000.0f - s_initTime; //rounded to mili sec
+    return timeGetTime() / 1000.0f - m_initTime; //rounded to mili sec
 }
 
 bool Timer::UpdateTime()
@@ -61,9 +61,13 @@ bool Timer::UpdateTime()
     m_fSysTime = newSysTime;
     if (elapsedSysTime > 0.04f) // 25 fps min
         elapsedSysTime = 0.04f;
-
     // App time
     m_fElapsedTime = elapsedSysTime;
     m_fTime += m_fElapsedTime;
     return true;
+}
+
+float Timer::GetDeltaTime()
+{
+    return m_fElapsedTime;
 }

@@ -3,7 +3,7 @@
 
 void Entity::Begin()
 {
-
+	transform = new TransformComponent;
 }
 
 void Entity::Update()
@@ -57,11 +57,11 @@ void Entity::AddComponent(Component* newComponentToAdd)
 {
 	if (newComponentToAdd == nullptr) { return; }
 
-	for (auto i = _lstComponenetChild.begin(); i != _lstComponenetChild.end(); i++)
+	for (auto i = _lstComponentChild.begin(); i != _lstComponentChild.end(); i++)
 	{
 		if (*i != newComponentToAdd)
 		{
-			_lstComponenetChild.push_back(newComponentToAdd);
+			_lstComponentChild.push_back(newComponentToAdd);
 		}
 		else
 		{
@@ -70,15 +70,26 @@ void Entity::AddComponent(Component* newComponentToAdd)
 	}
 }
 
+Component* Entity::GetComponentByName(string name)
+{
+	for (Component* comp : _lstComponentChild)
+	{
+		if (comp->name == name)
+		{
+			return comp;
+		}
+	}
+}
+
 void Entity::RemoveComponent(Component* ComponentToRem)
 {
 	if (ComponentToRem == nullptr) { return; }
 
-	for (auto i = _lstComponenetChild.begin(); i != _lstComponenetChild.end(); i++)
+	for (auto i = _lstComponentChild.begin(); i != _lstComponentChild.end(); i++)
 	{
 		if (*i == ComponentToRem)
 		{
-			_lstComponenetChild.erase(i);
+			_lstComponentChild.erase(i);
 		}
 	}
 }

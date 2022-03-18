@@ -81,13 +81,22 @@
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
+
+        Debug::s_inst->ScreenLog("Game Start");        //Debug
     }
+
+    int i = 0;
 
     void Game::Update()
     {
         m_engine->Update();
         UpdateInputs();
         UpdateCameraPosition();
+
+
+        ////Print Time
+        //string text = "Time :" + std::to_string(Timer::s_inst->GetSystemTimeEx());
+        //Debug::s_inst->ScreenLog(&text, 0.5f);     
     }
 
     void Game::Close()
@@ -99,13 +108,16 @@
     //Detect Inputs
     void Game::UpdateInputs()
     {
+        float l_fDebugDuration = 0.5f;
         //Forward inputs
         if (GetKeyState('Z') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Forward", l_fDebugDuration);
             _fForwardValue = 1;
         }
         else if (GetKeyState('S') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Backward", l_fDebugDuration);
             _fForwardValue = -1;
         }
         else
@@ -114,12 +126,14 @@
         }
 
         //Horizontal inputs
-        if (GetKeyState('Q') & 0x8000)
+        if (GetKeyState('D') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Right", l_fDebugDuration);
             _fHorizontalValue = 1;
         }
-        else if (GetKeyState('D') & 0x8000)
+        else if (GetKeyState('Q') & 0x8000)
         {
+            Debug::s_inst->ScreenLog("Left", l_fDebugDuration);
             _fHorizontalValue = -1;
         }
         else
