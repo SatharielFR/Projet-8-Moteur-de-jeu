@@ -14,6 +14,7 @@ public :
 		void AddScene(Scene* sceneToAdd);
 		void OpenScene(string strSceneName);
 		void UpdateScene();
+		void RenderScene();
 	#pragma endregion
 
 private: 

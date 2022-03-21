@@ -41,6 +41,10 @@ void Entity::AddEntity(Entity* newEntityToAdd)
 {
 	if (newEntityToAdd == nullptr) { return; }
 
+	if (_lstEntityChild.size() == 0)
+	{
+		_lstEntityChild.push_back(newEntityToAdd);
+	}
 	for (auto i = _lstEntityChild.begin(); i != _lstEntityChild.end(); i++)
 	{
 		if (*i != newEntityToAdd)
@@ -71,6 +75,10 @@ void Entity::AddComponent(Component* newComponentToAdd)
 {
 	if (newComponentToAdd == nullptr) { return; }
 
+	if (_lstComponentChild.size() == 0)
+	{
+		_lstComponentChild.push_back(newComponentToAdd);
+	}
 	for (auto i = _lstComponentChild.begin(); i != _lstComponentChild.end(); i++)
 	{
 		if (*i != newComponentToAdd)

@@ -29,16 +29,22 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 {
 	if (l_entityToAdd == nullptr) { return; }
 
-	for (auto i = _listEntity.begin(); i != _listEntity.end(); i++)
+	if (_listEntity.size() == 0 ) 
 	{
-		if (*i != l_entityToAdd)
+		_listEntity.push_back(l_entityToAdd);
+	}
+	else
+	{
+		for (auto i = _listEntity.begin(); i != _listEntity.end(); i++)
 		{
-			_listEntity.push_back(l_entityToAdd);
-		}
-		else
-		{
-			return;
+			if (*i != l_entityToAdd)
+			{
+				_listEntity.push_back(l_entityToAdd);
+			}
+			else
+			{
+				return;
+			}
 		}
 	}
-
 }

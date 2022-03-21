@@ -258,6 +258,10 @@ void Engine::RenderFrame(void)
     //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
     // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
+
+    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
+    _sceneManager->RenderScene();
+
     MeshComponent meshComp;
 
     meshComp.LoadMesh(L"..\\Ressources\\tiger.x", d3ddev);
@@ -278,9 +282,6 @@ void Engine::RenderFrame(void)
         // Draw the mesh subset
         meshComp.GetMesh()->DrawSubset(i);
     }
-    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
-
-    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
 
     d3ddev->EndScene();
 

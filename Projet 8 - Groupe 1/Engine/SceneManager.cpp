@@ -28,3 +28,26 @@ void SceneManager::UpdateScene()
 		_currentScene->Update();
 	}
 }
+
+/// <summary>
+/// Render the current Active scene
+/// </summary>
+void SceneManager::RenderScene()
+{
+	if (_currentScene)
+	{
+		//Check all entities
+		for (Entity* currentEntity : _currentScene->GetEntities())
+		{
+			Debug::s_inst->ScreenLog("RenderScene");
+
+			//Check if we got a Mesh Component
+			if (currentEntity->GetComponentByName("truc") != nullptr)
+			{
+				//Render It
+				//Getcompenent<Collider>()
+
+			}
+		}
+	}
+}

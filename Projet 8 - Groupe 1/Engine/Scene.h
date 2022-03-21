@@ -17,6 +17,7 @@ class Scene
 			void AddEntity(Entity* l_entityToAdd);
 			void SetSceneName(string strNewSceneName);
 			string GetSceneName() { return _strSceneName;}
+			list<Entity*> GetEntities() { return _listEntity; }
 		#pragma endregion
 
 	private:
