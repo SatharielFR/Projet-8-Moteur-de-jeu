@@ -51,6 +51,7 @@
 	#include "MeshComponent.h"
 	#include "TransformComponent.h"
     #include "Camera.h"
+	#include "Raycast.h"
 #pragma endregion
 
 #pragma region GlobalVariables

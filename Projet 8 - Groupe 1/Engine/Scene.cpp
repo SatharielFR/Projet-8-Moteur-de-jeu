@@ -32,19 +32,21 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 	if (_listEntity.size() == 0 ) 
 	{
 		_listEntity.push_back(l_entityToAdd);
+		return;
 	}
 	else
 	{
+		bool l_bIsInTheList = false;
 		for (auto i = _listEntity.begin(); i != _listEntity.end(); i++)
 		{
-			if (*i != l_entityToAdd)
+			if (*i == l_entityToAdd)
 			{
-				_listEntity.push_back(l_entityToAdd);
+				l_bIsInTheList = true;
 			}
-			else
-			{
-				return;
-			}
+		}
+		if (!l_bIsInTheList)
+		{
+			_listEntity.push_back(l_entityToAdd);
 		}
 	}
 }
