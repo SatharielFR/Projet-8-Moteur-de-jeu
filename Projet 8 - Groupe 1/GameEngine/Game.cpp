@@ -87,6 +87,9 @@
         //Create Tigger For Test Purpose
         Entity* l_enitityTigger = new Entity();
         sceneMain->AddEntity(l_enitityTigger);
+        MeshComponent* l_meshComponentTigger = new MeshComponent;
+        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        l_enitityTigger->AddComponent(l_meshComponentTigger);
 
         Debug::s_inst->ScreenLog("Game Start");        //Debug
     }

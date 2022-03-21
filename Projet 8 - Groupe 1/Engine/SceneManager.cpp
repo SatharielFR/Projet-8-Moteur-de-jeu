@@ -32,22 +32,20 @@ void SceneManager::UpdateScene()
 /// <summary>
 /// Render the current Active scene
 /// </summary>
-void SceneManager::RenderScene()
+list<MeshComponent*> SceneManager::GetMeshComponents()
 {
 	if (_currentScene)
 	{
 		//Check all entities
 		for (Entity* currentEntity : _currentScene->GetEntities())
 		{
-			Debug::s_inst->ScreenLog("RenderScene");
-
-			//Check if we got a Mesh Component
-			if (currentEntity->GetComponentByName("truc") != nullptr)
-			{
-				//Render It
-				//Getcompenent<Collider>()
-
-			}
+			////Check if we got a Mesh Component
+			//if (currentEntity->GetComponentByType<MeshComponent>() != nullptr)
+			//{
+			//	//Render It
+			//	Debug::s_inst->ScreenLog("Render Mesh Component");
+			//}
 		}
 	}
+	return list<MeshComponent*>();
 }

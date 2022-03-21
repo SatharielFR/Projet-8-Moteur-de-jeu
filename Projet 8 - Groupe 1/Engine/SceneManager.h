@@ -4,7 +4,7 @@
 #include <list>
 
  class Scene;
-
+ class MeshComponent;
 
 class SceneManager
 {
@@ -14,7 +14,10 @@ public :
 		void AddScene(Scene* sceneToAdd);
 		void OpenScene(string strSceneName);
 		void UpdateScene();
-		void RenderScene();
+	#pragma endregion
+
+	#pragma region Accessors
+		list<MeshComponent*> GetMeshComponents();
 	#pragma endregion
 
 private: 

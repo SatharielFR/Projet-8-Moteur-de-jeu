@@ -259,29 +259,57 @@ void Engine::RenderFrame(void)
     // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
 
+    //Get the list of MeshComponents to render from the scene&
+    list< MeshComponent*> l_listLeshComponents = _sceneManager->GetMeshComponents();
+
     // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
-    _sceneManager->RenderScene();
-
-    MeshComponent meshComp;
-
-    meshComp.LoadMesh(L"..\\Ressources\\tiger.x", d3ddev);
-
-    //setting transform and DRAWING mesh
-    Transform tr;
-    tr.m_vPos.x = 200.0f;
-    tr.m_vPos.z = 200.0f;
-    tr.UpdateMatrix();
-    tr.ScalingUniforme(1.0f);
-    tr.Rotate(index, 0.0f, index);
-    d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
-    for (DWORD i = 0; i < meshComp.GetNumMaterials(); i++)
+    for (MeshComponent * l_currentMeshComponent: l_listLeshComponents)
     {
-        // Set the material and texture for this subset
-        d3ddev->SetMaterial(&meshComp.GetMeshMaterials()[i]);
-        d3ddev->SetTexture(0, meshComp.GetMeshTextures()[i]);
-        // Draw the mesh subset
-        meshComp.GetMesh()->DrawSubset(i);
+        LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
+        l_currentMeshComponent->LoadMesh(l_pathName, d3ddev);
+        //meshComp.LoadMesh(L"..\\Ressources\\tiger.x", d3ddev);
+
+        //setting transform and DRAWING mesh
+        Transform tr;
+        tr.m_vPos.x = 200.0f;
+        tr.m_vPos.z = 200.0f;
+        tr.UpdateMatrix();
+        tr.ScalingUniforme(1.0f);
+        tr.Rotate(index, 0.0f, index);
+        d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
+        for (DWORD i = 0; i < l_currentMeshComponent->GetNumMaterials(); i++)
+        {
+            // Set the material and texture for this subset
+            d3ddev->SetMaterial(&l_currentMeshComponent->GetMeshMaterials()[i]);
+            d3ddev->SetTexture(0, l_currentMeshComponent->GetMeshTextures()[i]);
+            // Draw the mesh subset
+            l_currentMeshComponent->GetMesh()->DrawSubset(i);
+        }
     }
+
+    //Save : OLD tigger Display
+
+    //MeshComponent meshComp;
+    //LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
+    //meshComp.LoadMesh(l_pathName, d3ddev);
+    ////meshComp.LoadMesh(L"..\\Ressources\\tiger.x", d3ddev);
+
+    ////setting transform and DRAWING mesh
+    //Transform tr;
+    //tr.m_vPos.x = 200.0f;
+    //tr.m_vPos.z = 200.0f;
+    //tr.UpdateMatrix();
+    //tr.ScalingUniforme(1.0f);
+    //tr.Rotate(index, 0.0f, index);
+    //d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
+    //for (DWORD i = 0; i < meshComp.GetNumMaterials(); i++)
+    //{
+    //    // Set the material and texture for this subset
+    //    d3ddev->SetMaterial(&meshComp.GetMeshMaterials()[i]);
+    //    d3ddev->SetTexture(0, meshComp.GetMeshTextures()[i]);
+    //    // Draw the mesh subset
+    //    meshComp.GetMesh()->DrawSubset(i);
+    //}
 
     d3ddev->EndScene();
 
