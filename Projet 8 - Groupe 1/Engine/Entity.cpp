@@ -1,10 +1,32 @@
 #include "pch.h"
 #include "framework.h"
 
+Entity::Entity()
+{
+//	transform = nullptr;
+	transform = new TransformComponent;
+}
+
+Entity::~Entity()
+{
+}
+
+
 void Entity::Begin()
 {
-	transform = new TransformComponent;
+//	transform = new TransformComponent;
 	AddComponent(transform);
+
+	//Begin All child Entities
+	for (Entity* currentEntity : _lstEntityChild)
+	{
+		currentEntity->Begin();
+	}
+	//Begin All Components
+	for (Component* currentChild : _lstComponentChild)
+	{
+		currentChild->Begin();
+	}
 }
 
 void Entity::Update()
@@ -45,6 +67,7 @@ void Entity::AddEntity(Entity* newEntityToAdd)
 	if (_lstEntityChild.size() == 0)
 	{
 		_lstEntityChild.push_back(newEntityToAdd);
+		newEntityToAdd->SetParent(this);
 		return;
 	}
 	//Only Add o the list if its not already in
@@ -83,7 +106,8 @@ void Entity::AddComponent(Component* newComponentToAdd)
 	if (_lstComponentChild.size() == 0)
 	{
 		_lstComponentChild.push_back(newComponentToAdd);
-		return;
+		newComponentToAdd->SetParent(this);
+ 		return;
 	}
 	//Only Add o the list if its not already in
 	bool l_bIsInTheList = false;

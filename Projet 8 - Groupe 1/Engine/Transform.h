@@ -18,6 +18,7 @@ class Transform
 
 		#pragma region PublicFunction
 			Transform();
+			void Begin();
 			void Identity();
 			void UpdateMatrix();
 			void Rotate(float yaw, float pitch, float roll);

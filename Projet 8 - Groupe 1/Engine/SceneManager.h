@@ -14,9 +14,11 @@ public :
 		void AddScene(Scene* sceneToAdd);
 		void OpenScene(string strSceneName);
 		void UpdateScene();
+		void Begin();
 	#pragma endregion
 
 	#pragma region Accessors
+		Scene* GetCurrentScene() { return _currentScene;}
 		list<MeshComponent*> GetMeshComponents();
 	#pragma endregion
 

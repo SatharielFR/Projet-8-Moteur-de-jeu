@@ -27,7 +27,7 @@ void Camera::Update()
  void Camera::Render()
 {
     Component::Render();
-    d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform.m_matrix);    // set the view transform to matView
+    d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView
     d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);
 }
 

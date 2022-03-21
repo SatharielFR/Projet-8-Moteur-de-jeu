@@ -19,6 +19,7 @@ MeshComponent::MeshComponent() {
     meshMaterials = NULL;
     materialBuffer = NULL;
     meshAndTexturePath = "";
+    MeshComponent::id = 2;
 }
 
 //easy debugs

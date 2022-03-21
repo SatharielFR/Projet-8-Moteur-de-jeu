@@ -10,6 +10,10 @@ Scene::Scene(string strSceneName)
 
 void Scene::Begin()
 {
+	for (Entity* currentEntity : _listEntity)
+	{
+		currentEntity->Begin();
+	}
 }
 
 void Scene::Update()

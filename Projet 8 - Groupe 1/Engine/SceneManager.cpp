@@ -29,6 +29,14 @@ void SceneManager::UpdateScene()
 	}
 }
 
+void SceneManager::Begin()
+{
+	if (_currentScene)
+	{
+		_currentScene->Begin();
+	}
+}
+
 /// <summary>
 /// Render the current Active scene
 /// </summary>

@@ -25,6 +25,7 @@ class Game
 
 		#pragma region PublicFunctions
 			Game(HWND hWnd);
+			void Begin();
 			void Update();
 			void Close();
 		#pragma endregion

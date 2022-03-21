@@ -76,6 +76,8 @@
 
     Game::Game(HWND hWnd)
     {
+        g_game = this;
+
         //Create Engine
         m_engine = new Engine(hWnd);
 
@@ -85,16 +87,25 @@
         m_engine->GetSceneMananger()->OpenScene("Main");
 
         //Create Tigger For Test Purpose
-        Entity* l_enitityTigger = new Entity();
-        sceneMain->AddEntity(l_enitityTigger);
-        MeshComponent* l_meshComponentTigger = new MeshComponent;
-        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
-        l_enitityTigger->AddComponent(l_meshComponentTigger);
+        Entity* l_entityTigger = new Entity();
+        sceneMain->AddEntity(l_entityTigger);
+        MeshComponent* l_meshComponentTigger = new MeshComponent();
+//        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        l_entityTigger->AddComponent(l_meshComponentTigger);
 
-        Debug::s_inst->ScreenLog("Game Start");        //Debug
+        //Start Game
+        g_game->Begin();
+
+        //!!! Faire les Mooves APRES le Begin !!!
+//        l_entityTigger->transform->m_transform->Move(0.5f, 0.5f, 0.5f);
     }
 
-    int i = 0;
+    void Game::Begin()
+    {
+        Debug::s_inst->ScreenLog("Game Begin");        //Debug
+        m_engine->Begin();
+    }
+
 
     void Game::Update()
     {

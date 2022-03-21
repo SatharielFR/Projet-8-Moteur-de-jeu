@@ -7,6 +7,8 @@ class Entity
 {
 	public:
 		#pragma region PublicVariables
+			Entity();
+			~Entity();
 			TransformComponent* transform;
 			//collider
 			//mesh

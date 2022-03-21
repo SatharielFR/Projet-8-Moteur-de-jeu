@@ -6,6 +6,11 @@ Transform::Transform()
 	Identity();
 }
 
+void Transform::Begin()
+{
+//	Identity();
+}
+
 void Transform::Identity()
 {
 	m_vSca.x = 1.0f;

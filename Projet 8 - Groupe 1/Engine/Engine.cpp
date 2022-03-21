@@ -17,6 +17,14 @@ void Engine::Init()
     _timer = new Timer();
 }
 
+void Engine::Begin()
+{
+    if (_sceneManager)
+    {
+        _sceneManager->Begin();
+    }
+}
+
 void Engine::Update()
 {
     if (_timer)
@@ -211,20 +219,20 @@ void Engine::RenderFrame(void)
 
 
     //// set the view transform
-    //D3DXMatrixLookAtLH(&matView,
-    //    &vecCamPosition,   // the camera position
-    //    &vecLookAtPosition,    // the look-at position
-    //    &vecUpDirection);    // the up direction
-    //d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
+    D3DXMatrixLookAtLH(&matView,
+        &vecCamPosition,   // the camera position
+        &vecLookAtPosition,    // the look-at position
+        &vecUpDirection);    // the up direction
+    d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
 
-    //// set the projection transform
-    //D3DXMATRIX matProjection;    // the projection transform matrix
-    //D3DXMatrixPerspectiveFovLH(&matProjection,
-    //    D3DXToRadian(45),    // the horizontal field of view
-    //    (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
-    //    1.0f,    // the near view-plane
-    //    100.0f);    // the far view-plane
-    //d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
+    // set the projection transform
+    D3DXMATRIX matProjection;    // the projection transform matrix
+    D3DXMatrixPerspectiveFovLH(&matProjection,
+        D3DXToRadian(45),    // the horizontal field of view
+        (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
+        1.0f,    // the near view-plane
+        100.0f);    // the far view-plane
+    d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
 
 
     // select the vertex buffer to display
@@ -233,18 +241,18 @@ void Engine::RenderFrame(void)
 
     static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
 
-    
-    Transform test;
-    test.Rotate(index, index, index);
-    //test.Scaling(0.5f, 0.5f, 0.5f);
-    test.ScalingUniforme(1.5f);
-    //test.Move(1.0f,5.0f,1.0f);
-    test.MoveUniforme(-2.0f);
-    //test.SetPosition(2.0f,1.0f,2.0f);
+    //
+    //Transform test;
+    //test.Rotate(index, index, index);
+    ////test.Scaling(0.5f, 0.5f, 0.5f);
+    //test.ScalingUniforme(1.5f);
+    ////test.Move(1.0f,5.0f,1.0f);
+    //test.MoveUniforme(-2.0f);
+    ////test.SetPosition(2.0f,1.0f,2.0f);
 
 
-    // tell Direct3D about each world transform, and then draw another triangle
-    d3ddev->SetTransform(D3DTS_WORLD, &test.m_matrix);
+    //// tell Direct3D about each world transform, and then draw another triangle
+    //d3ddev->SetTransform(D3DTS_WORLD, &test.m_matrix);
 
     // draw the cube
    // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
@@ -260,33 +268,84 @@ void Engine::RenderFrame(void)
 
 
     //Get the list of MeshComponents to render from the scene&
-    list<MeshComponent*> l_listLeshComponents = _sceneManager->GetMeshComponents();
-
-    // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
-    for (MeshComponent * l_currentMeshComponent: l_listLeshComponents)
+    if (_sceneManager->GetCurrentScene())
     {
-        LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
-        l_currentMeshComponent->LoadMesh(l_pathName, d3ddev);
-        //meshComp.LoadMesh(L"..\\Ressources\\tiger.x", d3ddev);
-
-        //setting transform and DRAWING mesh
-        Transform tr;
-        tr.m_vPos.x = 200.0f;
-        tr.m_vPos.z = 200.0f;
-        tr.UpdateMatrix();
-        tr.ScalingUniforme(1.0f);
-        tr.Rotate(index, 0.0f, index);
-
-        d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
-        for (DWORD i = 0; i < l_currentMeshComponent->GetNumMaterials(); i++)
+        //For each Components of the scene
+        list<Entity*> l_entities = _sceneManager->GetCurrentScene()->GetEntities();
+        for (Entity* l_currentEntity: l_entities)
         {
-            // Set the material and texture for this subset
-            d3ddev->SetMaterial(&l_currentMeshComponent->GetMeshMaterials()[i]);
-            d3ddev->SetTexture(0, l_currentMeshComponent->GetMeshTextures()[i]);
-            // Draw the mesh subset
-            l_currentMeshComponent->GetMesh()->DrawSubset(i);
+            //If there is a Mesh Component
+            MeshComponent* l_meshComponent = (MeshComponent*)l_currentEntity->GetComponentByType<MeshComponent>();
+            TransformComponent* l_transformComponent = (TransformComponent*)l_currentEntity->GetComponentByType<TransformComponent>();
+            if (l_meshComponent != nullptr)
+            {
+                LPCTSTR l_pathName = L"..\\Ressources\\tiger.x"; //TODO : MeshComponent.GetPath()
+                l_meshComponent->LoadMesh(l_pathName, d3ddev);
+
+                //setting transform and DRAWING mesh
+                Transform* tr;
+                //TODO : FIX IT
+                if (/*l_transformComponent != nullptr && l_transformComponent->m_transform != nullptr*/ false)
+                {
+                    //Doesnt Work
+                    tr = l_transformComponent->m_transform;
+                    tr->Move(0.0f, 0.0f, 0.0f);
+                    tr->UpdateMatrix();
+                    tr->ScalingUniforme(1.0f);
+                    tr->Rotate(index, 0.0f, index);
+                }
+                else
+                {
+                    //Work
+                    tr = new Transform();
+                    tr->Move(0.0f, 0.0f, 0.0f);
+                    tr->UpdateMatrix();
+                    tr->ScalingUniforme(1.0f);
+                    tr->Rotate(index, 0.0f, index);                 
+                }
+
+                if (tr != nullptr)
+                {
+                    d3ddev->SetTransform(D3DTS_WORLD, &tr->m_matrix);
+                    for (DWORD i = 0; i < l_meshComponent->GetNumMaterials(); i++)
+                    {
+                        // Set the material and texture for this subset
+                        d3ddev->SetMaterial(&l_meshComponent->GetMeshMaterials()[i]);
+                        d3ddev->SetTexture(0, l_meshComponent->GetMeshTextures()[i]);
+                        // Draw the mesh subset
+                        l_meshComponent->GetMesh()->DrawSubset(i);
+                    }
+                }
+            }
         }
     }
+
+    //list<MeshComponent*> l_listLeshComponents = _sceneManager->GetMeshComponents();
+
+    //// scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
+    //for (MeshComponent * l_currentMeshComponent: l_listLeshComponents)
+    //{
+    //    LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
+    //    l_currentMeshComponent->LoadMesh(l_pathName, d3ddev);
+
+    //    //setting transform and DRAWING mesh
+    //    Transform tr;
+    //    tr.m_vPos.x = 200.0f;
+    //    tr.m_vPos.z = 200.0f;
+    //    tr.UpdateMatrix();
+    //    tr.ScalingUniforme(1.0f);
+    //    tr.Rotate(index, 0.0f, index);
+
+    //    d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
+    //    for (DWORD i = 0; i < l_currentMeshComponent->GetNumMaterials(); i++)
+    //    {
+    //        // Set the material and texture for this subset
+    //        d3ddev->SetMaterial(&l_currentMeshComponent->GetMeshMaterials()[i]);
+    //        d3ddev->SetTexture(0, l_currentMeshComponent->GetMeshTextures()[i]);
+    //        // Draw the mesh subset
+    //        l_currentMeshComponent->GetMesh()->DrawSubset(i);
+    //    }
+    //}
 
     //Save : OLD tigger Display
 
