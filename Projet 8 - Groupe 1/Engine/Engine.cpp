@@ -260,7 +260,7 @@ void Engine::RenderFrame(void)
 
 
     //Get the list of MeshComponents to render from the scene&
-    list< MeshComponent*> l_listLeshComponents = _sceneManager->GetMeshComponents();
+    list<MeshComponent*> l_listLeshComponents = _sceneManager->GetMeshComponents();
 
     // scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
     for (MeshComponent * l_currentMeshComponent: l_listLeshComponents)
@@ -276,6 +276,7 @@ void Engine::RenderFrame(void)
         tr.UpdateMatrix();
         tr.ScalingUniforme(1.0f);
         tr.Rotate(index, 0.0f, index);
+
         d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
         for (DWORD i = 0; i < l_currentMeshComponent->GetNumMaterials(); i++)
         {

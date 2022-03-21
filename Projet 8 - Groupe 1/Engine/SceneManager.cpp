@@ -34,18 +34,20 @@ void SceneManager::UpdateScene()
 /// </summary>
 list<MeshComponent*> SceneManager::GetMeshComponents()
 {
+	list<MeshComponent*> l_lstMeshComponents;
 	if (_currentScene)
 	{
 		//Check all entities
 		for (Entity* currentEntity : _currentScene->GetEntities())
 		{
-			////Check if we got a Mesh Component
-			//if (currentEntity->GetComponentByType<MeshComponent>() != nullptr)
-			//{
-			//	//Render It
-			//	Debug::s_inst->ScreenLog("Render Mesh Component");
-			//}
+			//Check if we got a Mesh Component
+			MeshComponent* l_currentMeshComponent = (MeshComponent*)(currentEntity->GetComponentByType<MeshComponent>());
+			if (l_currentMeshComponent != nullptr)
+			{
+				//Render It
+				l_lstMeshComponents.push_back(l_currentMeshComponent);
+			}
 		}
 	}
-	return list<MeshComponent*>();
+	return l_lstMeshComponents;
 }
