@@ -76,11 +76,17 @@
 
     Game::Game(HWND hWnd)
     {
+        //Create Engine
         m_engine = new Engine(hWnd);
+
         //Create a map for the game
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
+
+        //Create Tigger For Test Purpose
+        Entity* l_enitityTigger = new Entity();
+        sceneMain->AddEntity(l_enitityTigger);
 
         Debug::s_inst->ScreenLog("Game Start");        //Debug
     }
