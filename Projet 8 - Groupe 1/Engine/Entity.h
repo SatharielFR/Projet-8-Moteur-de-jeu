@@ -21,6 +21,10 @@ class Entity
 			void RemoveEntity(Entity* EntityToRem);
 			void AddComponent(Component* newComponentToAdd);
 			Component* GetComponentByName(string name);
+
+			template<typename T>
+			Component* GetComponentByType();
+
 			void RemoveComponent(Component* ComponentToRem);
 		#pragma endregion 
 
@@ -32,3 +36,15 @@ class Entity
 		#pragma endregion
 };
 
+template<typename T>
+inline Component* Entity::GetComponentByType()
+{
+	for (Component* comp : _lstComponentChild)
+	{
+		if (comp->id == T::id)
+		{
+			return comp;
+		}
+	}
+	return nullptr;
+}

@@ -3,6 +3,7 @@
 
 TransformComponent::TransformComponent()
 {
+	TransformComponent::id = 1;
 	TransformComponent::name = "Transform";
 }
 

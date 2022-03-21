@@ -102,6 +102,7 @@ Component* Entity::GetComponentByName(string name)
 			return comp;
 		}
 	}
+	return nullptr;
 }
 
 void Entity::RemoveComponent(Component* ComponentToRem)

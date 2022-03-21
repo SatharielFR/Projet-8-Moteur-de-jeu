@@ -6,6 +6,7 @@ class Component
 {
 	public:
 		#pragma region PublicVariables
+			static int id;
 			string name;
 		#pragma endregion 
 
