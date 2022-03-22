@@ -50,7 +50,7 @@
 	#include "Texturing.h"
 	#include "MeshComponent.h"
 	#include "TransformComponent.h"
-    #include "Camera.h"
+    #include "CameraComponent.h"
 	#include "Raycast.h"
 #pragma endregion
 

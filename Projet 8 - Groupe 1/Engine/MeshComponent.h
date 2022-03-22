@@ -6,6 +6,7 @@ class MeshComponent : public Component
     public:
 
     #pragma region variables
+        static int s_type;
         DWORD numMaterials;
         LPD3DXMESH mesh;
         LPDIRECT3DTEXTURE9* meshTextures;
@@ -30,6 +31,7 @@ class MeshComponent : public Component
         string GetMeshAndTexturePath();
         const LPDIRECT3DTEXTURE9* GetMeshTextures();
         const D3DMATERIAL9* GetMeshMaterials();
+        virtual int GetType() { return s_type; }
     #pragma endregion
 
     #pragma region mutators

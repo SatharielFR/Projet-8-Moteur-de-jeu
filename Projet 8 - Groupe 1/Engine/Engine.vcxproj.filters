@@ -14,7 +14,7 @@
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Raycast.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,7 +33,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Raycast.h" />
   </ItemGroup>
 </Project>
