@@ -93,11 +93,22 @@
         l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
         l_entityTigger->AddComponent(l_meshComponentTigger);
 
+
+        //Create Cube For Test Purpose
+        Entity* l_entityCube = new Entity();
+        sceneMain->AddEntity(l_entityCube);
+        MeshComponent* l_meshComponentCube = new MeshComponent();
+        l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        l_entityCube->AddComponent(l_meshComponentCube);
+
         //Start Game
         g_game->Begin();
 
         //!!! Faire les Mooves APRES le Begin !!!
         l_entityTigger->transform->m_transform->Move(0.5f, 0.5f, 0.5f);
+
+        l_entityCube->transform->m_transform->Move(0.5f, 2.0f, 0.5f);
+        l_entityCube->transform->m_transform->Rotate(90.0f, 0.0f, 0.0f);
     }
 
     void Game::Begin()
