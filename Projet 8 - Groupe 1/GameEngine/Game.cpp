@@ -138,12 +138,6 @@
         UpdateInputs();
         UpdateMouseInputs();
         UpdateCameraPosition();   
-
-
-        string Time = "Camera Dir - x :" + std::to_string(m_entityCamera->transform->m_transform->m_vDir.x) + "; y :" +
-                                        std::to_string(m_entityCamera->transform->m_transform->m_vDir.y);   //Show Current Mouse Movement
-        Debug::s_inst->ScreenLog(&Time);
-
     }
 
     void Game::Close()
@@ -183,6 +177,13 @@
         {
             _fHorizontalValue = 0;
         }
+
+        //Echap
+        if (GetKeyState(VK_ESCAPE) & 0x8000)
+        {
+            //Unlock Mouse Position
+            m_bCursorIsLocked = false;
+        }
     }
 
 
@@ -197,8 +198,7 @@
             _nbMouseX = point.x;
             _nbMouseY= point.y;
 
-            bool l_bCursorIsLocked = true;
-            if (l_bCursorIsLocked)
+            if (m_bCursorIsLocked)
             {
                 int l_nbAnchorPositionX = 0, l_nbAnchorPositionY = 0;
 

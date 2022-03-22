@@ -25,6 +25,7 @@ class Game
 		#pragma region publicVariables
 			Engine* m_engine = nullptr;
 			bool m_bIsRunning = false;
+			bool m_bCursorIsLocked = true;
 		#pragma endregion
 
 		#pragma region GamePointers
