@@ -122,12 +122,7 @@
     {
         m_engine->Update();
         UpdateInputs();
-        UpdateCameraPosition();
-
-
-        ////Print Time
-        //string text = "Time :" + std::to_string(Timer::s_inst->GetSystemTimeEx());
-        //Debug::s_inst->ScreenLog(&text, 0.5f);     
+        UpdateCameraPosition();   
     }
 
     void Game::Close()
@@ -175,8 +170,7 @@
 
     void Game::UpdateCameraPosition()
     {
-        //vecCamPosition.x += _fHorizontalValue  * _fSpeed;
-        //vecCamPosition.z += _fForwardValue     * _fSpeed;
+        
     }
 
 #pragma endregion

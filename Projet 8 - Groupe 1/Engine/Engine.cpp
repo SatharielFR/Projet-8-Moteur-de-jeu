@@ -88,117 +88,7 @@ D3DMATERIAL9 Engine::CreateTestMaterial() {
 // this is the function that puts the 3D models into video RAM
 void Engine::InitGraphics(void)
 {
-    // create the vertices using the CUSTOMVERTEX struct
-    CUSTOMVERTEX vertices[] =
-    {
-        /*{ -3.0f, 3.0f, 0.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        { 3.0f, 3.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        { -3.0f, -3.0f, 0.0f, D3DCOLOR_XRGB(255, 0, 0), },
-        { 3.0f, -3.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 255), },*/
-
-        // Vertex for cube 
-      //{ -3.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },    // vertex 0
-      //{ 3.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 0), },     // vertex 1
-      //{ -3.0f, -3.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },   // 2
-      //{ 3.0f, -3.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },  // 3
-      //{ -3.0f, 3.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },     // ...
-      //{ 3.0f, 3.0f, 3.0f, D3DCOLOR_XRGB(255, 0, 0), },
-      //{ -3.0f, -3.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
-      //{ 3.0f, -3.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 255), },
-
-      // Vertex for pyramide
-        // // base
-        { -3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        { 3.0f, 0.0f, 3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        { -3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(255, 0, 0), },
-        { 3.0f, 0.0f, -3.0f, D3DCOLOR_XRGB(0, 255, 255), },
-
-        //// top
-        { 0.0f, 5.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
-
-        // Vertex the Hypercraft
-        // fuselage
-        //{ 3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        //{ 0.0f, 3.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        //{ 0.0f, 0.0f, 10.0f, D3DCOLOR_XRGB(255, 0, 0), },
-        //{ -3.0f, 0.0f, 0.0f, D3DCOLOR_XRGB(0, 255, 255), },
-
-        //// left gun
-        //{ 3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        //{ 3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        //{ 2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
-
-        //// right gun
-        //{ -3.2f, -1.0f, -3.0f, D3DCOLOR_XRGB(0, 0, 255), },
-        //{ -3.2f, -1.0f, 11.0f, D3DCOLOR_XRGB(0, 255, 0), },
-        //{ -2.0f, 1.0f, 2.0f, D3DCOLOR_XRGB(255, 0, 0), },
-
-    };
-
-    //create a vertex buffer interface called v_buffer
-    d3ddev->CreateVertexBuffer(5 * sizeof(CUSTOMVERTEX),
-        0,
-        CUSTOMFVF,
-        D3DPOOL_MANAGED,
-        &v_buffer,
-        NULL);
-
-    VOID* pVoid;    // a void pointer
-
-    // lock v_buffer and load the vertices into it
-    v_buffer->Lock(0, 0, (void**)&pVoid, 0);
-    memcpy(pVoid, vertices, sizeof(vertices));
-    v_buffer->Unlock();
-
-
-    // create the indices using an int array
-    short indices[] =
-    {
-        // indice for cube
-        //0, 1, 2,    // side 1
-        //2, 1, 3,
-        //4, 0, 6,    // side 2
-        //6, 0, 2,
-        //7, 5, 6,    // side 3
-        //6, 5, 4,
-        //3, 1, 7,    // side 4
-        //7, 1, 5,
-        //4, 5, 0,    // side 5
-        //0, 5, 1,
-        //3, 7, 2,    // side 6
-        //2, 7, 6,
-
-        // indice for pyramide
-        0, 2, 1,    // base
-        1, 2, 3,
-        0, 1, 4,    // sides
-        1, 3, 4,
-        3, 2, 4,
-        2, 0, 4,
-
-        // indice the hypercraft
-        //0, 1, 2,    // fuselage
-        //2, 1, 3,
-        //3, 1, 0,
-        //0, 2, 3,
-        //4, 5, 6,    // wings
-        //7, 8, 9,
-
-    };
-
-
-    d3ddev->CreateIndexBuffer(18 * sizeof(short),    // 3 per triangle, 12 triangles
-        0,
-        D3DFMT_INDEX16,
-        D3DPOOL_MANAGED,
-        &i_buffer,
-        NULL
-    );
-
-    // lock i_buffer and load the indices into it
-    i_buffer->Lock(0, 0, (void**)&pVoid, 0);
-    memcpy(pVoid, indices, sizeof(indices));
-    i_buffer->Unlock();
+    //Use for draw a complex figure with vertex and indices
 }
 
 // this is the function used to render a single frame
@@ -216,8 +106,6 @@ void Engine::RenderFrame(void)
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
 
-
-
     //// set the view transform
     D3DXMatrixLookAtLH(&matView,
         &vecCamPosition,   // the camera position
@@ -234,37 +122,7 @@ void Engine::RenderFrame(void)
         100.0f);    // the far view-plane
     d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);     // set the projection
 
-
-    // select the vertex buffer to display
-    d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
-    d3ddev->SetIndices(i_buffer);
-
     static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
-
-    //
-    //Transform test;
-    //test.Rotate(index, index, index);
-    ////test.Scaling(0.5f, 0.5f, 0.5f);
-    //test.ScalingUniforme(1.5f);
-    ////test.Move(1.0f,5.0f,1.0f);
-    //test.MoveUniforme(-2.0f);
-    ////test.SetPosition(2.0f,1.0f,2.0f);
-
-
-    //// tell Direct3D about each world transform, and then draw another triangle
-    //d3ddev->SetTransform(D3DTS_WORLD, &test.m_matrix);
-
-    // draw the cube
-   // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
-
-    // draw the pyramid
-   // d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 5, 0, 6);
-
-    // draw the Hypercraft
-    //d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 10, 0, 6);
-
-    //d3ddev->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
-    // d3ddev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
 
     //Get the list of MeshComponents to render from the scene&
@@ -279,7 +137,7 @@ void Engine::RenderFrame(void)
             TransformComponent* l_transformComponent = (TransformComponent*)l_currentEntity->GetComponentByType<TransformComponent>();
             if (l_meshComponent != nullptr)
             {
-                LPCTSTR l_pathName = L"..\\Ressources\\tiger.x"; //TODO : MeshComponent.GetPath()
+                LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
                 l_meshComponent->LoadMesh(l_pathName, d3ddev);
 
                 //setting transform and DRAWING mesh
@@ -301,57 +159,6 @@ void Engine::RenderFrame(void)
         }
     }
 
-    //list<MeshComponent*> l_listLeshComponents = _sceneManager->GetMeshComponents();
-
-    //// scene manager => get current scene => get tous les mesh (liste) => draw chaque mesh
-    //for (MeshComponent * l_currentMeshComponent: l_listLeshComponents)
-    //{
-    //    LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
-    //    l_currentMeshComponent->LoadMesh(l_pathName, d3ddev);
-
-    //    //setting transform and DRAWING mesh
-    //    Transform tr;
-    //    tr.m_vPos.x = 200.0f;
-    //    tr.m_vPos.z = 200.0f;
-    //    tr.UpdateMatrix();
-    //    tr.ScalingUniforme(1.0f);
-    //    tr.Rotate(index, 0.0f, index);
-
-    //    d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
-    //    for (DWORD i = 0; i < l_currentMeshComponent->GetNumMaterials(); i++)
-    //    {
-    //        // Set the material and texture for this subset
-    //        d3ddev->SetMaterial(&l_currentMeshComponent->GetMeshMaterials()[i]);
-    //        d3ddev->SetTexture(0, l_currentMeshComponent->GetMeshTextures()[i]);
-    //        // Draw the mesh subset
-    //        l_currentMeshComponent->GetMesh()->DrawSubset(i);
-    //    }
-    //}
-
-    //Save : OLD tigger Display
-
-    //MeshComponent meshComp;
-    //LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
-    //meshComp.LoadMesh(l_pathName, d3ddev);
-    ////meshComp.LoadMesh(L"..\\Ressources\\tiger.x", d3ddev);
-
-    ////setting transform and DRAWING mesh
-    //Transform tr;
-    //tr.m_vPos.x = 200.0f;
-    //tr.m_vPos.z = 200.0f;
-    //tr.UpdateMatrix();
-    //tr.ScalingUniforme(1.0f);
-    //tr.Rotate(index, 0.0f, index);
-    //d3ddev->SetTransform(D3DTS_WORLD, &tr.m_matrix);
-    //for (DWORD i = 0; i < meshComp.GetNumMaterials(); i++)
-    //{
-    //    // Set the material and texture for this subset
-    //    d3ddev->SetMaterial(&meshComp.GetMeshMaterials()[i]);
-    //    d3ddev->SetTexture(0, meshComp.GetMeshTextures()[i]);
-    //    // Draw the mesh subset
-    //    meshComp.GetMesh()->DrawSubset(i);
-    //}
-
     d3ddev->EndScene();
 
     d3ddev->Present(NULL, NULL, NULL, NULL);
@@ -360,7 +167,6 @@ void Engine::RenderFrame(void)
 // this is the function that cleans up Direct3D and COM
 void Engine::CleanD3D(void)
 {
-    v_buffer->Release();    // close and release the vertex buffer
     d3ddev->Release();    // close and release the 3D device
     d3d->Release();    // close and release Direct3D
 }
