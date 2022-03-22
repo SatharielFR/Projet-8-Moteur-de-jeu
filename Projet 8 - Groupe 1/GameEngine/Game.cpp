@@ -87,7 +87,7 @@
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
 
-        //Create Tigger For Test Purpose
+        //Create Tiger For Test Purpose
         Entity* l_entityTiger = new Entity();
         sceneMain->AddEntity(l_entityTiger);
         MeshComponent* l_meshComponentTiger = new MeshComponent();

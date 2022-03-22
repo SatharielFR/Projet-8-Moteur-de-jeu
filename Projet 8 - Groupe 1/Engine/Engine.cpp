@@ -3,6 +3,7 @@
 
 LPDIRECT3DDEVICE9 Engine::d3ddev = nullptr;
 float Engine::gravity = 9.80f;
+HUD *HUDInstance;
 
 //Constructeur
 Engine::Engine(HWND hWnd)
@@ -26,6 +27,10 @@ void Engine::Begin()
     {
         _sceneManager->Begin();
     }
+
+    //initialize HUD
+    HUDInstance = new HUD();
+    HUDInstance->InitializeHUD(d3ddev);
 }
 
 void Engine::Update()
@@ -111,7 +116,6 @@ void Engine::RenderFrame(void)
 
     static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
 
-
     //Get the list of MeshComponents to render from the scene&
     if (_sceneManager->GetCurrentScene())
     {
@@ -148,6 +152,12 @@ void Engine::RenderFrame(void)
             }
         }
     }
+
+    //draw HUD on top
+    if (HUDInstance != NULL) {
+        HUDInstance->UpdateHUD(d3ddev);
+    }
+
 
     d3ddev->EndScene();
 

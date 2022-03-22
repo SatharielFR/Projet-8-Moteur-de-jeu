@@ -53,6 +53,7 @@
     #include "CameraComponent.h"
 	#include "RigidbodyComponent.h"
 	#include "Raycast.h"
+	#include "HUD.h"
 #pragma endregion
 
 #pragma region GlobalVariables
@@ -63,5 +64,8 @@
 	//Struct for 3D
 	struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; static const DWORD FVF; };
 	#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)
+	//struct for HUD
+	struct TLVERTEX {D3DXVECTOR4 p; DWORD c; D3DXVECTOR2 t;};
+	#define FVF_TLVERTEX ( D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1 )
 #pragma endregion
 
