@@ -91,7 +91,7 @@
         Entity* l_entityTigger = new Entity();
         sceneMain->AddEntity(l_entityTigger);
         MeshComponent* l_meshComponentTigger = new MeshComponent();
-        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
         l_entityTigger->AddComponent(l_meshComponentTigger);
 
 
@@ -99,8 +99,10 @@
         Entity* l_entityCube = new Entity();
         sceneMain->AddEntity(l_entityCube);
         MeshComponent* l_meshComponentCube = new MeshComponent();
-        l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        RigidbodyComponent* l_rigidbodycomponent = new RigidbodyComponent();
+        l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
         l_entityCube->AddComponent(l_meshComponentCube);
+        l_entityCube->AddComponent(l_rigidbodycomponent);
 
         //Create Camera
         Entity* entityCam = new Entity();
@@ -112,12 +114,15 @@
         g_game->Begin();
 
         //!!! Faire les Mooves APRES le Begin !!!
-        l_entityTigger->transform->m_transform->Move(0.0f, 0.0f, 10.0f);
-        entityCam->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
-     
-        l_entityCube->transform->m_transform->Move(1.0f, 1.0f, 1.0f);
-        l_entityCube->transform->m_transform->Rotate(90.0f, 0.0f, 0.0f);
-
+        
+        //Cam
+        entityCam->transform->m_transform->SetPosition(0.0f, 0.0f, 10.0f);
+        //Tigre
+        l_entityTigger->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
+        //Cube
+        l_entityCube->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
+        l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
+        l_entityCube->transform->m_transform->Scaling(0.01f, 0.01f, 0.01f);
     }
 
     void Game::Begin()
@@ -131,12 +136,7 @@
     {
         m_engine->Update();
         UpdateInputs();
-        UpdateCameraPosition();
-
-
-        ////Print Time
-        //string text = "Time :" + std::to_string(Timer::s_inst->GetSystemTimeEx());
-        //Debug::s_inst->ScreenLog(&text, 0.5f);     
+        UpdateCameraPosition();   
     }
 
     void Game::Close()
@@ -184,8 +184,7 @@
 
     void Game::UpdateCameraPosition()
     {
-        //vecCamPosition.x += _fHorizontalValue  * _fSpeed;
-        //vecCamPosition.z += _fForwardValue     * _fSpeed;
+        
     }
 
 #pragma endregion

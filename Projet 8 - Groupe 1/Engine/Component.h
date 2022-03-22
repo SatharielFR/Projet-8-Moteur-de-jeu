@@ -7,7 +7,7 @@ class Component
 	public:
 		#pragma region PublicVariables
 			static int s_type;
-			string name;
+			static string name;
 		#pragma endregion 
 
 		#pragma region PublicFunctions

@@ -19,6 +19,8 @@ class Engine
 			static LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
 			LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;    // the pointer to the vertex buffer
 			LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;     // the pointer to the index buffer
+			static float gravity;
+
 			//Matrices 
 			//D3DXMATRIX matView;    // the view transform matrix
 			//D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position

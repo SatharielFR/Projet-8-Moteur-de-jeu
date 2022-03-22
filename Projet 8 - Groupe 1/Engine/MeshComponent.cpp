@@ -22,10 +22,6 @@ MeshComponent::MeshComponent() {
     meshAndTexturePath = "";
 }
 
-//easy debugs
-//MessageBoxA(NULL, strFileName.c_str(), "", MB_OK);
-
-
 /// <summary>
 /// loads the mesh and creates the appropriate texture from a .x file
 /// </summary>

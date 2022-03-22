@@ -2,6 +2,7 @@
 #include "framework.h"
 
 int Component::s_type = 0;
+string Component::name = "";
 
 void Component::Begin()
 {
