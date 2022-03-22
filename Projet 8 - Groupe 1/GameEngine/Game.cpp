@@ -88,11 +88,11 @@
         m_engine->GetSceneMananger()->OpenScene("Main");
 
         //Create Tigger For Test Purpose
-        Entity* l_entityTigger = new Entity();
-        sceneMain->AddEntity(l_entityTigger);
-        MeshComponent* l_meshComponentTigger = new MeshComponent();
-        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
-        l_entityTigger->AddComponent(l_meshComponentTigger);
+        Entity* l_entityTiger = new Entity();
+        sceneMain->AddEntity(l_entityTiger);
+        MeshComponent* l_meshComponentTiger = new MeshComponent();
+        l_meshComponentTiger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
+        l_entityTiger->AddComponent(l_meshComponentTiger);
 
 
         //Create Cube For Test Purpose
@@ -118,7 +118,7 @@
         //Cam
         entityCam->transform->m_transform->SetPosition(0.0f, 0.0f, 10.0f);
         //Tigre
-        l_entityTigger->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
+        l_entityTiger->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
         //Cube
         l_entityCube->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
         l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
