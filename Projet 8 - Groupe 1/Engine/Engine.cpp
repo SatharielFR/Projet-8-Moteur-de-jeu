@@ -139,8 +139,11 @@ void Engine::RenderFrame(void)
             TransformComponent* l_transformComponent = (TransformComponent*)l_currentEntity->GetComponentByType<TransformComponent>();
             if (l_meshComponent != nullptr)
             {
-                LPCTSTR l_pathName = L"..\\Ressources\\tiger.x";
-                l_meshComponent->LoadMesh(l_pathName, d3ddev);
+                //making string to lpwstr for CreateTextureFromFile
+                std::string myString = l_meshComponent->GetMeshAndTexturePath();
+                wstring stemp = wstring(myString.begin(), myString.end());
+                LPCWSTR fullPath = stemp.c_str();
+                l_meshComponent->LoadMesh(fullPath, d3ddev);
 
                 //setting transform and DRAWING mesh
                 Transform* tr = l_transformComponent->m_transform;
