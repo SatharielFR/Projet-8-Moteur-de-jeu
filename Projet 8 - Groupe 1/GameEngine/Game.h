@@ -12,7 +12,11 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 //INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 
-class Game* g_game;
+#pragma region ForwardDeclaration
+	class Game* g_game;
+	class Entity;
+	class CameraComponent;
+#pragma endregion
 
 //Our main game class
 class Game 
@@ -21,6 +25,11 @@ class Game
 		#pragma region publicVariables
 			Engine* m_engine = nullptr;
 			bool m_bIsRunning = false;
+		#pragma endregion
+
+		#pragma region GamePointers
+			Entity* m_entityCamera;
+			CameraComponent* m_cameraComponent;
 		#pragma endregion
 
 		#pragma region PublicFunctions

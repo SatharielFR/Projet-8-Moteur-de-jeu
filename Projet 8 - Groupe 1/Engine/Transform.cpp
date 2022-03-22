@@ -94,7 +94,7 @@ void Transform::Move(float x, float y, float z)
 	m_vPos.x += x;
 	m_vPos.y += y;
 	m_vPos.z += z;
-	D3DXMatrixTranslation(&m_matPos, x, y, z);
+	D3DXMatrixTranslation(&m_matPos, m_vPos.x, m_vPos.y, m_vPos.z);
 	UpdateMatrix();
 }
 

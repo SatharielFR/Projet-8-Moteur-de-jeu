@@ -105,10 +105,10 @@
         l_entityCube->AddComponent(l_rigidbodycomponent);
 
         //Create Camera
-        Entity* entityCam = new Entity();
-        sceneMain->AddEntity(entityCam);
-        CameraComponent* cam = new CameraComponent();
-        entityCam->AddComponent(cam);
+        m_entityCamera = new Entity();
+        sceneMain->AddEntity(m_entityCamera);
+        m_cameraComponent = new CameraComponent();
+        m_entityCamera->AddComponent(m_cameraComponent);
 
         //Start Game
         g_game->Begin();
@@ -116,7 +116,7 @@
         //!!! Faire les Mooves APRES le Begin !!!
         
         //Cam
-        entityCam->transform->m_transform->SetPosition(0.0f, 0.0f, 10.0f);
+        m_entityCamera->transform->m_transform->SetPosition(0.0f, 0.0f, 10.0f);
         //Tigre
         l_entityTigger->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
         //Cube
@@ -152,13 +152,11 @@
         //Forward inputs
         if (GetKeyState('Z') & 0x8000)
         {
-            Debug::s_inst->ScreenLog("Forward", l_fDebugDuration);
-            _fForwardValue = 1;
+            _fForwardValue = -1;
         }
         else if (GetKeyState('S') & 0x8000)
         {
-            Debug::s_inst->ScreenLog("Backward", l_fDebugDuration);
-            _fForwardValue = -1;
+            _fForwardValue = 1;
         }
         else
         {
@@ -168,13 +166,11 @@
         //Horizontal inputs
         if (GetKeyState('D') & 0x8000)
         {
-            Debug::s_inst->ScreenLog("Right", l_fDebugDuration);
-            _fHorizontalValue = 1;
+            _fHorizontalValue = -1;
         }
         else if (GetKeyState('Q') & 0x8000)
         {
-            Debug::s_inst->ScreenLog("Left", l_fDebugDuration);
-            _fHorizontalValue = -1;
+            _fHorizontalValue = 1;
         }
         else
         {
@@ -184,7 +180,9 @@
 
     void Game::UpdateCameraPosition()
     {
-        
+        m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
+                                                        0 ,
+                                                        _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
     }
 
 #pragma endregion
