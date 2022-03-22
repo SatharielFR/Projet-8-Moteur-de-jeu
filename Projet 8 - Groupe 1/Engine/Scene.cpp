@@ -13,6 +13,7 @@ void Scene::Begin()
 	for (Entity* currentEntity : _listEntity)
 	{
 		currentEntity->Begin();
+		//initialize the hud _sceneHUD->InitializeHUD(device);
 	}
 }
 
@@ -21,6 +22,7 @@ void Scene::Update()
 	for (Entity* currentEntity : _listEntity)
 	{
 		currentEntity->Update();
+		//_sceneHUD->UpdateHUD(device); update the hud
 	}
 }
 
@@ -53,4 +55,8 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 			_listEntity.push_back(l_entityToAdd);
 		}
 	}
+}
+
+void Scene::AddHUD(HUD* HUDToAdd) {
+	_sceneHUD = HUDToAdd;
 }
