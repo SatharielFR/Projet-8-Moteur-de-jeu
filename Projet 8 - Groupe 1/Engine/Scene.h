@@ -20,14 +20,14 @@ class Scene
 			void SetSceneName(string strNewSceneName);
 			string GetSceneName() { return _strSceneName;}
 			list<Entity*> GetEntities() { return _listEntity; }
-			list<HUD*> GetHUDList() { return _listHUD; }
+			HUD* GetHUD() { return _sceneHUD; }
 		#pragma endregion
 
 	private:
 		#pragma region PrivateVariables
 			string _strSceneName = "Default";
 			list<Entity*> _listEntity;
-			list<HUD*> _listHUD;
+			HUD* _sceneHUD;
 		#pragma endregion
 };
 

@@ -13,6 +13,7 @@ void Scene::Begin()
 	for (Entity* currentEntity : _listEntity)
 	{
 		currentEntity->Begin();
+		//initialize the hud _sceneHUD->InitializeHUD(device);
 	}
 }
 
@@ -21,6 +22,7 @@ void Scene::Update()
 	for (Entity* currentEntity : _listEntity)
 	{
 		currentEntity->Update();
+		//_sceneHUD->UpdateHUD(device); update the hud
 	}
 }
 
@@ -55,22 +57,6 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 	}
 }
 
-void Scene::AddHUD(HUD* l_HUDToAdd) {
-	if (l_HUDToAdd == nullptr) { return; }
-
-	if (_listHUD.size() == 0) {
-		_listHUD.push_back(l_HUDToAdd);
-		return;
-	}
-	else {
-		bool l_bIsInTheList = false;
-		for (auto i = _listHUD.begin(); i != _listHUD.end(); i++) {
-			if (*i == l_HUDToAdd) {
-				l_bIsInTheList = true;
-			}
-		}
-		if (!l_bIsInTheList) {
-			_listHUD.push_back(l_HUDToAdd);
-		}
-	}
+void Scene::AddHUD(HUD* HUDToAdd) {
+	_sceneHUD = HUDToAdd;
 }
