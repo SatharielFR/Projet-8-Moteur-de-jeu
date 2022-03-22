@@ -11,21 +11,11 @@ class Engine
 {
 	public:
 		#pragma region PublicVariables
-			//#define SCREEN_WIDTH  800 
-			//#define SCREEN_HEIGHT 800
-			//#define MAX_LOADSTRING 100
 			//Programme
 			LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
 			static LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
-			LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;    // the pointer to the vertex buffer
-			LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;     // the pointer to the index buffer
 			static float gravity;
 
-			//Matrices 
-			//D3DXMATRIX matView;    // the view transform matrix
-			//D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position
-			//D3DXVECTOR3 vecLookAtPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);    // the look-at position
-			//D3DXVECTOR3 vecUpDirection = D3DXVECTOR3(0.0f, 1.0f, 0.0f);    // the up direction
 			//Font variable
 			ID3DXFont* Font = 0;
 
