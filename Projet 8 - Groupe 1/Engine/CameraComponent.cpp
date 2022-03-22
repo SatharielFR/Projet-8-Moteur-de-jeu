@@ -1,13 +1,14 @@
 #include "pch.h"
 #include "framework.h"
 
+int CameraComponent::s_type = 3;
 
-Camera::Camera() 
+CameraComponent::CameraComponent() 
 {
 
 }
 
-void Camera::Begin()
+void CameraComponent::Begin()
 {
     Component::Begin();
     // set the projection transform
@@ -18,13 +19,13 @@ void Camera::Begin()
         10000.0f);    // the far view-plane
 }
 
-void Camera::Update()
+void CameraComponent::Update()
 {
    
 }
 
 
- void Camera::Render()
+ void CameraComponent::Render()
 {
     Component::Render();
     d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView

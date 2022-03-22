@@ -4,11 +4,9 @@ class TransformComponent : public Component
 	public :
 
 		TransformComponent();
-		virtual int GetType() { return _type; }
+		virtual int GetType() { return s_type; }
 		virtual void Begin() override;
-	//protected :
-
-		static int _type;
+		static int s_type;
 		Transform* m_transform;
 };
 

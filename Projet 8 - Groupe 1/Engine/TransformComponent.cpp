@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "framework.h"
 
-int TransformComponent::_type = 1;
+int TransformComponent::s_type = 1;
 
 TransformComponent::TransformComponent()
 {
@@ -12,7 +12,5 @@ TransformComponent::TransformComponent()
 void TransformComponent::Begin()
 {
 	Component::Begin();
-	//m_transform = new Transform();
-	//m_transform->Begin();
 }
 

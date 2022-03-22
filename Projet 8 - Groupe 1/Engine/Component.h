@@ -6,15 +6,15 @@ class Component
 {
 	public:
 		#pragma region PublicVariables
-			static int _type;
+			static int s_type;
 			string name;
-			virtual int GetType() { return _type; }
 		#pragma endregion 
 
 		#pragma region PublicFunctions
 			virtual void Begin();
 			virtual void Update();
 			virtual void Render();
+			virtual int GetType() { return s_type; }
 			void SetParent(Entity* newParentEntity);
 		#pragma endregion 
 

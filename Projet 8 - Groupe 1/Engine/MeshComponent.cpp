@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "framework.h"
 
+int MeshComponent::s_type = 2;
+
 MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTURE9* textureIn, D3DMATERIAL9* materialIn, string meshAndTexturePathIn)
 {
 
@@ -9,7 +11,6 @@ MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTU
     meshTextures = textureIn;
     meshMaterials = materialIn;
     meshAndTexturePath = meshAndTexturePathIn;
-    MeshComponent::_type = 2;
 }
 
 MeshComponent::MeshComponent() {
@@ -19,7 +20,6 @@ MeshComponent::MeshComponent() {
     meshMaterials = NULL;
     materialBuffer = NULL;
     meshAndTexturePath = "";
-    MeshComponent::_type = 2;
 }
 
 //easy debugs
