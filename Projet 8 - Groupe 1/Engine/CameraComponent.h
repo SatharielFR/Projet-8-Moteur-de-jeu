@@ -7,7 +7,6 @@ class CameraComponent : public Component
 	#pragma region PublicVariables
 		static int s_type;
 		D3DXMATRIX matProjection;   // the projection transform matrix
-		LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
 	#pragma endregion
 
     #pragma region PublicFunctions

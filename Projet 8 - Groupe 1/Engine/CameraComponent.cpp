@@ -5,12 +5,18 @@ int CameraComponent::s_type = 3;
 
 CameraComponent::CameraComponent() 
 {
-
+    Begin();
 }
 
 void CameraComponent::Begin()
 {
     Component::Begin();
+
+    //D3DXVECTOR3 lookAt = _entityParent->transform->m_transform->m_vDir + _entityParent->transform->m_transform->m_vPos; // look at position     
+    //D3DXMatrixLookAtLH(&matView, &_entityParent->transform->m_transform->m_vPos,    // the camera position         
+    //    &lookAt,    // the look-at position         
+    //    &_entityParent->transform->m_transform->m_vUp);   // the up direction     
+    
     // set the projection transform
     D3DXMatrixPerspectiveFovLH(&matProjection,
         D3DXToRadian(45),    // the horizontal field of view
@@ -21,14 +27,15 @@ void CameraComponent::Begin()
 
 void CameraComponent::Update()
 {
-   
+    Render();
 }
 
 
  void CameraComponent::Render()
 {
     Component::Render();
-    d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView
-    d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);
+    Engine::d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView
+    Engine::d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);
+   /* d3ddev->SetTransform(D3DTS_VIEW, &matView);*/
 }
 

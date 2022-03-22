@@ -76,6 +76,7 @@
 
     Game::Game(HWND hWnd)
     {
+
         g_game = this;
 
         //Create Engine
@@ -101,14 +102,22 @@
         l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
         l_entityCube->AddComponent(l_meshComponentCube);
 
+        //Create Camera
+        Entity* entityCam = new Entity();
+        sceneMain->AddEntity(entityCam);
+        CameraComponent* cam = new CameraComponent();
+        entityCam->AddComponent(cam);
+
         //Start Game
         g_game->Begin();
 
         //!!! Faire les Mooves APRES le Begin !!!
-        l_entityTigger->transform->m_transform->Move(0.5f, 0.5f, 0.5f);
-
-        l_entityCube->transform->m_transform->Move(0.5f, 2.0f, 0.5f);
+        l_entityTigger->transform->m_transform->Move(0.0f, 0.0f, 10.0f);
+        entityCam->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
+     
+        l_entityCube->transform->m_transform->Move(1.0f, 1.0f, 1.0f);
         l_entityCube->transform->m_transform->Rotate(90.0f, 0.0f, 0.0f);
+
     }
 
     void Game::Begin()
