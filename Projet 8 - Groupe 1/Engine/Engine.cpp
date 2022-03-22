@@ -283,26 +283,7 @@ void Engine::RenderFrame(void)
                 l_meshComponent->LoadMesh(l_pathName, d3ddev);
 
                 //setting transform and DRAWING mesh
-                Transform* tr = nullptr;
-                //TODO : FIX IT
-                if (l_transformComponent != nullptr && l_transformComponent->m_transform != nullptr )
-                {
-                    //Doesnt Work
-                    tr = l_transformComponent->m_transform;
-                    tr->Move(0.0f, 0.0f, 0.0f);
-                    tr->UpdateMatrix();
-                    tr->ScalingUniforme(1.0f);
-                    //tr->Rotate(index, 0.0f, index);
-                }
-                //else
-                //{
-                //    //Work
-                //    tr = new Transform();
-                //    tr->Move(0.0f, 0.0f, 0.0f);
-                //    tr->UpdateMatrix();
-                //    tr->ScalingUniforme(1.0f);
-                //    tr->Rotate(index, 0.0f, index);                 
-                //}
+                Transform* tr = l_transformComponent->m_transform;
 
                 if (tr != nullptr)
                 {

@@ -90,7 +90,7 @@
         Entity* l_entityTigger = new Entity();
         sceneMain->AddEntity(l_entityTigger);
         MeshComponent* l_meshComponentTigger = new MeshComponent();
-       l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
         l_entityTigger->AddComponent(l_meshComponentTigger);
 
         //Start Game
