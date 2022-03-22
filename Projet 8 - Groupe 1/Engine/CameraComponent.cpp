@@ -16,8 +16,8 @@ void CameraComponent::Begin()
     D3DXMatrixPerspectiveFovLH(&matProjection,
         D3DXToRadian(45),    // the horizontal field of view
         (FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
-        1.0f,    // the near view-plane
-        10000.0f);    // the far view-plane
+        0.01f,    // the near view-plane
+        1000000.0f);    // the far view-plane
 }
 
 void CameraComponent::Update()

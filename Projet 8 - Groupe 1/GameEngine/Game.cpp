@@ -87,13 +87,19 @@
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
 
+        //Create Cube For Test Purpose
+        Entity* l_entitySkybox = new Entity();
+        sceneMain->AddEntity(l_entitySkybox);
+        MeshComponent* l_meshComponentSkybox= new MeshComponent();
+        l_meshComponentSkybox->SetMeshAndTexturePath("..\\Ressources\\Skybox.x");
+        l_entitySkybox->AddComponent(l_meshComponentSkybox);
+
         //Create Tiger For Test Purpose
         Entity* l_entityTiger = new Entity();
         sceneMain->AddEntity(l_entityTiger);
         MeshComponent* l_meshComponentTiger = new MeshComponent();
         l_meshComponentTiger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
         l_entityTiger->AddComponent(l_meshComponentTiger);
-
 
         //Create Cube For Test Purpose
         Entity* l_entityCube = new Entity();
@@ -123,6 +129,9 @@
         l_entityCube->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
         l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
         l_entityCube->transform->m_transform->Scaling(0.01f, 0.01f, 0.01f);
+        //Skybox
+        l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
+        l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
     }
 
     void Game::Begin()
@@ -224,15 +233,16 @@
     void Game::UpdateCameraPosition()
     {
         //Debug
-//        string Time = std::to_string(Timer::s_inst->GetDeltaTime());
-//        Debug::s_inst->ScreenLog(&Time);        
+/*        string Time = std::to_string(Timer::s_inst->GetDeltaTime());
+        Debug::s_inst->ScreenLog(&Time);    */    
 
         m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
                                                         0 ,
                                                         _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
-
-        m_entityCamera->transform->m_transform->Rotate( l_MouseMovementX * Timer::s_inst->GetDeltaTime(),
-                                                        l_MouseMovementY * Timer::s_inst->GetDeltaTime(),
+        
+        float l_fCameraSensibility = 0.5f;
+        m_entityCamera->transform->m_transform->Rotate( (l_MouseMovementY  * (3.14f/180))  * l_fCameraSensibility,
+                                                        (l_MouseMovementX * (3.14f / 180)) * l_fCameraSensibility,
                                                         0);
     }
 
