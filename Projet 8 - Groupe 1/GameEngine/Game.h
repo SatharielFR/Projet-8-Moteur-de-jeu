@@ -44,10 +44,16 @@ class Game
 			float _fForwardValue = 0;
 			float _fHorizontalValue = 0;
 			float _fSpeed = 0.5f;
+			int _nbMouseX = 0;
+			int _nbMouseY = 0;
+			int l_MouseMovementX;
+			int l_MouseMovementY;
+
 		#pragma endregion
 
 		#pragma region PrivateFunctions	
 			void UpdateInputs();
+			void UpdateMouseInputs();
 			void UpdateCameraPosition();
 		#pragma endregion
 };

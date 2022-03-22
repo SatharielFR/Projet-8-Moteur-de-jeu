@@ -27,9 +27,19 @@ void CameraComponent::Update()
 
 
  void CameraComponent::Render()
-{
+{ 
     Component::Render();
-    Engine::d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView
+
+   D3DXMATRIX l_matrixView;
+   D3DXVECTOR3 lookAt = _entityParent->transform->m_transform->m_vDir + _entityParent->transform->m_transform->m_vPos;
+   D3DXMatrixLookAtLH( &l_matrixView,
+                       &_entityParent->transform->m_transform->m_vPos,
+                       &lookAt,
+                       &_entityParent->transform->m_transform->m_vUp);
+   Engine::d3ddev->SetTransform(D3DTS_VIEW, &l_matrixView);
+
+    //Engine::d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView
     Engine::d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);
 }
 
+ 

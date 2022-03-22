@@ -29,6 +29,7 @@ class Engine
 		#pragma endregion 
 
 		#pragma region Accessors
+			HWND getHwnd() { return _hWnd; }
 			SceneManager* GetSceneMananger() { return _sceneManager; }
 		#pragma endregion
 

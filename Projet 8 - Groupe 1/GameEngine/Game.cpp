@@ -136,7 +136,14 @@
     {
         m_engine->Update();
         UpdateInputs();
+        UpdateMouseInputs();
         UpdateCameraPosition();   
+
+
+        string Time = "Camera Dir - x :" + std::to_string(m_entityCamera->transform->m_transform->m_vDir.x) + "; y :" +
+                                        std::to_string(m_entityCamera->transform->m_transform->m_vDir.y);   //Show Current Mouse Movement
+        Debug::s_inst->ScreenLog(&Time);
+
     }
 
     void Game::Close()
@@ -178,11 +185,55 @@
         }
     }
 
+
+    void Game::UpdateMouseInputs()
+    {
+        POINT point;
+        if (GetCursorPos(&point))
+        {
+            l_MouseMovementX = point.x - _nbMouseX;
+            l_MouseMovementY = point.y - _nbMouseY;
+
+            _nbMouseX = point.x;
+            _nbMouseY= point.y;
+
+            bool l_bCursorIsLocked = true;
+            if (l_bCursorIsLocked)
+            {
+                int l_nbAnchorPositionX = 0, l_nbAnchorPositionY = 0;
+
+                RECT rect;
+                if (GetWindowRect(m_engine->getHwnd(), &rect))
+                {
+                    l_nbAnchorPositionX =  rect.left;
+                    l_nbAnchorPositionY = rect.top;
+                }
+
+                int l_nbScreenCenterX = (SCREEN_WIDTH / 2 ) + l_nbAnchorPositionX;
+                int l_nbScreenCenterY = (SCREEN_HEIGHT / 2) + l_nbAnchorPositionY;
+                SetCursorPos(l_nbScreenCenterX, l_nbScreenCenterY);
+            }
+
+            //Debug
+//            string Time = "x :" + std::to_string(_nbMouseX)+ "; y :" + std::to_string(_nbMouseY);   //Show Current Mouse position
+//            string Time = "x :" + std::to_string(l_MouseMovementX) + "; y :" + std::to_string(l_MouseMovementY);   //Show Current Mouse Movement
+//            Debug::s_inst->ScreenLog(&Time);
+        }
+    }
+
     void Game::UpdateCameraPosition()
     {
+        //Debug
+//        string Time = std::to_string(Timer::s_inst->GetDeltaTime());
+//        Debug::s_inst->ScreenLog(&Time);        
+
         m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
                                                         0 ,
                                                         _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
+
+        m_entityCamera->transform->m_transform->Rotate( l_MouseMovementX * Timer::s_inst->GetDeltaTime(),
+                                                        l_MouseMovementY * Timer::s_inst->GetDeltaTime(),
+                                                        0);
     }
 
 #pragma endregion
