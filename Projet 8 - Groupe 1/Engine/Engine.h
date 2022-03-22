@@ -17,7 +17,7 @@ class Engine
 			//Programme
 			LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
 			LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
-
+			static float gravity;
 			//Matrices 
 			D3DXMATRIX matView;    // the view transform matrix
 			D3DXVECTOR3 vecCamPosition = D3DXVECTOR3(0.0f, 0.0f, 15.0f);   // the camera position

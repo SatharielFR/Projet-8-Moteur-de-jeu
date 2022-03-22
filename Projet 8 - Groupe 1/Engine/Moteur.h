@@ -51,6 +51,7 @@
 	#include "MeshComponent.h"
 	#include "TransformComponent.h"
     #include "CameraComponent.h"
+	#include "RigidbodyComponent.h"
 	#include "Raycast.h"
 #pragma endregion
 

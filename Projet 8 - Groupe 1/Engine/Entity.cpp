@@ -121,6 +121,7 @@ void Entity::AddComponent(Component* newComponentToAdd)
 	if (!l_bIsInTheList)
 	{
 		_lstComponentChild.push_back(newComponentToAdd);
+		newComponentToAdd->SetParent(this);
 	}
 }
 

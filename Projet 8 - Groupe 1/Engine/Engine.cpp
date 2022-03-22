@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "framework.h"
 
+float Engine::gravity = 9.80f;
+
 //Constructeur
 Engine::Engine(HWND hWnd)
 {

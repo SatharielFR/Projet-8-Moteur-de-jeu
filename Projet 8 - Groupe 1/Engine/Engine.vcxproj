@@ -164,6 +164,7 @@
     <ClInclude Include="Moteur.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Raycast.h" />
+    <ClInclude Include="RigidbodyComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Texturing.h" />
@@ -186,6 +187,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Raycast.cpp" />
+    <ClCompile Include="RigidbodyComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Texturing.cpp" />

@@ -99,7 +99,9 @@
         sceneMain->AddEntity(l_entityCube);
         MeshComponent* l_meshComponentCube = new MeshComponent();
         l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+        RigidbodyComponent* l_rigidbodycomponent = new RigidbodyComponent();
         l_entityCube->AddComponent(l_meshComponentCube);
+        l_entityCube->AddComponent(l_rigidbodycomponent);
 
         //Start Game
         g_game->Begin();
