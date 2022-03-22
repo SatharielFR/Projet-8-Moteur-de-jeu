@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "framework.h"
 
-int Component::id = 0;
+int Component::_type = 0;
 
 void Component::Begin()
 {

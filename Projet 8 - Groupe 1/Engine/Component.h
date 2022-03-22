@@ -6,8 +6,9 @@ class Component
 {
 	public:
 		#pragma region PublicVariables
-			static int id;
+			static int _type;
 			string name;
+			virtual int GetType() { return _type; }
 		#pragma endregion 
 
 		#pragma region PublicFunctions

@@ -90,14 +90,14 @@
         Entity* l_entityTigger = new Entity();
         sceneMain->AddEntity(l_entityTigger);
         MeshComponent* l_meshComponentTigger = new MeshComponent();
-//        l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
+       l_meshComponentTigger->SetMeshAndTexturePath("..\\Ressources\\tiger.x");
         l_entityTigger->AddComponent(l_meshComponentTigger);
 
         //Start Game
         g_game->Begin();
 
         //!!! Faire les Mooves APRES le Begin !!!
-//        l_entityTigger->transform->m_transform->Move(0.5f, 0.5f, 0.5f);
+        l_entityTigger->transform->m_transform->Move(0.5f, 0.5f, 0.5f);
     }
 
     void Game::Begin()

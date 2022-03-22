@@ -43,7 +43,7 @@ inline Component* Entity::GetComponentByType()
 {
 	for (Component* comp : _lstComponentChild)
 	{
-		if (comp->id == T::id)
+		if (comp->GetType() == T::_type)
 		{
 			return comp;
 		}

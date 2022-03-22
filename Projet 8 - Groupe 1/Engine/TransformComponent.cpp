@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "framework.h"
 
+int TransformComponent::_type = 1;
+
 TransformComponent::TransformComponent()
 {
 	m_transform = new Transform();
-	TransformComponent::id = 1;
 	TransformComponent::name = "Transform";
 }
 

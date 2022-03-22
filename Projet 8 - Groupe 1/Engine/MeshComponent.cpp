@@ -9,7 +9,7 @@ MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTU
     meshTextures = textureIn;
     meshMaterials = materialIn;
     meshAndTexturePath = meshAndTexturePathIn;
-    MeshComponent::id = 2;
+    MeshComponent::_type = 2;
 }
 
 MeshComponent::MeshComponent() {
@@ -19,7 +19,7 @@ MeshComponent::MeshComponent() {
     meshMaterials = NULL;
     materialBuffer = NULL;
     meshAndTexturePath = "";
-    MeshComponent::id = 2;
+    MeshComponent::_type = 2;
 }
 
 //easy debugs
