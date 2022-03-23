@@ -39,6 +39,17 @@ void Transform::UpdateMatrix()
 	m_matrix *= m_matPos;
 }
 
+void Transform::RotateAngle(float pitch, float yaw, float roll)
+{
+
+	 float l_fRadPitch	= pitch	* (D3DX_PI / 180.f);
+	 float l_fRadYaw	= yaw	* (D3DX_PI / 180.f);
+	 float l_fRadRoll	= roll	* (D3DX_PI / 180.f);
+
+	 Rotate(l_fRadPitch, l_fRadYaw, l_fRadRoll);
+}
+
+
 //Y X Z
 void Transform::Rotate(float pitch, float yaw, float roll)
 {

@@ -122,16 +122,23 @@
         l_entityCube->AddComponent(l_rigidbodycomponent);
 
         //Create Ground
-        Entity* l_entityGround = new Entity();
-        MeshComponent* l_meshComponentGround = new MeshComponent();
-        l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
-        sceneMain->AddEntity(l_entityGround);
+        //Entity* l_entityGround = new Entity();
+        //MeshComponent* l_meshComponentGround = new MeshComponent();
+        //l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
+        //sceneMain->AddEntity(l_entityGround);
 
         //Create Camera
         m_entityCamera = new Entity();
         sceneMain->AddEntity(m_entityCamera);
         m_cameraComponent = new CameraComponent();
         m_entityCamera->AddComponent(m_cameraComponent);
+
+        //Create Target
+        Entity* l_entityTarget= new Entity();
+        sceneMain->AddEntity(l_entityTarget);
+        MeshComponent* l_meshComponentTarget= new MeshComponent();
+        l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
+        l_entityTarget->AddComponent(l_meshComponentTarget);
 
         //Start Game
         g_game->Begin();
@@ -149,6 +156,10 @@
         //Skybox
         l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
         l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
+        //Target
+        l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
+        l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
+        l_entityTarget->transform->m_transform->RotateAngle( 90.0f,0.f,0.f);
     }
 
     void Game::Begin()
@@ -274,8 +285,8 @@
         static float l_fPitch = 0.f;
 
         float l_fCameraSensibility = 0.5f;
-        l_fYaw   += l_MouseMovementX * (3.14f / 180.f) * l_fCameraSensibility;
-        l_fPitch -= l_MouseMovementY * (3.14f / 180.f) * l_fCameraSensibility;
+        l_fYaw   += l_MouseMovementX * (D3DX_PI / 180.f) * l_fCameraSensibility;
+        l_fPitch -= l_MouseMovementY * (D3DX_PI / 180.f) * l_fCameraSensibility;
 
         m_entityCamera->transform->m_transform->Rotate(l_fPitch, 0,  0 );
         m_entityCamera->transform->m_transform->Rotate(0, l_fYaw, 0);
