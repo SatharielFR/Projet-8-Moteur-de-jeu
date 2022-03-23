@@ -155,7 +155,6 @@
         l_entityCube->transform->m_transform->Scaling(0.01f, 0.01f, 0.01f);
         //Skybox
         l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
-        l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
         //Target
         l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
         l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
@@ -259,37 +258,29 @@
                 _nbMouseX = point.x;
                 _nbMouseY = point.y;
             }
-
-            //Debug
-//            string Time = "x :" + std::to_string(_nbMouseX)+ "; y :" + std::to_string(_nbMouseY);   //Show Current Mouse position
-//            string Time = "x :" + std::to_string(l_MouseMovementX) + "; y :" + std::to_string(l_MouseMovementY);   //Show Current Mouse Movement
-//            Debug::s_inst->ScreenLog(&Time);
         }
     }
 
     void Game::UpdateCameraPosition()
     {
-        //Debug
-/*        string Time = std::to_string(Timer::s_inst->GetDeltaTime());
-        Debug::s_inst->ScreenLog(&Time);    */    
-
-//        m_entityCamera->transform->m_transform->Identity();
-
         m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
                                                         0 ,
                                                         _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
         
 
         m_entityCamera->transform->m_transform->ClearRotation();
+
         static float l_fYaw = 0.f;
         static float l_fPitch = 0.f;
 
         float l_fCameraSensibility = 0.5f;
-        l_fYaw   += l_MouseMovementX * (D3DX_PI / 180.f) * l_fCameraSensibility;
-        l_fPitch -= l_MouseMovementY * (D3DX_PI / 180.f) * l_fCameraSensibility;
+        l_fPitch += l_MouseMovementY * (D3DX_PI / 180.f) * l_fCameraSensibility;
+        l_fYaw += l_MouseMovementX * (D3DX_PI / 180.f) * l_fCameraSensibility;
 
-        m_entityCamera->transform->m_transform->Rotate(l_fPitch, 0,  0 );
-        m_entityCamera->transform->m_transform->Rotate(0, l_fYaw, 0);
+        l_fPitch = std::clamp(l_fPitch, -D3DX_PI / 3, D3DX_PI / 3);
+        //l_fYaw = std::clamp(l_fYaw, -D3DX_PI / 3, D3DX_PI / 3);
+       
+        m_entityCamera->transform->m_transform->Rotate(l_fPitch, l_fYaw, 0);
     }
 
 #pragma endregion
