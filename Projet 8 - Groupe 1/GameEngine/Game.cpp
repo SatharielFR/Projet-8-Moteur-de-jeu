@@ -62,7 +62,7 @@
         {
             case WM_MOUSEMOVE:
             {
-                Debug::s_inst->ScreenLog("MouseMove");
+//                Debug::s_inst->ScreenLog("MouseMove");
                 //OnMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), (DWORD)wParam);
                 return 0;
             }
