@@ -158,6 +158,10 @@ void Engine::RenderFrame(void)
         HUDInstance->UpdateHUD(d3ddev);
     }
 
+    //test HUD HERE
+    string testString = "test ah ouais";
+    HUDInstance->DisplayInt(120, -1);
+    //HUDInstance->DisplayText(&testString, -1);
 
     d3ddev->EndScene();
 
