@@ -88,6 +88,11 @@
         //Create Engine
         m_engine = new Engine(hWnd);
 
+        //Create a map for the Menu
+        Scene* sceneMenu = new Scene("Menu");
+        m_engine->GetSceneMananger()->AddScene(sceneMenu);
+//        m_engine->GetSceneMananger()->OpenScene("Menu");
+
         //Create a map for the game
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
@@ -115,6 +120,12 @@
         l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
         l_entityCube->AddComponent(l_meshComponentCube);
         l_entityCube->AddComponent(l_rigidbodycomponent);
+
+        //Create Ground
+        Entity* l_entityGround = new Entity();
+        MeshComponent* l_meshComponentGround = new MeshComponent();
+        l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
+        sceneMain->AddEntity(l_entityGround);
 
         //Create Camera
         m_entityCamera = new Entity();
@@ -251,14 +262,23 @@
 /*        string Time = std::to_string(Timer::s_inst->GetDeltaTime());
         Debug::s_inst->ScreenLog(&Time);    */    
 
+//        m_entityCamera->transform->m_transform->Identity();
+
         m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
                                                         0 ,
                                                         _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
         
+
+        m_entityCamera->transform->m_transform->ClearRotation();
+        static float l_fYaw = 0.f;
+        static float l_fPitch = 0.f;
+
         float l_fCameraSensibility = 0.5f;
-        m_entityCamera->transform->m_transform->Rotate( (l_MouseMovementY  * (3.14f/180)) * l_fCameraSensibility,
-                                                        (l_MouseMovementX  * (3.14f/180)) * l_fCameraSensibility,
-                                                        0 );
+        l_fYaw   += l_MouseMovementX * (3.14f / 180.f) * l_fCameraSensibility;
+        l_fPitch -= l_MouseMovementY * (3.14f / 180.f) * l_fCameraSensibility;
+
+        m_entityCamera->transform->m_transform->Rotate(l_fPitch, 0,  0 );
+        m_entityCamera->transform->m_transform->Rotate(0, l_fYaw, 0);
     }
 
 #pragma endregion

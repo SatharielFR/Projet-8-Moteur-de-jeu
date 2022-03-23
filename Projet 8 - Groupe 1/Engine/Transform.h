@@ -27,6 +27,7 @@ class Transform
 			void Move(float x, float y, float z);
 			void MoveUniforme(float dist);
 			void SetPosition(float x, float y, float z);
+			void ClearRotation();
 		#pragma endregion 
 };
 
