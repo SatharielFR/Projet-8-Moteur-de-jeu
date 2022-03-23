@@ -1,3 +1,5 @@
 ﻿  Game.cpp
-C:\Users\ChimL\source\repos\Projet-8-Moteur-de-jeu-updated\Projet 8 - Groupe 1\GameEngine\Game.cpp(55,19): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
-  GameEngine.vcxproj -> C:\Users\ChimL\source\repos\Projet-8-Moteur-de-jeu-updated\Projet 8 - Groupe 1\x64\Debug\Game.exe
+C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\Engine\Debug.h(4,16): warning C4099: 'ID3DXFont' : nom de type déjà rencontré avec 'struct' et utilisant maintenant 'class'
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3dx9core.h(319): message : voir la déclaration de 'ID3DXFont'
+C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\GameEngine\Game.cpp(55,19): warning C4244: 'return' : conversion de 'WPARAM' en 'int', perte possible de données
+  GameEngine.vcxproj -> C:\Users\leoch\Documents\ToSave\Cours\GTech_4\Projet 8 - Moteur de jeu\Projet-8-Moteur-de-jeu\Projet 8 - Groupe 1\x64\Debug\Game.exe

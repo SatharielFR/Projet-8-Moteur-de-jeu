@@ -24,8 +24,8 @@
         wc.hCursor = LoadCursor(NULL, IDC_ARROW);
         wc.lpszClassName = L"WindowClass";
         RegisterClassEx(&wc);
-        hWnd = CreateWindowEx(NULL, L"WindowClass", L"Our Direct3D Program",
-                              WS_OVERLAPPEDWINDOW, 300, 300, SCREEN_WIDTH, SCREEN_HEIGHT,
+        hWnd = CreateWindowEx(NULL, L"WindowClass", L"Projet 8 : Moteur de jeu",
+                              WS_OVERLAPPEDWINDOW, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
                               NULL, NULL, hInstance, NULL);
         ShowWindow(hWnd, nCmdShow);
 
