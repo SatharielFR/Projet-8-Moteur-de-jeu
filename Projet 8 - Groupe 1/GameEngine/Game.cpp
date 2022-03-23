@@ -274,11 +274,14 @@
         static float l_fPitch = 0.f;
 
         float l_fCameraSensibility = 0.5f;
-        l_fYaw   += l_MouseMovementX * (3.14f / 180.f) * l_fCameraSensibility;
-        l_fPitch -= l_MouseMovementY * (3.14f / 180.f) * l_fCameraSensibility;
+        l_fPitch += l_MouseMovementY * (D3DX_PI / 180.f) * l_fCameraSensibility;
+        l_fYaw += l_MouseMovementX * (D3DX_PI / 180.f) * l_fCameraSensibility;
 
-        m_entityCamera->transform->m_transform->Rotate(l_fPitch, 0,  0 );
-        m_entityCamera->transform->m_transform->Rotate(0, l_fYaw, 0);
+        l_fPitch = std::clamp(l_fPitch, -D3DX_PI / 3, D3DX_PI / 3);
+        l_fYaw = std::clamp(l_fYaw, -D3DX_PI / 3, D3DX_PI / 3);
+       
+
+        m_entityCamera->transform->m_transform->Rotate(l_fPitch, 0, l_fYaw);
     }
 
 #pragma endregion

@@ -39,20 +39,19 @@ void Transform::UpdateMatrix()
 	m_matrix *= m_matPos;
 }
 
-//Y X Z
-void Transform::Rotate(float pitch, float yaw, float roll)
+void Transform::Rotate(float pitch, float roll, float yaw)
 {
 	D3DXQUATERNION	quat;
 	D3DXQUATERNION quatRot;
 	D3DXQuaternionIdentity(&quatRot);
 
-	D3DXQuaternionRotationAxis(&quat, &m_vUp, yaw); // Axe Y 
+	D3DXQuaternionRotationAxis(&quat, &m_vRight, pitch); // Axe  Y
 	quatRot *= quat;
 
-	D3DXQuaternionRotationAxis(&quat, &m_vRight, pitch); // Axe  X
+	D3DXQuaternionRotationAxis(&quat, &m_vDir, roll); // Axe X
 	quatRot *= quat;
 
-	D3DXQuaternionRotationAxis(&quat, &m_vDir, roll); // Axe Z
+	D3DXQuaternionRotationAxis(&quat, &m_vUp, yaw); // Axe Z
 	quatRot *= quat;
 
 	m_qRot *= quatRot;
@@ -122,5 +121,6 @@ void Transform::ClearRotation()
 	m_vRight = { 1.0f, 0.0f, 0.0f };
 	m_vUp = { 0.0f, 1.0f, 0.0f };
 	D3DXQuaternionIdentity(&m_qRot);
-//	UpdateMatrix();
+	
+	D3DXMatrixIdentity(&m_matrix);
 }
