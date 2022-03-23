@@ -60,6 +60,12 @@
     {
         switch (message)
         {
+            case WM_MOUSEMOVE:
+            {
+                Debug::s_inst->ScreenLog("MouseMove");
+                //OnMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), (DWORD)wParam);
+                return 0;
+            }
             case WM_DESTROY:
             {
                 PostQuitMessage(0);
@@ -201,12 +207,6 @@
         POINT point;
         if (GetCursorPos(&point))
         {
-            l_MouseMovementX = point.x - _nbMouseX;
-            l_MouseMovementY = point.y - _nbMouseY;
-
-            _nbMouseX = point.x;
-            _nbMouseY= point.y;
-
             if (m_bCursorIsLocked)
             {
                 int l_nbAnchorPositionX = 0, l_nbAnchorPositionY = 0;
@@ -220,7 +220,22 @@
 
                 int l_nbScreenCenterX = (SCREEN_WIDTH / 2 ) + l_nbAnchorPositionX;
                 int l_nbScreenCenterY = (SCREEN_HEIGHT / 2) + l_nbAnchorPositionY;
+
+                l_MouseMovementX = point.x - l_nbScreenCenterX;
+                l_MouseMovementY = point.y - l_nbScreenCenterY;
+
+                _nbMouseX = point.x;
+                _nbMouseY = point.y;
+
                 SetCursorPos(l_nbScreenCenterX, l_nbScreenCenterY);
+            }
+            else
+            {
+                l_MouseMovementX = point.x - _nbMouseX;
+                l_MouseMovementY = point.y - _nbMouseY;
+
+                _nbMouseX = point.x;
+                _nbMouseY = point.y;
             }
 
             //Debug
@@ -241,9 +256,9 @@
                                                         _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
         
         float l_fCameraSensibility = 0.5f;
-        m_entityCamera->transform->m_transform->Rotate( (l_MouseMovementY  * (3.14f/180))  * l_fCameraSensibility,
-                                                        (l_MouseMovementX * (3.14f / 180)) * l_fCameraSensibility,
-                                                        0);
+        m_entityCamera->transform->m_transform->Rotate( (l_MouseMovementY  * (3.14f/180)) * l_fCameraSensibility,
+                                                        (l_MouseMovementX  * (3.14f/180)) * l_fCameraSensibility,
+                                                        0 );
     }
 
 #pragma endregion
