@@ -1,10 +1,4 @@
 #include "RailManager.h"
-//#include "Entity.h"
-//#include "Scene.h"
-//#include "MeshComponent.h"
-//#include "Component.h"
-//#include "Transform.h"
-//#include "transformComponent.h"
 
 RailManager::RailManager()
 {
@@ -28,8 +22,28 @@ void RailManager::CreateRails(Scene* scene)
         l_entityRails->AddComponent(l_meshComponentRails);
         //Change Rail position
         l_entityRails->transform->m_transform->ScalingUniforme(m_fScale);
+        switch(m_currentDirection)
+        {
+            case (enumDirection::Forward) :
+            {
+                break;
+            }
+            case (enumDirection::Backward):
+            {
+                break;
+            }
+            case (enumDirection::Right):
+            {
+                break;
+            }
+            case (enumDirection::Left):
+            {
+                break;
+            }
+        }
+
+        m_nbPositionZ = m_nbPositionZ - m_Lenght;
         l_entityRails->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
-        m_nbPositionZ = m_nbPositionZ + m_Lenght;
         //Add to the list of rails
         m_listEntityRails.push_back(l_entityRails);
     }
@@ -38,4 +52,5 @@ void RailManager::CreateRails(Scene* scene)
 
 void RailManager::RemoveRails()
 {
+    //To call after X sec to remove last rails from the list ans create one forward
 }
