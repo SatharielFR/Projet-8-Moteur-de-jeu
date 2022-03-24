@@ -240,7 +240,7 @@ Frame DXCC_ROOT {
             1.000000;
             0.000000; 0.000000; 0.000000;;
             0.000000; 0.000000; 0.000000;;
-            TextureFilename { "Rail-Forward.bmp"; }
+            TextureFilename { "Iron.bmp"; }
           }
         }
 
@@ -625,7 +625,7 @@ Frame DXCC_ROOT {
             1.000000;
             0.000000; 0.000000; 0.000000;;
             0.000000; 0.000000; 0.000000;;
-            TextureFilename { "Rail-Forward.bmp"; }
+            TextureFilename { "Iron.bmp";  }
           }
         }
 
@@ -1090,7 +1090,7 @@ Frame DXCC_ROOT {
             1.000000;
             0.000000; 0.000000; 0.000000;;
             0.000000; 0.000000; 0.000000;;
-            TextureFilename { "Rail-Forward.bmp"; }
+            TextureFilename { "Wood.bmp"; }
           }
         }
 
@@ -1397,7 +1397,7 @@ Frame DXCC_ROOT {
             1.000000;
             0.000000; 0.000000; 0.000000;;
             0.000000; 0.000000; 0.000000;;
-            TextureFilename { "Rail-Forward.bmp"; }
+            TextureFilename { "Wood.bmp"; }
           }
         }
 
