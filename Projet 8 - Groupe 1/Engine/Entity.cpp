@@ -5,6 +5,7 @@ Entity::Entity()
 {
 //	transform = nullptr;
 	transform = new TransformComponent;
+	AddComponent(transform);
 }
 
 Entity::~Entity()
@@ -15,7 +16,7 @@ Entity::~Entity()
 void Entity::Begin()
 {
 //	transform = new TransformComponent;
-	AddComponent(transform);
+//	AddComponent(transform);
 
 	//Begin All child Entities
 	for (Entity* currentEntity : _lstEntityChild)

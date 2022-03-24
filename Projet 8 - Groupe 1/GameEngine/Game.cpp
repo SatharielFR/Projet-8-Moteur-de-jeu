@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "RailManager.h"
 
 #pragma region GlobalVariables
     HINSTANCE hInst;                                // instance actuelle
@@ -140,6 +140,24 @@
         l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
         l_entityTarget->AddComponent(l_meshComponentTarget);
 
+        //Create Rail
+        //Entity* l_entityRails = new Entity();
+        //sceneMain->AddEntity(l_entityRails);
+        //MeshComponent* l_meshComponentRails = new MeshComponent();
+        //l_meshComponentRails->SetMeshAndTexturePath("..\\Ressources\\rail.x");
+        //l_entityRails->AddComponent(l_meshComponentRails);
+
+        m_railManager = new RailManager();
+
+        //for (int i = 0; i < m_nbRailsToSPawn; i++)
+        //{
+        //    float x;
+        //    float y;
+        //}
+
+
+
+
         //Start Game
         g_game->Begin();
 
@@ -165,6 +183,7 @@
     {
         Debug::s_inst->ScreenLog("Game Begin");        //Debug
         m_engine->Begin();
+        m_railManager->CreateRails(m_engine->GetSceneMananger()->GetCurrentScene());
     }
 
 

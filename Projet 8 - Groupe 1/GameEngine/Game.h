@@ -4,6 +4,7 @@
 #include "framework.h"
 
 
+
 // Déclarations anticipées des fonctions incluses dans ce module de code :
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -16,6 +17,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	class Game* g_game;
 	class Entity;
 	class CameraComponent;
+	class RailManager;
 #pragma endregion
 
 //Our main game class
@@ -26,6 +28,7 @@ class Game
 			Engine* m_engine = nullptr;
 			bool m_bIsRunning = false;
 			bool m_bCursorIsLocked = true;
+			RailManager* m_railManager = nullptr;
 		#pragma endregion
 
 		#pragma region GamePointers
