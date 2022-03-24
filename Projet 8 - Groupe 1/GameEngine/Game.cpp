@@ -121,12 +121,6 @@
         l_entityCube->AddComponent(l_meshComponentCube);
         l_entityCube->AddComponent(l_rigidbodycomponent);
 
-        //Create Ground
-        //Entity* l_entityGround = new Entity();
-        //MeshComponent* l_meshComponentGround = new MeshComponent();
-        //l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
-        //sceneMain->AddEntity(l_entityGround);
-
         //Create Camera
         m_entityCamera = new Entity();
         sceneMain->AddEntity(m_entityCamera);
@@ -140,25 +134,37 @@
         l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
         l_entityTarget->AddComponent(l_meshComponentTarget);
 
+        //Create Ground
+        Entity* l_entityGround = new Entity();
+        sceneMain->AddEntity(l_entityGround);
+        MeshComponent* l_meshComponentGround = new MeshComponent();
+        l_meshComponentGround->SetMeshAndTexturePath("..\\Ressources\\Plane.x");
+        l_entityGround->AddComponent(l_meshComponentGround);
+
         //Start Game
         g_game->Begin();
 
         //!!! Faire les Mooves APRES le Begin !!!
         
         //Cam
-        m_entityCamera->transform->m_transform->SetPosition(0.0f, 0.0f, 10.0f);
+        m_entityCamera->transform->m_transform->SetPosition(0.0f, 3.0f, 10.0f);
         //Tigre
-        l_entityTiger->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
+        l_entityTiger->transform->m_transform->Move(0.0f, 1.0f, 0.0f);
         //Cube
-        l_entityCube->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
+        l_entityCube->transform->m_transform->Move(0.0f, 3.0f, 0.0f);
         l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
-        l_entityCube->transform->m_transform->Scaling(0.01f, 0.01f, 0.01f);
+        l_entityCube->transform->m_transform->ScalingUniforme(0.01f);
         //Skybox
         l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
         //Target
         l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
         l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
         l_entityTarget->transform->m_transform->RotateAngle( 90.0f,0.f,0.f);
+        //Ground
+        l_entityGround->transform->m_transform->ScalingUniforme(10.0f);
+        l_entityGround->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
+        l_entityGround->transform->m_transform->RotateAngle(180.0f, 0.f, 0.f);
+
     }
 
     void Game::Begin()
