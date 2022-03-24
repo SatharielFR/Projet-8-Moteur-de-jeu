@@ -18,7 +18,7 @@ void RailManager::CreateRails(Scene* scene)
         Entity* l_entityRails = new Entity();
         m_scene->AddEntity(l_entityRails);
         MeshComponent* l_meshComponentRails = new MeshComponent();
-        l_meshComponentRails->SetMeshAndTexturePath("..\\Ressources\\rail.x");
+        l_meshComponentRails->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
         l_entityRails->AddComponent(l_meshComponentRails);
         //Change Rail position
         l_entityRails->transform->m_transform->ScalingUniforme(m_fScale);
@@ -26,6 +26,9 @@ void RailManager::CreateRails(Scene* scene)
         {
             case (enumDirection::Forward) :
             {
+                m_nbPositionZ = m_nbPositionZ - m_Lenght;
+                l_entityRails->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
+                l_entityRails->transform->m_transform->RotateAngle(0, 90, 0);
                 break;
             }
             case (enumDirection::Backward):
@@ -41,9 +44,6 @@ void RailManager::CreateRails(Scene* scene)
                 break;
             }
         }
-
-        m_nbPositionZ = m_nbPositionZ - m_Lenght;
-        l_entityRails->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
         //Add to the list of rails
         m_listEntityRails.push_back(l_entityRails);
     }

@@ -14,9 +14,9 @@ class RailManager
 {
 	public :
 		#pragma region Variable
-			float m_fScale = 0.01;
-			float m_Width = 10.0f;
-			float m_Lenght = 10.0f;
+			float m_fScale = 0.02;
+			float m_Width = 4.0f;
+			float m_Lenght = 4.0f;
 			int m_nbPositionX = 0;
 			int m_nbPositionY = 0.01;
 			int m_nbPositionZ = 0;
