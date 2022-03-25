@@ -51,6 +51,20 @@ void Debug::ScreenLog(char charToLog[], float fDuration)
     ScreenLog(&l_string, fDuration);
 }
 
+void Debug::ScreenLog(D3DXVECTOR3 v, float fDuration)
+{
+    string l_stringX;
+    string l_stringY;
+    string l_stringZ;
+    l_stringX = std::to_string(v.x);
+    l_stringY = std::to_string(v.y);
+    l_stringZ = std::to_string(v.z);
+
+    string l_stringToPrint = "(" + l_stringX + ";" + l_stringY + ";" + l_stringZ + ")";
+
+    ScreenLog(&l_stringToPrint, fDuration);
+}
+
 void Debug::ScreenLog(string* strToLog, float fDuration)
 {
     //Set Time duration

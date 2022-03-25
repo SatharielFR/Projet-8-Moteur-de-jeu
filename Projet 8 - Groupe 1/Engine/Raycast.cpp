@@ -1,36 +1,39 @@
 #include "pch.h"
 #include "framework.h"
 
-bool Raycast::RayTriIntersect(D3DXVECTOR3* pPoint, D3DXVECTOR3* pDir, D3DXTRI3* pTri, D3DXVECTOR3* pIntersect)
+Raycast Raycast::CalcPickingRay(int mouse_x, int mouse_y)
 {
-    /*D3DXVECTOR3 ab = pTri->v2 - pTri->v1;
-    D3DXVECTOR3 ac = pTri->v3 - pTri->v1;
-    D3DXVECTOR3 qp = -*pDir;
-    D3DXVECTOR3 n;
-    D3DXVec3Cross(&n, &ab, &ac);
-    FLOAT d = D3DXVec3Dot(&qp, &n);
-    if (d <= 0.0f)
-        return false;
-    D3DXVECTOR3 ap = *pPoint - pTri->v1;
-    FLOAT t = D3DXVec3Dot(&ap, &n);
-    if (t < 0.0f)
-        return false;
-    D3DXVECTOR3 e;
-    D3DXVec3Cross(&e, &qp, &ap);
-    FLOAT v = D3DXVec3Dot(&ac, &e);
-    if (v<0.0f || v>d)
-        return false;
-    FLOAT w = -D3DXVec3Dot(&ab, &e);
-    if (w<0.0f || v + w>d)
-        return false;
-    if (pIntersect == NULL)
-        return true;
-    FLOAT ood = 1.0f / d;
-    t *= ood;
-    v *= ood;
-    w *= ood;
-    *pIntersect = pTri->v1 * (1.0f - v - w);
-    *pIntersect += pTri->v2 * v;
-    *pIntersect += pTri->v3 * w;*/
-    return true;
+    float px = 0.0f;
+    float py = 0.0f;
+
+    // Get Projection matrix
+    D3DXMATRIX proj;
+    Engine::d3ddev->GetTransform(D3DTS_PROJECTION, &proj);
+
+    px = (((2.0f * mouse_x) / SCREEN_WIDTH) - 1.0f) / proj(0, 0);
+    py = (((-2.0f * mouse_y) / SCREEN_HEIGHT) + 1.0f) / proj(1, 1);
+
+    Raycast ray;
+    ray.origin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+    ray.direction = D3DXVECTOR3(px, py, 1.0f);
+
+    return ray;
+}
+
+void Raycast::TransformRay(Raycast* ray, D3DXMATRIX* invertViewMatrix)
+{
+    // transform the ray's origin, w = 1.
+    D3DXVec3TransformCoord(
+        &ray->origin,
+        &ray->origin,
+        invertViewMatrix);
+
+    // transform the ray's direction, w = 0.
+    D3DXVec3TransformNormal(
+        &ray->direction,
+        &ray->direction,
+        invertViewMatrix);
+
+    // normalize the direction
+    D3DXVec3Normalize(&ray->direction, &ray->direction);
 }

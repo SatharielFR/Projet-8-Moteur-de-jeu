@@ -4,6 +4,11 @@ class D3DXTRI3;
 class Raycast
 {
 	public :
-		bool RayTriIntersect(D3DXVECTOR3* pPoint, D3DXVECTOR3* pDir, D3DXTRI3* pTri, D3DXVECTOR3* pIntersect);
+		D3DXVECTOR3 origin;
+		D3DXVECTOR3 direction;
+
+		Raycast CalcPickingRay(int mouse_x, int mouse_y);
+		void TransformRay(Raycast* ray, D3DXMATRIX* invertViewMatrix);
+
 };
 
