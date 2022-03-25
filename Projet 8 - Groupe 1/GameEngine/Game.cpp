@@ -209,7 +209,6 @@
                 // apply on the ray
                 ray.TransformRay(&ray, &viewInverse);
                 
-                l_entityTiger->transform->m_transform->SetPosition(ray.direction.x, ray.direction.y, ray.direction.z);
                 Debug::s_inst->ScreenLog(ray.direction);
             }
         }
