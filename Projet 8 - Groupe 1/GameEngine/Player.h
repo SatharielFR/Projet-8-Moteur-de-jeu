@@ -7,16 +7,17 @@ class Player
 
 		#pragma region publicVariables
 			Entity* l_player;
+			Scene* m_scene;
 			bool canShoot;
 			float cooldown;
 		#pragma endregion
 
 		#pragma region PublicFunctions
-			Player();
-			void Begin();
-			void Update();
-			void CreatePlayer();
-			void Shoot();
+			Player(Scene* scene);
+			void Begin(Scene* scene);
+			void Update(Scene* scene);
+			void CreatePlayer(Scene* scene);
+			void Shoot(Scene* scene);
 		#pragma endregion
 };
 

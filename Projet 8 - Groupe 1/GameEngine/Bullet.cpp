@@ -1,18 +1,20 @@
 #include "Bullet.h"
 
-Bullet::Bullet()
+Bullet::Bullet(Scene* scene)
 {
 	l_bullet = new Entity();
-	Begin();
+	Begin(scene);
 }
 
-void Bullet::Begin()
+void Bullet::Begin(Scene* scene)
 {
-	CreateBullet();
+	CreateBullet(scene);
 }
 
-void Bullet::CreateBullet()
+void Bullet::CreateBullet(Scene* scene)
 {
+	m_scene = scene;
+	m_scene->AddEntity(l_bullet);
 	MeshComponent* l_meshBullet = new MeshComponent();
 	l_meshBullet->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
 	l_bullet->AddComponent(l_meshBullet);

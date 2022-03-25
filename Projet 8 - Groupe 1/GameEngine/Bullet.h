@@ -7,12 +7,13 @@ class Bullet
 
 		#pragma region publicVariables
 			Entity* l_bullet;
+			Scene* m_scene;
 		#pragma endregion
 
 		#pragma region PublicFunctions
-			Bullet();
-			void Begin();
-			void CreateBullet();
+			Bullet(Scene* scene);
+			void Begin(Scene* scene);
+			void CreateBullet(Scene* scene);
 		#pragma endregion
 };
 

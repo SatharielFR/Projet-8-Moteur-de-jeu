@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "RailManager.h"
 #include "Cart.h"
+#include "Player.h"
 
 #pragma region GlobalVariables
     HINSTANCE hInst;                                // instance actuelle
@@ -148,6 +149,7 @@
 
         //Create Cart
         m_cart = new Cart(sceneMain);
+        m_player = new Player();
 
         //Start Game
         g_game->Begin();
@@ -189,10 +191,7 @@
         UpdateInputs();
         UpdateMouseInputs();
         UpdateCameraPosition(); 
-
-        if (GetKeyState(VK_LBUTTON) & 0x8000)
-        {
-        }
+        m_player->Update();
     }
 
     void Game::Close()

@@ -1,39 +1,43 @@
 #include "Player.h"
 #include "Bullet.h"
 
-Player::Player()
+Player::Player(Scene* scene)
 {
 	l_player = new Entity();
 	canShoot = true;
 	cooldown = 1.0f;
-	Begin();
+	Begin(scene);
 }
 
-void Player::Begin()
+void Player::Begin(Scene* scene)
 {
-	CreatePlayer();
+	CreatePlayer(scene);
 }
 
-void Player::Update()
+void Player::Update(Scene* scene)
 { 
     cooldown -= Timer::s_inst->GetDeltaTime();
     if (cooldown <= 0.f)
     {
         canShoot = true;
     }
+    Shoot(scene);
 }
 
 
-void Player::CreatePlayer()
+void Player::CreatePlayer(Scene* scene)
 {
+    m_scene = scene;
+    m_scene->AddEntity(l_player);
 	CameraComponent* l_playerCamera = new CameraComponent();
 	l_player->AddComponent(l_playerCamera);
 	MeshComponent* l_meshPlayer = new MeshComponent();
 	l_meshPlayer->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
 	l_player->AddComponent(l_meshPlayer);
+    l_player->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
 }
 
-void Player::Shoot()
+void Player::Shoot(Scene* scene)
 {
 	if (canShoot && cooldown <= 0.f)
 	{
@@ -59,7 +63,7 @@ void Player::Shoot()
             // apply on the ray
             ray.TransformRay(&ray, &viewInverse);
 
-            Bullet* projectile = new Bullet();
+            Bullet* projectile = new Bullet(scene);
             projectile->l_bullet->transform->m_transform->SetPosition(ray.direction.x, ray.direction.y, ray.direction.z);
         }
 
