@@ -25,9 +25,8 @@ void RailManager::CreateRails(Scene* scene)
         {
             case (enumDirection::Forward) :
             {
+                int fRandom = rand() % 3 + 1 ;
                 m_nbPositionZ = m_nbPositionZ - m_Lenght;
-                srand(Timer::s_inst->GetSystemTimeEx());
-                int fRandom = rand() % 3 + 1;
                 switch (fRandom)
                 {
                     case (1): //Straight forward
@@ -38,16 +37,19 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 90, 0);
                         m_currentDirection = enumDirection::Forward;
                         Debug::s_inst->ScreenLog("Straight forward", 1000);
+                       
                         break;
                     }
                     case (2): //Turn Right
                     {
+
                         l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
                         l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 90, 0);
                         m_currentDirection = enumDirection::Right;
                         Debug::s_inst->ScreenLog("Turn Right", 1000);
+                      
                         break;
                     }
                     case (3): //Turn Left
@@ -61,6 +63,7 @@ void RailManager::CreateRails(Scene* scene)
                         break;
                     }
                 } 
+         
             }
             case (enumDirection::Backward):
             {
@@ -68,49 +71,51 @@ void RailManager::CreateRails(Scene* scene)
             }
             case (enumDirection::Right):
             {
+
+               // srand(Timer::s_inst->GetSystemTimeEx());
+                int fRandom = rand() % 2 + 1 ;
                 m_nbPositionX = m_nbPositionX - m_Lenght;
-                srand(Timer::s_inst->GetSystemTimeEx());
-                int fRandom = rand() % 2 + 1;
                 switch (fRandom)
                 {
                     case (1): //Straight Right
                     {
+
                         l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
                         l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
                         m_currentDirection = enumDirection::Right;
                         Debug::s_inst->ScreenLog("Straight Right", 1000);
-                        break;
+                       
                     }
                     case (2): //Turn Left
                     {
                         l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
                         l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
-                        l_entityCurrentRail->transform->m_transform->RotateAngle(0, 90, 0);
+                        l_entityCurrentRail->transform->m_transform->RotateAngle(0, 270, 0);
                         m_currentDirection = enumDirection::Forward;
                         Debug::s_inst->ScreenLog("Turn Left", 1000);
-                        break;
                     }
                 }
+ 
+                break;
             }
             case (enumDirection::Left):
             {
-                m_nbPositionX = m_nbPositionX + m_Lenght;
-                srand(Timer::s_inst->GetSystemTimeEx());
                 int fRandom = rand() % 2 + 1;
+                m_nbPositionX = m_nbPositionX + m_Lenght;
                 switch (fRandom)
                 {
                     case (1): //Straight Left
                     {
+  
                         l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
                         l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
                         m_currentDirection = enumDirection::Left;
                         Debug::s_inst->ScreenLog("Straight Left", 1000);
-                        break;
                     }
                     case (2): //Turn Right
                     {
@@ -120,9 +125,9 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
                         m_currentDirection = enumDirection::Forward;
                         Debug::s_inst->ScreenLog("Turn Right", 1000);
-                        break;
                     }
                 }
+                break;
             }
         }
         //Add to the list of rails

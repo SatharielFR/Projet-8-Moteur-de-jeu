@@ -19,6 +19,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	class CameraComponent;
 	class RailManager;
 	class Cart;
+	class Player;
 #pragma endregion
 
 //Our main game class
@@ -31,6 +32,7 @@ class Game
 			bool m_bCursorIsLocked = true;
 			RailManager* m_railManager = nullptr;
 			Cart* m_cart = nullptr;
+			Player* m_player = nullptr;
 		#pragma endregion
 
 		#pragma region GamePointers
@@ -49,7 +51,7 @@ class Game
 		#pragma region PrivateFunctions
 			float _fForwardValue = 0;
 			float _fHorizontalValue = 0;
-			float _fSpeed = 0.05f;
+			float _fSpeed = 8.f;// 0.05f;
 			int _nbMouseX = 0;
 			int _nbMouseY = 0;
 			int l_MouseMovementX;
