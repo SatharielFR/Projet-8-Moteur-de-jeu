@@ -54,7 +54,7 @@ class Game
 			int _nbMouseY = 0;
 			int l_MouseMovementX;
 			int l_MouseMovementY;
-
+			float _fCameraOffset = 3.f;
 		#pragma endregion
 
 		#pragma region PrivateFunctions	

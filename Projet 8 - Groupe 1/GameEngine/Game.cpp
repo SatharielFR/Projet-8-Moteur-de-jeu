@@ -146,7 +146,7 @@
         m_railManager = new RailManager();
 
         //Create Cart
-        m_cart = new Cart(sceneMain);
+        m_cart = new Cart(sceneMain, m_railManager);
 
         //Start Game
         g_game->Begin();
@@ -185,6 +185,7 @@
     void Game::Update()
     {
         m_engine->Update();
+        m_cart->Update();
         UpdateInputs();
         UpdateMouseInputs();
         UpdateCameraPosition(); 
@@ -305,11 +306,17 @@
 
     void Game::UpdateCameraPosition()
     {
-        m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
-                                                        0 ,
-                                                        _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
-        
+        //Update Rotation
+        //m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),
+        //                                                0 ,
+        //                                                _fForwardValue * _fSpeed * Timer::s_inst->GetDeltaTime());
 
+
+        m_entityCamera->transform->m_transform->SetPosition(    m_cart->GetCartPosition().x, 
+                                                                m_cart->GetCartPosition().y + _fCameraOffset,
+                                                                m_cart->GetCartPosition().z);
+        
+        //Update Rotation
         m_entityCamera->transform->m_transform->ClearRotation();
 
         static float l_fYaw = 0.f;
