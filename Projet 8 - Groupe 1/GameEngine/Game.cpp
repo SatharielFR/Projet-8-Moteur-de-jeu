@@ -191,30 +191,6 @@
 
         if (GetKeyState(VK_LBUTTON) & 0x8000)
         {
-            // Get screen point
-            POINT point;
-            if (GetCursorPos(&point))
-            {
-                int iMouseX = point.x;
-                int iMouseY = point.y;
-
-                // Calculate the picking ray
-                Raycast ray = ray.CalcPickingRay(iMouseX, iMouseY);
-
-                // transform the ray from view space to world space
-                // get view matrix
-                D3DXMATRIX view;
-                Engine::d3ddev->GetTransform(D3DTS_VIEW, &view);
-
-                // inverse it
-                D3DXMATRIX viewInverse;
-                D3DXMatrixInverse(&viewInverse, 0, &view);
-
-                // apply on the ray
-                ray.TransformRay(&ray, &viewInverse);
-                
-                Debug::s_inst->ScreenLog(ray.direction);
-            }
         }
     }
 
