@@ -77,9 +77,9 @@ void Engine::InitD3D(HWND hWnd)
     InitGraphics();    // call the function to initialize the triangle
 
     d3ddev->SetRenderState(D3DRS_LIGHTING, FALSE);    // turn off the 3D lighting
-//    d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);    // both sides of the triangles
+    d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);    // both sides of the triangles
 //    d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);    // On the side of the triangles normal
-    d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);    // On the side of the triangles normal
+//    d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);    // On the side of the triangles normal
     d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
 }
 
