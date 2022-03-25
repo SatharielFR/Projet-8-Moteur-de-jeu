@@ -98,6 +98,7 @@
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
+        srand((int)Timer::s_inst->GetSystemTimeEx());
 
         //Create Cube For Test Purpose
         Entity* l_entitySkybox = new Entity();

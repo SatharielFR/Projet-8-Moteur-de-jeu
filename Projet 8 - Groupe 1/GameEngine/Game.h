@@ -49,7 +49,7 @@ class Game
 		#pragma region PrivateFunctions
 			float _fForwardValue = 0;
 			float _fHorizontalValue = 0;
-			float _fSpeed = 0.05f;
+			float _fSpeed = 8.f;// 0.05f;
 			int _nbMouseX = 0;
 			int _nbMouseY = 0;
 			int l_MouseMovementX;

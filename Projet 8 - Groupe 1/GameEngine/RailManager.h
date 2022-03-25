@@ -20,7 +20,7 @@ class RailManager
 			int m_nbPositionX = 0;
 			int m_nbPositionY = 0.01;
 			int m_nbPositionZ = 0;
-			int m_nbRailSize = 30;
+			int m_nbRailSize = 70;
 			enumDirection m_currentDirection = enumDirection::Forward;
 			list<Entity*> m_listEntityRails;
 			Scene* m_scene;

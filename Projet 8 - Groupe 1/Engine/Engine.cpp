@@ -161,9 +161,9 @@ void Engine::RenderFrame(void)
     }
 
     //test HUD HERE
-    string testString = "test ah ouais";
+  // string testString = "test ah ouais";
     //HUDInstance->DisplayInt(120, -1);
-    HUDInstance->DisplayText(&testString, -1);
+    //HUDInstance->DisplayText(&testString, -1);
 
     d3ddev->EndScene();
 
