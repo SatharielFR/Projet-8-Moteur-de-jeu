@@ -18,6 +18,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	class Entity;
 	class CameraComponent;
 	class RailManager;
+	class Cart;
 #pragma endregion
 
 //Our main game class
@@ -29,6 +30,7 @@ class Game
 			bool m_bIsRunning = false;
 			bool m_bCursorIsLocked = true;
 			RailManager* m_railManager = nullptr;
+			Cart* m_cart = nullptr;
 		#pragma endregion
 
 		#pragma region GamePointers

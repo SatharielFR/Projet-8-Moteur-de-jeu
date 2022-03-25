@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "RailManager.h"
+#include "Cart.h"
 
 #pragma region GlobalVariables
     HINSTANCE hInst;                                // instance actuelle
@@ -143,6 +144,9 @@
 
         //Create Rail
         m_railManager = new RailManager();
+
+        //Create Cart
+        m_cart = new Cart(sceneMain);
 
         //Start Game
         g_game->Begin();
