@@ -9,7 +9,7 @@ Cart::Cart(Scene* scene, RailManager* railManager)
     m_entityCart = new Entity();
     m_scene->AddEntity(m_entityCart);
     MeshComponent* l_meshComponentCart = new MeshComponent();
-    l_meshComponentCart->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
+    l_meshComponentCart->SetMeshAndTexturePath("..\\Ressources\\Cart.x");
     m_entityCart->AddComponent(l_meshComponentCart);
     //Init Cart position
     m_entityCart->transform->m_transform->Move(0.0f, 1.0f, 0.0f);
@@ -25,13 +25,16 @@ void Cart::Update()
 {
     if (m_currentRailEntity == nullptr)
     {
-        l_newLocation = new D3DXVECTOR3();
+        _vec3NewLocation = new D3DXVECTOR3();
+        _quatnewRotation = new D3DXQUATERNION();
         itRail = m_railManager->m_listEntityRails.begin();
         //Set reference to the first Rail of the list
         m_currentRailEntity = *itRail;
         _vec3LerpStart = &m_currentRailEntity->transform->m_transform->m_vPos;
+        _quatLerpStart = &m_currentRailEntity->transform->m_transform->m_qRot;
         m_currentRailEntity = *(++itRail);
-        _vec3LerpEnd= &m_currentRailEntity->transform->m_transform->m_vPos;
+        _vec3LerpEnd = &m_currentRailEntity->transform->m_transform->m_vPos;
+        _quatLerpEnd = &m_currentRailEntity->transform->m_transform->m_qRot;
     }
     else
     {
@@ -42,9 +45,11 @@ void Cart::Update()
             if (itRail != --m_railManager->m_listEntityRails.end())
             {
                 _vec3LerpStart = &m_currentRailEntity->transform->m_transform->m_vPos;
+                _quatLerpStart = &m_currentRailEntity->transform->m_transform->m_qRot;
                 ++itRail;
                 m_currentRailEntity = *(itRail);
                 _vec3LerpEnd = &m_currentRailEntity->transform->m_transform->m_vPos;
+                _quatLerpEnd = &m_currentRailEntity->transform->m_transform->m_qRot;
                 _fLerpValue = 0;
             }
         }
@@ -55,12 +60,16 @@ void Cart::Update()
     if (_fLerpValue > 1) { _fLerpValue = 1; }
 
     //Lerp Values
-    D3DXVec3Lerp(l_newLocation, _vec3LerpStart, _vec3LerpEnd, _fLerpValue);
+    D3DXVec3Lerp(_vec3NewLocation, _vec3LerpStart, _vec3LerpEnd, _fLerpValue);              //Postion
+    D3DXQuaternionSlerp(_quatnewRotation, _quatLerpStart, _quatLerpEnd, _fLerpValue);       //Rotation
 
     //Set New location
-    m_entityCart->transform->m_transform->SetPosition( l_newLocation->x,
-                                                       l_newLocation->y,
-                                                       l_newLocation->z);
+    m_entityCart->transform->m_transform->SetPosition( _vec3NewLocation->x,
+                                                       _vec3NewLocation->y,
+                                                       _vec3NewLocation->z);
+
+    //TODO : Set New rotation
+
 }
 
 D3DXVECTOR3 Cart::GetCartPosition()

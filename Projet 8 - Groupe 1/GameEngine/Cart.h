@@ -38,7 +38,10 @@ class Cart
 			float _fLerpValue = 0;
 			D3DXVECTOR3* _vec3LerpStart;
 			D3DXVECTOR3* _vec3LerpEnd;
-			D3DXVECTOR3* l_newLocation;
+			D3DXVECTOR3* _vec3NewLocation;
+			D3DXQUATERNION* _quatLerpStart;
+			D3DXQUATERNION* _quatLerpEnd;
+			D3DXQUATERNION* _quatnewRotation;
 		#pragma endregion
 
 		#pragma region Utility
