@@ -20,6 +20,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	class RailManager;
 	class Cart;
 	class Player;
+	class GameHud;
 #pragma endregion
 
 //Our main game class
@@ -33,6 +34,7 @@ class Game
 			RailManager* m_railManager = nullptr;
 			Cart* m_cart = nullptr;
 			Player* m_player = nullptr;
+			GameHud* m_gameHud = nullptr;
 		#pragma endregion
 
 		#pragma region GamePointers

@@ -55,6 +55,10 @@
 	#include "RigidbodyComponent.h"
 	#include "Raycast.h"
 	#include "HUD.h"
+	#include "HudElement.h"
+	#include "Text.h"
+	#include "Sprite.h"
+	#include "Button.h"
 #pragma endregion
 
 #pragma region GlobalVariables

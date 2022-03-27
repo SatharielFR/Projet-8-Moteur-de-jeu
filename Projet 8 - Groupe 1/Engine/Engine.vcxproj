@@ -163,6 +163,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="HudElement.h" />
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="Moteur.h" />
     <ClInclude Include="pch.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="HudElement.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

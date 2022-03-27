@@ -152,7 +152,7 @@ void Engine::RenderFrame(void)
 
         //draw HUD on top
         _HudToDraw = _sceneManager->GetCurrentScene()->GetHUD();
-        if (_HudToDraw != NULL) 
+        if (_HudToDraw != nullptr) 
         {
             _HudToDraw->UpdateHUD(d3ddev);
         }

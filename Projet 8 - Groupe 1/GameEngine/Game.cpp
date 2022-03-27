@@ -2,6 +2,7 @@
 #include "RailManager.h"
 #include "Cart.h"
 #include "Player.h"
+#include "GameHud.h"
 
 #pragma region GlobalVariables
     HINSTANCE hInst;                                // instance actuelle
@@ -105,8 +106,7 @@
         srand((int)Timer::s_inst->GetSystemTimeEx());
 
         //Create Game HUD
-        HUD* l_gameHUD = new HUD();
-        sceneMain->AddHUD(l_gameHUD);
+        m_gameHud = new GameHud(sceneMain);
 
         //Create Skybox
         Entity* l_entitySkybox = new Entity();
@@ -187,6 +187,7 @@
     {
         m_engine->Update();
         m_cart->Update();
+        m_gameHud->Update();
         UpdateInputs();
         UpdateMouseInputs();
         UpdateCameraTransfrom(); 
@@ -237,7 +238,7 @@
             //Unlock Mouse Position
             m_bCursorIsLocked = false;
 
-            PostQuitMessage(0); //Close window
+//            PostQuitMessage(0); //Close window
         }
     }
 

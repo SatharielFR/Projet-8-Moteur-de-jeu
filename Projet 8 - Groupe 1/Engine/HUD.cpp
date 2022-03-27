@@ -67,8 +67,13 @@
 		//device->SetTexture(0, g_lpTexture);
 		//device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-		// add images and text
+
 		//draw all images
+
 		//draw all texts
+		for (Text* currentText : _lstTexts)
+		{
+			currentText->Update();
+		}
 	}
 //}
