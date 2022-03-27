@@ -36,7 +36,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 90, 0);
                         m_currentDirection = enumDirection::Forward;
-                        Debug::s_inst->ScreenLog("Straight forward", 1000);
+//                        Debug::s_inst->ScreenLog("Straight forward", 1000);
                        
                         break;
                     }
@@ -48,7 +48,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 90, 0);
                         m_currentDirection = enumDirection::Right;
-                        Debug::s_inst->ScreenLog("Turn Right", 1000);
+ //                       Debug::s_inst->ScreenLog("Turn Right", 1000);
                       
                         break;
                     }
@@ -59,7 +59,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 180, 0);
                         m_currentDirection = enumDirection::Left;
-                        Debug::s_inst->ScreenLog("Turn Left",1000);
+//                        Debug::s_inst->ScreenLog("Turn Left",1000);
                         break;
                     }
                 } 
@@ -85,7 +85,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
                         m_currentDirection = enumDirection::Right;
-                        Debug::s_inst->ScreenLog("Straight Right", 1000);
+//                        Debug::s_inst->ScreenLog("Straight Right", 1000);
                        
                     }
                     case (2): //Turn Left
@@ -95,7 +95,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 270, 0);
                         m_currentDirection = enumDirection::Forward;
-                        Debug::s_inst->ScreenLog("Turn Left", 1000);
+ //                       Debug::s_inst->ScreenLog("Turn Left", 1000);
                     }
                 }
  
@@ -115,7 +115,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
                         m_currentDirection = enumDirection::Left;
-                        Debug::s_inst->ScreenLog("Straight Left", 1000);
+//                        Debug::s_inst->ScreenLog("Straight Left", 1000);
                     }
                     case (2): //Turn Right
                     {
@@ -124,7 +124,7 @@ void RailManager::CreateRails(Scene* scene)
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
                         m_currentDirection = enumDirection::Forward;
-                        Debug::s_inst->ScreenLog("Turn Right", 1000);
+//                        Debug::s_inst->ScreenLog("Turn Right", 1000);
                     }
                 }
                 break;
