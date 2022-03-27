@@ -21,14 +21,18 @@ class Transform
 			void Begin();
 			void Identity();
 			void UpdateMatrix();
+			//Rotation
+			void ClearRotation();
+			void SetRotationAngle(float pitch, float yaw, float roll);
 			void RotateAngle(float pitch, float yaw, float roll);
-			void Rotate(float pitch , float yaw, float roll);
-			void Scaling( float x, float y, float z);
-			void ScalingUniforme(float scale);
+			void Rotate(float pitch, float yaw, float roll);
+			//Position
 			void Move(float x, float y, float z);
 			void MoveUniforme(float dist);
 			void SetPosition(float x, float y, float z);
-			void ClearRotation();
+			//Scale
+			void Scaling(float x, float y, float z);
+			void ScalingUniforme(float scale);
 		#pragma endregion 
 };
 

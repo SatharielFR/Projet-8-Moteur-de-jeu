@@ -39,6 +39,12 @@ void Transform::UpdateMatrix()
 	m_matrix *= m_matPos;
 }
 
+void Transform::SetRotationAngle(float pitch, float yaw, float roll)
+{
+	ClearRotation();
+	RotateAngle(pitch, yaw, roll);
+}
+
 
 void Transform::RotateAngle(float pitch, float yaw, float roll)
 {
