@@ -42,6 +42,15 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
@@ -86,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

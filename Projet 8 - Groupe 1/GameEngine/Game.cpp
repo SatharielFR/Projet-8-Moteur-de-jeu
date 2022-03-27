@@ -84,7 +84,6 @@
 
     Game::Game(HWND hWnd)
     {
-
         g_game = this;
 
         //Create Engine
@@ -95,18 +94,27 @@
         m_engine->GetSceneMananger()->AddScene(sceneMenu);
 //        m_engine->GetSceneMananger()->OpenScene("Menu");
 
+        //Create Menu HUD
+        HUD* l_menuHUD = new HUD();
+        sceneMenu->AddHUD(l_menuHUD);
+
         //Create a map for the game
         Scene* sceneMain = new Scene("Main");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
         m_engine->GetSceneMananger()->OpenScene("Main");
         srand((int)Timer::s_inst->GetSystemTimeEx());
 
-        //Create Cube For Test Purpose
+        //Create Game HUD
+        HUD* l_gameHUD = new HUD();
+        sceneMain->AddHUD(l_gameHUD);
+
+        //Create Skybox
         Entity* l_entitySkybox = new Entity();
         sceneMain->AddEntity(l_entitySkybox);
         MeshComponent* l_meshComponentSkybox= new MeshComponent();
         l_meshComponentSkybox->SetMeshAndTexturePath("..\\Ressources\\Skybox.x");
         l_entitySkybox->AddComponent(l_meshComponentSkybox);
+        l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
 
         //Create Tiger For Test Purpose
         Entity* l_entityTiger = new Entity();
@@ -114,6 +122,7 @@
         MeshComponent* l_meshComponentTiger = new MeshComponent();
         l_meshComponentTiger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
         l_entityTiger->AddComponent(l_meshComponentTiger);
+        l_entityTiger->transform->m_transform->Move(0.0f, 1.0f, 0.0f);
 
         //Create Cube For Test Purpose
         Entity* l_entityCube = new Entity();
@@ -123,12 +132,16 @@
         l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
         l_entityCube->AddComponent(l_meshComponentCube);
         l_entityCube->AddComponent(l_rigidbodycomponent);
+        l_entityCube->transform->m_transform->Move(0.0f, 3.0f, 0.0f);
+        l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
+        l_entityCube->transform->m_transform->ScalingUniforme(0.01f);
 
         //Create Camera
         m_entityCamera = new Entity();
         sceneMain->AddEntity(m_entityCamera);
         m_cameraComponent = new CameraComponent();
         m_entityCamera->AddComponent(m_cameraComponent);
+        m_entityCamera->transform->m_transform->SetPosition(0.0f, 3.0f, 10.0f);
 
         //Create Target
         Entity* l_entityTarget= new Entity();
@@ -136,6 +149,9 @@
         MeshComponent* l_meshComponentTarget= new MeshComponent();
         l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
         l_entityTarget->AddComponent(l_meshComponentTarget);
+        l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
+        l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
+        l_entityTarget->transform->m_transform->RotateAngle(90.0f, 0.f, 0.f);
 
         //Create Ground
         Entity* l_entityGround = new Entity();
@@ -143,6 +159,9 @@
         MeshComponent* l_meshComponentGround = new MeshComponent();
         l_meshComponentGround->SetMeshAndTexturePath("..\\Ressources\\Plane.x");
         l_entityGround->AddComponent(l_meshComponentGround);
+        l_entityGround->transform->m_transform->ScalingUniforme(10.0f);
+        l_entityGround->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
+        l_entityGround->transform->m_transform->RotateAngle(180.0f, 0.f, 0.f);
 
         //Create Rail
         m_railManager = new RailManager();
@@ -155,28 +174,6 @@
 
         //Start Game
         g_game->Begin();
-
-        //!!! Faire les Mooves APRES le Begin !!!
-        
-        //Cam
-        m_entityCamera->transform->m_transform->SetPosition(0.0f, 3.0f, 10.0f);
-        //Tigre
-        l_entityTiger->transform->m_transform->Move(0.0f, 1.0f, 0.0f);
-        //Cube
-        l_entityCube->transform->m_transform->Move(0.0f, 3.0f, 0.0f);
-        l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
-        l_entityCube->transform->m_transform->ScalingUniforme(0.01f);
-        //Skybox
-        l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
-        //Target
-        l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
-        l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
-        l_entityTarget->transform->m_transform->RotateAngle( 90.0f,0.f,0.f);
-        //Ground
-        l_entityGround->transform->m_transform->ScalingUniforme(10.0f);
-        l_entityGround->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
-        l_entityGround->transform->m_transform->RotateAngle(180.0f, 0.f, 0.f);
-
     }
 
     void Game::Begin()
@@ -186,14 +183,13 @@
         m_railManager->CreateRails(m_engine->GetSceneMananger()->GetCurrentScene());
     }
 
-
     void Game::Update()
     {
         m_engine->Update();
         m_cart->Update();
         UpdateInputs();
         UpdateMouseInputs();
-        UpdateCameraPosition(); 
+        UpdateCameraTransfrom(); 
 //        m_player->Update();
     }
 
@@ -240,9 +236,10 @@
         {
             //Unlock Mouse Position
             m_bCursorIsLocked = false;
+
+            PostQuitMessage(0); //Close window
         }
     }
-
 
     void Game::UpdateMouseInputs()
     {
@@ -282,7 +279,7 @@
         }
     }
 
-    void Game::UpdateCameraPosition()
+    void Game::UpdateCameraTransfrom()
     {
         //Update Rotation
         //m_entityCamera->transform->m_transform->Move(   _fHorizontalValue * _fSpeed * Timer::s_inst->GetDeltaTime(),

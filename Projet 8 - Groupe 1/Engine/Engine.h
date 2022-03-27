@@ -5,6 +5,7 @@
 	class Component;
 	class Debug;
 	class Timer;
+	class HUD;
 #pragma endregion
 
 class Engine
@@ -40,6 +41,7 @@ class Engine
 			Debug* _debug = nullptr;
 			Timer* _timer = nullptr;
 			D3DCOLOR _ClearColor = D3DCOLOR_XRGB(49, 51, 54);
+			HUD* _HudToDraw = nullptr;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions

@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "framework.h"
+//using namespace Interface;
 
 LPDIRECT3DDEVICE9 Engine::d3ddev = nullptr;
 float Engine::gravity = 9.80f;
-HUD *HUDInstance;
 
 //Constructeur
 Engine::Engine(HWND hWnd)
@@ -27,10 +27,6 @@ void Engine::Begin()
     {
         _sceneManager->Begin();
     }
-
-    //initialize HUD
-    HUDInstance = new HUD();
-    HUDInstance->InitializeHUD(d3ddev);
 }
 
 void Engine::Update()
@@ -153,17 +149,18 @@ void Engine::RenderFrame(void)
                 }
             }
         }
-    }
 
-    //draw HUD on top
-    if (HUDInstance != NULL) {
-        HUDInstance->UpdateHUD(d3ddev);
+        //draw HUD on top
+        _HudToDraw = _sceneManager->GetCurrentScene()->GetHUD();
+        if (_HudToDraw != NULL) 
+        {
+            _HudToDraw->UpdateHUD(d3ddev);
+        }
+        //test HUD HERE
+        // string testString = "test ah ouais";
+        //HUDInstance->DisplayInt(120, -1);
+        //HUDInstance->DisplayText(&testString, -1);
     }
-
-    //test HUD HERE
-  // string testString = "test ah ouais";
-    //HUDInstance->DisplayInt(120, -1);
-    //HUDInstance->DisplayText(&testString, -1);
 
     d3ddev->EndScene();
 

@@ -34,7 +34,7 @@
 	#include <list>
 	#include<vector>
 	#include<strsafe.h>
-using namespace std;
+	using namespace std;
 	// Engine classes
 	//#include "pch.h"
 #pragma endregion

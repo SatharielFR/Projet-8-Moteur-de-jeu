@@ -62,6 +62,6 @@ class Game
 		#pragma region PrivateFunctions	
 			void UpdateInputs();
 			void UpdateMouseInputs();
-			void UpdateCameraPosition();
+			void UpdateCameraTransfrom();
 		#pragma endregion
 };
