@@ -25,25 +25,42 @@ void Cart::Update()
 {
     if (m_currentRailEntity == nullptr)
     {
+        l_newLocation = new D3DXVECTOR3();
         itRail = m_railManager->m_listEntityRails.begin();
         //Set reference to the first Rail of the list
+        m_currentRailEntity = *itRail;
+        _vec3LerpStart = &m_currentRailEntity->transform->m_transform->m_vPos;
         m_currentRailEntity = *(++itRail);
+        _vec3LerpEnd= &m_currentRailEntity->transform->m_transform->m_vPos;
     }
     else
     {
-        //Update the current Rail Target according to rail position in Z
-        if ( itRail != --m_railManager->m_listEntityRails.end())
+        //When the lerp is complete
+        if (_fLerpValue == 1)
         {
-            ++itRail;
+            //Set the new destination to the next rail
+            if (itRail != --m_railManager->m_listEntityRails.end())
+            {
+                _vec3LerpStart = &m_currentRailEntity->transform->m_transform->m_vPos;
+                ++itRail;
+                m_currentRailEntity = *(itRail);
+                _vec3LerpEnd = &m_currentRailEntity->transform->m_transform->m_vPos;
+                _fLerpValue = 0;
+            }
         }
-
-        m_currentRailEntity = *(itRail);
     }
 
-    //Move the Cart Transform
-    m_entityCart->transform->m_transform->SetPosition(  m_currentRailEntity->transform->m_transform->m_vPos.x,
-                                                        m_currentRailEntity->transform->m_transform->m_vPos.y,
-                                                        m_currentRailEntity->transform->m_transform->m_vPos.z   );
+    //Increase lerp Value
+    _fLerpValue = _fLerpValue + _fCartSpeed * Timer::s_inst->GetDeltaTime();
+    if (_fLerpValue > 1) { _fLerpValue = 1; }
+
+    //Lerp Values
+    D3DXVec3Lerp(l_newLocation, _vec3LerpStart, _vec3LerpEnd, _fLerpValue);
+
+    //Set New location
+    m_entityCart->transform->m_transform->SetPosition( l_newLocation->x,
+                                                       l_newLocation->y,
+                                                       l_newLocation->z);
 }
 
 D3DXVECTOR3 Cart::GetCartPosition()
