@@ -10,6 +10,7 @@ class Player
 			Scene* m_scene;
 			bool canShoot;
 			float cooldown;
+			int score;
 		#pragma endregion
 
 		#pragma region PublicFunctions

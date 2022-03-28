@@ -16,6 +16,7 @@ class Scene
 
 		#pragma region Accessors
 			void AddEntity(Entity* l_entityToAdd);
+			void DestroyEntity(Entity* l_entityToDestroy);
 			void AddHUD(HUD* l_HUDToAdd);
 			void SetSceneName(string strNewSceneName);
 			string GetSceneName() { return _strSceneName;}

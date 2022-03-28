@@ -3,6 +3,7 @@
 Bullet::Bullet(Scene* scene)
 {
 	l_bullet = new Entity();
+	damage = 1;
 	Begin(scene);
 }
 

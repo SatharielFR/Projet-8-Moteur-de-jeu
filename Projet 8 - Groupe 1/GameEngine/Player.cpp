@@ -6,6 +6,7 @@ Player::Player(Scene* scene)
 	l_player = new Entity();
 	canShoot = true;
 	cooldown = 1.0f;
+    score = 0;
 	Begin(scene);
 }
 
@@ -23,7 +24,6 @@ void Player::Update(Scene* scene)
     }
     if (GetKeyState(VK_LBUTTON) & 0x8000)
     {
-
         Shoot(scene);
     }
 }
@@ -33,7 +33,6 @@ void Player::CreatePlayer(Scene* scene)
 {
     m_scene = scene;
     m_scene->AddEntity(l_player);
-    l_player->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
     l_player->transform->m_transform->ScalingUniforme(0.01f);
 }
 
