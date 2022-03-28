@@ -10,7 +10,20 @@ GameHud::GameHud(Scene* scene, Engine* engine)
 
     //Colors
     _colorTitle     = D3DXCOLOR(255,255,255,255);
-    _colorContent   = D3DXCOLOR(0,0,255,255);
+    _colorContent   = D3DXCOLOR(255, 0, 242,255);
+
+    //Crosshair
+    _spriteCrosshair = new Sprite();
+    int l_nbCrosshairTextSize = 1024;
+    float l_fCrosshairScale = 0.06f;
+    _spriteCrosshair->SetTexture("Crosshair.bmp");
+    _spriteCrosshair->SetHeight(l_nbCrosshairTextSize);
+    _spriteCrosshair->SetWidth(l_nbCrosshairTextSize);
+    _spriteCrosshair->SetScale(l_fCrosshairScale);
+    _spriteCrosshair->SetPosition((SCREEN_WIDTH / 2) - (l_nbCrosshairTextSize*l_fCrosshairScale)/2 ,
+                                  (SCREEN_HEIGHT/ 2) - (l_nbCrosshairTextSize*l_fCrosshairScale)/2 );
+    _spriteCrosshair->SetSpriteColor(&_colorTitle);
+    l_gameHUD->AddSprite(_spriteCrosshair);
 
     //Label FPS Title
     _labelFpsTitle = new Text();

@@ -23,6 +23,7 @@ class GameHud
 		#pragma endregion
 
 		#pragma region Content
+			Sprite* _spriteCrosshair;
 			Text* _labelFpsTitle;
 			Text* _labelFpsContent;
 		#pragma endregion

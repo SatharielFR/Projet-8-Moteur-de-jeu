@@ -69,6 +69,10 @@
 
 
 		//draw all images
+		for (Sprite* currentSprite : _lstSprites)
+		{
+			currentSprite->Update();
+		}
 
 		//draw all texts
 		for (Text* currentText : _lstTexts)
