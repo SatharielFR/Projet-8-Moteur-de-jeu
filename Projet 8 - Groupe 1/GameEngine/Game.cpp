@@ -106,7 +106,7 @@
         srand((int)Timer::s_inst->GetSystemTimeEx());
 
         //Create Game HUD
-        m_gameHud = new GameHud(sceneMain);
+        m_gameHud = new GameHud(sceneMain, m_engine);
 
         //Create Skybox
         Entity* l_entitySkybox = new Entity();

@@ -1,7 +1,8 @@
 #include "GameHud.h"
 
-GameHud::GameHud(Scene* scene)
+GameHud::GameHud(Scene* scene, Engine* engine)
 {
+    _engine = engine;
     _scene = scene;
 
     HUD* l_gameHUD = new HUD();
@@ -31,6 +32,6 @@ GameHud::~GameHud()
 
 void GameHud::Update()
 {
-    string l_strFpsContent = to_string(Timer::s_inst->GetDeltaTime());
+    string l_strFpsContent = to_string(_engine->GetFps());
     _labelFpsContent->SetText(l_strFpsContent);
 }

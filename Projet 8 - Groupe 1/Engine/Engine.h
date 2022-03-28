@@ -27,6 +27,7 @@ class Engine
 			void Begin();
 			void Update();
 			void Close();
+			int GetFps() {return _nbFps;}
 		#pragma endregion 
 
 		#pragma region Accessors
@@ -42,12 +43,14 @@ class Engine
 			Timer* _timer = nullptr;
 			D3DCOLOR _ClearColor = D3DCOLOR_XRGB(49, 51, 54);
 			HUD* _HudToDraw = nullptr;
+			int _nbFps;
+			int _nbFpsCount;
+			float _fLastCheckFpsTime;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
 			void Init();
 			D3DMATERIAL9 CreateTestMaterial();
-
 		#pragma endregion 
 
 		#pragma region 3D Display

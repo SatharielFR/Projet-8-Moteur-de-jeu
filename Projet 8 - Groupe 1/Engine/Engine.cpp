@@ -19,6 +19,7 @@ void Engine::Init()
     _sceneManager = new SceneManager();
     _debug = new Debug(&d3ddev);
     _timer = new Timer();
+    _fLastCheckFpsTime = _timer->GetSystemTimeEx();
 }
 
 void Engine::Begin()
@@ -38,6 +39,18 @@ void Engine::Update()
         {
             //UpdatePhysique
             RenderFrame();
+            //Update FPS
+            if (_timer->GetSystemTimeEx() > _fLastCheckFpsTime + 1.0f)
+            {
+                _nbFps = _nbFpsCount;
+                _fLastCheckFpsTime = _timer->GetSystemTimeEx();
+                _nbFpsCount = 1;
+
+            }
+            else
+            {
+                _nbFpsCount++;
+            }
         }
     }
 }
@@ -156,10 +169,6 @@ void Engine::RenderFrame(void)
         {
             _HudToDraw->UpdateHUD(d3ddev);
         }
-        //test HUD HERE
-        // string testString = "test ah ouais";
-        //HUDInstance->DisplayInt(120, -1);
-        //HUDInstance->DisplayText(&testString, -1);
     }
 
     d3ddev->EndScene();

@@ -5,7 +5,7 @@ class GameHud
 {
 	public:
 		#pragma region PublicFunctions
-			GameHud(Scene* scene);
+			GameHud(Scene* scene, Engine* engine);
 			~GameHud();
 			void Update();
 		#pragma endregion
@@ -13,6 +13,7 @@ class GameHud
 
 	private: 
 		#pragma region RuntimeVariables
+			Engine* _engine;
 			Scene* _scene;
 		#pragma endregion
 
