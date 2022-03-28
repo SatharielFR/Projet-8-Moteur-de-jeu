@@ -57,6 +57,20 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 	}
 }
 
+void Scene::DestroyEntity(Entity* l_entityToDestroy)
+{
+	if (l_entityToDestroy == nullptr) { return; }
+
+	for (auto i = _listEntity.begin(); i != _listEntity.end(); i++)
+	{
+		if (*i == l_entityToDestroy)
+		{
+			delete *i;
+			_listEntity.erase(i);
+		}
+	}
+}
+
 void Scene::AddHUD(HUD* HUDToAdd) {
 	_sceneHUD = HUDToAdd;
 }

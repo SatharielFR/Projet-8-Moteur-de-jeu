@@ -170,7 +170,7 @@
         m_cart = new Cart(sceneMain, m_railManager);
 
         //Create Player
-//        m_player = new Player();
+        m_player = new Player(sceneMain);
 
         //Start Game
         g_game->Begin();
@@ -189,10 +189,13 @@
         m_engine->Update();
         m_cart->Update();
         m_gameHud->Update();
+        m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x, 
+                                                                m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
+                                                                m_cart->m_entityCart->transform->m_transform->m_vPos.z);
+        m_player->Update(m_engine->GetSceneMananger()->GetCurrentScene());
         UpdateInputs();
         UpdateMouseInputs();
         UpdateCameraTransfrom(); 
-//        m_player->Update();
     }
 
     void Game::Close()

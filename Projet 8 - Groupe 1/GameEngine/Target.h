@@ -1,20 +1,21 @@
 #pragma once
 #include "framework.h"
 
-class Bullet
+class Target
 {
 	public:
 
 		#pragma region publicVariables
-			Entity* l_bullet;
+			Entity* l_target;
 			Scene* m_scene;
-			int damage;
+			int life;
 		#pragma endregion
 
 		#pragma region PublicFunctions
-			Bullet(Scene* scene);
+			Target(Scene* scene);
 			void Begin(Scene* scene);
-			void CreateBullet(Scene* scene);
+			void CreateTarget(Scene* scene);
+			void Destroy(Scene* scene);
 		#pragma endregion
 };
 

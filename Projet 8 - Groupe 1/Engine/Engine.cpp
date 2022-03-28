@@ -3,7 +3,7 @@
 //using namespace Interface;
 
 LPDIRECT3DDEVICE9 Engine::d3ddev = nullptr;
-float Engine::gravity = 9.80f;
+float Engine::gravity = 9.8f;
 
 //Constructeur
 Engine::Engine(HWND hWnd)

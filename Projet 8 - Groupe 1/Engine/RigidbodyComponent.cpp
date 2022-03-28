@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "framework.h"
 
-//int RigidbodyComponent::s_type = 4;
+int RigidbodyComponent::s_type = 4;
 
 RigidbodyComponent::RigidbodyComponent()
 {
@@ -23,5 +23,5 @@ void RigidbodyComponent::Update()
 
 void RigidbodyComponent::AddForce(D3DXVECTOR3 force)
 {
-
+	velocity += force;
 }

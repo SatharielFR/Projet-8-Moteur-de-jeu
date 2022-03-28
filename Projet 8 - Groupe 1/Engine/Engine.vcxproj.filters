@@ -5,7 +5,6 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Texturing.cpp" />
-    <ClCompile Include="Raycast.cpp" />
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -60,7 +59,6 @@
     <ClInclude Include="Moteur.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Texturing.h" />
-    <ClInclude Include="Raycast.h" />
     <ClInclude Include="CameraComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
