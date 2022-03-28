@@ -21,7 +21,11 @@ void Player::Update(Scene* scene)
     {
         canShoot = true;
     }
-    Shoot(scene);
+    if (GetKeyState(VK_LBUTTON) & 0x8000)
+    {
+
+        Shoot(scene);
+    }
 }
 
 
@@ -29,45 +33,34 @@ void Player::CreatePlayer(Scene* scene)
 {
     m_scene = scene;
     m_scene->AddEntity(l_player);
-	CameraComponent* l_playerCamera = new CameraComponent();
-	l_player->AddComponent(l_playerCamera);
-	MeshComponent* l_meshPlayer = new MeshComponent();
-	l_meshPlayer->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
-	l_player->AddComponent(l_meshPlayer);
-    l_player->transform->m_transform->Move(0.0f, 0.0f, 0.0f);
+    l_player->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);
+    l_player->transform->m_transform->ScalingUniforme(0.01f);
 }
 
 void Player::Shoot(Scene* scene)
 {
-	if (canShoot && cooldown <= 0.f)
-	{
-        // Get screen point
-        POINT point;
-        if (GetCursorPos(&point))
+    list<Entity*> l_entities = scene->GetEntities();
+    for (Entity* l_currentEntity : l_entities)
+    {
+        CameraComponent* l_cameraComponent = (CameraComponent*)l_currentEntity->GetComponentByType<CameraComponent>();
+        if (l_cameraComponent != nullptr)
         {
-            int iMouseX = point.x;
-            int iMouseY = point.y;
+            if (canShoot && cooldown <= 0.f)
+            {
+                Bullet* projectile = new Bullet(scene);
+                projectile->l_bullet->transform->m_transform->SetPosition(l_cameraComponent->origin.x, l_cameraComponent->origin.y, l_cameraComponent->origin.z);
+                projectile->l_bullet->transform->m_transform->ScalingUniforme(0.01f);
+                RigidbodyComponent* l_bulletRigidbody = (RigidbodyComponent*)(projectile->l_bullet->GetComponentByType<RigidbodyComponent>());
+                if (l_bulletRigidbody != nullptr)
+                {
+                    D3DXVECTOR3 force = l_cameraComponent->direction;
+                    force *= 10.0f;
+                    l_bulletRigidbody->AddForce(force);
+                }
 
-            // Calculate the picking ray
-            Raycast ray = ray.CalcPickingRay(iMouseX, iMouseY);
-
-            // transform the ray from view space to world space
-            // get view matrix
-            D3DXMATRIX view;
-            Engine::d3ddev->GetTransform(D3DTS_VIEW, &view);
-
-            // inverse it
-            D3DXMATRIX viewInverse;
-            D3DXMatrixInverse(&viewInverse, 0, &view);
-
-            // apply on the ray
-            ray.TransformRay(&ray, &viewInverse);
-
-            Bullet* projectile = new Bullet(scene);
-            projectile->l_bullet->transform->m_transform->SetPosition(ray.direction.x, ray.direction.y, ray.direction.z);
+                canShoot = false;
+                cooldown = 1.0f;
+            }
         }
-
-        canShoot = false;
-        cooldown = 1.0f;
-	}
+    }
 }

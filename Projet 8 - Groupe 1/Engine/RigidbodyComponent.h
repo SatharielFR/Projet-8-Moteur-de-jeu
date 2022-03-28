@@ -3,13 +3,20 @@
 class RigidbodyComponent : public Component
 {
 	public :
-		D3DXVECTOR3 velocity;
-		bool useGravity;
-		float GravityStrengh;
 
-		RigidbodyComponent();
-		virtual void Begin() override;
-		virtual void Update() override;
-		void AddForce(D3DXVECTOR3 force);
+		#pragma region PublicVariables
+			static int s_type;
+			D3DXVECTOR3 velocity;
+			bool useGravity;
+			float GravityStrengh;
+		#pragma endregion
+
+		#pragma region PublicFunctions
+			RigidbodyComponent();
+			virtual void Begin() override;
+			virtual void Update() override;
+			virtual int GetType() { return s_type; }
+			void AddForce(D3DXVECTOR3 force);
+		#pragma endregion
 };
 

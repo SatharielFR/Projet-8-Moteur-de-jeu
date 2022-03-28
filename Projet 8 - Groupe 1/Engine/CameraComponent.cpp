@@ -23,12 +23,13 @@ void CameraComponent::Begin()
 void CameraComponent::Update()
 {
     Render();
+    CalcPickingRay();
 }
 
 
  void CameraComponent::Render()
 { 
-    Component::Render();
+   Component::Render();
 
    D3DXMATRIX l_matrixView;
    D3DXVECTOR3 lookAt = _entityParent->transform->m_transform->m_vDir + _entityParent->transform->m_transform->m_vPos;
@@ -36,10 +37,28 @@ void CameraComponent::Update()
                        &_entityParent->transform->m_transform->m_vPos,
                        &lookAt,
                        &_entityParent->transform->m_transform->m_vUp);
-   Engine::d3ddev->SetTransform(D3DTS_VIEW, &l_matrixView);
 
-    //Engine::d3ddev->SetTransform(D3DTS_VIEW, &_entityParent->transform->m_transform->m_matrix);    // set the view transform to matView
-    Engine::d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);
+   Engine::d3ddev->SetTransform(D3DTS_VIEW, &l_matrixView);
+   Engine::d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);
 }
+
+ void CameraComponent::CalcPickingRay()
+ {
+     D3DXMATRIX view;
+     Engine::d3ddev->GetTransform(D3DTS_VIEW, &view);
+
+     D3DXMATRIX viewInverse;
+     D3DXMatrixInverse(&viewInverse, NULL, &view);
+
+     origin.x = viewInverse._41;
+     origin.y = viewInverse._42;
+     origin.z = viewInverse._43;
+
+     direction.x = viewInverse._31;
+     direction.y = viewInverse._32;
+     direction.z = viewInverse._33;
+
+     D3DXVec3Normalize(&direction, &direction);
+ }
 
  
