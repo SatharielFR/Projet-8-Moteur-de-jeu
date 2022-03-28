@@ -16,13 +16,13 @@ GameHud::GameHud(Scene* scene, Engine* engine)
     _labelFpsTitle = new Text();
     _labelFpsTitle->SetTextColor(_colorTitle);
     _labelFpsTitle->SetText("FPS : ");
-    _labelFpsTitle->SetPosition(200, 20);
+    _labelFpsTitle->SetPosition(SCREEN_WIDTH-300, 20);
     l_gameHUD->AddText(_labelFpsTitle);
 
     //Label FPS Content
     _labelFpsContent = new Text();
     _labelFpsContent->SetTextColor(_colorContent);
-    _labelFpsContent->SetPosition(300, 20);
+    _labelFpsContent->SetPosition(SCREEN_WIDTH - 230, 20);
     l_gameHUD->AddText(_labelFpsContent);
 }
 
