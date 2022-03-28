@@ -3,10 +3,10 @@
 
 HudElement::HudElement()
 {
-    _nbPosX = 0;
-    _nbPosY = 0;
-    _nbWidth = SCREEN_WIDTH;
-    _nbHeight = SCREEN_HEIGHT;
+    //_nbWidth = SCREEN_WIDTH;
+    //_nbHeight = SCREEN_HEIGHT;
+    SetWidth(SCREEN_WIDTH);
+    SetHeight(SCREEN_HEIGHT);
 }
 
 HudElement::~HudElement()
@@ -21,24 +21,28 @@ void HudElement::Update()
 void HudElement::DrawRec()
 {
     //Create Rectangle to draw the font
-    _rec.left = _nbPosX;
-    _rec.top = _nbPosY;
-    _rec.right = _nbWidth;
-    _rec.bottom = _nbHeight;
+    _rec.left = _transform.m_vPos.x;
+    _rec.top = _transform.m_vPos.y;
+    _rec.right = _transform.m_vSca.x;
+    _rec.bottom = _transform.m_vSca.y;
 }
 
 void HudElement::SetPosition(int x, int y)
 {
-    _nbPosX = x;
-    _nbPosY = y;
+    _transform.SetPosition((float)x, (float)y, 0);
 }
 
-void HudElement::SetWidth(int nbWidth)
+void HudElement::SetWidth(float nbWidth)
 {
-    _nbWidth = nbWidth;
+    _transform.Scaling(nbWidth, _transform.m_vSca.y, _transform.m_vSca.z);
 }
 
-void HudElement::SetHeight(int nbHeight)
+void HudElement::SetHeight(float nbHeight)
 {
-    _nbHeight = nbHeight;
+    _transform.Scaling(_transform.m_vSca.x, nbHeight, _transform.m_vSca.z);
+}
+
+void HudElement::SetScale(float fScale)
+{
+    _transform.ScalingUniforme(fScale);
 }

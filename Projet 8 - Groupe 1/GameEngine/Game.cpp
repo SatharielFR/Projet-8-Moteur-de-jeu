@@ -27,9 +27,9 @@
         wc.hCursor = LoadCursor(NULL, IDC_ARROW);
         wc.lpszClassName = L"WindowClass";
         RegisterClassEx(&wc);
-        hWnd = CreateWindowEx(NULL, L"WindowClass", L"Projet 8 : Moteur de jeu",
-                              WS_OVERLAPPEDWINDOW, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
-                              NULL, NULL, hInstance, NULL);
+        hWnd = CreateWindowEx(  NULL, L"WindowClass", L"Projet 8 : Moteur de jeu",
+                                WS_POPUP, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
+                                NULL, NULL, hInstance, NULL);
         ShowWindow(hWnd, nCmdShow);
 
         // Set up and initialize Direct3D
@@ -178,6 +178,7 @@
 
     void Game::Begin()
     {
+        ShowCursor(false);
         Debug::s_inst->ScreenLog("Game Begin");        //Debug
         m_engine->Begin();
         m_railManager->CreateRails(m_engine->GetSceneMananger()->GetCurrentScene());
@@ -237,7 +238,9 @@
         {
             //Unlock Mouse Position
             m_bCursorIsLocked = false;
+            ShowCursor(true);
 
+            PostQuitMessage(WM_CLOSE);
 //            PostQuitMessage(0); //Close window
         }
     }

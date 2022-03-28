@@ -20,12 +20,22 @@ class GameHud
 		#pragma region Params
 			D3DXCOLOR _colorTitle;
 			D3DXCOLOR _colorContent;
+			D3DXCOLOR _colorFooter;
 		#pragma endregion
 
 		#pragma region Content
+			//Sprites
 			Sprite* _spriteCrosshair;
+			Sprite* _spriteFooter;
+			//FPS
 			Text* _labelFpsTitle;
 			Text* _labelFpsContent;
+			//Time
+			Text* _labelTimeTitle;
+			Text* _labelTimeContent;
+			//Score
+			Text* _labelScoreTitle;
+			Text* _labelScoreContent;
 		#pragma endregion
 };
 

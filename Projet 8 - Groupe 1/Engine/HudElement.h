@@ -8,9 +8,10 @@ class HudElement
 			~HudElement();
 			virtual void Update();
 			void DrawRec();
+			virtual void SetWidth(float nbWidth);
+			virtual void SetHeight(float nbHeight);
+			virtual void SetScale(float fScale);
 			void SetPosition(int x, int y);
-			void SetWidth(int nbWidth);
-			void SetHeight(int nbHeight);
 			//TODO : Set Anchor mode ( top-left, top,  top-right, left, center , right , bottom - left, ... )
 		#pragma endregion 
 
@@ -20,11 +21,8 @@ class HudElement
 			//Color
 			D3DCOLOR _colorRec = D3DXCOLOR(255, 240, 0, 1);
 			//Position
+			Transform _transform;
 			RECT _rec;
-			int _nbPosX;
-			int _nbPosY;
-			int _nbWidth;
-			int _nbHeight;
 		#pragma endregion
 };
 
