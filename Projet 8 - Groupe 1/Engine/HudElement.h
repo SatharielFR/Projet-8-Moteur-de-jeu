@@ -11,7 +11,7 @@ class HudElement
 			virtual void SetWidth(float nbWidth);
 			virtual void SetHeight(float nbHeight);
 			virtual void SetScale(float fScale);
-			void SetPosition(int x, int y);
+			virtual void SetPosition(int x, int y);
 			//TODO : Set Anchor mode ( top-left, top,  top-right, left, center , right , bottom - left, ... )
 		#pragma endregion 
 

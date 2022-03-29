@@ -61,7 +61,8 @@
 	}
 
 	//UNTESTED AND PROBABLY INCOMPLETE
-	void HUD::UpdateHUD(LPDIRECT3DDEVICE9 device) {
+	void HUD::UpdateHUD(LPDIRECT3DDEVICE9 device) 
+	{
 		//device->SetFVF(FVF_TLVERTEX);
 		//device->SetStreamSource(0, g_lpVBuffer, 0, sizeof(TLVERTEX));
 		//device->SetTexture(0, g_lpTexture);
@@ -72,6 +73,12 @@
 		for (Sprite* currentSprite : _lstSprites)
 		{
 			currentSprite->Update();
+		}
+
+		//draw all Button
+		for (Button* currentButton : _lstButtons)
+		{
+			currentButton->Update();
 		}
 
 		//draw all texts

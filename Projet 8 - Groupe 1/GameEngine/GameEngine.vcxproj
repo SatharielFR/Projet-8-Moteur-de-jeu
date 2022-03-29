@@ -150,9 +150,11 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameHud.h" />
+    <ClInclude Include="MenuHud.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RailManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SplashHud.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -161,8 +163,10 @@
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameHud.cpp" />
+    <ClCompile Include="MenuHud.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RailManager.cpp" />
+    <ClCompile Include="SplashHud.cpp" />
     <ClCompile Include="Target.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,7 @@ class Text : public HudElement
 			void DrawTextOnScreen();
 			void SetText(string strText);
 			void SetTextColor(D3DXCOLOR color);
+			void SetFontSize(float size);
 			//TODO : Set Font
 			//TODO : Set Font Size
 		#pragma endregion
@@ -21,7 +22,8 @@ class Text : public HudElement
 	private:
 		#pragma region PrivateVariables
 			//Text
-			ID3DXFont* _Font = 0; 					//Font variable*
+			ID3DXFont* _Font = 0;
+			float _fFontSize = 1;
 			string _strText;
 			std::wstring _wstrTextToDisplay;
 			//Color

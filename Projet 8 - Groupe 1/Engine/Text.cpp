@@ -17,8 +17,8 @@ void Text::InitFont()
     //Create font
     D3DXFONT_DESC fontDesc;
     ZeroMemory(&fontDesc, sizeof(D3DXFONT_DESC));
-    fontDesc.Height = 25;
-    fontDesc.Width = 12;
+    fontDesc.Height = 25 * _fFontSize;
+    fontDesc.Width = 12 * _fFontSize;
     fontDesc.Weight = 500;
     fontDesc.MipLevels = D3DX_DEFAULT;
     fontDesc.Italic = false;
@@ -63,4 +63,10 @@ void Text::SetText(string strText)
 void Text::SetTextColor(D3DXCOLOR color)
 {
     _colorText = color;
+}
+
+void Text::SetFontSize(float size)
+{
+    _fFontSize = size;
+    InitFont();
 }

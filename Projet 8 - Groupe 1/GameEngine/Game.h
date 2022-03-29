@@ -21,6 +21,8 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	class Cart;
 	class Player;
 	class GameHud;
+	class MenuHud;
+	class SplashHud;
 #pragma endregion
 
 //Our main game class
@@ -30,10 +32,12 @@ class Game
 		#pragma region publicVariables
 			Engine* m_engine = nullptr;
 			bool m_bIsRunning = false;
-			bool m_bCursorIsLocked = true;
+			bool m_bCursorIsLocked = false;
 			RailManager* m_railManager = nullptr;
 			Cart* m_cart = nullptr;
 			Player* m_player = nullptr;
+			SplashHud* m_splashHud = nullptr;
+			MenuHud* m_menuHud = nullptr;
 			GameHud* m_gameHud = nullptr;
 		#pragma endregion
 

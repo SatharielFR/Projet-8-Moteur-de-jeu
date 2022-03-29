@@ -3,6 +3,8 @@
 #include "Cart.h"
 #include "Player.h"
 #include "GameHud.h"
+#include "MenuHud.h"
+#include "SplashHud.h"
 
 #pragma region GlobalVariables
     HINSTANCE hInst;                                // instance actuelle
@@ -90,14 +92,21 @@
         //Create Engine
         m_engine = new Engine(hWnd);
 
+        //Create a map for the Splash
+        Scene* sceneSplash = new Scene("Splash");
+        m_engine->GetSceneMananger()->AddScene(sceneSplash);
+//        m_engine->GetSceneMananger()->OpenScene("Splash");
+
+        //Create Menu Splash
+        m_splashHud = new SplashHud(sceneSplash, m_engine);
+
         //Create a map for the Menu
         Scene* sceneMenu = new Scene("Menu");
         m_engine->GetSceneMananger()->AddScene(sceneMenu);
 //        m_engine->GetSceneMananger()->OpenScene("Menu");
 
         //Create Menu HUD
-        HUD* l_menuHUD = new HUD();
-        sceneMenu->AddHUD(l_menuHUD);
+        m_menuHud = new MenuHud(sceneMenu, m_engine);
 
         //Create a map for the game
         Scene* sceneMain = new Scene("Main");
@@ -179,7 +188,7 @@
     void Game::Begin()
     {
         ShowCursor(false);
-        Debug::s_inst->ScreenLog("Game Begin");        //Debug
+        Debug::s_inst->ScreenLog("Game Begin", 5.f);        //Debug
         m_engine->Begin();
         m_railManager->CreateRails(m_engine->GetSceneMananger()->GetCurrentScene());
     }
@@ -188,6 +197,8 @@
     {
         m_engine->Update();
         m_cart->Update();
+//        m_splashHud->Update();
+        m_menuHud->Update();
         m_gameHud->Update();
         m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x, 
                                                                 m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
