@@ -15,6 +15,7 @@ class Component
 			virtual void Update();
 			virtual void Render();
 			virtual int GetType() { return s_type; }
+			Entity* GetParent() { return _entityParent; }
 			void SetParent(Entity* newParentEntity);
 		#pragma endregion 
 

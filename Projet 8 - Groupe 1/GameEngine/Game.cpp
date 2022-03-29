@@ -125,26 +125,6 @@
         l_entitySkybox->AddComponent(l_meshComponentSkybox);
         l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
 
-        //Create Tiger For Test Purpose
-        Entity* l_entityTiger = new Entity();
-        sceneMain->AddEntity(l_entityTiger);
-        MeshComponent* l_meshComponentTiger = new MeshComponent();
-        l_meshComponentTiger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
-        l_entityTiger->AddComponent(l_meshComponentTiger);
-        l_entityTiger->transform->m_transform->Move(0.0f, 1.0f, 0.0f);
-
-        //Create Cube For Test Purpose
-        Entity* l_entityCube = new Entity();
-        sceneMain->AddEntity(l_entityCube);
-        MeshComponent* l_meshComponentCube = new MeshComponent();
-        RigidbodyComponent* l_rigidbodycomponent = new RigidbodyComponent();
-        l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
-        l_entityCube->AddComponent(l_meshComponentCube);
-        l_entityCube->AddComponent(l_rigidbodycomponent);
-        l_entityCube->transform->m_transform->Move(0.0f, 3.0f, 0.0f);
-        l_entityCube->transform->m_transform->Rotate(45.0f, 45.0f, 0.0f);
-        l_entityCube->transform->m_transform->ScalingUniforme(0.01f);
-
         //Create Camera
         m_entityCamera = new Entity();
         sceneMain->AddEntity(m_entityCamera);
@@ -158,6 +138,8 @@
         MeshComponent* l_meshComponentTarget= new MeshComponent();
         l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
         l_entityTarget->AddComponent(l_meshComponentTarget);
+        RigidbodyComponent* l_rigidbodyTarget = new RigidbodyComponent();
+        l_entityTarget->AddComponent(l_rigidbodyTarget);
         l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
         l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
         l_entityTarget->transform->m_transform->RotateAngle(90.0f, 0.f, 0.f);

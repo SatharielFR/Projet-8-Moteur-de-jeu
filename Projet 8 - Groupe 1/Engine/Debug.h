@@ -42,6 +42,7 @@ class Debug
 			void ScreenLog(string* strToLog, float fDuration = -1);
 			void ScreenLog(D3DXVECTOR3 vector, float fDuration = -1);
 			void ScreenLog(float f, float fDuration = -1);
+			void ScreenLog(bool b, float fDuration = -1);
 			void UpdateScreenLogs();
 		#pragma endregion
 

@@ -9,6 +9,7 @@ class RigidbodyComponent : public Component
 			D3DXVECTOR3 velocity;
 			bool useGravity;
 			float GravityStrengh;
+			int radius;
 		#pragma endregion
 
 		#pragma region PublicFunctions

@@ -2,6 +2,7 @@
 
 #pragma region ForwardDeclaration
 	class SceneManager;
+	class RigidbodyComponent;
 	class Component;
 	class Debug;
 	class Timer;
@@ -58,5 +59,7 @@ class Engine
 			void InitGraphics(void);    // 3D declarations
 			void RenderFrame(void);		// renders a single frame
 			void CleanD3D(void);		// closes Direct3D and releases memory
+			void CollisionCheck();
+			void Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2);
 		#pragma endregion
 };
