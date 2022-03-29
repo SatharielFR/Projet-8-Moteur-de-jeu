@@ -32,14 +32,14 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	//Sprite Title
 	_spriteTitle = new Sprite();
 	_spriteTitle->SetTexture("MenuBackground.bmp");
-	_spriteTitle->SetTextureSize(1920);
-	_spriteTitle->SetWidth(SCREEN_WIDTH);
-	_spriteTitle->SetHeight(SCREEN_HEIGHT);
+	_spriteTitle->SetTextureSize(1920, 1920);
+	_spriteTitle->SetWidth(REAL_SCREEN_WIDHT);
+	_spriteTitle->SetHeight(REAL_SCREEN_HEIGHT);
 	_spriteTitle->SetPosition(0, 0);
 	_spriteTitle->SetSpriteColor(&_colorContent);
 	l_menuHUD->AddSprite(_spriteTitle);
 
-	//Title
+	//Text Title
 	//_labelTitle = new Text();
 	//_labelTitle->SetFontSize(4);
 	//_labelTitle->SetTextColor(_colorTitle);
@@ -48,61 +48,68 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	//l_menuHUD->AddText(_labelTitle);
 
 	//Button text
-	_labelPlay = new Text();
-	_labelPlay->SetFontSize(3);
-	_labelPlay->SetTextColor(_colorContent);
-	_labelPlay->SetText("Play");
-	_labelPlay->SetPosition(SCREEN_WIDTH / 2 - 60, 400);
-	l_menuHUD->AddText(_labelPlay);
+	//_labelPlay = new Text();
+	//_labelPlay->SetFontSize(3);
+	//_labelPlay->SetTextColor(_colorContent);
+	//_labelPlay->SetText("Play");
+	//_labelPlay->SetPosition(SCREEN_WIDTH / 2 - 60, 400);
+	//l_menuHUD->AddText(_labelPlay);
 
-	_labelCredits = new Text();
-	_labelCredits->SetFontSize(3);
-	_labelCredits->SetTextColor(_colorContent);
-	_labelCredits->SetText("Credits");
-	_labelCredits->SetPosition(SCREEN_WIDTH / 2 - 115, 600);
-	l_menuHUD->AddText(_labelCredits);
+	//_labelCredits = new Text();
+	//_labelCredits->SetFontSize(3);
+	//_labelCredits->SetTextColor(_colorContent);
+	//_labelCredits->SetText("Credits");
+	//_labelCredits->SetPosition(SCREEN_WIDTH / 2 - 115, 600);
+	//l_menuHUD->AddText(_labelCredits);
 
-	_labelExit = new Text();
-	_labelExit->SetFontSize(3);
-	_labelExit->SetTextColor(_colorContent);
-	_labelExit->SetText("Exit");
-	_labelExit->SetPosition(SCREEN_WIDTH / 2 - 60, 800);
-	l_menuHUD->AddText(_labelExit);
+	//_labelExit = new Text();
+	//_labelExit->SetFontSize(3);
+	//_labelExit->SetTextColor(_colorContent);
+	//_labelExit->SetText("Exit");
+	//_labelExit->SetPosition(SCREEN_WIDTH / 2 - 60, 800);
+	//l_menuHUD->AddText(_labelExit);
 
-	//Button
-	float l_fButtonWidth = 400;
-	float l_fButtonHeight = 100;
-
+	//Buttons
+	float l_nbButtonScale = 1.5;
+	int l_nbSizePlayX = 1024 / 6 * l_nbButtonScale;
+	int l_nbSizePlayY = 342	 / 8 * l_nbButtonScale;
 	_buttonPlay = new Button(_engine);
-	//_buttonPlay->SetTexture("Default.bmp");
-	_buttonPlay->SetWidth(l_fButtonWidth);
-	_buttonPlay->SetHeight(l_fButtonHeight);
-	_buttonPlay->SetPosition(SCREEN_WIDTH / 2 - l_fButtonWidth, 350);
-	_buttonPlay->SetDefaultColor(&_colorButtonDefault);
-	_buttonPlay->SetHoverColor(&_colorButtonHover);
+	_buttonPlay->SetTexture("ButtonPlay-Default.bmp", "ButtonPlay-Hover.bmp");
+	_buttonPlay->SetTextureResolution(1024, 342);
+	_buttonPlay->SetWidth(l_nbSizePlayX);
+	_buttonPlay->SetHeight(l_nbSizePlayY);
+	_buttonPlay->SetPosition(REAL_SCREEN_WIDHT / 2 - l_nbSizePlayX, 400);
+	_buttonPlay->SetDefaultColor(&_colorContent);
+	_buttonPlay->SetHoverColor(&_colorContent);
 	l_menuHUD->AddButton(_buttonPlay);
 	_buttonPlay->m_OnClic = RUNNER(Play);	// Bind Function 
 
-
+	int l_CreditsWidth = 1324 / 8 * 0.8 *l_nbButtonScale;
+	int l_CreditsHeight = 342 / 6 * 0.8 *l_nbButtonScale;
 	_buttonCredits = new Button(_engine);
-	//_buttonPlay->SetTexture("Default.bmp");
-	_buttonCredits->SetWidth(l_fButtonWidth);
-	_buttonCredits->SetHeight(l_fButtonHeight);
-	_buttonCredits->SetPosition(SCREEN_WIDTH / 2 - l_fButtonWidth, 540);
-	_buttonCredits->SetDefaultColor(&_colorButtonDefault);
-	_buttonCredits->SetHoverColor(&_colorButtonHover);
+	_buttonCredits->SetTexture("ButtonCredits-Default.bmp", "ButtonCredits-Hover.bmp");
+	_buttonCredits->SetTextureResolution(1324, 342);
+	_buttonCredits->SetWidth(l_CreditsWidth);
+	_buttonCredits->SetHeight(l_CreditsHeight);
+	_buttonCredits->SetPosition(REAL_SCREEN_WIDHT / 2 - l_CreditsWidth - 25, 505);
+	_buttonCredits->SetDefaultColor(&_colorContent);
+	_buttonCredits->SetHoverColor(&_colorContent);
 	l_menuHUD->AddButton(_buttonCredits);
 	_buttonCredits->m_OnClic = RUNNER(Credits);	// Bind Function 
 
+	int l_nbSizeExitX = 1024 / 6 * l_nbButtonScale;
+	int l_nbSizeExitY = 342	 / 8 * l_nbButtonScale;
 	_buttonExit= new Button(_engine);
-	//_buttonPlay->SetTexture("Default.bmp");
-	_buttonExit->SetWidth(l_fButtonWidth);
-	_buttonExit->SetHeight(l_fButtonHeight);
-	_buttonExit->SetPosition(SCREEN_WIDTH / 2 - l_fButtonWidth, 720);
-	_buttonExit->SetDefaultColor(&_colorButtonDefault);
-	_buttonExit->SetHoverColor(&_colorButtonHover);
+	_buttonExit->SetTexture("ButtonExit-Default.bmp", "ButtonExit-Hover.bmp");
+	_buttonExit->SetTextureResolution(1024, 342);
+	_buttonExit->SetWidth(l_nbSizeExitX);
+	_buttonExit->SetHeight(l_nbSizeExitY);
+	_buttonExit->SetPosition(REAL_SCREEN_WIDHT / 2 - l_nbSizeExitX, 630);
+	_buttonExit->SetDefaultColor(&_colorContent);
+	_buttonExit->SetHoverColor(&_colorContent);
 	l_menuHUD->AddButton(_buttonExit);
 	_buttonExit->m_OnClic = RUNNER(Exit);	// Bind Function 
+
 }
 
 MenuHud::~MenuHud()
@@ -115,7 +122,6 @@ void MenuHud::Update()
 
 void MenuHud::Play()
 {	
-	Debug::s_inst->ScreenLog("Play");
 	_engine->GetSceneMananger()->OpenScene("Game");
 	_engine->GetSceneMananger()->CloseScene("Menu");
 	ShowCursor(false);

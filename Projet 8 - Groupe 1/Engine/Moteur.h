@@ -64,6 +64,10 @@
 	// define the screen resolution
 	#define SCREEN_WIDTH  1920
 	#define SCREEN_HEIGHT 1080
+	#define REAL_SCREEN_WIDHT	1800
+	#define REAL_SCREEN_HEIGHT	1020
+
+
 	#define MAX_LOADSTRING 100
 	//Struct for 3D
 	struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; static const DWORD FVF; };

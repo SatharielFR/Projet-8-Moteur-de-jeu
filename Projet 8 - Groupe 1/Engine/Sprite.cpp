@@ -7,6 +7,7 @@ Sprite::Sprite()
 	_d3ddev = &Engine::d3ddev;
     SetTexture("DefaultTexture.bmp");
     SetScale(1);
+    _vec2TextureSize = new D3DXVECTOR2(1024, 1024);
 }
 
 Sprite::~Sprite()
@@ -65,15 +66,15 @@ void Sprite::SetSpriteColor(D3DXCOLOR* color)
 
 void Sprite::SetWidth(float nbWidth)
 {
-    HudElement::SetWidth(nbWidth /_nbTextureSize);
+    HudElement::SetWidth(nbWidth /_vec2TextureSize->x);
 }
 
 void Sprite::SetHeight(float nbHeight)
 {
-    HudElement::SetHeight(nbHeight/ _nbTextureSize);
+    HudElement::SetHeight(nbHeight/ _vec2TextureSize->y);
 }
 
 void Sprite::SetScale(float fScale)
 {
-    HudElement::SetScale(fScale / _nbTextureSize);
+    HudElement::SetScale(fScale / _vec2TextureSize->x);
 }

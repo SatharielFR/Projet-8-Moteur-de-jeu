@@ -72,34 +72,45 @@ void Button::SetHoverColor(D3DXCOLOR* color)
 	_spriteHover->SetSpriteColor(_colorHover);
 }
 
+void Button::SetTexture(string a, string b)
+{
+	_spriteDefault->SetTexture(a);
+	_spriteHover->SetTexture(b);
+}
+
+void Button::SetTextureResolution(int x, int y)
+{
+	_spriteDefault->SetTextureSize(x,y);
+	_spriteHover->SetTextureSize(x, y);
+}
+
 bool Button::IsMouseHover()
 {
 	//Check if the mouse is hover the sprite
 	POINT point;
 	if (GetCursorPos(&point))
 	{
-
 		int l_nbAnchorPositionX = 0, l_nbAnchorPositionY = 0;
-
 		RECT rect;
-
 		if (GetWindowRect(_engine->getHwnd(), &rect))
 		{
 			l_nbAnchorPositionX = rect.left;
 			l_nbAnchorPositionY = rect.top;
 		}
-
-		int l_mousePosX = point.x ;//+ l_nbAnchorPositionX;
-		int l_mousePosY = point.y ;//+ l_nbAnchorPositionY;
+		//Add Window anchor position
+		int l_mousePosX = point.x + l_nbAnchorPositionX;
+		int l_mousePosY = point.y + l_nbAnchorPositionY;
 
 		bool bIsInX= false;
 		bool bIsInY= false;
 
-		if (l_mousePosX > _spriteDefault->GetPosition().x && l_mousePosX < _spriteDefault->GetPosition().x + _spriteDefault->GetTextureSize() *_spriteDefault->GetWidth() )
+		if (l_mousePosX > _spriteDefault->GetPosition().x /*+ (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth()) /2*/ &&
+			l_mousePosX < _spriteDefault->GetPosition().x + (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth())/* *2 */)
 		{
 			bIsInX = true;
 		}
-		if (l_mousePosY > _spriteDefault->GetPosition().y && l_mousePosY < _spriteDefault->GetPosition().y + _spriteDefault->GetTextureSize() * _spriteDefault->GetHeight())
+		if (l_mousePosY > _spriteDefault->GetPosition().y /*+ (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /2*/ &&
+			l_mousePosY < _spriteDefault->GetPosition().y + (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /**2*/ )
 		{
 			bIsInY = true;
 		}
