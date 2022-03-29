@@ -1,5 +1,6 @@
 #pragma once
 #include "framework.h"
+#include "Player.h"
 
 class Target
 {
@@ -14,8 +15,9 @@ class Target
 		#pragma region PublicFunctions
 			Target(Scene* scene);
 			void Begin(Scene* scene);
+			void Update(Scene* scene, Player* player);
 			void CreateTarget(Scene* scene);
-			void Destroy(Scene* scene);
+			void Destroy(Scene* scene, Player* player);
 		#pragma endregion
 };
 

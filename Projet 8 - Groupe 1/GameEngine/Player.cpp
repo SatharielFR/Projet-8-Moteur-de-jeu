@@ -56,7 +56,6 @@ void Player::Shoot(Scene* scene)
                     force *= 10.0f;
                     l_bulletRigidbody->AddForce(force);
                 }
-
                 canShoot = false;
                 cooldown = 1.0f;
             }

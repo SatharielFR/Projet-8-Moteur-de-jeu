@@ -78,6 +78,13 @@ void Debug::ScreenLog(string* strToLog, float fDuration)
     _lstLogs.push_back(l_pLogCurrent);
 }
 
+void Debug::ScreenLog(float f, float fDuration)
+{
+    string display;
+    display = std::to_string(f);
+    ScreenLog(&display, fDuration);
+}
+
 void Debug::UpdateScreenLogs()
 {
     //if there is at least one Log on the list, Print the last log added to the list
