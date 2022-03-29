@@ -11,14 +11,18 @@ RigidbodyComponent::RigidbodyComponent()
 void RigidbodyComponent::Begin()
 {
 	velocity = { 0.0, 0.0, 0.0 };
-	useGravity = true;
+	useGravity = false;
 	GravityStrengh = 1.f;
+	radius = 1;
 }
 
 void RigidbodyComponent::Update()
 {
-	velocity.y -= Engine::gravity * GravityStrengh * Timer::s_inst->GetDeltaTime();
-	_entityParent->transform->m_transform->Move(velocity.x, velocity.y, velocity.z);
+	if (useGravity == true)
+	{
+		velocity.y -= Engine::gravity * GravityStrengh * Timer::s_inst->GetDeltaTime();
+		_entityParent->transform->m_transform->Move(velocity.x, velocity.y, velocity.z);
+	}
 }
 
 void RigidbodyComponent::AddForce(D3DXVECTOR3 force)

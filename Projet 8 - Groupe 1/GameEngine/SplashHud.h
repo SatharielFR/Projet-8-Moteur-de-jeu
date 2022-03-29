@@ -20,7 +20,7 @@ class SplashHud
 	#pragma region Params
 		float _fSoundDelay = 2.5f;
 		bool _bSoundHasBeenPlayed = false;
-		float _fFadeSpeed = 0.00019f;
+		float _fFadeSpeed = 0.00028f;
 		float _fFadeValue;
 		D3DXCOLOR _colorBackground;
 		D3DXCOLOR _colorSplash;

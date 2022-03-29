@@ -50,6 +50,7 @@ void Player::Shoot(Scene* scene)
                 projectile->l_bullet->transform->m_transform->SetPosition(l_cameraComponent->origin.x, l_cameraComponent->origin.y, l_cameraComponent->origin.z);
                 projectile->l_bullet->transform->m_transform->ScalingUniforme(0.01f);
                 RigidbodyComponent* l_bulletRigidbody = (RigidbodyComponent*)(projectile->l_bullet->GetComponentByType<RigidbodyComponent>());
+                l_bulletRigidbody->useGravity = true;
                 if (l_bulletRigidbody != nullptr)
                 {
                     D3DXVECTOR3 force = l_cameraComponent->direction;

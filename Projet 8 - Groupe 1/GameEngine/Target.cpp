@@ -27,6 +27,9 @@ void Target::CreateTarget(Scene* scene)
 	MeshComponent* l_meshTarget = new MeshComponent();
 	l_meshTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
 	l_target->AddComponent(l_meshTarget);
+	RigidbodyComponent* l_rigidbodyTarget = new RigidbodyComponent();
+	l_rigidbodyTarget->useGravity = false;
+	l_target->AddComponent(l_rigidbodyTarget);
 }
 
 void Target::Destroy(Scene* scene, Player* player)

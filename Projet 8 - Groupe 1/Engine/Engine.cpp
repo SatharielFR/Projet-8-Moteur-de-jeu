@@ -53,6 +53,7 @@ void Engine::Update()
             }
         }
     }
+    CollisionCheck();
 }
 
 void Engine::Close()
@@ -182,6 +183,48 @@ void Engine::CleanD3D(void)
 {
     d3ddev->Release();    // close and release the 3D device
     d3d->Release();    // close and release Direct3D
+}
+
+void Engine::CollisionCheck()
+{
+    if (_sceneManager->GetCurrentScene())
+    {
+        //For each Components of the scene
+        list<Entity*> l_entities = _sceneManager->GetCurrentScene()->GetEntities();
+        for (auto i = l_entities.begin(); i != l_entities.end(); i++)
+        {
+            RigidbodyComponent* firstRb = (RigidbodyComponent*)(*i)->GetComponentByType<RigidbodyComponent>();
+
+            if (firstRb != nullptr)
+            {
+                for (auto j = l_entities.begin(); j != l_entities.end(); j++)
+                {
+                    RigidbodyComponent* secondRb = (RigidbodyComponent*)(*j)->GetComponentByType<RigidbodyComponent>();
+
+                    if (secondRb != nullptr && secondRb != firstRb)
+                    {
+                        Collision(firstRb, secondRb);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
+{
+    D3DXVECTOR3 pos1 = rb1->GetParent()->transform->m_transform->m_vPos;
+    D3DXVECTOR3 pos2 = rb2->GetParent()->transform->m_transform->m_vPos;
+
+    bool result = std::pow(pos2.x - pos1.x, 2) +
+                  std::pow(pos2.y - pos1.y, 2) +
+                  std::pow(pos2.z - pos1.z, 2)
+                  <= rb1->radius + rb2->radius;
+
+    if (result)
+    {
+        Debug::s_inst->ScreenLog("CC");
+    }
 }
 
 
