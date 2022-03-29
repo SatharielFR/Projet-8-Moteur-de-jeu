@@ -1,7 +1,9 @@
 
 #include "MenuHud.h"
-
 #include "GameHud.h"
+
+#define RUNNER(str)[=]{str();}
+
 
 MenuHud::MenuHud(Scene* scene, Engine* engine)
 {
@@ -12,16 +14,18 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_scene->AddHUD(l_menuHUD);
 
 	//Colors
-	_colorTitle =		D3DXCOLOR(1, 0.835, 0.101, 1);
-	_colorContent =		D3DXCOLOR(1,   1, 1, 1);
-	_colorBackground =	D3DXCOLOR(0.094, 0.309, 0.364, 1);
+	_colorTitle = D3DXCOLOR(1, 0.835, 0.101, 1);
+	_colorContent = D3DXCOLOR(1, 1, 1, 1);
+	_colorBackground = D3DXCOLOR(0.094, 0.309, 0.364, 1);
+	_colorButtonDefault = D3DXCOLOR(0, 0, 0, 0.2f);
+	_colorButtonHover = _colorTitle;
 
 	//Background
 	_spriteBackground = new Sprite();
 	_spriteBackground->SetTexture("Default.bmp");
 	_spriteBackground->SetWidth(SCREEN_WIDTH);
 	_spriteBackground->SetHeight(SCREEN_HEIGHT);
-	_spriteBackground->SetPosition(0,0);
+	_spriteBackground->SetPosition(0, 0);
 	_spriteBackground->SetSpriteColor(&_colorBackground);
 	l_menuHUD->AddSprite(_spriteBackground);
 
@@ -31,7 +35,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_labelTitle->SetFontSize(4);
 	_labelTitle->SetTextColor(_colorTitle);
 	_labelTitle->SetText("MineCart");
-	_labelTitle->SetPosition(SCREEN_WIDTH/2 - 200, 100);
+	_labelTitle->SetPosition(SCREEN_WIDTH / 2 - 200, 100);
 	l_menuHUD->AddText(_labelTitle);
 
 	//Button text
@@ -57,13 +61,39 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	l_menuHUD->AddText(_labelExit);
 
 	//Button
-	_buttonPlay = new Button();
+	float l_fButtonWidth = 400;
+	float l_fButtonHeight = 100;
+
+	_buttonPlay = new Button(_engine);
 	//_buttonPlay->SetTexture("Default.bmp");
-	//_buttonPlay->SetWidth(SCREEN_WIDTH);
-	//_buttonPlay->SetHeight(SCREEN_HEIGHT);
-	//_buttonPlay->SetPosition(0, 0);
-	//_buttonPlay->SetSpriteColor(&_colorBackground);
+	_buttonPlay->SetWidth(l_fButtonWidth);
+	_buttonPlay->SetHeight(l_fButtonHeight);
+	_buttonPlay->SetPosition(SCREEN_WIDTH / 2 - l_fButtonWidth, 350);
+	_buttonPlay->SetDefaultColor(&_colorButtonDefault);
+	_buttonPlay->SetHoverColor(&_colorButtonHover);
 	l_menuHUD->AddButton(_buttonPlay);
+	_buttonPlay->m_OnClic = RUNNER(Play);	// Bind Function 
+
+
+	_buttonCredits = new Button(_engine);
+	//_buttonPlay->SetTexture("Default.bmp");
+	_buttonCredits->SetWidth(l_fButtonWidth);
+	_buttonCredits->SetHeight(l_fButtonHeight);
+	_buttonCredits->SetPosition(SCREEN_WIDTH / 2 - l_fButtonWidth, 540);
+	_buttonCredits->SetDefaultColor(&_colorButtonDefault);
+	_buttonCredits->SetHoverColor(&_colorButtonHover);
+	l_menuHUD->AddButton(_buttonCredits);
+	_buttonCredits->m_OnClic = RUNNER(Credits);	// Bind Function 
+
+	_buttonExit= new Button(_engine);
+	//_buttonPlay->SetTexture("Default.bmp");
+	_buttonExit->SetWidth(l_fButtonWidth);
+	_buttonExit->SetHeight(l_fButtonHeight);
+	_buttonExit->SetPosition(SCREEN_WIDTH / 2 - l_fButtonWidth, 720);
+	_buttonExit->SetDefaultColor(&_colorButtonDefault);
+	_buttonExit->SetHoverColor(&_colorButtonHover);
+	l_menuHUD->AddButton(_buttonExit);
+	_buttonExit->m_OnClic = RUNNER(Exit);	// Bind Function 
 }
 
 MenuHud::~MenuHud()
@@ -72,4 +102,19 @@ MenuHud::~MenuHud()
 
 void MenuHud::Update()
 {
+}
+
+void MenuHud::Play()
+{
+	Debug::s_inst->ScreenLog("Play", 10.0f);
+	_engine->GetSceneMananger()->OpenScene("Game");
+}
+
+void MenuHud::Credits()
+{
+}
+
+void MenuHud::Exit()
+{
+	PostQuitMessage(WM_CLOSE);
 }

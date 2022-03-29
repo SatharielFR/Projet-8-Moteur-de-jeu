@@ -9,11 +9,15 @@ class Sprite : public HudElement
 			void Update();
 			void SetTexture(string strTextureName);
 			void DrawSprite();
+		#pragma endregion
+
+		#pragma region Accessors
 			void SetSpriteColor(D3DXCOLOR* color);
 			virtual void SetWidth(float nbWidth) override;
 			virtual void SetHeight(float nbHeight) override;
 			virtual void SetScale(float fScale) override;
 		#pragma endregion
+
 
 	private :
 		#pragma region PrivateVariables

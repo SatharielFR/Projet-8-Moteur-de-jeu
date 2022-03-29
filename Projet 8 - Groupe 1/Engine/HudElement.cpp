@@ -32,6 +32,21 @@ void HudElement::SetPosition(int x, int y)
     _transform.SetPosition((float)x, (float)y, 0);
 }
 
+D3DXVECTOR3 HudElement::GetPosition()
+{
+    return _transform.m_vPos;
+}
+
+float HudElement::GetWidth()
+{
+    return _transform.m_vSca.x;
+}
+
+float HudElement::GetHeight()
+{
+    return _transform.m_vSca.y;
+}
+
 void HudElement::SetWidth(float nbWidth)
 {
     _transform.Scaling(nbWidth, _transform.m_vSca.y, _transform.m_vSca.z);

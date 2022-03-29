@@ -95,7 +95,7 @@
         //Create a map for the Splash
         Scene* sceneSplash = new Scene("Splash");
         m_engine->GetSceneMananger()->AddScene(sceneSplash);
-//        m_engine->GetSceneMananger()->OpenScene("Splash");
+        m_engine->GetSceneMananger()->OpenScene("Splash");
 
         //Create Menu Splash
         m_splashHud = new SplashHud(sceneSplash, m_engine);
@@ -109,9 +109,9 @@
         m_menuHud = new MenuHud(sceneMenu, m_engine);
 
         //Create a map for the game
-        Scene* sceneMain = new Scene("Main");
+        Scene* sceneMain = new Scene("Game");
         m_engine->GetSceneMananger()->AddScene(sceneMain);
-        m_engine->GetSceneMananger()->OpenScene("Main");
+//        m_engine->GetSceneMananger()->OpenScene("Game");
         srand((int)Timer::s_inst->GetSystemTimeEx());
 
         //Create Game HUD
@@ -179,7 +179,7 @@
     {
         m_engine->Update();
         m_cart->Update();
-//        m_splashHud->Update();
+        m_splashHud->Update();
         m_menuHud->Update();
         m_gameHud->Update();
         m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x, 
