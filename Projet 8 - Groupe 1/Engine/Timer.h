@@ -24,6 +24,8 @@ class Timer
 			float m_fElapsedTime;
 			float m_fSysTime;
 			float m_fTime;
+			float m_fTimeLastFrame = 0;
+			float m_fDeltaTime = 0;
 		#pragma endregion 
 };
 
