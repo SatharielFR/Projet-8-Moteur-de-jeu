@@ -120,7 +120,6 @@ void Engine::RenderFrame(void)
 
     // Render Game
     _sceneManager->UpdateScene();
-    _debug->UpdateScreenLogs();
 
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
@@ -170,6 +169,8 @@ void Engine::RenderFrame(void)
             _HudToDraw->UpdateHUD(d3ddev);
         }
     }
+
+    _debug->UpdateScreenLogs(); //Draw ScreenLogs on top
 
     d3ddev->EndScene();
 

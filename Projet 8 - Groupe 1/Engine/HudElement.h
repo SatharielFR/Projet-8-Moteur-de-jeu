@@ -15,6 +15,12 @@ class HudElement
 			//TODO : Set Anchor mode ( top-left, top,  top-right, left, center , right , bottom - left, ... )
 		#pragma endregion 
 
+		#pragma region Accessors
+			D3DXVECTOR3 GetPosition();
+			float GetWidth();
+			float GetHeight();
+		#pragma endregion
+
 	protected:
 		#pragma region PrivateVariables
 			LPDIRECT3DDEVICE9* _d3ddev;				// the pointer to the device class
