@@ -30,6 +30,7 @@ class SplashHud
 	#pragma region Content
 		//Background
 		Sprite* _spriteBackground;
+		Sprite* _spriteSplashBackground;
 		Sprite* _spriteSplash;
 	#pragma endregion
 

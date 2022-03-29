@@ -24,6 +24,16 @@ SplashHud::SplashHud(Scene* scene, Engine* engine)
 	_spriteBackground->SetSpriteColor(&_colorBackground);
 	l_SplashHud->AddSprite(_spriteBackground);
 
+	//Background
+	_spriteSplashBackground = new Sprite();
+	_spriteSplashBackground->SetTexture("Splash-Background.bmp");
+	_spriteSplashBackground->SetTextureSize(1920, 1920);
+	_spriteSplashBackground->SetWidth(REAL_SCREEN_WIDTH);
+	_spriteSplashBackground->SetHeight(REAL_SCREEN_HEIGHT);
+	_spriteSplashBackground->SetPosition(0, 0);
+	_spriteSplashBackground->SetSpriteColor(new D3DXCOLOR(1, 1, 1, 1));
+	l_SplashHud->AddSprite(_spriteSplashBackground);
+
 	//Splash
 	_spriteSplash = new Sprite();
 	_spriteSplash->SetTexture("Splash.bmp");

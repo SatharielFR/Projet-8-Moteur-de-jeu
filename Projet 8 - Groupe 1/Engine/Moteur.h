@@ -64,7 +64,7 @@
 	// define the screen resolution
 	#define SCREEN_WIDTH  1920
 	#define SCREEN_HEIGHT 1080
-	#define REAL_SCREEN_WIDHT	1800
+	#define REAL_SCREEN_WIDTH	1800
 	#define REAL_SCREEN_HEIGHT	1020
 
 

@@ -33,7 +33,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_spriteTitle = new Sprite();
 	_spriteTitle->SetTexture("MenuBackground.bmp");
 	_spriteTitle->SetTextureSize(1920, 1920);
-	_spriteTitle->SetWidth(REAL_SCREEN_WIDHT);
+	_spriteTitle->SetWidth(REAL_SCREEN_WIDTH);
 	_spriteTitle->SetHeight(REAL_SCREEN_HEIGHT);
 	_spriteTitle->SetPosition(0, 0);
 	_spriteTitle->SetSpriteColor(&_colorContent);
@@ -78,7 +78,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_buttonPlay->SetTextureResolution(1024, 342);
 	_buttonPlay->SetWidth(l_nbSizePlayX);
 	_buttonPlay->SetHeight(l_nbSizePlayY);
-	_buttonPlay->SetPosition(REAL_SCREEN_WIDHT / 2 - l_nbSizePlayX, 400);
+	_buttonPlay->SetPosition(REAL_SCREEN_WIDTH / 2 - l_nbSizePlayX, 400);
 	_buttonPlay->SetDefaultColor(&_colorContent);
 	_buttonPlay->SetHoverColor(&_colorContent);
 	l_menuHUD->AddButton(_buttonPlay);
@@ -91,7 +91,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_buttonCredits->SetTextureResolution(1324, 342);
 	_buttonCredits->SetWidth(l_CreditsWidth);
 	_buttonCredits->SetHeight(l_CreditsHeight);
-	_buttonCredits->SetPosition(REAL_SCREEN_WIDHT / 2 - l_CreditsWidth - 25, 505);
+	_buttonCredits->SetPosition(REAL_SCREEN_WIDTH / 2 - l_CreditsWidth - 25, 505);
 	_buttonCredits->SetDefaultColor(&_colorContent);
 	_buttonCredits->SetHoverColor(&_colorContent);
 	l_menuHUD->AddButton(_buttonCredits);
@@ -104,7 +104,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_buttonExit->SetTextureResolution(1024, 342);
 	_buttonExit->SetWidth(l_nbSizeExitX);
 	_buttonExit->SetHeight(l_nbSizeExitY);
-	_buttonExit->SetPosition(REAL_SCREEN_WIDHT / 2 - l_nbSizeExitX, 630);
+	_buttonExit->SetPosition(REAL_SCREEN_WIDTH / 2 - l_nbSizeExitX, 630);
 	_buttonExit->SetDefaultColor(&_colorContent);
 	_buttonExit->SetHoverColor(&_colorContent);
 	l_menuHUD->AddButton(_buttonExit);
