@@ -16,7 +16,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	//Colors
 	_colorTitle = D3DXCOLOR(1, 0.835, 0.101, 1);
 	_colorContent = D3DXCOLOR(1, 1, 1, 1);
-	_colorBackground = D3DXCOLOR(0.094, 0.309, 0.364, 1);
+	_colorBackground = D3DXCOLOR(1, 1, 1, 1);
 	_colorButtonDefault = D3DXCOLOR(0, 0, 0, 0.2f);
 	_colorButtonHover = _colorTitle;
 
@@ -29,14 +29,23 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_spriteBackground->SetSpriteColor(&_colorBackground);
 	l_menuHUD->AddSprite(_spriteBackground);
 
+	//Sprite Title
+	_spriteTitle = new Sprite();
+	_spriteTitle->SetTexture("MenuBackground.bmp");
+	_spriteTitle->SetTextureSize(1920);
+	_spriteTitle->SetWidth(SCREEN_WIDTH);
+	_spriteTitle->SetHeight(SCREEN_HEIGHT);
+	_spriteTitle->SetPosition(0, 0);
+	_spriteTitle->SetSpriteColor(&_colorContent);
+	l_menuHUD->AddSprite(_spriteTitle);
 
 	//Title
-	_labelTitle = new Text();
-	_labelTitle->SetFontSize(4);
-	_labelTitle->SetTextColor(_colorTitle);
-	_labelTitle->SetText("MineCart");
-	_labelTitle->SetPosition(SCREEN_WIDTH / 2 - 200, 100);
-	l_menuHUD->AddText(_labelTitle);
+	//_labelTitle = new Text();
+	//_labelTitle->SetFontSize(4);
+	//_labelTitle->SetTextColor(_colorTitle);
+	//_labelTitle->SetText("MineCart");
+	//_labelTitle->SetPosition(SCREEN_WIDTH / 2 - 200, 100);
+	//l_menuHUD->AddText(_labelTitle);
 
 	//Button text
 	_labelPlay = new Text();
@@ -105,10 +114,11 @@ void MenuHud::Update()
 }
 
 void MenuHud::Play()
-{
-	Debug::s_inst->ScreenLog("Play", 10.0f);
+{	
+	Debug::s_inst->ScreenLog("Play");
 	_engine->GetSceneMananger()->OpenScene("Game");
-	//_engine->GetSceneMananger()->GetSceneByName("Game")->m_bHasStarted = true;
+	_engine->GetSceneMananger()->CloseScene("Menu");
+	ShowCursor(false);
 }
 
 void MenuHud::Credits()

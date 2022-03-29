@@ -65,15 +65,15 @@ void Sprite::SetSpriteColor(D3DXCOLOR* color)
 
 void Sprite::SetWidth(float nbWidth)
 {
-    HudElement::SetWidth(nbWidth /TEXTURE_SIZE);
+    HudElement::SetWidth(nbWidth /_nbTextureSize);
 }
 
 void Sprite::SetHeight(float nbHeight)
 {
-    HudElement::SetHeight(nbHeight/ TEXTURE_SIZE);
+    HudElement::SetHeight(nbHeight/ _nbTextureSize);
 }
 
 void Sprite::SetScale(float fScale)
 {
-    HudElement::SetScale(fScale / TEXTURE_SIZE);
+    HudElement::SetScale(fScale / _nbTextureSize);
 }

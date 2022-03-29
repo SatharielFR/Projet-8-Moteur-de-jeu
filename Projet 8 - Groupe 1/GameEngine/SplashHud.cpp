@@ -13,7 +13,7 @@ SplashHud::SplashHud(Scene* scene, Engine* engine)
     //Colors
 	_fFadeValue = 0;
     _colorBackground = D3DXCOLOR(0.1, 0.1, 0.1, 0);
-    _colorSplash = D3DXCOLOR(1, 1, 1, 1);
+    _colorSplash = D3DXCOLOR(1, 1, 1, 0);
 
 	//Background
 	_spriteBackground = new Sprite();
@@ -40,22 +40,21 @@ SplashHud::~SplashHud()
 
 void SplashHud::Update()
 {
-	if (_fFadeValue < 1)
+	if (_fFadeValue < 1.0f)
 	{
-		_fFadeValue = _fFadeValue + _fFadeSpeed * Timer::s_inst->GetDeltaTime();
+		_fFadeValue = (Timer::s_inst->GetSystemTimeEx()  / _fFadeDuration);
 	}
-	else if (_fFadeValue > 1)
+	else if (_fFadeValue >= 1.0f)
 	{
-		_fFadeValue = 1;
-		_engine->GetSceneMananger()->OpenScene("Menu");
 		ShowCursor(true);
+		_engine->GetSceneMananger()->OpenScene("Menu");
+		_engine->GetSceneMananger()->CloseScene("Splash");
 	}
 
 	if (!_bSoundHasBeenPlayed && Timer::s_inst->GetSystemTimeEx() > _fSoundDelay)
 	{
 		//Sound
-		PlaySound(TEXT("..\\Ressources\\TigerRoar.wav"), NULL, SND_FILENAME | SND_ASYNC);// - the correct code
-
+		PlaySound(TEXT("..\\Ressources\\TigerRoar.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		_bSoundHasBeenPlayed = true;
 	}
 

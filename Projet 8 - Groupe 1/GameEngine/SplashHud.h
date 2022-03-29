@@ -22,6 +22,7 @@ class SplashHud
 		bool _bSoundHasBeenPlayed = false;
 		float _fFadeSpeed;
 		float _fFadeValue;
+		float _fFadeDuration = 4.0f;
 		D3DXCOLOR _colorBackground;
 		D3DXCOLOR _colorSplash;
 	#pragma endregion

@@ -65,7 +65,6 @@
 	#define SCREEN_WIDTH  1920
 	#define SCREEN_HEIGHT 1080
 	#define MAX_LOADSTRING 100
-	#define TEXTURE_SIZE 1024.0f
 	//Struct for 3D
 	struct CUSTOMVERTEX { FLOAT X, Y, Z; DWORD COLOR; static const DWORD FVF; };
 	#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_DIFFUSE)

@@ -13,6 +13,7 @@ public :
 		SceneManager();
 		void AddScene(Scene* sceneToAdd);
 		void OpenScene(string strSceneName);
+		void CloseScene(string strSceneName);
 		void UpdateScene();
 		void Begin();
 	#pragma endregion

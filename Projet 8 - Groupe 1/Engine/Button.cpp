@@ -3,8 +3,6 @@
 
 Button::Button(Engine* engine)
 {
-	ShowCursor(true); //to remove
-
 	_engine = engine;
 	_d3ddev = &Engine::d3ddev;
 	SetScale(1);
@@ -97,11 +95,11 @@ bool Button::IsMouseHover()
 		bool bIsInX= false;
 		bool bIsInY= false;
 
-		if (l_mousePosX > _spriteDefault->GetPosition().x && l_mousePosX < _spriteDefault->GetPosition().x + TEXTURE_SIZE*_spriteDefault->GetWidth() )
+		if (l_mousePosX > _spriteDefault->GetPosition().x && l_mousePosX < _spriteDefault->GetPosition().x + _spriteDefault->GetTextureSize() *_spriteDefault->GetWidth() )
 		{
 			bIsInX = true;
 		}
-		if (l_mousePosY > _spriteDefault->GetPosition().y && l_mousePosY < _spriteDefault->GetPosition().y + TEXTURE_SIZE * _spriteDefault->GetHeight())
+		if (l_mousePosY > _spriteDefault->GetPosition().y && l_mousePosY < _spriteDefault->GetPosition().y + _spriteDefault->GetTextureSize() * _spriteDefault->GetHeight())
 		{
 			bIsInY = true;
 		}

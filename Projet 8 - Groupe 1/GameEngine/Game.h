@@ -44,7 +44,7 @@ class Game
 		#pragma region GamePointers
 			Entity* m_entityCamera;
 			CameraComponent* m_cameraComponent;
-			Scene* m_sceneMain;
+			Scene* m_sceneGame;
 		#pragma endregion
 
 		#pragma region PublicFunctions

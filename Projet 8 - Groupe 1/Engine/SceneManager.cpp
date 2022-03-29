@@ -17,7 +17,18 @@ void SceneManager::OpenScene(string strSceneName)
 		if (currentScene->GetSceneName() == strSceneName)
 		{
 			_currentScene = currentScene;
-			_currentScene->SetHasStarted(true);
+			_currentScene->SetIsRunning(true);
+		}
+	}
+}
+
+void SceneManager::CloseScene(string strSceneName)
+{
+	for (Scene* currentScene : _lstScenes)
+	{
+		if (currentScene->GetSceneName() == strSceneName)
+		{
+			currentScene->SetIsRunning(false);
 		}
 	}
 }

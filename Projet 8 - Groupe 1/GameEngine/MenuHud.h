@@ -28,6 +28,7 @@ class MenuHud
 	#pragma region Content
 		//Background
 		Sprite* _spriteBackground;
+		Sprite* _spriteTitle;
 		//Title
 		Text* _labelTitle;
 		//Buttons text
