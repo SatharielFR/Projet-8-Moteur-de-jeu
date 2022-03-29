@@ -57,8 +57,8 @@ bool Timer::UpdateTime()
     if (elapsedSysTime < 0.005f) // 200 fps max
         return false;
     m_fSysTime = newSysTime;
-    //if (elapsedSysTime > 0.04f) // 25 fps min
-    //    elapsedSysTime = 0.04f;
+    if (elapsedSysTime > 0.04f) // 25 fps min
+        elapsedSysTime = 0.04f;
     // App time
     m_fElapsedTime = elapsedSysTime;
     m_fTime += m_fElapsedTime;

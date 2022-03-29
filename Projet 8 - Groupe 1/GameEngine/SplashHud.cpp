@@ -8,6 +8,8 @@ SplashHud::SplashHud(Scene* scene, Engine* engine)
     HUD* l_SplashHud = new HUD();
     _scene->AddHUD(l_SplashHud);
 
+	_fFadeSpeed = 0.0002f;
+
     //Colors
 	_fFadeValue = 0;
     _colorBackground = D3DXCOLOR(0.1, 0.1, 0.1, 0);
