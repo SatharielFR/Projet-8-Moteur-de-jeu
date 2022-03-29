@@ -19,8 +19,6 @@ Timer::Timer()
 
 void Timer::InitSystemTime()
 {
-    m_initTime = 8.0f;
-    timeGetTime();
 	m_initTime = timeGetTime() / 1000.0f;
 	m_isPerformanceTimer = false;
     m_frequency = 0.0f;
@@ -65,15 +63,10 @@ bool Timer::UpdateTime()
     m_fElapsedTime = elapsedSysTime;
     m_fTime += m_fElapsedTime;
 
-    //Update DeltaTime
-    m_fDeltaTime = GetSystemTimeEx() - m_fTimeLastFrame;
-    m_fTimeLastFrame = GetSystemTimeEx();
-
     return true;
 }
 
 float Timer::GetDeltaTime()
 {
-//    return m_fElapsedTime; //old
-    return m_fDeltaTime;
+    return m_fElapsedTime;
 }
