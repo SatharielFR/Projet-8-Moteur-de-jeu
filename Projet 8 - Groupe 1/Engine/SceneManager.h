@@ -18,6 +18,7 @@ public :
 	#pragma endregion
 
 	#pragma region Accessors
+		Scene* GetSceneByName(string strSceneName);
 		Scene* GetCurrentScene() { return _currentScene;}
 		list<MeshComponent*> GetMeshComponents();
 	#pragma endregion

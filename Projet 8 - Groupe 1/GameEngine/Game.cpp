@@ -109,17 +109,17 @@
         m_menuHud = new MenuHud(sceneMenu, m_engine);
 
         //Create a map for the game
-        Scene* sceneMain = new Scene("Game");
-        m_engine->GetSceneMananger()->AddScene(sceneMain);
+        m_sceneMain = new Scene("Game");
+        m_engine->GetSceneMananger()->AddScene(m_sceneMain);
 //        m_engine->GetSceneMananger()->OpenScene("Game");
         srand((int)Timer::s_inst->GetSystemTimeEx());
 
         //Create Game HUD
-        m_gameHud = new GameHud(sceneMain, m_engine);
+        m_gameHud = new GameHud(m_sceneMain, m_engine);
 
         //Create Skybox
         Entity* l_entitySkybox = new Entity();
-        sceneMain->AddEntity(l_entitySkybox);
+        m_sceneMain->AddEntity(l_entitySkybox);
         MeshComponent* l_meshComponentSkybox= new MeshComponent();
         l_meshComponentSkybox->SetMeshAndTexturePath("..\\Ressources\\Skybox.x");
         l_entitySkybox->AddComponent(l_meshComponentSkybox);
@@ -127,7 +127,7 @@
 
         //Create Tiger For Test Purpose
         Entity* l_entityTiger = new Entity();
-        sceneMain->AddEntity(l_entityTiger);
+        m_sceneMain->AddEntity(l_entityTiger);
         MeshComponent* l_meshComponentTiger = new MeshComponent();
         l_meshComponentTiger->SetMeshAndTexturePath("..\\Ressources\\Tiger.x");
         l_entityTiger->AddComponent(l_meshComponentTiger);
@@ -135,7 +135,7 @@
 
         //Create Cube For Test Purpose
         Entity* l_entityCube = new Entity();
-        sceneMain->AddEntity(l_entityCube);
+        m_sceneMain->AddEntity(l_entityCube);
         MeshComponent* l_meshComponentCube = new MeshComponent();
         RigidbodyComponent* l_rigidbodycomponent = new RigidbodyComponent();
         l_meshComponentCube->SetMeshAndTexturePath("..\\Ressources\\Cube.x");
@@ -147,14 +147,14 @@
 
         //Create Camera
         m_entityCamera = new Entity();
-        sceneMain->AddEntity(m_entityCamera);
+        m_sceneMain->AddEntity(m_entityCamera);
         m_cameraComponent = new CameraComponent();
         m_entityCamera->AddComponent(m_cameraComponent);
         m_entityCamera->transform->m_transform->SetPosition(0.0f, 3.0f, 10.0f);
 
         //Create Target
         Entity* l_entityTarget= new Entity();
-        sceneMain->AddEntity(l_entityTarget);
+        m_sceneMain->AddEntity(l_entityTarget);
         MeshComponent* l_meshComponentTarget= new MeshComponent();
         l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
         l_entityTarget->AddComponent(l_meshComponentTarget);
@@ -164,7 +164,7 @@
 
         //Create Ground
         Entity* l_entityGround = new Entity();
-        sceneMain->AddEntity(l_entityGround);
+        m_sceneMain->AddEntity(l_entityGround);
         MeshComponent* l_meshComponentGround = new MeshComponent();
         l_meshComponentGround->SetMeshAndTexturePath("..\\Ressources\\Plane.x");
         l_entityGround->AddComponent(l_meshComponentGround);
@@ -176,10 +176,10 @@
         m_railManager = new RailManager();
 
         //Create Cart
-        m_cart = new Cart(sceneMain, m_railManager);
+        m_cart = new Cart(m_sceneMain, m_railManager);
 
         //Create Player
-        m_player = new Player(sceneMain);
+        m_player = new Player(m_sceneMain);
 
         //Start Game
         g_game->Begin();
@@ -190,23 +190,32 @@
         ShowCursor(false);
         Debug::s_inst->ScreenLog("Game Begin", 5.f);        //Debug
         m_engine->Begin();
-        m_railManager->CreateRails(m_engine->GetSceneMananger()->GetCurrentScene());
+        m_railManager->CreateRails(m_sceneMain);
     }
 
     void Game::Update()
     {
         m_engine->Update();
-        m_cart->Update();
-        m_splashHud->Update();
-        m_menuHud->Update();
-        m_gameHud->Update();
-        m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x, 
-                                                                m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
-                                                                m_cart->m_entityCart->transform->m_transform->m_vPos.z);
-        m_player->Update(m_engine->GetSceneMananger()->GetCurrentScene());
-        UpdateInputs();
-        UpdateMouseInputs();
-        UpdateCameraTransfrom(); 
+        if (m_engine->GetSceneMananger()->GetSceneByName("Splash")->GetHasStarted())
+        {
+            m_splashHud->Update();
+        }
+        if (m_engine->GetSceneMananger()->GetSceneByName("Menu")->GetHasStarted())
+        {
+            m_menuHud->Update();
+        }
+        if (m_sceneMain->GetHasStarted())
+        {
+            m_gameHud->Update();
+            m_cart->Update();
+            m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x,
+                m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
+                m_cart->m_entityCart->transform->m_transform->m_vPos.z);
+            m_player->Update(m_sceneMain);
+            UpdateInputs();
+            UpdateMouseInputs();
+            UpdateCameraTransfrom();
+        }
     }
 
     void Game::Close()

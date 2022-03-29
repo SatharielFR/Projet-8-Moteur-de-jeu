@@ -74,3 +74,4 @@ void Scene::DestroyEntity(Entity* l_entityToDestroy)
 void Scene::AddHUD(HUD* HUDToAdd) {
 	_sceneHUD = HUDToAdd;
 }
+

@@ -17,6 +17,7 @@ void SceneManager::OpenScene(string strSceneName)
 		if (currentScene->GetSceneName() == strSceneName)
 		{
 			_currentScene = currentScene;
+			_currentScene->SetHasStarted(true);
 		}
 	}
 }
@@ -58,4 +59,17 @@ list<MeshComponent*> SceneManager::GetMeshComponents()
 		}
 	}
 	return l_lstMeshComponents;
+}
+
+Scene* SceneManager::GetSceneByName(string strSceneName)
+{
+	for (Scene* currentScene : _lstScenes)
+	{
+		if (currentScene->GetSceneName() == strSceneName)
+		{
+			return currentScene;
+		}
+	}
+
+	return nullptr;
 }

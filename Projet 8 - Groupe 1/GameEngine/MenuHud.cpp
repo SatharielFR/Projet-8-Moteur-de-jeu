@@ -108,6 +108,7 @@ void MenuHud::Play()
 {
 	Debug::s_inst->ScreenLog("Play", 10.0f);
 	_engine->GetSceneMananger()->OpenScene("Game");
+	//_engine->GetSceneMananger()->GetSceneByName("Game")->m_bHasStarted = true;
 }
 
 void MenuHud::Credits()

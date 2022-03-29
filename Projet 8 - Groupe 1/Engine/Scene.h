@@ -22,6 +22,8 @@ class Scene
 			string GetSceneName() { return _strSceneName;}
 			list<Entity*> GetEntities() { return _listEntity; }
 			HUD* GetHUD() { return _sceneHUD; }
+			void SetHasStarted(bool value) {m_bHasStarted = value;}
+			bool GetHasStarted() {return m_bHasStarted;}
 		#pragma endregion
 
 	private:
@@ -29,6 +31,7 @@ class Scene
 			string _strSceneName = "Default";
 			list<Entity*> _listEntity;
 			HUD* _sceneHUD;
+			bool m_bHasStarted = false;
 		#pragma endregion
 };
 
