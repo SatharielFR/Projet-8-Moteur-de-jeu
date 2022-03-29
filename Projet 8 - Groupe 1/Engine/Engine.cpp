@@ -46,7 +46,6 @@ void Engine::Update()
                 _nbFps = _nbFpsCount;
                 _fLastCheckFpsTime = _timer->GetSystemTimeEx();
                 _nbFpsCount = 1;
-
             }
             else
             {
