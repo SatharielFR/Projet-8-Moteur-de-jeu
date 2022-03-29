@@ -38,6 +38,7 @@ void Engine::Update()
         if (_timer->UpdateTime())
         {
             //UpdatePhysique
+            CollisionCheck();
             RenderFrame();
             //Update FPS
             if (_timer->GetSystemTimeEx() > _fLastCheckFpsTime + 1.0f)
@@ -51,9 +52,9 @@ void Engine::Update()
             {
                 _nbFpsCount++;
             }
+            _timer->UpdateDeltaTime();
         }
     }
-    CollisionCheck();
 }
 
 void Engine::Close()

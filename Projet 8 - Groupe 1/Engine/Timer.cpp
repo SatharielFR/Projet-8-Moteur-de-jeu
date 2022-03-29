@@ -65,10 +65,6 @@ bool Timer::UpdateTime()
     m_fElapsedTime = elapsedSysTime;
     m_fTime += m_fElapsedTime;
 
-    //Update DeltaTime
-    m_fDeltaTime = GetSystemTimeEx() - m_fTimeLastFrame;
-    m_fTimeLastFrame = GetSystemTimeEx();
-
     return true;
 }
 
@@ -76,4 +72,11 @@ float Timer::GetDeltaTime()
 {
 //    return m_fElapsedTime; //old
     return m_fDeltaTime;
+}
+
+void Timer::UpdateDeltaTime()
+{
+    //Update DeltaTime
+    m_fDeltaTime = GetSystemTimeEx() - m_fTimeLastFrame;
+    m_fTimeLastFrame = GetSystemTimeEx();
 }

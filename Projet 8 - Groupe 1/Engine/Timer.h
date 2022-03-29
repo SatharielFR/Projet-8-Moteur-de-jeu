@@ -17,6 +17,7 @@ class Timer
 			float GetSystemTimeEx();
 			float GetDeltaTime();
 			bool UpdateTime();
+			void UpdateDeltaTime();
 		#pragma endregion
 
 	private:
