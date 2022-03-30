@@ -120,18 +120,12 @@
 
         //Create Player
         m_player = new Player(m_sceneGame);
-
-       /* delete m_railManager;
-        delete m_cart;
-        delete m_player;*/
-
     }
 
 
 
     void Game::InitCamera()
     {
-
         //Create Camera
         m_entityCamera = new Entity();
         m_sceneGame->AddEntity(m_entityCamera);
@@ -144,13 +138,6 @@
     {
         //Create Game HUD
         m_gameHud = new GameHud(m_sceneGame, m_engine);
-
-        //ShowCursor(false);
-        //Debug::s_inst->ScreenLog("Game Begin", 5.f);        //Debug
-        //m_engine->Begin();
-        //m_railManager->CreateRails(m_sceneGame);
-        //m_targetSpawner->SpawnTargets();
-
     }
 
  
@@ -203,18 +190,24 @@
         //Forward inputs
         if (GetKeyState('Z') & 0x8000)
         {
-            _fForwardValue = 1;
             if (GetKeyState(VK_LSHIFT))
             {
                 _fForwardValue = 2;
             }
+            else
+            {
+                _fForwardValue = 1;
+            }
         }
         else if (GetKeyState('S') & 0x8000)
         {
-            _fForwardValue = -1;
             if (GetKeyState(VK_LSHIFT))
             {
                 _fForwardValue = -2;
+            }
+            else
+            {
+                _fForwardValue = -1;
             }
         }
         else

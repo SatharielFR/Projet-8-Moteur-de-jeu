@@ -8,6 +8,7 @@
 	class Timer;
 	class HUD;
 	class Entity;
+	class Scene;
 #pragma endregion
 
 struct CollisionResult {
@@ -68,6 +69,8 @@ class Engine
 			float _fLastCheckFpsTime;
 			D3DCOLOR ClearColor;
 			vector<Entity*> l_entities;
+			Scene* _sceneCurrent;
+			Scene* _scenePrevious;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions

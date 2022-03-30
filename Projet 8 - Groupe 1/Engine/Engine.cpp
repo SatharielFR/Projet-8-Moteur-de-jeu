@@ -124,11 +124,20 @@ void Engine::RenderFrame(void)
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
 
+    //Get the CurrentScene
+    _sceneCurrent = _sceneManager->GetCurrentScene();
+
     //Get the list of MeshComponents to render from the scene
-    if (_sceneManager->GetCurrentScene())
+    if (_sceneCurrent)
     {
+        //if the scene has changedn 
+        if (_sceneCurrent != _scenePrevious)
+        {
+            //update the list of entities
+            l_entities = _sceneCurrent->GetEntities();
+        }
+
         //For each Components of the scene
-        l_entities = _sceneManager->GetCurrentScene()->GetEntities();
         for (Entity* l_currentEntity: l_entities)
         {
             //If there is a Mesh Component
@@ -158,7 +167,10 @@ void Engine::RenderFrame(void)
                         // Draw the mesh subset
                         l_meshComponent->GetMesh()->DrawSubset(i);
                     }
+                    tr = nullptr;
                 }
+
+                delete tr;
                 l_meshComponent = nullptr;
                 delete l_meshComponent;
                 l_currentEntity = nullptr;
@@ -172,6 +184,8 @@ void Engine::RenderFrame(void)
         {
             _HudToDraw->UpdateHUD(d3ddev);
         }
+
+        _scenePrevious = _sceneCurrent;
     }
 
     _debug->UpdateScreenLogs(); //Draw ScreenLogs on top
