@@ -21,7 +21,7 @@ void Target::CreateTarget(Scene* scene)
 	l_target->AddComponent(l_meshTarget);
 	RigidbodyComponent* l_rigidbodyTarget = new RigidbodyComponent();
 	l_rigidbodyTarget->useGravity = false;
-	l_rigidbodyTarget->radius = 5;
+	l_rigidbodyTarget->radius = 4;
 	l_target->AddComponent(l_rigidbodyTarget);
 }
 

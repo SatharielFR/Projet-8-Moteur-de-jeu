@@ -143,7 +143,7 @@
     void Game::InitHUD()
     {
         //Create Game HUD
-        m_gameHud = new GameHud(m_sceneGame, m_engine);
+        m_gameHud = new GameHud(m_sceneGame, m_engine, this);
 
         //ShowCursor(false);
         //Debug::s_inst->ScreenLog("Game Begin", 5.f);        //Debug
@@ -320,6 +320,8 @@
 
             auto j = currentCollisionResult;
             m_engine->RemoveCollisionResult(j);
+
+            m_player->score += 1;
         }
     }
     

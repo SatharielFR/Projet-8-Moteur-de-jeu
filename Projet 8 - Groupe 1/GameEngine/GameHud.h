@@ -1,11 +1,13 @@
 #pragma once
 #include "framework.h"
+#include "Game.h"
+#include "Player.h"
 
 class GameHud
 {
 	public:
 		#pragma region PublicFunctions
-			GameHud(Scene* scene, Engine* engine);
+			GameHud(Scene* scene, Engine* engine, Game* game);
 			~GameHud();
 			void Update();
 			void ShowEndMenu();
@@ -22,6 +24,7 @@ class GameHud
 
 		#pragma region RuntimeVariables
 			Engine* _engine;
+			Game* _game;
 			Scene* _scene;
 			HUD* _gameHUD;
 			bool _bEndMenuIsActive = false;

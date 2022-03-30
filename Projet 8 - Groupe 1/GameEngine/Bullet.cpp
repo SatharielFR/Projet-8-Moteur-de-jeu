@@ -19,6 +19,5 @@ void Bullet::CreateBullet(Scene* scene)
 	l_meshBullet->SetMeshAndTexturePath("..\\Ressources\\Bullet.x");
 	l_bullet->AddComponent(l_meshBullet);
 	RigidbodyComponent* l_rigidbodyBullet = new RigidbodyComponent();
-	l_rigidbodyBullet->radius = 1;
 	l_bullet->AddComponent(l_rigidbodyBullet);
 }
