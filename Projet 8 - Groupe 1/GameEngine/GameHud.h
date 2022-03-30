@@ -1,7 +1,10 @@
 #pragma once
 #include "framework.h"
-#include "Game.h"
-#include "Player.h"
+
+#pragma region ForwardDeclaration
+	class Game;
+	class Player;
+#pragma endregion
 
 class GameHud
 {
@@ -11,6 +14,7 @@ class GameHud
 			~GameHud();
 			void Update();
 			void ShowEndMenu();
+			void ShowGameHud();
 		#pragma endregion
 
 
@@ -19,6 +23,7 @@ class GameHud
 			void CreateMain();
 			void DestroyMain();
 			void CreateEnd();
+			void DestroyEnd();
 			void Return();
 		#pragma endregion
 
@@ -28,6 +33,7 @@ class GameHud
 			Scene* _scene;
 			HUD* _gameHUD;
 			bool _bEndMenuIsActive = false;
+			bool _bGameHudIsActive = false;
 		#pragma endregion
 
 		#pragma region Params

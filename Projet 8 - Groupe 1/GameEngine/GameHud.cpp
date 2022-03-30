@@ -39,6 +39,8 @@ void GameHud::Update()
         string l_strTimeContent = to_string((int)Timer::s_inst->GetSystemTimeEx());
         _labelTimeContent->SetText(l_strTimeContent);
     }
+
+    //Score
     if (_labelScoreContent)
     {
         string l_strScoreContent = to_string((int)_game->m_player->score);
@@ -50,10 +52,17 @@ void GameHud::ShowEndMenu()
 {
     if (!_bEndMenuIsActive)
     {
-        _bEndMenuIsActive = true;
         DestroyMain();
         CreateEnd();
-        ShowCursor(true);
+    }
+}
+
+void GameHud::ShowGameHud()
+{
+    if (!_bGameHudIsActive)
+    {
+        DestroyEnd();
+        CreateMain();
     }
 }
 
@@ -117,33 +126,41 @@ void GameHud::CreateMain()
     _labelScoreContent->SetPosition(SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelScoreContent);
     _labelScoreContent->SetText("0");
+
+    ShowCursor(false);
+    _bGameHudIsActive = true;
 }
 
 void GameHud::DestroyMain()
 {
-    //Crosshair
-    _gameHUD->RemoveSprite(_spriteCrosshair);
+    if (_bGameHudIsActive)
+    {
+        //Crosshair
+        _gameHUD->RemoveSprite(_spriteCrosshair);
 
-    //Footer
-    _gameHUD->RemoveSprite(_spriteFooter);
+        //Footer
+        _gameHUD->RemoveSprite(_spriteFooter);
 
-    //Label FPS Title
-    _gameHUD->RemoveText(_labelFpsTitle);
+        //Label FPS Title
+        _gameHUD->RemoveText(_labelFpsTitle);
 
-    //Label FPS Content
-    _gameHUD->RemoveText(_labelFpsContent);
+        //Label FPS Content
+        _gameHUD->RemoveText(_labelFpsContent);
 
-    //Label Time Title
-    _gameHUD->RemoveText(_labelTimeTitle);
+        //Label Time Title
+        _gameHUD->RemoveText(_labelTimeTitle);
 
-    //Label Time Content
-    _gameHUD->RemoveText(_labelTimeContent);
+        //Label Time Content
+        _gameHUD->RemoveText(_labelTimeContent);
 
-    //Label Time Title
-    _gameHUD->RemoveText(_labelScoreTitle);
+        //Label Time Title
+        _gameHUD->RemoveText(_labelScoreTitle);
 
-    //Label Time Content
-    _gameHUD->RemoveText(_labelScoreContent);
+        //Label Time Content
+        _gameHUD->RemoveText(_labelScoreContent);
+
+        _bGameHudIsActive = false;
+    }
 }
 
 void GameHud::CreateEnd()
@@ -190,9 +207,33 @@ void GameHud::CreateEnd()
     _buttonReturn->SetHoverColor(&_colorWhite);
     _gameHUD->AddButton(_buttonReturn);
     _buttonReturn->m_OnClic = RUNNER(Return);	// Bind Function 
+
+    ShowCursor(true);
+    _bEndMenuIsActive = true;
+}
+
+void GameHud::DestroyEnd()
+{
+    if (_bEndMenuIsActive)
+    {
+        //Background
+        _gameHUD->RemoveSprite(_spriteBackgroundEnd);
+
+        //Time
+        _gameHUD->RemoveText(_labelTimeEnd);
+
+        //Score
+        _gameHUD->RemoveText(_labelScoreEnd);
+
+        //Button Return
+        _gameHUD->RemoveButton(_buttonReturn);
+
+        _bEndMenuIsActive = false;
+    }
 }
 
 void GameHud::Return()
 {
     _engine->GetSceneMananger()->OpenScene("Menu");
+    ShowCursor(true);
 }

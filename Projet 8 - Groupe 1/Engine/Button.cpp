@@ -127,7 +127,6 @@ void Button::OnClick()
 	{
 		if (IsMouseHover())
 		{
-			Debug::s_inst->ScreenLog("Click", 1.0f);
 			m_OnClic();
 		}
 	}

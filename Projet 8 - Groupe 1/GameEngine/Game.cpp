@@ -35,10 +35,20 @@
         _fCameraOffset = 3.f;
     }
 
+    Game::~Game()
+    {
+        delete m_engine;
+        delete m_railManager;
+        delete m_cart;
+        delete m_targetSpawner;
+        delete m_player;
+        delete m_splashHud;
+        delete m_menuHud;
+        delete m_gameHud;
+    }
+
     void Game::Begin()
     {
-        ShowCursor(false);
-        Debug::s_inst->ScreenLog("Game Begin", 5.f);        //Debug
         m_engine->Begin();
         m_railManager->CreateRails(m_sceneGame);
         m_targetSpawner->SpawnTargets();
@@ -60,18 +70,6 @@
         InitHUD();
     }
 
-    Game::~Game()
-    {
-        delete m_engine;
-        delete m_railManager;
-        delete m_cart;
-        delete m_targetSpawner;
-        delete m_player;
-        delete m_splashHud;
-        delete m_menuHud;
-        delete m_gameHud;
-    }
-
     void Game::InitLevel()
     {
         //Create a map for the Splash
@@ -88,7 +86,7 @@
 //        m_engine->GetSceneMananger()->OpenScene("Menu");
 
         //Create Menu HUD
-        m_menuHud = new MenuHud(sceneMenu, m_engine);
+        m_menuHud = new MenuHud(sceneMenu, m_engine,this);
 
 
         //Create a map for the game
@@ -132,8 +130,6 @@
         m_player = new Player(m_sceneGame);
     }
 
-
-
     void Game::InitCamera()
     {
         //Create Camera
@@ -149,8 +145,6 @@
         //Create Game HUD
         m_gameHud = new GameHud(m_sceneGame, m_engine, this);
     }
-
- 
 
     void Game::Update()
     {
@@ -190,6 +184,14 @@
     {
         // clean up DirectX and COM
         m_engine->Close();
+    }
+
+    void Game::StartGame()
+    {
+        m_cart->Reset();
+        m_gameHud->ShowGameHud();
+        m_engine->GetSceneMananger()->OpenScene("Game");
+        m_engine->GetSceneMananger()->CloseScene("Menu");
     }
 
     //Detect Inputs
@@ -243,10 +245,8 @@
         {
             //Unlock Mouse Position
             m_bCursorIsLocked = false;
-            ShowCursor(true);
 
             PostQuitMessage(WM_CLOSE);
-//            PostQuitMessage(0); //Close window
         }
     }
 
@@ -326,7 +326,4 @@
             m_player->score += 1;
         }
     }
-    
-
-
 #pragma endregion

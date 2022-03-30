@@ -1,12 +1,12 @@
-
 #include "MenuHud.h"
 #include "GameHud.h"
+#include "Game.h"
 
-
-MenuHud::MenuHud(Scene* scene, Engine* engine)
+MenuHud::MenuHud(Scene* scene, Engine* engine, Game* game)
 {
 	_scene = scene;
 	_engine = engine;
+	_game = game;
 
 	HUD* l_menuHUD = new HUD();
 	_scene->AddHUD(l_menuHUD);
@@ -128,9 +128,7 @@ void MenuHud::Update()
 
 void MenuHud::Play()
 {	
-	_engine->GetSceneMananger()->OpenScene("Game");
-	_engine->GetSceneMananger()->CloseScene("Menu");
-	ShowCursor(false);
+	_game->StartGame();
 }
 
 void MenuHud::Credits()

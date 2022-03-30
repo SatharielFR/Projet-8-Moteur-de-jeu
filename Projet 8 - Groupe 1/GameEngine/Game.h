@@ -49,6 +49,7 @@ class Game
 			~Game();
 			void Init(HWND hWnd);
 			void Begin();
+			void StartGame();
 			void Update();
 			void Close();
 		#pragma endregion

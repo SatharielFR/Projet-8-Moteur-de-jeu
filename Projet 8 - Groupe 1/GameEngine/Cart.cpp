@@ -102,6 +102,15 @@ void Cart::Update()
 
 }
 
+void Cart::Reset()
+{
+    _bHasReachEnd = false;
+    //Init Cart position
+    m_entityCart->transform->m_transform->Move(0.0f, 1.0f, 0.0f);
+    //Reset Current rail
+    m_currentRailEntity = nullptr;
+}
+
 D3DXVECTOR3 Cart::GetCartPosition()
 {
     return m_entityCart->transform->m_transform->m_vPos;

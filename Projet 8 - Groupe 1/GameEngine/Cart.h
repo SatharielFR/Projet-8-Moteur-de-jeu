@@ -25,11 +25,10 @@ class Cart
 		#pragma region Functions
 			void SetForwardValue(int value);
 			void Update();
-			//void Lerp(D3DXVECTOR3 A, D3DXVECTOR3 B, float step);
+			void Reset();
 		#pragma endregion
 
 		#pragma region Accessor
-	//		m_vec3CartPosition
 			D3DXVECTOR3 GetCartPosition();
 			bool GetHasReachEnd() { return _bHasReachEnd; }
 		#pragma endregion
