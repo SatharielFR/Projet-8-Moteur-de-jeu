@@ -11,6 +11,7 @@ class Button : HudElement
 			virtual void SetWidth(float fWidth) override;
 			virtual void SetHeight(float fHeight) override;
 			virtual void SetPosition(int x, int y) override;
+			Engine* GetEngine() { return _engine; }
 			void SetDefaultColor(D3DXCOLOR* color);
 			void SetHoverColor(D3DXCOLOR* color);
 			void SetTexture(string a, string b);

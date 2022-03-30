@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Framework.h"
+#include "framework.h"
 
 Button::Button(Engine* engine)
 {
@@ -20,10 +20,10 @@ Button::Button(Engine* engine)
 
 	//Sprite Over
 	_spriteHover = new Sprite();
-	_spriteDefault->SetTexture("Default.bmp");
-	_spriteDefault->SetWidth(40);
-	_spriteDefault->SetHeight(40);
-	_spriteDefault->SetPosition(0, 0);
+	_spriteHover->SetTexture("Default.bmp");
+	_spriteHover->SetWidth(40);
+	_spriteHover->SetHeight(40);
+	_spriteHover->SetPosition(0, 0);
 	_spriteHover->SetSpriteColor(_colorHover);
 }
 
@@ -90,35 +90,31 @@ bool Button::IsMouseHover()
 	POINT point;
 	if (GetCursorPos(&point))
 	{
-		int l_nbAnchorPositionX = 0, l_nbAnchorPositionY = 0;
-		RECT rect;
-		if (GetWindowRect(_engine->getHwnd(), &rect))
-		{
-			l_nbAnchorPositionX = rect.left;
-			l_nbAnchorPositionY = rect.top;
-		}
-		//Add Window anchor position
-		int l_mousePosX = point.x + l_nbAnchorPositionX;
-		int l_mousePosY = point.y + l_nbAnchorPositionY;
+		if (ScreenToClient(GetEngine()->getHwnd(), &point)) {
 
-		bool bIsInX= false;
-		bool bIsInY= false;
+			int l_mousePosX = point.x;
+			int l_mousePosY = point.y;
 
-		if (l_mousePosX > _spriteDefault->GetPosition().x /*+ (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth()) /2*/ &&
-			l_mousePosX < _spriteDefault->GetPosition().x + (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth())/* *2 */)
-		{
-			bIsInX = true;
-		}
-		if (l_mousePosY > _spriteDefault->GetPosition().y /*+ (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /2*/ &&
-			l_mousePosY < _spriteDefault->GetPosition().y + (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /**2*/ )
-		{
-			bIsInY = true;
+			bool bIsInX = false;
+			bool bIsInY = false;
+
+			if (l_mousePosX > _spriteDefault->GetPosition().x /*+ (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth()) /2*/ &&
+				l_mousePosX < _spriteDefault->GetPosition().x + (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth())/* *2 */)
+			{
+				bIsInX = true;
+			}
+			if (l_mousePosY > _spriteDefault->GetPosition().y /*+ (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /2*/ &&
+				l_mousePosY < _spriteDefault->GetPosition().y + (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /**2*/)
+			{
+				bIsInY = true;
+			}
+
+			if (bIsInX && bIsInY)
+			{
+				return true;
+			}
 		}
 
-		if (bIsInX && bIsInY)
-		{
-			return true;
-		}
 	}
 
 	return false;
