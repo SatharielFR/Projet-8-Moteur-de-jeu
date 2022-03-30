@@ -139,6 +139,7 @@
         l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
         l_entityTarget->AddComponent(l_meshComponentTarget);
         RigidbodyComponent* l_rigidbodyTarget = new RigidbodyComponent();
+        l_rigidbodyTarget->radius = 5;
         l_entityTarget->AddComponent(l_rigidbodyTarget);
         l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
         l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);

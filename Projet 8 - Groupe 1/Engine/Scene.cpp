@@ -59,16 +59,14 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 
 void Scene::DestroyEntity(Entity* l_entityToDestroy)
 {
-	if (l_entityToDestroy == nullptr) { return; }
+	if (l_entityToDestroy == nullptr || _listEntity.size() < 1) { return; }
 
-	for (auto i = _listEntity.begin(); i != _listEntity.end(); i++)
-	{
-		if (*i == l_entityToDestroy)
-		{
-			delete *i;
-			_listEntity.erase(i);
-		}
-	}
+	auto i = std::find(_listEntity.begin(), _listEntity.end(), l_entityToDestroy);
+
+	if (i == _listEntity.end()) { return;  }
+
+	_listEntity.erase(i);
+	delete l_entityToDestroy;
 }
 
 void Scene::AddHUD(HUD* HUDToAdd) {

@@ -38,7 +38,7 @@ void Player::CreatePlayer(Scene* scene)
 
 void Player::Shoot(Scene* scene)
 {
-    list<Entity*> l_entities = scene->GetEntities();
+    std::vector<Entity*> l_entities = scene->GetEntities();
     for (Entity* l_currentEntity : l_entities)
     {
         CameraComponent* l_cameraComponent = (CameraComponent*)l_currentEntity->GetComponentByType<CameraComponent>();

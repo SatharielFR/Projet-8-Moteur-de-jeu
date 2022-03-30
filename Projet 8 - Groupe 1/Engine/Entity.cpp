@@ -147,6 +147,8 @@ void Entity::RemoveComponent(Component* ComponentToRem)
 		if (*i == ComponentToRem)
 		{
 			_lstComponentChild.erase(i);
+			delete ComponentToRem;
 		}
 	}
+	_lstComponentChild.shrink_to_fit();
 }

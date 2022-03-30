@@ -131,7 +131,7 @@ void Engine::RenderFrame(void)
     if (_sceneManager->GetCurrentScene())
     {
         //For each Components of the scene
-        list<Entity*> l_entities = _sceneManager->GetCurrentScene()->GetEntities();
+        std::vector<Entity*> l_entities = _sceneManager->GetCurrentScene()->GetEntities();
         for (Entity* l_currentEntity: l_entities)
         {
             //If there is a Mesh Component
@@ -187,10 +187,10 @@ void Engine::CleanD3D(void)
 
 void Engine::CollisionCheck()
 {
-    if (_sceneManager->GetCurrentScene())
+    if (GetSceneMananger()->GetSceneByName("Game"))
     {
         //For each Components of the scene
-        list<Entity*> l_entities = _sceneManager->GetCurrentScene()->GetEntities();
+        std::vector<Entity*> l_entities = GetSceneMananger()->GetSceneByName("Game")->GetEntities();
         for (auto i = l_entities.begin(); i != l_entities.end(); i++)
         {
             RigidbodyComponent* firstRb = (RigidbodyComponent*)(*i)->GetComponentByType<RigidbodyComponent>();
@@ -224,6 +224,9 @@ void Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
     if (result)
     {
         Debug::s_inst->ScreenLog("CC");
+        Scene* scene = GetSceneMananger()->GetSceneByName("Game");
+        scene->DestroyEntity(rb1->GetParent());
+        scene->DestroyEntity(rb2->GetParent());
     }
 }
 

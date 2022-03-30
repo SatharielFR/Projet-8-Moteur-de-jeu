@@ -20,7 +20,7 @@ class Scene
 			void AddHUD(HUD* l_HUDToAdd);
 			void SetSceneName(string strNewSceneName);
 			string GetSceneName() { return _strSceneName;}
-			list<Entity*> GetEntities() { return _listEntity; }
+			std::vector<Entity*> GetEntities() { return _listEntity; }
 			HUD* GetHUD() { return _sceneHUD; }
 			void SetIsRunning(bool value) {m_bIsRunning = value;}
 			bool GetIsRunning() {return m_bIsRunning;}
@@ -29,7 +29,7 @@ class Scene
 	private:
 		#pragma region PrivateVariables
 			string _strSceneName = "Default";
-			list<Entity*> _listEntity;
+			std::vector<Entity*> _listEntity;
 			HUD* _sceneHUD;
 			bool m_bIsRunning = false;
 		#pragma endregion
