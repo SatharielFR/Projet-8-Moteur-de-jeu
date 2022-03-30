@@ -21,8 +21,34 @@ Cart::~Cart()
 {
 }
 
+void Cart::UpdateSpeed()
+{
+    if (_nbForwardValue == -1)
+    {
+        _fCartSpeed = 0;
+    }
+    if (_nbForwardValue == 0)
+    {
+        _fCartSpeed = 0;
+    }
+    if (_nbForwardValue == 1)
+    {
+        _fCartSpeed = _fCartDefaultSpeed;
+    }
+    if (_nbForwardValue == 2)
+    {
+        _fCartSpeed = _fCartBoostSpeed;
+    }
+}
+
+void Cart::SetForwardValue(int value)
+{
+    _nbForwardValue = value;
+}
+
 void Cart::Update()
 {
+    UpdateSpeed();
     if (m_currentRailEntity == nullptr)
     {
         _vec3NewLocation = new D3DXVECTOR3();
