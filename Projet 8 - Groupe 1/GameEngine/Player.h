@@ -15,6 +15,7 @@ class Player
 
 		#pragma region PublicFunctions
 			Player(Scene* scene);
+			void Reset();
 			void Begin(Scene* scene);
 			void Update(Scene* scene);
 			void CreatePlayer(Scene* scene);

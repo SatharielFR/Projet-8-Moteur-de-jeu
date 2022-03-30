@@ -4,10 +4,15 @@
 Player::Player(Scene* scene)
 {
 	l_player = new Entity();
-	canShoot = true;
-	cooldown = 1.0f;
-    score = 0;
+    Reset();
 	Begin(scene);
+}
+
+void Player::Reset()
+{
+    score = 0;
+    cooldown = 1.0f;
+    canShoot = true;
 }
 
 void Player::Begin(Scene* scene)

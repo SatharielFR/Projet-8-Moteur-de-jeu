@@ -50,7 +50,6 @@ void Game::Begin()
 {
     m_engine->Begin();
     m_railManager->CreateRails(m_sceneGame);
-    m_targetSpawner->SpawnTargets();
 }
 
 void Game::Init(HWND hWnd)
@@ -148,6 +147,10 @@ void Game::InitHUD()
 void Game::StartGame()
 {
     m_cart->Reset();
+    m_player->Reset();
+    //TODO : Reset railManager
+    m_targetSpawner->Reset();
+    m_targetSpawner->SpawnTargets();
     m_gameHud->ShowGameHud();
     m_engine->GetSceneMananger()->OpenScene("Game");
     m_engine->GetSceneMananger()->CloseScene("Menu");

@@ -12,8 +12,17 @@ TargetSpawner::~TargetSpawner()
 {
 }
 
-void TargetSpawner::Init()
+void TargetSpawner::Reset()
 {
+    if (_lstTarget.size() > 0)
+    {
+        for (Target* currentTarget : _lstTarget)
+        {
+            _scene->DestroyEntity(currentTarget->l_target);
+            delete currentTarget;
+        }
+        _lstTarget.clear();
+    }
 }
 
 void TargetSpawner::SpawnTargets()

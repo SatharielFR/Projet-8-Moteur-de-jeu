@@ -16,8 +16,6 @@ GameHud::GameHud(Scene* scene, Engine* engine, Game* game)
     _colorContent   = D3DXCOLOR(255, 237, 0,255);
     _colorFooter    = D3DXCOLOR(0, 0, 0, 0.65f);
     _colorWhite     = D3DXCOLOR(1, 1, 1, 1);
-
-    CreateMain();
 }
 
 GameHud::~GameHud()
@@ -36,7 +34,7 @@ void GameHud::Update()
     //Time
     if (_labelTimeContent)
     {
-        string l_strTimeContent = to_string((int)Timer::s_inst->GetSystemTimeEx());
+        string l_strTimeContent = to_string((int)Timer::s_inst->GetSystemTimeEx() - _nbTimeGameStart);
         _labelTimeContent->SetText(l_strTimeContent);
     }
 
@@ -127,6 +125,7 @@ void GameHud::CreateMain()
     _gameHUD->AddText(_labelScoreContent);
     _labelScoreContent->SetText("0");
 
+    _nbTimeGameStart = (int)Timer::s_inst->GetSystemTimeEx();
     ShowCursor(false);
     _bGameHudIsActive = true;
 }
@@ -180,7 +179,7 @@ void GameHud::CreateEnd()
     _labelTimeEnd->SetTextColor(_colorContent);
     _labelTimeEnd->SetFontSize(2.5);
     _labelTimeEnd->SetPosition(SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 55);
-    string l_strTimeContent = to_string((int)Timer::s_inst->GetSystemTimeEx()) + "s";
+    string l_strTimeContent = to_string((int)Timer::s_inst->GetSystemTimeEx() - _nbTimeGameStart) + "s";
     _labelTimeEnd->SetText(l_strTimeContent);
     _gameHUD->AddText(_labelTimeEnd);
 

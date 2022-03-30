@@ -34,6 +34,7 @@ class GameHud
 			HUD* _gameHUD;
 			bool _bEndMenuIsActive = false;
 			bool _bGameHudIsActive = false;
+			int  _nbTimeGameStart;
 		#pragma endregion
 
 		#pragma region Params

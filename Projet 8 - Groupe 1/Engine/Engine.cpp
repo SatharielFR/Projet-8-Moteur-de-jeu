@@ -26,8 +26,6 @@ Engine::~Engine()
     ConsoleLog("Engine");
 }
 
-
-
 //Init all engine values
 void Engine::Init()
 {

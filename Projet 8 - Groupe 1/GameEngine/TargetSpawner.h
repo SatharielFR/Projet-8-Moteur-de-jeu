@@ -9,7 +9,7 @@ class TargetSpawner
 		#pragma region PublicFunctions
 			TargetSpawner(Scene* scene, RailManager* railManager);
 			~TargetSpawner();
-			void Init();
+			void Reset();
 			void SpawnTargets();
 			void Close();
 		#pragma endregion
