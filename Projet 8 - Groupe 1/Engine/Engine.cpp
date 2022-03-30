@@ -259,7 +259,20 @@ void Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
     
     if(result)
     {
-        collisionResult.push_back(new CollisionResult(result, rb1, rb2));
+        bool l_bAlreadyExist = false;
+        //Check if the collision is already detected
+        for (auto currentResult : collisionResult)
+        {
+            if (currentResult->rigidbody1 == rb2 && currentResult->rigidbody2 == rb1)
+            {
+                l_bAlreadyExist = true;
+            }
+        }
+        //else add it
+        if (!l_bAlreadyExist)
+        {
+            collisionResult.push_back(new CollisionResult(result, rb1, rb2));
+        }
     }
 }
 
