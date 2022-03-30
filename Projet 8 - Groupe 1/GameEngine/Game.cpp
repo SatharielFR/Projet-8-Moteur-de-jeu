@@ -83,20 +83,6 @@
         l_entitySkybox->AddComponent(l_meshComponentSkybox);
         l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
 
-
-        //Create Target
-        Entity* l_entityTarget = new Entity();
-        m_sceneGame->AddEntity(l_entityTarget);
-        MeshComponent* l_meshComponentTarget = new MeshComponent();
-        l_meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
-        l_entityTarget->AddComponent(l_meshComponentTarget);
-        RigidbodyComponent* l_rigidbodyTarget = new RigidbodyComponent();
-        l_rigidbodyTarget->radius = 5;
-        l_entityTarget->AddComponent(l_rigidbodyTarget);
-        l_entityTarget->transform->m_transform->SetPosition(0.0f, 5.0f, 0.0f);
-        l_entityTarget->transform->m_transform->ScalingUniforme(0.01f);
-        l_entityTarget->transform->m_transform->RotateAngle(90.0f, 0.f, 0.f);
-
         //Create Ground
         Entity* l_entityGround = new Entity();
         m_sceneGame->AddEntity(l_entityGround);
@@ -303,14 +289,18 @@
 
     void Game::UpdateCollision()
     {
-        if (m_engine->GetCollisionResult())
+        vector<CollisionResult*> result = m_engine->GetListResult();
+        for (vector<CollisionResult*>::iterator i = result.begin(); i != result.end(); i++)
         {
-            m_sceneGame->DestroyEntity(m_engine->GetRigidbody1()->GetParent());
-            m_sceneGame->DestroyEntity(m_engine->GetRigidbody2()->GetParent());
+            CollisionResult* currentCollisionResult = *i;
+            m_sceneGame->DestroyEntity(currentCollisionResult->rigidbody1->GetParent());
+            m_sceneGame->DestroyEntity(currentCollisionResult->rigidbody2->GetParent());
 
-            m_player->score += 1;
+            auto j = currentCollisionResult;
+            m_engine->RemoveCollisionResult(j);
         }
     }
+    
 
 
 #pragma endregion

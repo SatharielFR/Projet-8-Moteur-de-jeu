@@ -187,10 +187,10 @@ void Engine::CleanD3D(void)
 
 void Engine::CollisionCheck()
 {
-    if (GetSceneMananger()->GetSceneByName("Game"))
+    if (GetSceneMananger()->GetCurrentScene()->GetSceneName() == "Game")
     {
         //For each Components of the scene
-        std::vector<Entity*> l_entities = GetSceneMananger()->GetSceneByName("Game")->GetEntities();
+        std::vector<Entity*> l_entities = GetSceneMananger()->GetCurrentScene()->GetEntities();
         for (auto i = l_entities.begin(); i != l_entities.end(); i++)
         {
             RigidbodyComponent* firstRb = (RigidbodyComponent*)(*i)->GetComponentByType<RigidbodyComponent>();
@@ -216,14 +216,27 @@ void Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
     D3DXVECTOR3 pos1 = rb1->GetParent()->transform->m_transform->m_vPos;
     D3DXVECTOR3 pos2 = rb2->GetParent()->transform->m_transform->m_vPos;
 
-    bool result = std::pow(pos2.x - pos1.x, 2) +
-                  std::pow(pos2.y - pos1.y, 2) +
-                  std::pow(pos2.z - pos1.z, 2)
+    bool result = std::pow(pos1.x - pos2.x, 2) +
+                  std::pow(pos1.y - pos2.y, 2) +
+                  std::pow(pos1.z - pos2.z, 2)
                   <= rb1->radius + rb2->radius;
+    
+    if(result)
+    {
+        collisionResult.push_back(new CollisionResult(result, rb1, rb2));
+    }
+}
 
-    _collisionResult = result;
-    _rigidbody1 = rb1;
-    _rigidbody2 = rb2;
+void Engine::RemoveCollisionResult(CollisionResult* CollsionToRem)
+{
+    if (CollsionToRem == nullptr || collisionResult.size() < 1) { return; }
+
+    auto i = std::find(collisionResult.begin(), collisionResult.end(), CollsionToRem);
+
+    if (i == collisionResult.end()) { return; }
+
+    collisionResult.erase(i);
+    delete CollsionToRem;
 }
 
 

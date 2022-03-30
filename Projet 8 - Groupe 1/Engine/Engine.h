@@ -9,6 +9,19 @@
 	class HUD;
 #pragma endregion
 
+struct CollisionResult {
+	public:
+		bool result;
+		RigidbodyComponent* rigidbody1;
+		RigidbodyComponent* rigidbody2;
+
+		CollisionResult(bool r, RigidbodyComponent* rigidbd1, RigidbodyComponent* rigidbd2) {
+			result = r;
+			rigidbody1 = rigidbd1;
+			rigidbody2 = rigidbd2;
+		}
+};
+
 class Engine
 {
 	public:
@@ -29,11 +42,10 @@ class Engine
 			void Update();
 			void Close();
 			int GetFps() {return _nbFps;}
-			bool GetCollisionResult() { return _collisionResult;  }
-			RigidbodyComponent* GetRigidbody1() { return _rigidbody1; }
-			RigidbodyComponent* GetRigidbody2() { return _rigidbody2; }
 			void CollisionCheck();
 			void Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2);
+			vector<CollisionResult*> GetListResult() { return collisionResult; }
+			void RemoveCollisionResult(CollisionResult* CollsionToRem);
 		#pragma endregion 
 
 		#pragma region Accessors
@@ -49,12 +61,10 @@ class Engine
 			Timer* _timer = nullptr;
 			D3DCOLOR _ClearColor = D3DCOLOR_XRGB(49, 51, 54);
 			HUD* _HudToDraw = nullptr;
+			vector<CollisionResult*> collisionResult;
 			int _nbFps;
 			int _nbFpsCount;
 			float _fLastCheckFpsTime;
-			bool _collisionResult;
-			RigidbodyComponent* _rigidbody1;
-			RigidbodyComponent* _rigidbody2;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
