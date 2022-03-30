@@ -39,7 +39,6 @@ void RailManager::CreateRails(Scene* scene)
                     }
                     case (2): //Turn Right
                     {
-
                         l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
                         l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
@@ -141,32 +140,77 @@ void RailManager::RemoveRails()
 
 void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity, MeshComponent* meshComponent)
 {
-    float fRotationAngleZ = 0;
-    int fRandom = rand() % 3 + 1;
+    int fRandom;
+    bool bRailHasBeenCreated = false;
+    while (!bRailHasBeenCreated)
+    {
+
+        float fRotationAngleZ = 0;
+        fRandom = rand() % 3 + 1;
+        switch (fRandom)
+        {
+            case (1):
+            {
+                fRotationAngleY += 180;
+                m_nbPositionY = m_nbPositionY + m_Height / 2;
+                meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Up.x");
+                entity->AddComponent(meshComponent);
+                entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
+                entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
+                bRailHasBeenCreated = true;
+                break;
+            }
+            case (2):
+            {
+                fRotationAngleZ += 0;
+                meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
+                entity->AddComponent(meshComponent);
+                entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
+                entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
+                bRailHasBeenCreated = true;
+                break;
+            }
+            case (3):
+            {
+                //Cant go downer than ground
+                if (m_nbPositionY > 1)
+                {
+                    fRotationAngleY += 0;
+                    m_nbPositionY = m_nbPositionY - m_Height / 2;
+                    meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Up.x");
+                    entity->AddComponent(meshComponent);
+                    entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
+                    entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
+                    bRailHasBeenCreated = true;
+                }
+                else
+                {
+                    bRailHasBeenCreated = false;
+                }
+                break;
+            }
+        }
+    }
+
     switch (fRandom)
     {
         case (1):
         {
-            fRotationAngleZ = 45;
-            m_nbPositionY += m_Height;
+            m_nbPositionY = m_nbPositionY + m_Height/2;
+            break;
         }
         case (2):
         {
-            fRotationAngleZ += 0;
+            break;
         }
         case (3):
         {
             //Cant go downer than ground
             if (m_nbPositionY > 1)
             {
-                fRotationAngleZ = -45;
-                m_nbPositionY -= m_Height;
+                m_nbPositionY = m_nbPositionY - m_Height/2;
             }
+            break;
         }
     }
-
-    meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
-    entity->AddComponent(meshComponent);
-    entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
-    entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
 }
