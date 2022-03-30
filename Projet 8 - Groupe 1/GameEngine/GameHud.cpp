@@ -1,9 +1,12 @@
 #include "GameHud.h"
+#include "Game.h"
+#include "Player.h"
 
-GameHud::GameHud(Scene* scene, Engine* engine)
+GameHud::GameHud(Scene* scene, Engine* engine, Game* game)
 {
     _engine = engine;
     _scene = scene;
+    _game = game;
 
     _gameHUD = new HUD();
     _scene->AddHUD(_gameHUD);
@@ -35,6 +38,11 @@ void GameHud::Update()
     {
         string l_strTimeContent = to_string((int)Timer::s_inst->GetSystemTimeEx());
         _labelTimeContent->SetText(l_strTimeContent);
+    }
+    if (_labelScoreContent)
+    {
+        string l_strScoreContent = to_string((int)_game->m_player->score);
+        _labelScoreContent->SetText(l_strScoreContent);
     }
 }
 
@@ -164,7 +172,7 @@ void GameHud::CreateEnd()
     _labelScoreEnd->SetTextColor(_colorContent);
     _labelScoreEnd->SetFontSize(2.5);
     _labelScoreEnd->SetPosition(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2 + 55);
-    string l_strScoreContent = to_string((int)Timer::s_inst->GetSystemTimeEx());
+    string l_strScoreContent = to_string((int)_game->m_player->score);
     _labelScoreEnd->SetText(l_strScoreContent);
     _gameHUD->AddText(_labelScoreEnd);
 
