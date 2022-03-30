@@ -65,7 +65,7 @@
         //Create a map for the Splash
         Scene* sceneSplash = new Scene("Splash");
         m_engine->GetSceneMananger()->AddScene(sceneSplash);
-        m_engine->GetSceneMananger()->OpenScene("Splash");
+//        m_engine->GetSceneMananger()->OpenScene("Splash");
 
         //Create Menu Splash
         m_splashHud = new SplashHud(sceneSplash, m_engine);
@@ -82,7 +82,7 @@
         //Create a map for the game
         m_sceneGame = new Scene("Game");
         m_engine->GetSceneMananger()->AddScene(m_sceneGame);
-        //m_engine->GetSceneMananger()->OpenScene("Game");
+        m_engine->GetSceneMananger()->OpenScene("Game");
 
         srand((int)Timer::s_inst->GetSystemTimeEx());
      
@@ -184,16 +184,23 @@
         if(m_engine->GetSceneMananger()->GetSceneByName("Game")->GetIsRunning())
         {
             m_gameHud->Update();
-            m_cart->Update();
-            m_cart->SetForwardValue(_fForwardValue);
-            m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x,
-                                                                    m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
-                                                                    m_cart->m_entityCart->transform->m_transform->m_vPos.z);
-            m_player->Update(m_sceneGame);
-            UpdateInputs();
-            UpdateMouseInputs();
-            UpdateCameraTransfrom();
-            UpdateCollision();
+            if (m_cart->GetHasReachEnd())
+            {
+                m_gameHud->ShowEndMenu();
+            }
+            else 
+            {
+                m_cart->Update();
+                m_cart->SetForwardValue(_fForwardValue);
+                m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x,
+                    m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
+                    m_cart->m_entityCart->transform->m_transform->m_vPos.z);
+                m_player->Update(m_sceneGame);
+                UpdateInputs();
+                UpdateMouseInputs();
+                UpdateCameraTransfrom();
+                UpdateCollision();
+            }
         }
     }
 

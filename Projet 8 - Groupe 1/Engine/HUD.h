@@ -23,8 +23,11 @@
 				void UpdateHUD(LPDIRECT3DDEVICE9 device);
 				void InitializeHUD(LPDIRECT3DDEVICE9 device);
 				void AddSprite(Sprite* spriteToAdd);
+				void RemoveSprite(Sprite* spriteToAdd);
 				void AddButton(Button* buttonToAdd);
+				void RemoveButton(Button* buttonToAdd);
 				void AddText(Text* textToAdd);
+				void RemoveText(Text* textToAdd);
 			#pragma endregion
 
 		private :
