@@ -32,6 +32,7 @@ class MeshComponent : public Component
         const LPDIRECT3DTEXTURE9* GetMeshTextures();
         const D3DMATERIAL9* GetMeshMaterials();
         virtual int GetType() { return s_type; }
+        bool IsMeshLoaded() { return _bIsMeshLoaded; }
     #pragma endregion
 
     #pragma region mutators
@@ -41,5 +42,10 @@ class MeshComponent : public Component
         void SetMaterial(D3DMATERIAL9* material);
         void SetMeshAndTexturePath(string pathIn);
     #pragma endregion
+
+    private :
+        bool _bIsMeshLoaded = false;
+        bool _bIsTextureLoaded = false;
+
 };
 

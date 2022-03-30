@@ -67,6 +67,9 @@ void MeshComponent::LoadMesh(LPCTSTR file, LPDIRECT3DDEVICE9 device)
                 //StringCchCatW(strFileName, 26, (d3dxMaterials[i].pTextureFilename));
                 D3DXCreateTextureFromFile(device, fullPath, &meshTextures[i]);
             }
+
+            _bIsMeshLoaded = true;
+            _bIsTextureLoaded = true;
         }
         materialBuffer->Release();
     }

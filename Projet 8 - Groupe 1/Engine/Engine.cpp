@@ -16,6 +16,7 @@ Engine::Engine(HWND hWnd)
 //Init all engine values
 void Engine::Init()
 {
+    ClearColor = D3DCOLOR_XRGB(255, 0, 0);
     _sceneManager = new SceneManager();
     _debug = new Debug(&d3ddev);
     _timer = new Timer();
@@ -114,8 +115,6 @@ void Engine::InitGraphics(void)
 // this is the function used to render a single frame
 void Engine::RenderFrame(void)
 {
-    D3DCOLOR ClearColor = D3DCOLOR_XRGB(255, 0, 0);
-
     d3ddev->Clear(0, NULL, D3DCLEAR_TARGET| D3DCLEAR_ZBUFFER, _ClearColor, 1.0f, 0);
     d3ddev->BeginScene();
 
@@ -125,28 +124,28 @@ void Engine::RenderFrame(void)
     // select which vertex format we are using
     d3ddev->SetFVF(CUSTOMFVF);
 
-    static float index = 0.0f; index += 0.05f * Timer::s_inst->GetDeltaTime(); // an ever-increasing float value
-
-    //Get the list of MeshComponents to render from the scene&
+    //Get the list of MeshComponents to render from the scene
     if (_sceneManager->GetCurrentScene())
     {
         //For each Components of the scene
-        std::vector<Entity*> l_entities = _sceneManager->GetCurrentScene()->GetEntities();
+        l_entities = _sceneManager->GetCurrentScene()->GetEntities();
         for (Entity* l_currentEntity: l_entities)
         {
             //If there is a Mesh Component
             MeshComponent* l_meshComponent = (MeshComponent*)l_currentEntity->GetComponentByType<MeshComponent>();
-            TransformComponent* l_transformComponent = (TransformComponent*)l_currentEntity->GetComponentByType<TransformComponent>();
             if (l_meshComponent != nullptr)
             {
-                //making string to lpwstr for CreateTextureFromFile
-                std::string myString = l_meshComponent->GetMeshAndTexturePath();
-                wstring stemp = wstring(myString.begin(), myString.end());
-                LPCWSTR fullPath = stemp.c_str();
-                l_meshComponent->LoadMesh(fullPath, d3ddev);
+                if (!l_meshComponent->IsMeshLoaded())
+                {
+                    //making string to lpwstr for CreateTextureFromFile
+                    std::string myString = l_meshComponent->GetMeshAndTexturePath();
+                    wstring stemp = wstring(myString.begin(), myString.end());
+                    LPCWSTR fullPath = stemp.c_str();
+                    l_meshComponent->LoadMesh(fullPath, d3ddev);
+                }
 
                 //setting transform and DRAWING mesh
-                Transform* tr = l_transformComponent->m_transform;
+                Transform* tr = l_currentEntity->transform->m_transform;
 
                 if (tr != nullptr)
                 {
@@ -160,6 +159,10 @@ void Engine::RenderFrame(void)
                         l_meshComponent->GetMesh()->DrawSubset(i);
                     }
                 }
+                l_meshComponent = nullptr;
+                delete l_meshComponent;
+                l_currentEntity = nullptr;
+                delete l_currentEntity;
             }
         }
 
