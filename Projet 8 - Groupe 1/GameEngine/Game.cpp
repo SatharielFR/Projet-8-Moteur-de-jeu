@@ -15,6 +15,24 @@
     Game::Game()
     {
         m_engine = nullptr;
+        m_bIsRunning = false;
+        m_bCursorIsLocked = false;
+        m_railManager = nullptr;
+        m_cart = nullptr;
+        m_targetSpawner = nullptr;
+        m_player = nullptr;
+        m_splashHud = nullptr;
+        m_menuHud = nullptr;
+        m_gameHud = nullptr;
+
+        _fForwardValue = 0;
+        _fHorizontalValue = 0;
+        _fSpeed = 8.f;
+        _nbMouseX = 0;
+        _nbMouseY = 0;
+        _MouseMovementX;
+        _MouseMovementY;
+        _fCameraOffset = 3.f;
     }
 
     void Game::Begin()
@@ -68,8 +86,6 @@
 
         srand((int)Timer::s_inst->GetSystemTimeEx());
      
-
-      
     }
 
     void Game::InitEntity()
