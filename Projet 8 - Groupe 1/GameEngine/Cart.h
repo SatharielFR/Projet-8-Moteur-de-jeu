@@ -23,6 +23,7 @@ class Cart
 		#pragma endregion
 
 		#pragma region Functions
+			void SetForwardValue(int value);
 			void Update();
 			//void Lerp(D3DXVECTOR3 A, D3DXVECTOR3 B, float step);
 		#pragma endregion
@@ -34,8 +35,11 @@ class Cart
 
 	private:
 		#pragma region PrivateVariables
-			float _fCartSpeed = 1.5f;
-			float _fLerpValue = 0;
+			int _nbForwardValue;
+			float _fCartBoostSpeed = 6.0f;
+			float _fCartDefaultSpeed = 1.5f;
+			float _fCartSpeed = 0.f;
+			float _fLerpValue = 0.f;
 			D3DXVECTOR3* _vec3LerpStart;
 			D3DXVECTOR3* _vec3LerpEnd;
 			D3DXVECTOR3* _vec3NewLocation;
@@ -45,7 +49,7 @@ class Cart
 		#pragma endregion
 
 		#pragma region Utility
-//			D3DXVECTOR3 Lerp(D3DXVECTOR3 a, D3DXVECTOR3 b, float s);
+			void UpdateSpeed();
 		#pragma endregion
 };
 

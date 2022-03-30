@@ -1,10 +1,13 @@
 #include "Game.h"
-#include "RailManager.h"
-#include "Cart.h"
-#include "Player.h"
+//Hud
 #include "GameHud.h"
 #include "MenuHud.h"
 #include "SplashHud.h"
+//Gameplay
+#include "RailManager.h"
+#include "Cart.h"
+#include "Player.h"
+#include "TargetSpawner.h"
 
 #pragma region GlobalVariables
     HINSTANCE hInst;                                // instance actuelle
@@ -95,7 +98,7 @@
         //Create a map for the Splash
         Scene* sceneSplash = new Scene("Splash");
         m_engine->GetSceneMananger()->AddScene(sceneSplash);
-        m_engine->GetSceneMananger()->OpenScene("Splash");
+//        m_engine->GetSceneMananger()->OpenScene("Splash");
 
         //Create Menu Splash
         m_splashHud = new SplashHud(sceneSplash, m_engine);
@@ -111,7 +114,7 @@
         //Create a map for the game
         m_sceneGame = new Scene("Game");
         m_engine->GetSceneMananger()->AddScene(m_sceneGame);
-//        m_engine->GetSceneMananger()->OpenScene("Game");
+        m_engine->GetSceneMananger()->OpenScene("Game");
         srand((int)Timer::s_inst->GetSystemTimeEx());
 
         //Create Game HUD
@@ -161,6 +164,9 @@
         //Create Cart
         m_cart = new Cart(m_sceneGame, m_railManager);
 
+        //Create Target Spawner
+        m_targetSpawner = new TargetSpawner(m_sceneGame, m_railManager);
+
         //Create Player
         m_player = new Player(m_sceneGame);
 
@@ -174,6 +180,7 @@
         Debug::s_inst->ScreenLog("Game Begin", 5.f);        //Debug
         m_engine->Begin();
         m_railManager->CreateRails(m_sceneGame);
+        m_targetSpawner->SpawnTargets();
     }
 
     void Game::Update()
@@ -192,10 +199,12 @@
         {
             m_gameHud->Update();
             m_cart->Update();
+            m_cart->SetForwardValue(_fForwardValue);
             m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x,
-                m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
-                m_cart->m_entityCart->transform->m_transform->m_vPos.z);
+                                                                    m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
+                                                                    m_cart->m_entityCart->transform->m_transform->m_vPos.z);
             m_player->Update(m_sceneGame);
+
             UpdateInputs();
             UpdateMouseInputs();
             UpdateCameraTransfrom();
@@ -215,11 +224,19 @@
         //Forward inputs
         if (GetKeyState('Z') & 0x8000)
         {
-            _fForwardValue = -1;
+            _fForwardValue = 1;
+            if (GetKeyState(VK_LSHIFT))
+            {
+                _fForwardValue = 2;
+            }
         }
         else if (GetKeyState('S') & 0x8000)
         {
-            _fForwardValue = 1;
+            _fForwardValue = -1;
+            if (GetKeyState(VK_LSHIFT))
+            {
+                _fForwardValue = -2;
+            }
         }
         else
         {

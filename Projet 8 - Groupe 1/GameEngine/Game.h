@@ -23,6 +23,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	class GameHud;
 	class MenuHud;
 	class SplashHud;
+	class TargetSpawner;
 #pragma endregion
 
 //Our main game class
@@ -35,6 +36,7 @@ class Game
 			bool m_bCursorIsLocked = false;
 			RailManager* m_railManager = nullptr;
 			Cart* m_cart = nullptr;
+			TargetSpawner* m_targetSpawner = nullptr;
 			Player* m_player = nullptr;
 			SplashHud* m_splashHud = nullptr;
 			MenuHud* m_menuHud = nullptr;
