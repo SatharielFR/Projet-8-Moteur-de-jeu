@@ -3,13 +3,14 @@
 
 Entity::Entity()
 {
-//	transform = nullptr;
 	transform = new TransformComponent;
 	AddComponent(transform);
 }
 
 Entity::~Entity()
 {
+	ConsoleLog("entity");
+	delete transform;
 }
 
 

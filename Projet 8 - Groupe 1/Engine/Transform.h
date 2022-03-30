@@ -18,6 +18,7 @@ class Transform
 
 		#pragma region PublicFunction
 			Transform();
+			~Transform();
 			void Begin();
 			void Identity();
 			void UpdateMatrix();

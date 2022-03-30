@@ -10,6 +10,7 @@ class Scene
 	public:
 		#pragma region PublicFunctions
 			Scene(string strSceneName);
+			~Scene();
 			void Begin();
 			void Update();
 		#pragma endregion

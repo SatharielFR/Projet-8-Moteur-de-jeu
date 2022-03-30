@@ -6,6 +6,11 @@ Transform::Transform()
 	Identity();
 }
 
+Transform::~Transform()
+{
+	
+}
+
 void Transform::Begin()
 {
 //	Identity();

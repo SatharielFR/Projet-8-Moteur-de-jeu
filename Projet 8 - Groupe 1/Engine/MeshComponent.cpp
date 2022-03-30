@@ -13,6 +13,12 @@ MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTU
     meshAndTexturePath = meshAndTexturePathIn;
 }
 
+MeshComponent::~MeshComponent()
+{
+    delete meshTextures;
+    delete meshMaterials;
+}
+
 MeshComponent::MeshComponent() {
     numMaterials = 0;
     mesh = NULL;

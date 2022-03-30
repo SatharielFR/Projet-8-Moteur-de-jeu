@@ -46,6 +46,7 @@ class Game
 
 		#pragma region PublicFunctions
 			Game();
+			~Game();
 			void Init(HWND hWnd);
 			void Begin();
 			void Update();

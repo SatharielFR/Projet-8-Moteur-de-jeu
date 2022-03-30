@@ -60,6 +60,18 @@
         InitHUD();
     }
 
+    Game::~Game()
+    {
+        delete m_engine;
+        delete m_railManager;
+        delete m_cart;
+        delete m_targetSpawner;
+        delete m_player;
+        delete m_splashHud;
+        delete m_menuHud;
+        delete m_gameHud;
+    }
+
     void Game::InitLevel()
     {
         //Create a map for the Splash
