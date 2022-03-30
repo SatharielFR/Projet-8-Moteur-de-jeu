@@ -30,8 +30,10 @@ class Engine
 			void Close();
 			int GetFps() {return _nbFps;}
 			bool GetCollisionResult() { return _collisionResult;  }
+			RigidbodyComponent* GetRigidbody1() { return _rigidbody1; }
+			RigidbodyComponent* GetRigidbody2() { return _rigidbody2; }
 			void CollisionCheck();
-			RigidbodyComponent* Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2);
+			void Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2);
 		#pragma endregion 
 
 		#pragma region Accessors
@@ -51,6 +53,8 @@ class Engine
 			int _nbFpsCount;
 			float _fLastCheckFpsTime;
 			bool _collisionResult;
+			RigidbodyComponent* _rigidbody1;
+			RigidbodyComponent* _rigidbody2;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions

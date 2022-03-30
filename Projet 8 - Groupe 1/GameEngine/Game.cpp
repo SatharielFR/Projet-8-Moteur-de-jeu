@@ -47,7 +47,7 @@
         //Create a map for the Splash
         Scene* sceneSplash = new Scene("Splash");
         m_engine->GetSceneMananger()->AddScene(sceneSplash);
-//        m_engine->GetSceneMananger()->OpenScene("Splash");
+        m_engine->GetSceneMananger()->OpenScene("Splash");
 
         //Create Menu Splash
         m_splashHud = new SplashHud(sceneSplash, m_engine);
@@ -64,7 +64,7 @@
         //Create a map for the game
         m_sceneGame = new Scene("Game");
         m_engine->GetSceneMananger()->AddScene(m_sceneGame);
-        m_engine->GetSceneMananger()->OpenScene("Game");
+        //m_engine->GetSceneMananger()->OpenScene("Game");
 
         srand((int)Timer::s_inst->GetSystemTimeEx());
      
@@ -178,6 +178,7 @@
             UpdateInputs();
             UpdateMouseInputs();
             UpdateCameraTransfrom();
+            UpdateCollision();
         }
     }
 
@@ -299,5 +300,17 @@
        
         m_entityCamera->transform->m_transform->Rotate(l_fPitch, l_fYaw, 0);
     }
+
+    void Game::UpdateCollision()
+    {
+        if (m_engine->GetCollisionResult())
+        {
+            m_sceneGame->DestroyEntity(m_engine->GetRigidbody1()->GetParent());
+            m_sceneGame->DestroyEntity(m_engine->GetRigidbody2()->GetParent());
+
+            m_player->score += 1;
+        }
+    }
+
 
 #pragma endregion

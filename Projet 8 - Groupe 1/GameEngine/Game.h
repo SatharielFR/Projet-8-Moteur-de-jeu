@@ -72,5 +72,6 @@ class Game
 			void UpdateInputs();
 			void UpdateMouseInputs();
 			void UpdateCameraTransfrom();
+			void UpdateCollision();
 		#pragma endregion
 };
