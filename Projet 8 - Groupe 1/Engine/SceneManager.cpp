@@ -5,6 +5,11 @@ SceneManager::SceneManager()
 {
 }
 
+SceneManager::~SceneManager()
+{
+	ConsoleLog("SceneManager");
+}
+
 void SceneManager::AddScene(Scene* sceneToAdd)
 {
 	_lstScenes.push_back(sceneToAdd);

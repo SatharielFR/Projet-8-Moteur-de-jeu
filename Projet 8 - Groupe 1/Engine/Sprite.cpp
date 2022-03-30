@@ -12,6 +12,7 @@ Sprite::Sprite()
 
 Sprite::~Sprite()
 {
+    delete _vec2TextureSize;
 }
 
 void Sprite::Update()

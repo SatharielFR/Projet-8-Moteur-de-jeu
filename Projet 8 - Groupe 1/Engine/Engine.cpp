@@ -13,6 +13,21 @@ Engine::Engine(HWND hWnd)
     Init();
 }
 
+Engine::~Engine()
+{
+   // delete _hWnd;
+    delete _sceneManager;
+    delete _debug;
+    delete _timer;
+    delete _HudToDraw;
+  //  delete _sceneCurrent;
+    delete _scenePrevious;
+
+    ConsoleLog("Engine");
+}
+
+
+
 //Init all engine values
 void Engine::Init()
 {

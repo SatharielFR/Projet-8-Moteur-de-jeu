@@ -29,7 +29,7 @@ Button::Button(Engine* engine)
 
 Button::~Button()
 {
-
+	delete _spriteDefault;
 }
 
 void Button::Update()

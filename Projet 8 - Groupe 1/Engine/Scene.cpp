@@ -8,6 +8,11 @@ Scene::Scene(string strSceneName)
 	SetSceneName(strSceneName);
 }
 
+Scene::~Scene()
+{
+	ConsoleLog("Scene");
+}
+
 void Scene::Begin()
 {
 	for (Entity* currentEntity : _listEntity)

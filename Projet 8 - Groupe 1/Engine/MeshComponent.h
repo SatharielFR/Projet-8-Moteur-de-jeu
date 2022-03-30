@@ -19,6 +19,7 @@ class MeshComponent : public Component
     #pragma region Constructeur
         MeshComponent();
         MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTURE9* textureIn, D3DMATERIAL9* materialIn, string meshAndTexturePathIn);
+        ~MeshComponent();
     #pragma endregion
 
     #pragma region methods

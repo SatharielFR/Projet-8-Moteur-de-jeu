@@ -40,6 +40,7 @@ class Engine
 
 		#pragma region PublicFunctions
 			Engine(HWND hWnd);
+			~Engine();
 			void Begin();
 			void Update();
 			void Close();
