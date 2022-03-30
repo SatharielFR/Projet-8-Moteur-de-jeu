@@ -78,6 +78,10 @@ void Cart::Update()
                 _quatLerpEnd = &m_currentRailEntity->transform->m_transform->m_qRot;
                 _fLerpValue = 0;
             }
+            else
+            {
+                _bHasReachEnd = true;
+            }
         }
     }
 

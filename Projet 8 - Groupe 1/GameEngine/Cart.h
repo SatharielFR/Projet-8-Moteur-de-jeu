@@ -31,10 +31,12 @@ class Cart
 		#pragma region Accessor
 	//		m_vec3CartPosition
 			D3DXVECTOR3 GetCartPosition();
+			bool GetHasReachEnd() { return _bHasReachEnd; }
 		#pragma endregion
 
 	private:
 		#pragma region PrivateVariables
+			bool _bHasReachEnd = false;
 			int _nbForwardValue;
 			float _fCartBoostSpeed = 6.0f;
 			float _fCartDefaultSpeed = 1.5f;

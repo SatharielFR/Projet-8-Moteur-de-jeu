@@ -66,7 +66,7 @@
 	#define SCREEN_HEIGHT 1080
 	#define REAL_SCREEN_WIDTH	1800
 	#define REAL_SCREEN_HEIGHT	1020
-
+	#define RUNNER(str)[=]{str();}
 
 	#define MAX_LOADSTRING 100
 	//Struct for 3D

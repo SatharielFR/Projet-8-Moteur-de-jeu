@@ -50,14 +50,29 @@
 		_lstSprites.push_back(spriteToAdd);
 	}
 
+	void HUD::RemoveSprite(Sprite* spriteToAdd)
+	{
+		_lstSprites.remove(spriteToAdd);
+	}
+
 	void HUD::AddButton(Button* buttonToAdd)
 	{
 		_lstButtons.push_back(buttonToAdd);
 	}
 
+	void HUD::RemoveButton(Button* buttonToAdd)
+	{
+		_lstButtons.remove(buttonToAdd);
+	}
+
 	void HUD::AddText(Text* textToAdd)
 	{
 		_lstTexts.push_back(textToAdd);
+	}
+
+	void HUD::RemoveText(Text* textToAdd)
+	{
+		_lstTexts.remove(textToAdd);
 	}
 
 	//UNTESTED AND PROBABLY INCOMPLETE

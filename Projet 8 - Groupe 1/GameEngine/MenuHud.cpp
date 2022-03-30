@@ -2,8 +2,6 @@
 #include "MenuHud.h"
 #include "GameHud.h"
 
-#define RUNNER(str)[=]{str();}
-
 
 MenuHud::MenuHud(Scene* scene, Engine* engine)
 {
@@ -19,6 +17,7 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	_colorBackground = D3DXCOLOR(1, 1, 1, 1);
 	_colorButtonDefault = D3DXCOLOR(0, 0, 0, 0.2f);
 	_colorButtonHover = _colorTitle;
+	_colorBlack = D3DXCOLOR(0, 0, 0, 1.0f);
 
 	//Background
 	_spriteBackground = new Sprite();
@@ -68,6 +67,13 @@ MenuHud::MenuHud(Scene* scene, Engine* engine)
 	//_labelExit->SetText("Exit");
 	//_labelExit->SetPosition(SCREEN_WIDTH / 2 - 60, 800);
 	//l_menuHUD->AddText(_labelExit);
+
+	_labelGroupe = new Text();
+	_labelGroupe->SetFontSize(1);
+	_labelGroupe->SetTextColor(_colorBlack);
+	_labelGroupe->SetText("Groupe 1 : Leo / Rodrigue / Janaky");
+	_labelGroupe->SetPosition(SCREEN_WIDTH / 2 - 220, REAL_SCREEN_HEIGHT - 100 );
+	l_menuHUD->AddText(_labelGroupe);
 
 	//Buttons
 	float l_nbButtonScale = 1.5;
