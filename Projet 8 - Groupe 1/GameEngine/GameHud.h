@@ -8,22 +8,33 @@ class GameHud
 			GameHud(Scene* scene, Engine* engine);
 			~GameHud();
 			void Update();
+			void ShowEndMenu();
 		#pragma endregion
 
 
 	private: 
+		#pragma region UtilityFunctions
+			void CreateMain();
+			void DestroyMain();
+			void CreateEnd();
+			void Return();
+		#pragma endregion
+
 		#pragma region RuntimeVariables
 			Engine* _engine;
 			Scene* _scene;
+			HUD* _gameHUD;
+			bool _bEndMenuIsActive = false;
 		#pragma endregion
 
 		#pragma region Params
 			D3DXCOLOR _colorTitle;
 			D3DXCOLOR _colorContent;
 			D3DXCOLOR _colorFooter;
+			D3DXCOLOR _colorWhite;
 		#pragma endregion
 
-		#pragma region Content
+		#pragma region ContentMain
 			//Sprites
 			Sprite* _spriteCrosshair;
 			Sprite* _spriteFooter;
@@ -36,6 +47,17 @@ class GameHud
 			//Score
 			Text* _labelScoreTitle;
 			Text* _labelScoreContent;
+		#pragma endregion
+
+		#pragma region ContentMain
+			//Sprites
+			Sprite* _spriteBackgroundEnd;
+			//Time
+			Text* _labelTimeEnd;
+			//Score
+			Text* _labelScoreEnd;
+			//Button Return
+			Button* _buttonReturn;
 		#pragma endregion
 };
 

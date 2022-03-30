@@ -26,16 +26,16 @@ class Game
 {
 	public:
 		#pragma region publicVariables
-			Engine* m_engine = nullptr;
-			bool m_bIsRunning = false;
-			bool m_bCursorIsLocked = false;
-			RailManager* m_railManager = nullptr;
-			Cart* m_cart = nullptr;
-			TargetSpawner* m_targetSpawner = nullptr;
-			Player* m_player = nullptr;
-			SplashHud* m_splashHud = nullptr;
-			MenuHud* m_menuHud = nullptr;
-			GameHud* m_gameHud = nullptr;
+			Engine* m_engine ;
+			bool m_bIsRunning ;
+			bool m_bCursorIsLocked ;
+			RailManager* m_railManager;
+			Cart* m_cart;
+			TargetSpawner* m_targetSpawner;
+			Player* m_player;
+			SplashHud* m_splashHud ;
+			MenuHud* m_menuHud;
+			GameHud* m_gameHud;
 		#pragma endregion
 
 		#pragma region GamePointers
@@ -54,14 +54,14 @@ class Game
 
 	private:
 		#pragma region PrivateFunctions
-			float _fForwardValue = 0;
-			float _fHorizontalValue = 0;
-			float _fSpeed = 8.f;// 0.05f;
-			int _nbMouseX = 0;
-			int _nbMouseY = 0;
+			float _fForwardValue ;
+			float _fHorizontalValue ;
+			float _fSpeed;// 0.05f;
+			int _nbMouseX;
+			int _nbMouseY;
 			int _MouseMovementX;
 			int _MouseMovementY;
-			float _fCameraOffset = 3.f;
+			float _fCameraOffset;
 		#pragma endregion
 
 		#pragma region PrivateFunctions	

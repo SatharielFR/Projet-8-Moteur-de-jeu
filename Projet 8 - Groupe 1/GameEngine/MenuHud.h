@@ -23,6 +23,7 @@ class MenuHud
 		D3DXCOLOR _colorContent;
 		D3DXCOLOR _colorButtonDefault;
 		D3DXCOLOR _colorButtonHover;
+		D3DXCOLOR _colorBlack;
 	#pragma endregion
 
 	#pragma region Content
@@ -35,6 +36,7 @@ class MenuHud
 		Text* _labelPlay;
 		Text* _labelCredits;
 		Text* _labelExit;
+		Text* _labelGroupe;
 		//Buttons
 		Button* _buttonPlay;
 		Button* _buttonCredits;
