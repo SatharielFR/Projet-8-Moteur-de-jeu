@@ -65,7 +65,7 @@
         //Create a map for the Splash
         Scene* sceneSplash = new Scene("Splash");
         m_engine->GetSceneMananger()->AddScene(sceneSplash);
-//        m_engine->GetSceneMananger()->OpenScene("Splash");
+        m_engine->GetSceneMananger()->OpenScene("Splash");
 
         //Create Menu Splash
         m_splashHud = new SplashHud(sceneSplash, m_engine);
@@ -73,7 +73,7 @@
         //Create a map for the Menu
         Scene* sceneMenu = new Scene("Menu");
         m_engine->GetSceneMananger()->AddScene(sceneMenu);
-        //m_engine->GetSceneMananger()->OpenScene("Menu");
+//        m_engine->GetSceneMananger()->OpenScene("Menu");
 
         //Create Menu HUD
         m_menuHud = new MenuHud(sceneMenu, m_engine);
@@ -82,15 +82,13 @@
         //Create a map for the game
         m_sceneGame = new Scene("Game");
         m_engine->GetSceneMananger()->AddScene(m_sceneGame);
-        m_engine->GetSceneMananger()->OpenScene("Game");
+//        m_engine->GetSceneMananger()->OpenScene("Game");
 
         srand((int)Timer::s_inst->GetSystemTimeEx());
-     
     }
 
     void Game::InitEntity()
     {
-
         //Create Skybox
         Entity* l_entitySkybox = new Entity();
         m_sceneGame->AddEntity(l_entitySkybox);
@@ -153,7 +151,6 @@
         {
             m_menuHud->Update();
         }
-        //if (m_sceneMain->GetHasStarted())
         if(m_engine->GetSceneMananger()->GetSceneByName("Game")->GetIsRunning())
         {
             m_gameHud->Update();

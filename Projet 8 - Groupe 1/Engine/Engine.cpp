@@ -135,6 +135,8 @@ void Engine::RenderFrame(void)
         {
             //update the list of entities
             l_entities = _sceneCurrent->GetEntities();
+            //Update HUD
+            _HudToDraw = _sceneManager->GetCurrentScene()->GetHUD();
         }
 
         //For each Components of the scene
@@ -179,11 +181,11 @@ void Engine::RenderFrame(void)
         }
 
         //draw HUD on top
-        _HudToDraw = _sceneManager->GetCurrentScene()->GetHUD();
         if (_HudToDraw != nullptr) 
         {
             _HudToDraw->UpdateHUD(d3ddev);
         }
+
 
         _scenePrevious = _sceneCurrent;
     }

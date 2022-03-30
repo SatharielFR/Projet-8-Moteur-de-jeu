@@ -15,13 +15,13 @@ Entity::~Entity()
 
 void Entity::Begin()
 {
-//	transform = new TransformComponent;
-//	AddComponent(transform);
-
 	//Begin All child Entities
 	for (Entity* currentEntity : _lstEntityChild)
 	{
-		currentEntity->Begin();
+		if (currentEntity != this)
+		{
+			currentEntity->Begin();
+		}
 	}
 	//Begin All Components
 	for (Component* currentChild : _lstComponentChild)
