@@ -5,16 +5,11 @@
 
 
 
-// Déclarations anticipées des fonctions incluses dans ce module de code :
-ATOM                MyRegisterClass(HINSTANCE hInstance);
-BOOL                InitInstance(HINSTANCE, int);
-// the WindowProc function prototype
-LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-//INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
 
 
 #pragma region ForwardDeclaration
-	class Game* g_game;
+
 	class Entity;
 	class CameraComponent;
 	class RailManager;
@@ -48,7 +43,8 @@ class Game
 		#pragma endregion
 
 		#pragma region PublicFunctions
-			Game(HWND hWnd);
+			Game();
+			void Init(HWND hWnd);
 			void Begin();
 			void Update();
 			void Close();
@@ -61,12 +57,16 @@ class Game
 			float _fSpeed = 8.f;// 0.05f;
 			int _nbMouseX = 0;
 			int _nbMouseY = 0;
-			int l_MouseMovementX;
-			int l_MouseMovementY;
+			int _MouseMovementX;
+			int _MouseMovementY;
 			float _fCameraOffset = 3.f;
 		#pragma endregion
 
 		#pragma region PrivateFunctions	
+			void InitLevel();
+			void InitEntity();
+			void InitCamera();
+			void InitHUD();
 			void UpdateInputs();
 			void UpdateMouseInputs();
 			void UpdateCameraTransfrom();
