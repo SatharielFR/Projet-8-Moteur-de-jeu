@@ -88,15 +88,14 @@ void Entity::AddEntity(Entity* newEntityToAdd)
 
 void Entity::RemoveEntity(Entity* EntityToRem)
 {
-	if (EntityToRem == nullptr) { return; }
+	if (EntityToRem == nullptr || _lstEntityChild.size() < 1) { return; }
 
-	for (auto i = _lstEntityChild.begin(); i != _lstEntityChild.end(); i++)
-	{
-		if (*i == EntityToRem)
-		{
-			_lstEntityChild.erase(i);
-		}
-	}
+	auto i = std::find(_lstEntityChild.begin(), _lstEntityChild.end(), EntityToRem);
+
+	if (i == _lstEntityChild.end()) { return; }
+
+	_lstEntityChild.erase(i);
+	delete EntityToRem;
 }
 
 void Entity::AddComponent(Component* newComponentToAdd)
@@ -140,15 +139,12 @@ Component* Entity::GetComponentByName(string name)
 
 void Entity::RemoveComponent(Component* ComponentToRem)
 {
-	if (ComponentToRem == nullptr) { return; }
+	if (ComponentToRem == nullptr || _lstComponentChild.size() < 1) { return; }
 
-	for (auto i = _lstComponentChild.begin(); i != _lstComponentChild.end(); i++)
-	{
-		if (*i == ComponentToRem)
-		{
-			_lstComponentChild.erase(i);
-			delete ComponentToRem;
-		}
-	}
-	_lstComponentChild.shrink_to_fit();
+	auto i = std::find(_lstComponentChild.begin(), _lstComponentChild.end(), ComponentToRem);
+
+	if (i == _lstComponentChild.end()) { return; }
+
+	_lstComponentChild.erase(i);
+	delete ComponentToRem;
 }

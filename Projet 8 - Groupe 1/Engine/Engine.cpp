@@ -211,7 +211,7 @@ void Engine::CollisionCheck()
     }
 }
 
-void Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
+RigidbodyComponent* Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
 {
     D3DXVECTOR3 pos1 = rb1->GetParent()->transform->m_transform->m_vPos;
     D3DXVECTOR3 pos2 = rb2->GetParent()->transform->m_transform->m_vPos;
@@ -221,13 +221,17 @@ void Engine::Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2)
                   std::pow(pos2.z - pos1.z, 2)
                   <= rb1->radius + rb2->radius;
 
-    if (result)
+    _collisionResult = result;
+
+    /*if (result)
     {
         Debug::s_inst->ScreenLog("CC");
         Scene* scene = GetSceneMananger()->GetSceneByName("Game");
         scene->DestroyEntity(rb1->GetParent());
         scene->DestroyEntity(rb2->GetParent());
-    }
+    }*/
+
+    return rb1, rb2;
 }
 
 

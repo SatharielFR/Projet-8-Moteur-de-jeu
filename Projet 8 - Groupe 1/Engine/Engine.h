@@ -29,6 +29,9 @@ class Engine
 			void Update();
 			void Close();
 			int GetFps() {return _nbFps;}
+			bool GetCollisionResult() { return _collisionResult;  }
+			void CollisionCheck();
+			RigidbodyComponent* Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2);
 		#pragma endregion 
 
 		#pragma region Accessors
@@ -47,6 +50,7 @@ class Engine
 			int _nbFps;
 			int _nbFpsCount;
 			float _fLastCheckFpsTime;
+			bool _collisionResult;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions
@@ -59,7 +63,5 @@ class Engine
 			void InitGraphics(void);    // 3D declarations
 			void RenderFrame(void);		// renders a single frame
 			void CleanD3D(void);		// closes Direct3D and releases memory
-			void CollisionCheck();
-			void Collision(RigidbodyComponent* rb1, RigidbodyComponent* rb2);
 		#pragma endregion
 };
