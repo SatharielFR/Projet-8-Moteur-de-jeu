@@ -15,12 +15,12 @@ Engine::Engine(HWND hWnd)
 
 Engine::~Engine()
 {
-    delete _hWnd;
+   // delete _hWnd;
     delete _sceneManager;
     delete _debug;
     delete _timer;
     delete _HudToDraw;
-    delete _sceneCurrent;
+  //  delete _sceneCurrent;
     delete _scenePrevious;
 
     ConsoleLog("Engine");
