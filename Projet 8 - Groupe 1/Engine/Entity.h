@@ -33,7 +33,7 @@ class Entity
 	protected:
 		#pragma region PrivateVariable
 			Entity* _entityParent = nullptr;
-			list<Entity*> _lstEntityChild;
+			vector<Entity*> _lstEntityChild;
 			vector<Component*> _lstComponentChild;
 		#pragma endregion
 };
