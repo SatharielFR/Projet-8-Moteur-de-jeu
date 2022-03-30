@@ -131,12 +131,14 @@ void Engine::RenderFrame(void)
     if (_sceneCurrent)
     {
         //if the scene has changedn 
-        if (_sceneCurrent != _scenePrevious)
+        if (_sceneCurrent != _scenePrevious || _sceneCurrent->GetEntityHasBeenHaded() == true)
         {
             //update the list of entities
             l_entities = _sceneCurrent->GetEntities();
             //Update HUD
             _HudToDraw = _sceneManager->GetCurrentScene()->GetHUD();
+            //Clean Dirty
+            _sceneCurrent->SetEntityHasBeenHaded(false);
         }
 
         //For each Components of the scene

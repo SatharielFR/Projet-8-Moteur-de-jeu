@@ -38,7 +38,6 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 	if (_listEntity.size() == 0 ) 
 	{
 		_listEntity.push_back(l_entityToAdd);
-		return;
 	}
 	else
 	{
@@ -55,6 +54,7 @@ void Scene::AddEntity(Entity* l_entityToAdd)
 			_listEntity.push_back(l_entityToAdd);
 		}
 	}
+	SetEntityHasBeenHaded(true);
 }
 
 void Scene::DestroyEntity(Entity* l_entityToDestroy)

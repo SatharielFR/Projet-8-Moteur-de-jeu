@@ -24,6 +24,8 @@ class Scene
 			HUD* GetHUD() { return _sceneHUD; }
 			void SetIsRunning(bool value) {m_bIsRunning = value;}
 			bool GetIsRunning() {return m_bIsRunning;}
+			void SetEntityHasBeenHaded(bool value) { _bEntityHasBeenHaded = value;}
+			bool GetEntityHasBeenHaded() {return _bEntityHasBeenHaded;}
 		#pragma endregion
 
 	private:
@@ -32,6 +34,7 @@ class Scene
 			std::vector<Entity*> _listEntity;
 			HUD* _sceneHUD;
 			bool m_bIsRunning = false;
+			bool _bEntityHasBeenHaded = false;
 		#pragma endregion
 };
 
