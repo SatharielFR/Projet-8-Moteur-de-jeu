@@ -7,6 +7,7 @@
 	class Debug;
 	class Timer;
 	class HUD;
+	class Entity;
 #pragma endregion
 
 struct CollisionResult {
@@ -65,6 +66,8 @@ class Engine
 			int _nbFps;
 			int _nbFpsCount;
 			float _fLastCheckFpsTime;
+			D3DCOLOR ClearColor;
+			vector<Entity*> l_entities;
 		#pragma endregion 
 
 		#pragma region PrivateFunctions

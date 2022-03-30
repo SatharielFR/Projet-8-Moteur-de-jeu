@@ -178,9 +178,9 @@
             {
                 m_cart->Update();
                 m_cart->SetForwardValue(_fForwardValue);
-                m_player->l_player->transform->m_transform->SetPosition(m_cart->m_entityCart->transform->m_transform->m_vPos.x,
-                    m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
-                    m_cart->m_entityCart->transform->m_transform->m_vPos.z);
+                m_player->l_player->transform->m_transform->SetPosition(    m_cart->m_entityCart->transform->m_transform->m_vPos.x,
+                                                                            m_cart->m_entityCart->transform->m_transform->m_vPos.y + _fCameraOffset,
+                                                                            m_cart->m_entityCart->transform->m_transform->m_vPos.z);
                 m_player->Update(m_sceneGame);
                 UpdateInputs();
                 UpdateMouseInputs();
