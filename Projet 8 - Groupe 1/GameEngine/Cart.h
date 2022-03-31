@@ -14,9 +14,9 @@ class Cart
 		~Cart();
 
 		#pragma region Variables
-			Scene* m_scene = nullptr;
-			RailManager* m_railManager = nullptr;
-			Entity* m_currentRailEntity = nullptr;
+			Scene* m_scene;
+			RailManager* m_railManager;
+			Entity* m_currentRailEntity;
 			std::list<Entity*>::iterator itRail;
 			Entity* m_entityCart;
 			D3DXVECTOR3 m_vec3CartPosition;
@@ -37,10 +37,10 @@ class Cart
 		#pragma region PrivateVariables
 			bool _bHasReachEnd = false;
 			int _nbForwardValue;
-			float _fCartBoostSpeed = 6.0f;
-			float _fCartDefaultSpeed = 1.5f;
-			float _fCartSpeed = 0.f;
-			float _fLerpValue = 0.f;
+			float _fCartBoostSpeed;
+			float _fCartDefaultSpeed;
+			float _fCartSpeed;
+			float _fLerpValue;
 			D3DXVECTOR3* _vec3LerpStart;
 			D3DXVECTOR3* _vec3LerpEnd;
 			D3DXVECTOR3* _vec3NewLocation;

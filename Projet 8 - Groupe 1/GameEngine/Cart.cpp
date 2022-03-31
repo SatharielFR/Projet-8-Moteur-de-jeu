@@ -5,6 +5,8 @@ Cart::Cart(Scene* scene, RailManager* railManager)
 {
     m_scene = scene;
     m_railManager = railManager;
+    _fCartBoostSpeed = 6.0f;
+    _fCartDefaultSpeed = 1.5f;
     //Create the Cart
     m_entityCart = new Entity();
     m_scene->AddEntity(m_entityCart);

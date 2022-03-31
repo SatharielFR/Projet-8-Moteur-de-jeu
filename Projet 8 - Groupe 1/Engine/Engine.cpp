@@ -95,7 +95,7 @@ void Engine::InitD3D(HWND hWnd)
     d3d->CreateDevice(D3DADAPTER_DEFAULT,
         D3DDEVTYPE_HAL,
         hWnd,
-        D3DCREATE_SOFTWARE_VERTEXPROCESSING,
+        D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_PUREDEVICE,
         &d3dpp,
         &d3ddev);
     InitGraphics();    // call the function to initialize the triangle

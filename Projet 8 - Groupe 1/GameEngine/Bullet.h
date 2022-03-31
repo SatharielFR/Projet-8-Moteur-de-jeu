@@ -12,6 +12,7 @@ class Bullet
 
 		#pragma region PublicFunctions
 			Bullet(Scene* scene);
+			~Bullet();
 			void Begin(Scene* scene);
 			void CreateBullet(Scene* scene);
 		#pragma endregion

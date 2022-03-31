@@ -6,6 +6,13 @@ Bullet::Bullet(Scene* scene)
 	Begin(scene);
 }
 
+Bullet::~Bullet()
+{
+	delete l_bullet;
+	m_scene = nullptr;
+	delete m_scene;
+}
+
 void Bullet::Begin(Scene* scene)
 {
 	CreateBullet(scene);
