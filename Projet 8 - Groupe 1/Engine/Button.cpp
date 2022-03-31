@@ -98,13 +98,13 @@ bool Button::IsMouseHover()
 			bool bIsInX = false;
 			bool bIsInY = false;
 
-			if (l_mousePosX > _spriteDefault->GetPosition().x /*+ (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth()) /2*/ &&
-				l_mousePosX < _spriteDefault->GetPosition().x + (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth())/* *2 */)
+			if (l_mousePosX > _spriteDefault->GetPosition().x + (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth())/2 &&
+				l_mousePosX < _spriteDefault->GetPosition().x + (_spriteDefault->GetTextureSize().x * _spriteDefault->GetWidth()) *2)
 			{
 				bIsInX = true;
 			}
-			if (l_mousePosY > _spriteDefault->GetPosition().y /*+ (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /2*/ &&
-				l_mousePosY < _spriteDefault->GetPosition().y + (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) /**2*/)
+			if (l_mousePosY > _spriteDefault->GetPosition().y + (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) &&
+				l_mousePosY < _spriteDefault->GetPosition().y + (_spriteDefault->GetTextureSize().y * _spriteDefault->GetHeight()) *3)
 			{
 				bIsInY = true;
 			}
