@@ -5,16 +5,14 @@
 class Target
 {
 	public:
-
 		#pragma region publicVariables
 			Entity* l_target;
 			Scene* m_scene;
 		#pragma endregion
 
 		#pragma region PublicFunctions
-			Target(Scene* scene);
-			void Begin(Scene* scene);
-			void CreateTarget(Scene* scene);
+			Target(Scene* scene, MeshComponent* meshComponent);
+			void CreateTarget(Scene* scene, MeshComponent* meshComponent);
 		#pragma endregion
 };
 

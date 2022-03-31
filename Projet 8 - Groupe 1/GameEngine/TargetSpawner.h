@@ -20,6 +20,7 @@ class TargetSpawner
 			Scene* _scene;
 			list<Target*> _lstTarget;
 			RailManager* _railManager;
+			MeshComponent* _meshComponentTarget;
 		#pragma endregion
 
 		#pragma region PrivateFunctions

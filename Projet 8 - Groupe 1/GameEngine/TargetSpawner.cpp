@@ -6,10 +6,14 @@ TargetSpawner::TargetSpawner(Scene* scene, RailManager* railManager)
 	_railManager = railManager;
 
     _fSpawnPercentChance = 20.0f;
+    _meshComponentTarget = new MeshComponent();
+    _meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
 }
 
 TargetSpawner::~TargetSpawner()
 {
+    _meshComponentTarget = nullptr;
+    delete _meshComponentTarget;
 }
 
 void TargetSpawner::Reset()
@@ -36,7 +40,7 @@ void TargetSpawner::SpawnTargets()
             if (fRandom > 100 - _fSpawnPercentChance)
             {
                 //Create a Target
-                Target* target = new Target(_scene);
+                Target* target = new Target(_scene, _meshComponentTarget);
                 target->l_target->transform->m_transform->ScalingUniforme(0.01f);
 
 
