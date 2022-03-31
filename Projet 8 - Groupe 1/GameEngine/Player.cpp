@@ -54,6 +54,7 @@ void Player::Shoot(Scene* scene)
                 Bullet* projectile = new Bullet(scene);
                 projectile->l_bullet->transform->m_transform->SetPosition(l_cameraComponent->origin.x, l_cameraComponent->origin.y, l_cameraComponent->origin.z);
                 projectile->l_bullet->transform->m_transform->ScalingUniforme(0.02f);
+                projectile->l_bullet->transform->m_transform->Rotate(_fRotationX, _fRotationY,0);
                 RigidbodyComponent* l_bulletRigidbody = (RigidbodyComponent*)(projectile->l_bullet->GetComponentByType<RigidbodyComponent>());
                 l_bulletRigidbody->useGravity = true;
                 if (l_bulletRigidbody != nullptr)
@@ -64,7 +65,16 @@ void Player::Shoot(Scene* scene)
                 }
                 canShoot = false;
                 cooldown = 1.0f;
+
+                //Sound
+                PlaySound(TEXT("..\\Ressources\\Shoot.wav"), NULL, SND_FILENAME | SND_ASYNC);
             }
         }
     }
+}
+
+void Player::SaveRotation(float fRotationX, float fRotationY)
+{
+    _fRotationX = fRotationX;
+    _fRotationY = fRotationY;
 }

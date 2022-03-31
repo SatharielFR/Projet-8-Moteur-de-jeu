@@ -208,8 +208,6 @@ void Game::UpdateCollision()
 
 void Game::UpdateCameraTransfrom()
 {
-
-
     m_entityCamera->transform->m_transform->SetPosition(m_cart->GetCartPosition().x,
         m_cart->GetCartPosition().y + _fCameraOffset,
         m_cart->GetCartPosition().z);
@@ -227,6 +225,7 @@ void Game::UpdateCameraTransfrom()
     l_fPitch = std::clamp(l_fPitch, -D3DX_PI / 3, D3DX_PI / 3);
 
     m_entityCamera->transform->m_transform->Rotate(l_fPitch, l_fYaw, 0);
+    m_player->SaveRotation(l_fPitch, l_fYaw);
 }
 
 //End

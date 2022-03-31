@@ -52,6 +52,9 @@ void GameHud::ShowEndMenu()
     {
         DestroyMain();
         CreateEnd();
+
+        //Sound
+        PlaySound(TEXT("..\\Ressources\\Win.wav"), NULL, SND_FILENAME | SND_ASYNC);
     }
 }
 
@@ -201,7 +204,7 @@ void GameHud::CreateEnd()
     _buttonReturn->SetTextureResolution(1024, 342);
     _buttonReturn->SetWidth(l_nbSizeExitX);
     _buttonReturn->SetHeight(l_nbSizeExitY);
-    _buttonReturn->SetPosition(REAL_SCREEN_WIDTH / 2 - l_nbSizeExitX, 630);
+    _buttonReturn->SetPosition(REAL_SCREEN_WIDTH / 2 - l_nbSizeExitX, 730);
     _buttonReturn->SetDefaultColor(&_colorWhite);
     _buttonReturn->SetHoverColor(&_colorWhite);
     _gameHUD->AddButton(_buttonReturn);
@@ -233,6 +236,9 @@ void GameHud::DestroyEnd()
 
 void GameHud::Return()
 {
+    //Sound
+    PlaySound(TEXT("..\\Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
     _engine->GetSceneMananger()->OpenScene("Menu");
     ShowCursor(true);
 }

@@ -20,6 +20,13 @@ class Player
 			void Update(Scene* scene);
 			void CreatePlayer(Scene* scene);
 			void Shoot(Scene* scene);
+			void SaveRotation(float fRotationX, float fRotationY);
+		#pragma endregion
+
+	private:
+		#pragma region PrivateVariables
+			float _fRotationX;
+			float _fRotationY;
 		#pragma endregion
 };
 
