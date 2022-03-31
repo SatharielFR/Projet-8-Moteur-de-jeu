@@ -71,10 +71,10 @@ void GameHud::CreateMain()
 {
     //Crosshair
     _spriteCrosshair = new Sprite();
-    float l_fCrosshairScale = 60.0f;
+    float l_fCrosshairScale = 45.0f;
     _spriteCrosshair->SetTexture("Crosshair.bmp");
     _spriteCrosshair->SetScale(l_fCrosshairScale);
-    _spriteCrosshair->SetPosition((SCREEN_WIDTH / 2.0f) - (l_fCrosshairScale)-60,
+    _spriteCrosshair->SetPosition((SCREEN_WIDTH / 2.0f) - (l_fCrosshairScale)-30,
         (SCREEN_HEIGHT / 2.0f) - (l_fCrosshairScale));
     _spriteCrosshair->SetSpriteColor(&_colorTitle);
     _gameHUD->AddSprite(_spriteCrosshair);
@@ -89,42 +89,49 @@ void GameHud::CreateMain()
     _gameHUD->AddSprite(_spriteFooter);
 
     //Label FPS Title
+    float l_fTextScale = 1.3f;
     _labelFpsTitle = new Text();
     _labelFpsTitle->SetTextColor(_colorTitle);
+    _labelFpsTitle->SetFontSize(l_fTextScale);
     _labelFpsTitle->SetText("FPS : ");
     _labelFpsTitle->SetPosition(SCREEN_WIDTH - 300, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelFpsTitle);
 
     //Label FPS Content
     _labelFpsContent = new Text();
+    _labelFpsContent->SetFontSize(l_fTextScale);
     _labelFpsContent->SetTextColor(_colorContent);
-    _labelFpsContent->SetPosition(SCREEN_WIDTH - 230, SCREEN_HEIGHT - 80);
+    _labelFpsContent->SetPosition(SCREEN_WIDTH - 200, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelFpsContent);
 
     //Label Time Title
     _labelTimeTitle = new Text();
+    _labelTimeTitle->SetFontSize(l_fTextScale);
     _labelTimeTitle->SetTextColor(_colorTitle);
     _labelTimeTitle->SetText("Time : ");
-    _labelTimeTitle->SetPosition(200, SCREEN_HEIGHT - 80);
+    _labelTimeTitle->SetPosition(180, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelTimeTitle);
 
     //Label Time Content
     _labelTimeContent = new Text();
+    _labelTimeContent->SetFontSize(l_fTextScale);
     _labelTimeContent->SetTextColor(_colorContent);
     _labelTimeContent->SetPosition(300, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelTimeContent);
 
-    //Label Time Title
+    //Label Score Title
     _labelScoreTitle = new Text();
+    _labelScoreTitle->SetFontSize(l_fTextScale);
     _labelScoreTitle->SetTextColor(_colorTitle);
     _labelScoreTitle->SetText("Score : ");
-    _labelScoreTitle->SetPosition(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT - 80);
+    _labelScoreTitle->SetPosition(SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelScoreTitle);
 
-    //Label Time Content
+    //Label Score Content
     _labelScoreContent = new Text();
+    _labelScoreContent->SetFontSize(l_fTextScale);
     _labelScoreContent->SetTextColor(_colorContent);
-    _labelScoreContent->SetPosition(SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT - 80);
+    _labelScoreContent->SetPosition(SCREEN_WIDTH / 2 + 30, SCREEN_HEIGHT - 80);
     _gameHUD->AddText(_labelScoreContent);
     _labelScoreContent->SetText("0");
 
