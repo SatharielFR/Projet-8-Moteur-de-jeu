@@ -64,7 +64,7 @@ void SplashHud::Update()
 	if (!_bSoundHasBeenPlayed && Timer::s_inst->GetSystemTimeEx() > _fSoundDelay)
 	{
 		//Sound
-		PlaySound(TEXT("..\\Ressources\\TigerRoar.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		PlaySound(TEXT("Ressources\\TigerRoar.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		_bSoundHasBeenPlayed = true;
 	}
 

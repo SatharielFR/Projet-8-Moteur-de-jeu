@@ -7,7 +7,7 @@ TargetSpawner::TargetSpawner(Scene* scene, RailManager* railManager)
 
     _fSpawnPercentChance = 20.0f;
     _meshComponentTarget = new MeshComponent();
-    _meshComponentTarget->SetMeshAndTexturePath("..\\Ressources\\Target.x");
+    _meshComponentTarget->SetMeshAndTexturePath("Ressources\\Target.x");
 }
 
 TargetSpawner::~TargetSpawner()

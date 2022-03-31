@@ -9,7 +9,7 @@ Cart::Cart(Scene* scene, RailManager* railManager)
     m_entityCart = new Entity();
     m_scene->AddEntity(m_entityCart);
     MeshComponent* l_meshComponentCart = new MeshComponent();
-    l_meshComponentCart->SetMeshAndTexturePath("..\\Ressources\\Cart.x");
+    l_meshComponentCart->SetMeshAndTexturePath("Ressources\\Cart.x");
     m_entityCart->AddComponent(l_meshComponentCart);
     //Init Cart position
     m_entityCart->transform->m_transform->Move(0.0f, 1.0f, 0.0f);

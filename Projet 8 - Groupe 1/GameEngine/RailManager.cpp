@@ -26,11 +26,11 @@ void RailManager::Reset()
 void RailManager::CreateMeshComponents()
 {
     _meshComponentRailsForward = new MeshComponent();
-    _meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
+    _meshComponentRailsForward->SetMeshAndTexturePath("Ressources\\Rail-Forward.x");
     _meshComponentRailsTurn = new MeshComponent();
-    _meshComponentRailsTurn->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
+    _meshComponentRailsTurn->SetMeshAndTexturePath("Ressources\\Rail-Right.x");
     _meshComponentRailsUp = new MeshComponent();
-    _meshComponentRailsUp->SetMeshAndTexturePath("..\\Ressources\\Rail-Up.x");
+    _meshComponentRailsUp->SetMeshAndTexturePath("Ressources\\Rail-Up.x");
 }
 
 void RailManager::CreateRails(Scene* scene)

@@ -24,7 +24,7 @@ void Sprite::Update()
 void Sprite::SetTexture(string strTextureName)
 {
     //create full path
-    string strFileName = "..\\Ressources\\";
+    string strFileName = "Ressources\\";
     strFileName.append((string)strTextureName);
 
     //making string to lpwstr for CreateTextureFromFile

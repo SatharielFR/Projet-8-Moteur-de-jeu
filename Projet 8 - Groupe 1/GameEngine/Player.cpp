@@ -69,7 +69,7 @@ void Player::Shoot(Scene* scene)
                 cooldown = 1.0f;
 
                 //Sound
-                PlaySound(TEXT("..\\Ressources\\Shoot.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                PlaySound(TEXT("Ressources\\Shoot.wav"), NULL, SND_FILENAME | SND_ASYNC);
             }
         }
     }

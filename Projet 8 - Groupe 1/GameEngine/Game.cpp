@@ -99,7 +99,7 @@ void Game::InitEntity()
     Entity* l_entitySkybox = new Entity();
     m_sceneGame->AddEntity(l_entitySkybox);
     MeshComponent* l_meshComponentSkybox = new MeshComponent();
-    l_meshComponentSkybox->SetMeshAndTexturePath("..\\Ressources\\Skybox.x");
+    l_meshComponentSkybox->SetMeshAndTexturePath("Ressources\\Skybox.x");
     l_entitySkybox->AddComponent(l_meshComponentSkybox);
     l_entitySkybox->transform->m_transform->Scaling(1000.f, 1000.f, 1000.f);
 
@@ -107,7 +107,7 @@ void Game::InitEntity()
     Entity* l_entityGround = new Entity();
     m_sceneGame->AddEntity(l_entityGround);
     MeshComponent* l_meshComponentGround = new MeshComponent();
-    l_meshComponentGround->SetMeshAndTexturePath("..\\Ressources\\Plane.x");
+    l_meshComponentGround->SetMeshAndTexturePath("Ressources\\Plane.x");
     l_entityGround->AddComponent(l_meshComponentGround);
     l_entityGround->transform->m_transform->ScalingUniforme(10.0f);
     l_entityGround->transform->m_transform->SetPosition(0.0f, 0.0f, 0.0f);

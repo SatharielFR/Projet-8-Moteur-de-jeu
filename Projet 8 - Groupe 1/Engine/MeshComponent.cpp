@@ -63,7 +63,7 @@ void MeshComponent::LoadMesh(LPCTSTR file, LPDIRECT3DDEVICE9 device)
             if (l_d3dxMaterials[i].pTextureFilename) {
 
                 //create full path
-                string strFileName = "..\\Ressources\\";
+                string strFileName = "Ressources\\";
                 strFileName.append((string)l_d3dxMaterials[i].pTextureFilename);
 
                 //store it in class variable

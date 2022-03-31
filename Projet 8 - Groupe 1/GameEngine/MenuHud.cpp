@@ -129,7 +129,7 @@ void MenuHud::Update()
 void MenuHud::Play()
 {	
 	//Sound
-	PlaySound(TEXT("..\\Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	_game->StartGame();
 }
@@ -137,13 +137,13 @@ void MenuHud::Play()
 void MenuHud::Credits()
 {
 	//Sound
-	PlaySound(TEXT("..\\Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
 void MenuHud::Exit()
 {
 	//Sound
-	PlaySound(TEXT("..\\Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	PostQuitMessage(WM_CLOSE);
 }

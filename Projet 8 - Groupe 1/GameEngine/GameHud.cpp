@@ -54,7 +54,7 @@ void GameHud::ShowEndMenu()
         CreateEnd();
 
         //Sound
-        PlaySound(TEXT("..\\Ressources\\Win.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        PlaySound(TEXT("Ressources\\Win.wav"), NULL, SND_FILENAME | SND_ASYNC);
     }
 }
 
@@ -244,7 +244,7 @@ void GameHud::DestroyEnd()
 void GameHud::Return()
 {
     //Sound
-    PlaySound(TEXT("..\\Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    PlaySound(TEXT("Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
     _engine->GetSceneMananger()->OpenScene("Menu");
     ShowCursor(true);
