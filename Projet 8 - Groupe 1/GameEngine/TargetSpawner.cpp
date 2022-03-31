@@ -43,7 +43,6 @@ void TargetSpawner::SpawnTargets()
                 Target* target = new Target(_scene, _meshComponentTarget);
                 target->l_target->transform->m_transform->ScalingUniforme(0.01f);
 
-
                 //Set Position
                 float l_fOffsetY = 5.0f;
                 D3DXVECTOR3 vec3TargetPosition = currentRailEntity->transform->m_transform->m_vPos;

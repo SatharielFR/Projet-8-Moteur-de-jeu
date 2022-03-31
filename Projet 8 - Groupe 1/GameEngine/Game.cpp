@@ -49,7 +49,6 @@ Game::~Game()
 void Game::Begin()
 {
     m_engine->Begin();
-    m_railManager->CreateRails(m_sceneGame);
 }
 
 void Game::Init(HWND hWnd)
@@ -85,7 +84,6 @@ void Game::InitLevel()
 
     //Create Menu HUD
     m_menuHud = new MenuHud(sceneMenu, m_engine,this);
-
 
     //Create a map for the game
     m_sceneGame = new Scene("Game");
@@ -146,11 +144,12 @@ void Game::InitHUD()
 
 void Game::StartGame()
 {
-    m_cart->Reset();
-    m_player->Reset();
-    //TODO : Reset railManager
+    m_railManager->Reset();
+    m_railManager->CreateRails(m_sceneGame);
     m_targetSpawner->Reset();
     m_targetSpawner->SpawnTargets();
+    m_cart->Reset();
+    m_player->Reset();
     m_gameHud->ShowGameHud();
     m_engine->GetSceneMananger()->OpenScene("Game");
     m_engine->GetSceneMananger()->CloseScene("Menu");

@@ -2,7 +2,7 @@
 
 RailManager::RailManager()
 {
-    CreasteMeshComponents();
+    CreateMeshComponents();
 }
 
 RailManager::~RailManager()
@@ -10,7 +10,20 @@ RailManager::~RailManager()
 
 }
 
-void RailManager::CreasteMeshComponents()
+void RailManager::Reset()
+{
+    m_nbPositionX = 0;
+    m_nbPositionY = 0.01;
+    m_nbPositionZ = 0;
+
+    for (Entity* currentEntity : m_listEntityRails)
+    {
+        m_scene->DestroyEntity(currentEntity);
+    }
+    m_listEntityRails.clear();
+}
+
+void RailManager::CreateMeshComponents()
 {
     _meshComponentRailsForward = new MeshComponent();
     _meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
@@ -118,9 +131,10 @@ void RailManager::CreateRails(Scene* scene)
         }
         //Add to the list of rails
         m_listEntityRails.push_back(l_entityCurrentRail);
+        l_entityCurrentRail = nullptr;
+        delete l_entityCurrentRail;
     }
 }
-
 
 void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity)
 {

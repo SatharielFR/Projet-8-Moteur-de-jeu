@@ -20,7 +20,6 @@ class RailManager
 			int m_nbPositionY = 0.01;
 			int m_nbPositionZ = 0;
 			int m_nbRailSize = 70;
-
 			enumDirection m_currentDirection = enumDirection::North;
 			list<Entity*> m_listEntityRails;
 			Scene* m_scene;
@@ -29,7 +28,8 @@ class RailManager
 		#pragma region PublicFunctions
 				RailManager();
 				~RailManager();
-				void CreasteMeshComponents();
+				void Reset();
+				void CreateMeshComponents();
 				void CreateRails(Scene* scene);
 		#pragma endregion
 
