@@ -92,7 +92,7 @@ void Game::InitLevel()
     m_engine->GetSceneMananger()->AddScene(m_sceneGame);
 //        m_engine->GetSceneMananger()->OpenScene("Game");
 
-    srand((int)Timer::s_inst->GetSystemTimeEx());
+    srand((unsigned int)time(NULL));
 }
 
 void Game::InitEntity()
