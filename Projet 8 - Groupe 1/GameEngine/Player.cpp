@@ -4,6 +4,7 @@
 Player::Player(Scene* scene)
 {
 	l_player = new Entity();
+    _fShootForce = 5;
     Reset();
 	Begin(scene);
 }
@@ -56,11 +57,12 @@ void Player::Shoot(Scene* scene)
                 projectile->l_bullet->transform->m_transform->ScalingUniforme(0.02f);
                 projectile->l_bullet->transform->m_transform->Rotate(_fRotationX, _fRotationY,0);
                 RigidbodyComponent* l_bulletRigidbody = (RigidbodyComponent*)(projectile->l_bullet->GetComponentByType<RigidbodyComponent>());
+                l_bulletRigidbody->GravityStrengh = 0.03f;
                 l_bulletRigidbody->useGravity = true;
                 if (l_bulletRigidbody != nullptr)
                 {
                     D3DXVECTOR3 force = l_cameraComponent->direction;
-                    force *= 10.0f;
+                    force *= _fShootForce;
                     l_bulletRigidbody->AddForce(force);
                 }
                 canShoot = false;

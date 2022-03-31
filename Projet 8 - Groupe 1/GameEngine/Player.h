@@ -27,6 +27,7 @@ class Player
 		#pragma region PrivateVariables
 			float _fRotationX;
 			float _fRotationY;
+			float _fShootForce;
 		#pragma endregion
 };
 
