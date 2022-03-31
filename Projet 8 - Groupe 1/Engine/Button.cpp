@@ -114,7 +114,6 @@ bool Button::IsMouseHover()
 				return true;
 			}
 		}
-
 	}
 
 	return false;

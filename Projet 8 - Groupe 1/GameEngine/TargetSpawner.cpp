@@ -18,15 +18,13 @@ TargetSpawner::~TargetSpawner()
 
 void TargetSpawner::Reset()
 {
-    if (_lstTarget.size() > 0)
+    for (Target* currentTarget : _lstTarget)
     {
-        for (Target* currentTarget : _lstTarget)
-        {
-            _scene->DestroyEntity(currentTarget->l_target);
-            delete currentTarget;
-        }
-        _lstTarget.clear();
+        _scene->DestroyEntity(currentTarget->l_target);
+
+        delete currentTarget;
     }
+    _lstTarget.clear();
 }
 
 void TargetSpawner::SpawnTargets()
@@ -51,6 +49,9 @@ void TargetSpawner::SpawnTargets()
 
                 //Set Rotation  
                 target->l_target->transform->m_transform->RotateAngle(90.0f, 0.f, 0.f);
+
+                //Save the target
+                _lstTarget.push_back(target);
             }     
 		}
 	}
