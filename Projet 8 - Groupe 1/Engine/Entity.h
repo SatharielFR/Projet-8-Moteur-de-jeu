@@ -41,11 +41,17 @@ class Entity
 template<typename T>
 inline Component* Entity::GetComponentByType()
 {
-	for (Component* comp : _lstComponentChild)
+	if (_lstComponentChild.size()>0)
 	{
-		if (comp->GetType() == T::s_type)
+		for (Component* comp : _lstComponentChild)
 		{
-			return comp;
+			if (comp != nullptr) 
+			{
+				if (comp->GetType() == T::s_type)
+				{
+					return comp;
+				}
+			}
 		}
 	}
 	return nullptr;

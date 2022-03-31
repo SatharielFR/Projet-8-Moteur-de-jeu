@@ -146,42 +146,46 @@ void Engine::RenderFrame(void)
         for (Entity* l_currentEntity: l_entities)
         {
             //If there is a Mesh Component
-            MeshComponent* l_meshComponent = (MeshComponent*)l_currentEntity->GetComponentByType<MeshComponent>();
-            if (l_meshComponent != nullptr)
+            Component* l_component = l_currentEntity->GetComponentByType<MeshComponent>();
+            if (l_component)
             {
-                if (!l_meshComponent->IsMeshLoaded())
+                MeshComponent* l_meshComponent = (MeshComponent*)l_component;
+                if (l_meshComponent != nullptr)
                 {
-                    //making string to lpwstr for CreateTextureFromFile
-                    std::string myString = l_meshComponent->GetMeshAndTexturePath();
-                    l_meshComponent->SetMeshName(myString);
-                    wstring stemp = wstring(myString.begin(), myString.end());
-                    LPCWSTR fullPath = stemp.c_str();
-                    l_meshComponent->LoadMesh(fullPath, d3ddev);
-                }
-
-                //setting transform and DRAWING mesh
-                Transform* tr = l_currentEntity->transform->m_transform;
-
-                if (tr != nullptr)
-                {
-                    d3ddev->SetTransform(D3DTS_WORLD, &tr->m_matrix);
-                    for (DWORD i = 0; i < l_meshComponent->GetNumMaterials(); i++)
+                    if (!l_meshComponent->IsMeshLoaded())
                     {
-                        // Set the material and texture for this subset
-                        d3ddev->SetMaterial(&l_meshComponent->GetMeshMaterials()[i]);
-                        d3ddev->SetTexture(0, l_meshComponent->GetMeshTextures()[i]);
-                        // Draw the mesh subset
-                        l_meshComponent->GetMesh()->DrawSubset(i);
+                        //making string to lpwstr for CreateTextureFromFile
+                        std::string myString = l_meshComponent->GetMeshAndTexturePath();
+                        l_meshComponent->SetMeshName(myString);
+                        wstring stemp = wstring(myString.begin(), myString.end());
+                        LPCWSTR fullPath = stemp.c_str();
+                        l_meshComponent->LoadMesh(fullPath, d3ddev);
                     }
-                    tr = nullptr;
-                }
 
-                delete tr;
-                l_meshComponent = nullptr;
-                delete l_meshComponent;
-                l_currentEntity = nullptr;
-                delete l_currentEntity;
-            }
+                    //setting transform and DRAWING mesh
+                    Transform* tr = l_currentEntity->transform->m_transform;
+
+                    if (tr != nullptr)
+                    {
+                        d3ddev->SetTransform(D3DTS_WORLD, &tr->m_matrix);
+                        for (DWORD i = 0; i < l_meshComponent->GetNumMaterials(); i++)
+                        {
+                            // Set the material and texture for this subset
+                            d3ddev->SetMaterial(&l_meshComponent->GetMeshMaterials()[i]);
+                            d3ddev->SetTexture(0, l_meshComponent->GetMeshTextures()[i]);
+                            // Draw the mesh subset
+                            l_meshComponent->GetMesh()->DrawSubset(i);
+                        }
+                        tr = nullptr;
+                    }
+
+                    //delete tr;
+                    //l_meshComponent = nullptr;
+                    //delete l_meshComponent;
+                    //l_currentEntity = nullptr;
+                    //delete l_currentEntity;
+                }
+            }       
         }
 
         //draw HUD on top

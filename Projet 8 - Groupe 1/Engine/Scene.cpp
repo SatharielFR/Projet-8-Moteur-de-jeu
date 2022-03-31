@@ -72,6 +72,9 @@ void Scene::DestroyEntity(Entity* l_entityToDestroy)
 
 	_listEntity.erase(i);
 	delete l_entityToDestroy;
+
+	//Set Dirty
+	this->SetEntityHasBeenHaded(true);
 }
 
 void Scene::AddHUD(HUD* HUDToAdd) {
