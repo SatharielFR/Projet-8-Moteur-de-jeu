@@ -7,12 +7,12 @@ class MeshComponent : public Component
 
     #pragma region variables
         static int s_type;
-        DWORD numMaterials;
-        LPD3DXMESH mesh;
-        LPDIRECT3DTEXTURE9* meshTextures;
-        D3DMATERIAL9* meshMaterials;
-        LPD3DXBUFFER materialBuffer;
-        string meshAndTexturePath;
+        DWORD m_numMaterials;
+        LPD3DXMESH m_mesh;
+        LPDIRECT3DTEXTURE9* m_meshTextures;
+        D3DMATERIAL9* m_meshMaterials;
+        LPD3DXBUFFER m_materialBuffer;
+        string m_strMeshAndTexturePath;
     #pragma endregion
 
 
@@ -34,11 +34,13 @@ class MeshComponent : public Component
         const D3DMATERIAL9* GetMeshMaterials();
         virtual int GetType() { return s_type; }
         bool IsMeshLoaded() { return _bIsMeshLoaded; }
+        string GetMeshName() { return _strMeshName; }
     #pragma endregion
 
     #pragma region mutators
-        void SetNumMaterials(DWORD numMaterials);
-        void SetMesh(LPD3DXMESH mesh);
+        void SetMeshName(string meshName) {_strMeshName = meshName;}
+        void SetNumMaterials(DWORD m_numMaterials);
+        void SetMesh(LPD3DXMESH m_mesh);
         void SetTexture(LPDIRECT3DTEXTURE9* texture);
         void SetMaterial(D3DMATERIAL9* material);
         void SetMeshAndTexturePath(string pathIn);
@@ -47,6 +49,6 @@ class MeshComponent : public Component
     private :
         bool _bIsMeshLoaded = false;
         bool _bIsTextureLoaded = false;
-
+        string _strMeshName;
 };
 

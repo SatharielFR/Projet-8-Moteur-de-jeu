@@ -58,6 +58,7 @@ void Sprite::DrawSprite()
     _sprite->Begin(D3DXSPRITE_ALPHABLEND);
     _sprite->Draw(_text, NULL, NULL, &_transform.m_vPos, *_colorSprite);
     _sprite->End();
+    _sprite->Release();
 }
 
 void Sprite::SetSpriteColor(D3DXCOLOR* color)

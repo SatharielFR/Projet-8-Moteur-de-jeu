@@ -76,7 +76,6 @@ class Engine
 
 		#pragma region PrivateFunctions
 			void Init();
-			D3DMATERIAL9 CreateTestMaterial();
 		#pragma endregion 
 
 		#pragma region 3D Display

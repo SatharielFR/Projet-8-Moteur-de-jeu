@@ -5,7 +5,7 @@
 
 enum enumDirection
 {
-	Forward, Backward, Right, Left
+	North, South, East, West
 };
 
 class RailManager
@@ -21,7 +21,7 @@ class RailManager
 			int m_nbPositionZ = 0;
 			int m_nbRailSize = 70;
 
-			enumDirection m_currentDirection = enumDirection::Forward;
+			enumDirection m_currentDirection = enumDirection::North;
 			list<Entity*> m_listEntityRails;
 			Scene* m_scene;
 		#pragma endregion
@@ -29,13 +29,19 @@ class RailManager
 		#pragma region PublicFunctions
 				RailManager();
 				~RailManager();
+				void CreasteMeshComponents();
 				void CreateRails(Scene* scene);
-				void RemoveRails();
+		#pragma endregion
+
+		#pragma region MeshComponents
+				MeshComponent* _meshComponentRailsForward;
+				MeshComponent* _meshComponentRailsTurn;
+				MeshComponent* _meshComponentRailsUp;
 		#pragma endregion
 
 	private :
 		#pragma region Utility
-			void CreateStraightRails(float fRotationAngleY, Entity* entity, MeshComponent* meshComponent);
+			void CreateStraightRails(float fRotationAngleY, Entity* entity);
 		#pragma endregion
 
 };

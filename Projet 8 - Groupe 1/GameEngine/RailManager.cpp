@@ -2,11 +2,22 @@
 
 RailManager::RailManager()
 {
+    CreasteMeshComponents();
 }
 
 RailManager::~RailManager()
 {
 
+}
+
+void RailManager::CreasteMeshComponents()
+{
+    _meshComponentRailsForward = new MeshComponent();
+    _meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
+    _meshComponentRailsTurn = new MeshComponent();
+    _meshComponentRailsTurn->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
+    _meshComponentRailsUp = new MeshComponent();
+    _meshComponentRailsUp->SetMeshAndTexturePath("..\\Ressources\\Rail-Up.x");
 }
 
 void RailManager::CreateRails(Scene* scene)
@@ -17,13 +28,12 @@ void RailManager::CreateRails(Scene* scene)
         //Create the rail
         Entity* l_entityCurrentRail = new Entity();
         m_scene->AddEntity(l_entityCurrentRail);
-        MeshComponent* l_meshComponentRailsForward = new MeshComponent();
         l_entityCurrentRail->transform->m_transform->ScalingUniforme(m_fScale);
 
         //Select the rail Prefab
         switch(m_currentDirection)
         {
-            case (enumDirection::Forward) :
+            case (enumDirection::North) :
             {
                 int fRandom = rand() % 3 + 1 ;
                 m_nbPositionZ = m_nbPositionZ - m_Lenght;
@@ -31,72 +41,56 @@ void RailManager::CreateRails(Scene* scene)
                 {
                     case (1): //Straight forward
                     {
-                        CreateStraightRails(90, l_entityCurrentRail, l_meshComponentRailsForward);
-                        m_currentDirection = enumDirection::Forward;
-//                        Debug::s_inst->ScreenLog("Straight forward", 1000);
-                       
+                        CreateStraightRails(90, l_entityCurrentRail);
+                        m_currentDirection = enumDirection::North;                       
                         break;
                     }
                     case (2): //Turn Right
                     {
-                        l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
-                        l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
+                        l_entityCurrentRail->AddComponent(_meshComponentRailsTurn);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 90, 0);
-                        m_currentDirection = enumDirection::Right;
- //                       Debug::s_inst->ScreenLog("Turn Right", 1000);
-                      
+                        m_currentDirection = enumDirection::East;                   
                         break;
                     }
                     case (3): //Turn Left
                     {
-                        l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
-                        l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
+                        l_entityCurrentRail->AddComponent(_meshComponentRailsTurn);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 180, 0);
-                        m_currentDirection = enumDirection::Left;
-//                        Debug::s_inst->ScreenLog("Turn Left",1000);
+                        m_currentDirection = enumDirection::West;
                         break;
                     }
                 } 
-         
-            }
-            case (enumDirection::Backward):
-            {
                 break;
             }
-            case (enumDirection::Right):
+            case (enumDirection::East):
             {
-
-               // srand(Timer::s_inst->GetSystemTimeEx());
                 int fRandom = rand() % 2 + 1 ;
                 m_nbPositionX = m_nbPositionX - m_Lenght;
                 switch (fRandom)
                 {
                     case (1): //Straight Right
                     {
-                        l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
-                        l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
+                        l_entityCurrentRail->AddComponent(_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
-                        m_currentDirection = enumDirection::Right;
-//                        Debug::s_inst->ScreenLog("Straight Right", 1000);
+                        m_currentDirection = enumDirection::East;
+                        break;
                        
                     }
                     case (2): //Turn Left
                     {
-                        l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
-                        l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
+                        l_entityCurrentRail->AddComponent(_meshComponentRailsTurn);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 270, 0);
-                        m_currentDirection = enumDirection::Forward;
- //                       Debug::s_inst->ScreenLog("Turn Left", 1000);
+                        m_currentDirection = enumDirection::North;
+                        break;
                     }
                 }
- 
                 break;
             }
-            case (enumDirection::Left):
+            case (enumDirection::West):
             {
                 int fRandom = rand() % 2 + 1;
                 m_nbPositionX = m_nbPositionX + m_Lenght;
@@ -104,22 +98,19 @@ void RailManager::CreateRails(Scene* scene)
                 {
                     case (1): //Straight Left
                     {
-  
-                        l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
-                        l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
+                        l_entityCurrentRail->AddComponent(_meshComponentRailsForward);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
-                        m_currentDirection = enumDirection::Left;
-//                        Debug::s_inst->ScreenLog("Straight Left", 1000);
+                        m_currentDirection = enumDirection::West;
+                        break;
                     }
                     case (2): //Turn Right
                     {
-                        l_meshComponentRailsForward->SetMeshAndTexturePath("..\\Ressources\\Rail-Right.x");
-                        l_entityCurrentRail->AddComponent(l_meshComponentRailsForward);
+                        l_entityCurrentRail->AddComponent(_meshComponentRailsTurn);
                         l_entityCurrentRail->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                         l_entityCurrentRail->transform->m_transform->RotateAngle(0, 0, 0);
-                        m_currentDirection = enumDirection::Forward;
-//                        Debug::s_inst->ScreenLog("Turn Right", 1000);
+                        m_currentDirection = enumDirection::North;
+                        break;
                     }
                 }
                 break;
@@ -128,17 +119,10 @@ void RailManager::CreateRails(Scene* scene)
         //Add to the list of rails
         m_listEntityRails.push_back(l_entityCurrentRail);
     }
-
-
 }
 
 
-void RailManager::RemoveRails()
-{
-    //To call after X sec to remove last rails from the list ans create one forward
-}
-
-void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity, MeshComponent* meshComponent)
+void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity)
 {
     int fRandom;
     bool bRailHasBeenCreated = false;
@@ -153,8 +137,7 @@ void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity, Mes
             {
                 fRotationAngleY += 180;
                 m_nbPositionY = m_nbPositionY + m_Height / 2;
-                meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Up.x");
-                entity->AddComponent(meshComponent);
+                entity->AddComponent(_meshComponentRailsUp);
                 entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                 entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
                 bRailHasBeenCreated = true;
@@ -163,8 +146,7 @@ void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity, Mes
             case (2):
             {
                 fRotationAngleZ += 0;
-                meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Forward.x");
-                entity->AddComponent(meshComponent);
+                entity->AddComponent(_meshComponentRailsForward);
                 entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                 entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
                 bRailHasBeenCreated = true;
@@ -175,10 +157,8 @@ void RailManager::CreateStraightRails(float fRotationAngleY, Entity* entity, Mes
                 //Cant go downer than ground
                 if (m_nbPositionY > 1)
                 {
-                    fRotationAngleY += 0;
                     m_nbPositionY = m_nbPositionY - m_Height / 2;
-                    meshComponent->SetMeshAndTexturePath("..\\Ressources\\Rail-Up.x");
-                    entity->AddComponent(meshComponent);
+                    entity->AddComponent(_meshComponentRailsUp);
                     entity->transform->m_transform->SetPosition(m_nbPositionX, m_nbPositionY, m_nbPositionZ);
                     entity->transform->m_transform->RotateAngle(0, fRotationAngleY, fRotationAngleZ);
                     bRailHasBeenCreated = true;

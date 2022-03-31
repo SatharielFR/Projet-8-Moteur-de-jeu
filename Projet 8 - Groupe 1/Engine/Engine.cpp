@@ -107,18 +107,6 @@ void Engine::InitD3D(HWND hWnd)
     d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
 }
 
-D3DMATERIAL9 Engine::CreateTestMaterial() {
-    D3DMATERIAL9 mtrl;
-    ZeroMemory(&mtrl, sizeof(mtrl));
-    mtrl.Emissive.r = 0.0f;
-    mtrl.Emissive.g = 0.75f;
-    mtrl.Emissive.b = 0.0f;
-    mtrl.Emissive.a = 0.0f;
-    d3ddev->SetMaterial(&mtrl);
-    d3ddev->SetRenderState(D3DRS_EMISSIVEMATERIALSOURCE, D3DMCS_MATERIAL);
-    return mtrl;
-}
-
 // this is the function that puts the 3D models into video RAM
 void Engine::InitGraphics(void)
 {
@@ -165,6 +153,7 @@ void Engine::RenderFrame(void)
                 {
                     //making string to lpwstr for CreateTextureFromFile
                     std::string myString = l_meshComponent->GetMeshAndTexturePath();
+                    l_meshComponent->SetMeshName(myString);
                     wstring stemp = wstring(myString.begin(), myString.end());
                     LPCWSTR fullPath = stemp.c_str();
                     l_meshComponent->LoadMesh(fullPath, d3ddev);

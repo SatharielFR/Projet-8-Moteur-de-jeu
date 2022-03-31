@@ -8,6 +8,7 @@ Text::Text()
 
 Text::~Text()
 {
+    _Font->Release();
 }
 
 void Text::InitFont()

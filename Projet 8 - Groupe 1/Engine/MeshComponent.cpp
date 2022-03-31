@@ -5,28 +5,32 @@ int MeshComponent::s_type = 2;
 
 MeshComponent::MeshComponent(DWORD materials, LPD3DXMESH meshIn, LPDIRECT3DTEXTURE9* textureIn, D3DMATERIAL9* materialIn, string meshAndTexturePathIn)
 {
+    m_numMaterials = materials;
+    m_mesh = meshIn;
+    m_meshTextures = textureIn;
+    m_meshMaterials = materialIn;
+    m_strMeshAndTexturePath = meshAndTexturePathIn;
+    m_materialBuffer->Release();
+}
 
-    numMaterials = materials;
-    mesh = meshIn;
-    meshTextures = textureIn;
-    meshMaterials = materialIn;
-    meshAndTexturePath = meshAndTexturePathIn;
+MeshComponent::MeshComponent() {
+    m_numMaterials = 0;
+    m_mesh = NULL;
+    m_meshTextures = NULL;
+    m_meshMaterials = NULL;
+    m_materialBuffer = NULL;
+    m_strMeshAndTexturePath = "";
 }
 
 MeshComponent::~MeshComponent()
 {
-    delete meshTextures;
-    delete meshMaterials;
+    m_mesh->Release();
+    m_materialBuffer->Release();
+
+    delete m_meshTextures;
+    delete m_meshMaterials;
 }
 
-MeshComponent::MeshComponent() {
-    numMaterials = 0;
-    mesh = NULL;
-    meshTextures = NULL;
-    meshMaterials = NULL;
-    materialBuffer = NULL;
-    meshAndTexturePath = "";
-}
 
 /// <summary>
 /// loads the mesh and creates the appropriate texture from a .x file
@@ -36,88 +40,89 @@ MeshComponent::MeshComponent() {
 void MeshComponent::LoadMesh(LPCTSTR file, LPDIRECT3DDEVICE9 device)
 {
     //loading mesh
-    if (mesh == NULL)
+    if (m_mesh == NULL)
     {
-
-        HRESULT hr = D3DXLoadMeshFromX(file, D3DXMESH_SYSTEMMEM, device, NULL, &materialBuffer, NULL, &numMaterials, &mesh);
+        HRESULT hr = D3DXLoadMeshFromX(file, D3DXMESH_SYSTEMMEM, device, NULL, &m_materialBuffer, NULL, &m_numMaterials, &m_mesh);
 
         // Loading the material buffer
-        D3DXMATERIAL* d3dxMaterials = (D3DXMATERIAL*)materialBuffer->GetBufferPointer();
+        D3DXMATERIAL* l_d3dxMaterials = (D3DXMATERIAL*)m_materialBuffer->GetBufferPointer();
         // Holding material and texture pointers
-        meshMaterials = new D3DMATERIAL9[numMaterials];
-        meshTextures = new LPDIRECT3DTEXTURE9[numMaterials];
+        m_meshMaterials = new D3DMATERIAL9[m_numMaterials];
+        m_meshTextures = new LPDIRECT3DTEXTURE9[m_numMaterials];
         // Filling material and texture arrays
-        for (DWORD i = 0; i < numMaterials; i++)
+        for (DWORD i = 0; i < m_numMaterials; i++)
         {
             // Copy the material
-            meshMaterials[i] = d3dxMaterials[i].MatD3D;
+            m_meshMaterials[i] = l_d3dxMaterials[i].MatD3D;
 
             // Set the ambient color for the material (D3DX does not do this)
-            meshMaterials[i].Ambient = meshMaterials[i].Diffuse;
+            m_meshMaterials[i].Ambient = m_meshMaterials[i].Diffuse;
 
             // Create the texture if it exists - it may not
-            meshTextures[i] = NULL;
-            if (d3dxMaterials[i].pTextureFilename) {
+            m_meshTextures[i] = NULL;
+            if (l_d3dxMaterials[i].pTextureFilename) {
 
                 //create full path
                 string strFileName = "..\\Ressources\\";
-                strFileName.append((string)d3dxMaterials[i].pTextureFilename);
+                strFileName.append((string)l_d3dxMaterials[i].pTextureFilename);
 
                 //store it in class variable
-                meshAndTexturePath = strFileName;
+                m_strMeshAndTexturePath = strFileName;
 
                 //making string to lpwstr for CreateTextureFromFile
                 wstring stemp = wstring(strFileName.begin(), strFileName.end());
                 LPCWSTR fullPath = stemp.c_str();
 
                 //StringCchCatW(strFileName, 26, (d3dxMaterials[i].pTextureFilename));
-                D3DXCreateTextureFromFile(device, fullPath, &meshTextures[i]);
+                D3DXCreateTextureFromFile(device, fullPath, &m_meshTextures[i]);
             }
 
             _bIsMeshLoaded = true;
             _bIsTextureLoaded = true;
         }
-        materialBuffer->Release();
+        m_materialBuffer->Release();
+        l_d3dxMaterials = nullptr;
+        delete l_d3dxMaterials;
     }
 }
 
 #pragma region Accessors
     DWORD MeshComponent::GetNumMaterials() {
-        return numMaterials;
+        return m_numMaterials;
     }
 
     LPD3DXMESH MeshComponent::GetMesh() {
-        return mesh;
+        return m_mesh;
     }
 
     const LPDIRECT3DTEXTURE9* MeshComponent::GetMeshTextures() {
-        return meshTextures;
+        return m_meshTextures;
     }
 
     const D3DMATERIAL9* MeshComponent::GetMeshMaterials() {
-        return meshMaterials;
+        return m_meshMaterials;
     }
 
     string MeshComponent::GetMeshAndTexturePath() {
-        return meshAndTexturePath;
+        return m_strMeshAndTexturePath;
     }
 #pragma endregion
 
 #pragma region mutators
-    void MeshComponent::SetNumMaterials(DWORD numMaterials) {
-        numMaterials = numMaterials;
+    void MeshComponent::SetNumMaterials(DWORD m_numMaterials) {
+        m_numMaterials = m_numMaterials;
     }
-    void MeshComponent::SetMesh(LPD3DXMESH mesh) {
-        mesh = mesh;
+    void MeshComponent::SetMesh(LPD3DXMESH m_mesh) {
+        m_mesh = m_mesh;
     }
     void MeshComponent::SetTexture(LPDIRECT3DTEXTURE9* texture) {
-        meshTextures = texture;
+        m_meshTextures = texture;
     }
     void MeshComponent::SetMaterial(D3DMATERIAL9* material) {
-        meshMaterials = material;
+        m_meshMaterials = material;
     }
 
     void MeshComponent::SetMeshAndTexturePath(string pathIn) {
-        meshAndTexturePath = pathIn;
+        m_strMeshAndTexturePath = pathIn;
     }
 #pragma endregion
