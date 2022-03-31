@@ -13,6 +13,7 @@ class Timer
 
 		#pragma region PublicFunctions
 			Timer();
+			~Timer();
 			void InitSystemTime();
 			float GetSystemTimeEx();
 			float GetDeltaTime();

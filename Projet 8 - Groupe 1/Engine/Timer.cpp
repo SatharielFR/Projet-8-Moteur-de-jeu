@@ -49,6 +49,10 @@ float Timer::GetSystemTimeEx()
     return timeGetTime() / 1000.0f - m_initTime; //rounded to mili sec
 }
 
+Timer::~Timer()
+{
+}
+
 bool Timer::UpdateTime()
 {
     // System time
