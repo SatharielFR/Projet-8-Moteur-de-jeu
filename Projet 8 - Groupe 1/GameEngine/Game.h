@@ -3,11 +3,6 @@
 #include "resource.h"
 #include "framework.h"
 
-
-
-
-
-
 #pragma region ForwardDeclaration
 
 	class Entity;
@@ -58,7 +53,7 @@ class Game
 		#pragma region PrivateFunctions
 			float _fForwardValue ;
 			float _fHorizontalValue ;
-			float _fSpeed;// 0.05f;
+			float _fSpeed;
 			int _nbMouseX;
 			int _nbMouseY;
 			int _MouseMovementX;

@@ -52,9 +52,9 @@ void GameHud::ShowEndMenu()
     {
         DestroyMain();
         CreateEnd();
-
         //Sound
         PlaySound(TEXT("Ressources\\Win.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        ShowCursor(true);
     }
 }
 
@@ -64,6 +64,7 @@ void GameHud::ShowGameHud()
     {
         DestroyEnd();
         CreateMain();
+        ShowCursor(false);
     }
 }
 
@@ -136,7 +137,6 @@ void GameHud::CreateMain()
     _labelScoreContent->SetText("0");
 
     _nbTimeGameStart = (int)Timer::s_inst->GetSystemTimeEx();
-    ShowCursor(false);
     _bGameHudIsActive = true;
 }
 
@@ -217,7 +217,6 @@ void GameHud::CreateEnd()
     _gameHUD->AddButton(_buttonReturn);
     _buttonReturn->m_OnClic = RUNNER(Return);	// Bind Function 
 
-    ShowCursor(true);
     _bEndMenuIsActive = true;
 }
 

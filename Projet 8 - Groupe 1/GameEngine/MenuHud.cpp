@@ -132,6 +132,7 @@ void MenuHud::Play()
 	PlaySound(TEXT("Ressources\\Button.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 	_game->StartGame();
+	ShowCursor(false);
 }
 
 void MenuHud::Credits()
